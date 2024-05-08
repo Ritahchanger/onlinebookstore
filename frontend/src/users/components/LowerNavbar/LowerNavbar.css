@@ -4,12 +4,13 @@
 }
 .lower_navbar{
     background:var(--white);
-    height:40px;
+    height:50px;
 }
 .fixed{
     position:fixed;
     top:0;
     width:100%;
+    box-shadow:0 0 5px rgba(0,0,0,0.25);
 }
 .nav_li{
     padding:0.5rem 1rem;
@@ -21,4 +22,29 @@
 }
 .nav_li:hover a{
     color:var(--white);
+}
+.profile-logo img{
+    width:45px;
+}
+.lower_navbar .menu-icon, .lower_navbar .profile-logo{
+    display:none;
+}
+
+
+.lower_navbar .navigation{
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+}
+
+
+
+
+@media(max-width:668px){
+    .lower_navbar .menu-icon, .lower_navbar .profile-logo{
+        display:block;
+    }
+    .lower_navbar .navigation{
+        display:none;
+    }
 }

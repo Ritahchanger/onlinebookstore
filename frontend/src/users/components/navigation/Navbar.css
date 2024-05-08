@@ -1,96 +1,142 @@
-section .container{
-    width:100%;
+/* section .container */
+.container {
+    width: 100%;
 }
-.nav{
-    background:var(--white);
-}
-.section-a{
-    background:var(--blue);
-    color:#FFF;
-}
-.section-a .container{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    text-align:center;
-    text-align:center;
-    padding:0.5rem 12px;
 
+/* nav */
+.nav {
+    background: var(--white);
 }
-.phone-number{
-    display:flex;
-    align-items:center;
+
+/* section-a */
+.section-a {
+    background: var(--blue);
+    color: #fff;
+}
+
+.section-a .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 0.5rem 12px;
+}
+
+.phone-number {
+    display: flex;
+    align-items: center;
     text-align: center;
     justify-content: center;
 }
-.section-a .social-media-links i{
-    margin-left:1rem;
+
+.section-a .social-media-links i {
+    margin-left: 1rem;
     cursor: pointer;
-    font-size:1.5rem;
+    font-size: 1.5rem;
 }
-.phone-number span{
-    font-weight:700;
+
+.phone-number span {
+    font-weight: 700;
 }
-.section-a .social-media-links i:hover{
+
+.section-a .social-media-links i:hover {
     transform: scale(1.1);
     cursor: pointer;
 }
 
-
 /* section b */
-.section-b{
-   border-bottom:1px solid var(--gray);
-}
-.section-b .container{
-    display:flex;
-    justify-content:space-between;
-    padding-top:0.5rem;
-    padding-bottom:0.5rem;
-    
-}
-.section-b .section-navigation{
-    display:flex;
-    justify-content:space-between;
-}
-.section-b .section-navigation p a{
-    text-transform:uppercase;
+.section-b {
+    border-bottom: 1px solid var(--gray);
 }
 
-.section-b .section-navigation p{
-    border-right:1px solid var(--gray);
-    padding:0rem 1rem;
+.section-b .container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
-.section-b .container .profile-logo{
-    flex-basis:10%;
+.section-b .section-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.section-b .container .search_container{
-    flex-basis:45%;
+.section-b .section-navigation p a {
+    text-transform: uppercase;
+}
+
+.section-b .section-navigation p {
+    border-right: 1px solid var(--gray);
+    padding: 0rem 1rem;
+}
+
+.section-b .container .profile-logo {
+    flex-basis: 10%;
+}
+
+.section-b .container .profile-logo img {
+    width: 45px;
+}
+
+.section-b .container .search_container {
+    flex-basis: 45%;
     cursor: pointer;
+    height: 40px;
 }
-.section-b .container .search_container input{
-    background:transparent;
-    border:none;
-    border-bottom:2px solid var(--gray);
-    outline:none;
+
+.section-b .container .search_container input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--gray);
+    outline: none;
 }
-.section-b .container .search_container input:focus{
-  border-bottom:2px solid var(--green);
+
+.section-b .container .search_container input:focus {
+    border-bottom: 2px solid var(--green);
 }
-.section-b .container .section-navigation{
-    flex-basis:40%;
+
+.section-b .container .section-navigation {
+    flex-basis: 40%;
 }
-.section-b .container .search_container{
-    display:flex;
+
+.section-b .container .search_container {
+    display: flex;
 }
-.section-b .container .search_container button{
-    border:none;
-    cursor:pointer;
-    color:var(--white);
-    flex-basis:15%;
-    background:var(--blue);
+
+.section-b .container .search_container button {
+    border: none;
+    cursor: pointer;
+    color: var(--white);
+    flex-basis: 15%;
+    background: var(--blue);
 }
-.section-b .container .search_container input{
-    flex-basis:85%;
+
+.section-b .container .search_container input {
+    flex-basis: 85%;
+}
+
+
+
+
+@media(max-width:668px){
+    .section-b .container .profile-logo {
+        display:none;
+    }
+    .section-b .section-navigation{
+        width:100%;
+    }
+}
+
+/* Media query for screen width less than or equal to 690px */
+@media (max-width: 690px) {
+    .section-b .container .search_container,
+    .section-b .container .profile-logo,
+    .section-b .container .section-navigation {
+        flex-basis: auto;
+    }
+
+    .section-b .container .search_container {
+        display: none;
+    }
 }

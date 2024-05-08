@@ -43,7 +43,7 @@ export const sectioncNavigation = [
     path: '#'
   },
   {
-    menu_name: 'CONTACT',
+    menu_name: 'BLOG',
     path: '#'
   },
 //   {

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { sectionbNavigation, sectioncNavigation } from "../Data/NavbarData";
 import "./Navbar.css";
+import ProfileImage from "../../../assets/images/bemi.png"
 const Navbar = () => {
   return (
     <nav className="nav">
@@ -20,7 +21,7 @@ const Navbar = () => {
         <div className="container">
           <div className="profile-logo">
             <a href="#">
-              <i class="fa-solid fa-user"></i>
+              <img src={ProfileImage} alt="" />
             </a>
           </div>
 
