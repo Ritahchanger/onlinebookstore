@@ -120,12 +120,9 @@
 
 
 @media(max-width:668px){
-    .section-b .container .profile-logo {
-        display:none;
-    }
-    .section-b .section-navigation{
-        width:100%;
-    }
+  .nav .section-b{
+    display:none;
+  }
 }
 
 /* Media query for screen width less than or equal to 690px */
