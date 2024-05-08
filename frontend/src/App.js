@@ -1,9 +1,10 @@
 import React from 'react'
+import Navbar from './users/components/navigation/Navbar'
 
 const App = () => {
   return (
     <div>
-      <h3>ONLINE BOOKSTORE</h3>
+     <Navbar/>
     </div>
   )
 }

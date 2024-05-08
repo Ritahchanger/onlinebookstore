@@ -1,0 +1,33 @@
+
+.section-a{
+    background:var(--blue);
+    color:#FFF;
+}
+.section-a .container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    text-align:center;
+    text-align:center;
+}
+.phone-number{
+    display:flex;
+    align-items:center;
+    text-align: center;
+    justify-content: center;
+}
+.section-a .container{
+    padding:0.5rem 0rem;
+}
+.section-a .social-media-links i{
+    margin-left:1rem;
+    cursor: pointer;
+    font-size:1.5rem;
+}
+.phone-number span{
+    font-weight:700;
+}
+.section-a .social-media-links i:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
