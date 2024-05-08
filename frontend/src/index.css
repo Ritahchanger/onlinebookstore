@@ -12,6 +12,7 @@
   --black:#000;
   --gray:#ababab;
   --white:#fff;
+  --pinkRed:#ff004f;
 }
 html{
   scroll-behavior:smooth;

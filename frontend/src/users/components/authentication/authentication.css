@@ -25,14 +25,14 @@
 }
 .authentication input{
     border:none;
-    height:50px;
+    height:45px;
     border-bottom:2px solid var(--gray);
     outline:none;
 }
 .authentication .input-group{
   margin-bottom:1rem;
   cursor: pointer;
- 
+  position:relative;
 }
 .authentication .input-group input:focus{
     border-bottom:2px solid var(--green);
@@ -41,4 +41,10 @@
     border:none;
     background:var(--green);
     color:var(--white);
+}
+.error-message{
+    color:var(--pinkRed);
+    position: absolute;
+    top:100%;
+    z-index:9;
 }
