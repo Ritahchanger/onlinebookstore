@@ -1,0 +1,44 @@
+.authentication{
+    width:100%;
+    height:100vh;
+    justify-content:center;
+    align-items:center;
+    display:flex;
+}
+.authentication .form-wrapper{
+    max-width:600px;
+    box-shadow:0 0 5px rgba(0,0,0,0.25);
+    width:100%;
+    border-radius:10px;
+}
+.form-title{
+   
+    text-align:center;
+    font-size:2rem;
+    font-weight:700;
+    color:var(--green);
+}
+.authentication .form-wrapper form{
+    padding:2rem;
+    width:100%;
+    border-radius:10px;
+}
+.authentication input{
+    border:none;
+    height:50px;
+    border-bottom:2px solid var(--gray);
+    outline:none;
+}
+.authentication .input-group{
+  margin-bottom:1rem;
+  cursor: pointer;
+ 
+}
+.authentication .input-group input:focus{
+    border-bottom:2px solid var(--green);
+}
+.authentication .input-group input[type=submit]{
+    border:none;
+    background:var(--green);
+    color:var(--white);
+}

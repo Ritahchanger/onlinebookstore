@@ -19,8 +19,8 @@ const Hero = () => {
               Offering an extensive collection of genres ranging from gripping
               <br />
               Thrillers to heartwarming romances, insightful non-fiction to
-              enchanting children's tales.Immerse yourself in the magic of words as you explore our curated
-              selection of bestselling novels,
+              enchanting children's tales.Immerse yourself in the magic of words
+              as you explore our curated selection of bestselling novels,
               <br /> timeless classics, and hidden gems waiting to be
               discovered.
             </p>

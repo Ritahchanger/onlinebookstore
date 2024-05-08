@@ -13,7 +13,7 @@ export const sectionbNavigation = [
   },
   {
     menu_name: 'LOGIN',
-    path: '#'
+    path: '/login'
   },
 //   {
 //     menu_name: 'LOGOUT',

@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react'
-import Hero from '../components/Hero/Hero'
+import React, { Fragment } from "react";
+import Hero from "../components/Hero/Hero";
 
 const Home = () => {
-  return(
+  return (
     <Fragment>
-        <Hero/>
+      <Hero />
     </Fragment>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
