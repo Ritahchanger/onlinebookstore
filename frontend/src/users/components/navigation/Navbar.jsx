@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import "./Navbar.css"
+import { sectionbNavigation } from "../Data/NavbarData";
+import "./Navbar.css";
 const Navbar = () => {
   return (
     <nav className="nav">
@@ -16,7 +17,21 @@ const Navbar = () => {
         </div>
       </section>
       <section className="section-b">
-        <div className="container"></div>
+        <div className="container">
+          <div className="profile">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div className="search-bar">
+            <input type="text" name="" id="" placeholder="Search..." />
+          </div>
+          <div className="sectionb-navigation">
+            {sectionbNavigation.map((item, index) => (
+              <p key={index}>
+                <a href={item.path}>{item.menu_name}</a>
+              </p>
+            ))}
+          </div>
+        </div>
       </section>
       <section className="section-c">
         <div className="container"></div>

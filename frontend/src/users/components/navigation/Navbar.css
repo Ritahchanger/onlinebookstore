@@ -1,4 +1,6 @@
-
+section .container{
+    width:100%;
+}
 .section-a{
     background:var(--blue);
     color:#FFF;
@@ -30,4 +32,39 @@
 .section-a .social-media-links i:hover{
     transform: scale(1.1);
     cursor: pointer;
+}
+
+.section-b .container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    text-align:center;
+}
+.section-b .profile{
+    flex-basis:10%;
+}
+.section-b .profile span{
+    width:50px;
+    height:50px;
+   
+}
+.section-b .container .search-bar{
+    flex-basis:60%;
+}
+.section-b .container .search-bar input{
+    border:none;
+    border-bottom:2px solid var(--gray); 
+     outline:none;
+}
+.section-b .container .search-bar input:focus{
+    border-bottom:2px solid var(--green);
+}
+.section-b .container .sectionb-navigation{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-basis:25%;
+    
+}.section-b .container .sectionb-navigation p{
+    margin-left:1rem;
 }

@@ -9,6 +9,8 @@
   --orange:#e8b12e;
   --blue:#2f0ad6;
   --green:#08a34e;
+  --black:#000;
+  --gray:#ababab;
 }
 section{
   width:100%;
@@ -18,4 +20,10 @@ section{
   margin:0 auto;
   width:100%;
   padding:0 2rem;
+}
+a{
+  text-decoration:none;
+}
+input{
+  width:100%;
 }
