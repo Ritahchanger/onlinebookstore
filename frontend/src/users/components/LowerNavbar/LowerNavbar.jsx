@@ -5,6 +5,12 @@ import "./LowerNavbar.css";
 const LowerNavbar = () => {
   const [isFixed, setIsFixed] = useState(false);
 
+  const [sidebar, setSideBar] = useState(false);
+
+  const handleSideBar = () => {
+    setSideBar(!sidebar);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -29,15 +35,28 @@ const LowerNavbar = () => {
           </a>
         </div>
 
-        <div className="navigation">
-        {sectioncNavigation.map((item, index) => (
-          <p key={index} className="nav_li">
-            <a href={item.path}>{item.menu_name}</a>
-          </p>
-        ))}
+        <div className={`navigation ${sidebar ? "active" : null}`}>
+          <a
+            href="#"
+            className="close-menu"
+            style={{ fontSize: "3rem" }}
+            id="close-menu"
+            onClick={handleSideBar}
+          >
+            &times;
+          </a>
+          <div className="nav-ul">
+            {sectioncNavigation.map((item, index) => (
+              <p key={index} className="nav_li">
+                <a href={item.path}>{item.menu_name}</a>
+              </p>
+            ))}
+          </div>
         </div>
-       
-         <a href="#" className="menu-icon" ><i class="fa-solid fa-bars-staggered"></i></a>
+
+        <a href="#" className="menu-icon" onClick={handleSideBar}>
+          <i class="fa-solid fa-bars-staggered"></i>
+        </a>
       </div>
     </div>
   );
