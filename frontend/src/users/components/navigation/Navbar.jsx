@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { sectionbNavigation } from "../Data/NavbarData";
+import { sectionbNavigation, sectioncNavigation } from "../Data/NavbarData";
 import "./Navbar.css";
 const Navbar = () => {
   return (
@@ -18,23 +18,38 @@ const Navbar = () => {
       </section>
       <section className="section-b">
         <div className="container">
-          <div className="profile">
-            <i class="fa-solid fa-user"></i>
+          <div className="profile-logo">
+            <a href="#">
+              <i class="fa-solid fa-user"></i>
+            </a>
           </div>
-          <div className="search-bar">
-            <input type="text" name="" id="" placeholder="Search..." />
+
+          <div className="search_container">
+            <input type="text" placeholder="Search..." />
+            <button className="search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
           </div>
-          <div className="sectionb-navigation">
+
+          <div className="section-navigation">
             {sectionbNavigation.map((item, index) => (
-              <p key={index}>
-                <a href={item.path}>{item.menu_name}</a>
+              <p className="nav-li" key={index}>
+                <a href="#">{item.menu_name}</a>
               </p>
             ))}
           </div>
         </div>
       </section>
       <section className="section-c">
-        <div className="container"></div>
+        <div className="container">
+          <div className="sectionc-navigation">
+            {sectioncNavigation.map((item, index) => (
+              <p>
+                <a href={item.path}>{item.menu_name}</a>
+              </p>
+            ))}
+          </div>
+        </div>
       </section>
     </nav>
   );

@@ -10,5 +10,45 @@ export const sectionbNavigation = [
   {
     menu_name: 'WishList',
     path: '#'
-  }
+  },
+  {
+    menu_name: 'LOGIN',
+    path: '#'
+  },
+//   {
+//     menu_name: 'LOGOUT',
+//     path: '#'
+//   },
+  
+]
+export const sectioncNavigation = [
+  {
+    menu_name: 'CATEGORIES',
+    path: '#'
+  },
+  {
+    menu_name: 'HOME',
+    path: '#'
+  },
+  {
+    menu_name: 'ABOUT US',
+    path: '#'
+  },
+  {
+    menu_name: 'AUTHORS',
+    path: '#'
+  },
+  {
+    menu_name: 'NEW RELEASE',
+    path: '#'
+  },
+  {
+    menu_name: 'CONTACT',
+    path: '#'
+  },
+//   {
+//     menu_name: 'LOGOUT',
+//     path: '#'
+//   },
+  
 ]

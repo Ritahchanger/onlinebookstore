@@ -11,15 +11,14 @@ section .container{
     align-items:center;
     text-align:center;
     text-align:center;
+    padding:0.5rem 12px;
+
 }
 .phone-number{
     display:flex;
     align-items:center;
     text-align: center;
     justify-content: center;
-}
-.section-a .container{
-    padding:0.5rem 0rem;
 }
 .section-a .social-media-links i{
     margin-left:1rem;
@@ -34,37 +33,75 @@ section .container{
     cursor: pointer;
 }
 
+
+/* section b */
+.section-b{
+    box-shadow:0 0 5px rgba(0,0,0,0.25);
+}
 .section-b .container{
     display:flex;
     justify-content:space-between;
-    align-items:center;
-    text-align:center;
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+    
 }
-.section-b .profile{
+.section-b .section-navigation{
+    display:flex;
+    justify-content:space-between;
+}
+.section-b .section-navigation p a{
+    text-transform:uppercase;
+}
+
+.section-b .section-navigation p{
+    border-right:1px solid var(--gray);
+    padding:0rem 1rem;
+}
+
+.section-b .container .profile-logo{
     flex-basis:10%;
 }
-.section-b .profile span{
-    width:50px;
-    height:50px;
-   
+
+.section-b .container .search_container{
+    flex-basis:45%;
+    cursor: pointer;
 }
-.section-b .container .search-bar{
-    flex-basis:60%;
-}
-.section-b .container .search-bar input{
+.section-b .container .search_container input{
     border:none;
-    border-bottom:2px solid var(--gray); 
-     outline:none;
+    border-bottom:2px solid var(--gray);
+    outline:none;
 }
-.section-b .container .search-bar input:focus{
-    border-bottom:2px solid var(--green);
+.section-b .container .search_container input:focus{
+  border-bottom:2px solid var(--green);
 }
-.section-b .container .sectionb-navigation{
+.section-b .container .section-navigation{
+    flex-basis:40%;
+}
+.section-b .container .search_container{
     display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-basis:25%;
-    
-}.section-b .container .sectionb-navigation p{
-    margin-left:1rem;
+}
+.section-b .container .search_container button{
+    border:none;
+    cursor:pointer;
+    color:var(--white);
+    flex-basis:15%;
+    background:var(--blue);
+}
+.section-b .container .search_container input{
+    flex-basis:85%;
+}
+
+
+
+/* SECTION---C */
+
+
+
+.section-c .container .sectionc-navigation{
+    display:flex;
+    justify-content:space-between;
+}
+.section-c .container{
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
 }
