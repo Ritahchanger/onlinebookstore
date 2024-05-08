@@ -47,4 +47,12 @@
     .lower_navbar .navigation{
         display:none;
     }
+    .lower_navbar .container{
+        align-items:center;
+        text-align:center;
+        justify-content:space-between;
+    }
+    .lower_navbar .menu-icon{
+        font-size:2rem;
+    }
 }
