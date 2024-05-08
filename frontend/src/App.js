@@ -1,10 +1,13 @@
-import React from 'react'
-import Navbar from './users/components/navigation/Navbar'
+import {BrowserRouter,Routes,Route } from "react-router-dom"
+
+
+import "./App.css"
+import Home from './users/pages/Home'
 
 const App = () => {
   return (
-    <div>
-     <Navbar/>
+    <div className='app'>
+      <Home/>
     </div>
   )
 }

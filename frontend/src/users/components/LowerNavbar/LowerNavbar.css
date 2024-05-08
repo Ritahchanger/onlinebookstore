@@ -1,0 +1,24 @@
+.lower_navbar .container{
+    display:flex;
+    justify-content:space-between;
+}
+.lower_navbar{
+    background:var(--white);
+    height:40px;
+}
+.fixed{
+    position:fixed;
+    top:0;
+    width:100%;
+}
+.nav_li{
+    padding:0.5rem 1rem;
+    cursor: pointer;
+    transition:all 0.5s;
+}
+.nav_li:hover{
+    background:var(--green);
+}
+.nav_li:hover a{
+    color:var(--white);
+}

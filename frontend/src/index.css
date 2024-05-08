@@ -13,6 +13,9 @@
   --gray:#ababab;
   --white:#fff;
 }
+html{
+  scroll-behavior:smooth;
+}
 section{
   width:100%;
 }
@@ -26,4 +29,10 @@ a{
 }
 input{
   width:100%;
+}
+.hero-btn{
+  background:var(--green);
+
+  padding:0.5rem 3rem;
+  color:var(--white);
 }

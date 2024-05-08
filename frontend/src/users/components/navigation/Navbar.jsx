@@ -40,17 +40,6 @@ const Navbar = () => {
           </div>
         </div>
       </section>
-      <section className="section-c">
-        <div className="container">
-          <div className="sectionc-navigation">
-            {sectioncNavigation.map((item, index) => (
-              <p>
-                <a href={item.path}>{item.menu_name}</a>
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
     </nav>
   );
 };

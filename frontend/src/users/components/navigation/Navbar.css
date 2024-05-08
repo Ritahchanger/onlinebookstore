@@ -1,6 +1,9 @@
 section .container{
     width:100%;
 }
+.nav{
+    background:var(--white);
+}
 .section-a{
     background:var(--blue);
     color:#FFF;
@@ -36,7 +39,7 @@ section .container{
 
 /* section b */
 .section-b{
-    box-shadow:0 0 5px rgba(0,0,0,0.25);
+   border-bottom:1px solid var(--gray);
 }
 .section-b .container{
     display:flex;
@@ -67,6 +70,7 @@ section .container{
     cursor: pointer;
 }
 .section-b .container .search_container input{
+    background:transparent;
     border:none;
     border-bottom:2px solid var(--gray);
     outline:none;
@@ -89,19 +93,4 @@ section .container{
 }
 .section-b .container .search_container input{
     flex-basis:85%;
-}
-
-
-
-/* SECTION---C */
-
-
-
-.section-c .container .sectionc-navigation{
-    display:flex;
-    justify-content:space-between;
-}
-.section-c .container{
-    padding-top:0.5rem;
-    padding-bottom:0.5rem;
 }
