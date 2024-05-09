@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./Ebook.css"
 const Ebook = () => {
   return (
     <div className="ebook">
@@ -16,9 +16,15 @@ const Ebook = () => {
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione
               soluta facere tempora quia quaerat distinctio suscipit tenetur rem
               temporibus officia veniam facilis, alias eveniet aut, porro sunt
-              obcaecati provident corporis laudantium quam, corrupti est
-              quisquam? Voluptates delectus necessitatibus blanditiis id.
+              obcaecati provident corporis laudantium quam,
             </p>
+            <form action="#" className="newsLetter">
+              <p className="small-header">Get newsletter</p>
+              <div className="input-group">
+                <input type="email" placeholder="Enter your email.." />
+                <input type="submit" value="SUBSCRIBE" />
+              </div>
+            </form>
           </div>
           <div className="col-md-6">
             <img
