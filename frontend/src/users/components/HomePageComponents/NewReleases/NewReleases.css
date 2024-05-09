@@ -16,3 +16,12 @@
 .new-releases .book-body{
     text-align: center;
 }
+.new-releases .book-title{
+    color:var(--blue)
+}
+.new-releases .book-author{
+    color:var(--gray)
+}
+.new-releases .book-price{
+    color:var(--orange)
+}

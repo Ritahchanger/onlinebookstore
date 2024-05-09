@@ -49,7 +49,7 @@ const NewRelease = () => {
             {NewReleaseData.map((item, index) => (
               <div className="book" key={index}>
                 <div className="img-wrapper">
-                  <img src={NewRelaseImage} alt="" />
+                  <img src={item.imgUrl} alt="" />
                 </div>
                 <div className="book-body">
                   <p className="book-title">{item.bookTitle}</p>
