@@ -10,6 +10,7 @@
   border-bottom: 2px solid var(--gray);
   margin-bottom: 1rem;
   outline: none;
+ 
 }
 .ebook .newsLetter .input-group input[type="email"]:focus {
   border-bottom: 2px solid var(--green);
@@ -18,6 +19,7 @@
   display: flex;
   width: 100%;
   background: var(--green);
+  color:var(--white);
 }
 
 @media (max-width: 880px) {
