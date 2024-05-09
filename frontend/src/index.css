@@ -16,6 +16,7 @@
 }
 html{
   scroll-behavior:smooth;
+  overflow-x:hidden;
 }
 section{
   width:100%;
@@ -33,8 +34,19 @@ input{
 }
 .hero-btn{
   background:var(--green);
-
   padding:0.5rem 3rem;
   color:var(--white);
-  
+}
+.small-header{
+  font-weight:700;
+  color:var(--orange);
+  font-size:1.4rem;
+}
+.medium-header{
+  font-size:2rem;
+  font-weight:700;
+  color:var(--blue)
+}
+img{
+  width:100%;
 }
