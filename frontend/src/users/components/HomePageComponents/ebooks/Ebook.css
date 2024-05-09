@@ -1,39 +1,8 @@
 .ebook{
     margin-top:5rem;
 }
-.ebook input {
-  border: none;
-  height: 40px;
-}
-.ebook .newsLetter .input-group {
-  display: flex;
-  width: 100%;
-}
-.ebook .newsLetter .input-group input[type="email"] {
-  border-bottom: 2px solid var(--gray);
-  margin-bottom: 1rem;
-  outline: none;
- 
-}
-.ebook .newsLetter .input-group input[type="email"]:focus {
-  border-bottom: 2px solid var(--green);
-}
-.ebook .newsLetter .input-group input[type="submit"] {
-  width: 100%;
-  background: var(--green);
-  margin-bottom:1rem;
-  color:var(--white);
-  transition:All 0.5s;
-}
-.ebook .newsLetter .input-group input[type="submit"]:hover{
-    background:var(--orange);
-}
-
-@media (max-width: 880px) {
-  .ebook .newsLetter .input-group {
-    flex-direction: column;
-  }
-  .ebook .newsLetter .input-group input {
-    width: 100%;
-  }
+.ebook .row .col-md-6:nth-child(1){
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
 }

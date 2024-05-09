@@ -20,13 +20,6 @@ const Ebook = () => {
               temporibus officia veniam facilis, alias eveniet aut, porro sunt
               obcaecati provident corporis laudantium quam,
             </p>
-            <form action="#" className="newsLetter">
-              <p className="small-header">Get newsletter</p>
-              <div className="input-group">
-                <input type="email" placeholder="Enter your email.." />
-                <input type="submit" value="SUBSCRIBE" />
-              </div>
-            </form>
           </div>
           <div className="col-md-6">
             <img

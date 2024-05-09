@@ -4,6 +4,7 @@ import Categories from "../components/HomePageComponents/categories/Categories";
 import Ebook from "../components/HomePageComponents/ebooks/Ebook";
 import NewRelease from "../components/HomePageComponents/NewReleases/NewRelease";
 import FeaturedBook from "../components/HomePageComponents/FeaturedBook/FeaturedBook";
+import NewsLetter from "../components/HomePageComponents/NewsLetter/NewsLetter";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Ebook />
       <NewRelease />
       <FeaturedBook/>
+      <NewsLetter/>
     </Fragment>
   );
 };

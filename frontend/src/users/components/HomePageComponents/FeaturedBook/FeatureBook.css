@@ -1,5 +1,6 @@
 .featured{
     margin-top: 5rem;
+    background:#f2f2f2;
 }
 
 .featured .img-wrapper{
@@ -19,9 +20,16 @@
     flex-direction: column;
     justify-content:center;
     align-items:start;
+    
 }
+.featured .col:nth-child(2) p{
+    color:var(--black)
+} 
 .featured  p{
     width:100%;
+}
+.featured .col:nth-child(2) .small-header{
+    color:var(--orange)
 }
 
 
