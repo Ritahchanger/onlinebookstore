@@ -1,5 +1,7 @@
-.categories {
-  padding: 3rem 0rem;
+
+.categories .container{
+    background:#ccc;
+    padding: 3rem 2rem;
 }
 .categories .books-categories {
   margin-top: 3rem;
@@ -11,6 +13,7 @@
   text-align: center;
   padding: 10px;
   cursor: pointer;
+  background:var(--white);
 }
 .book-show .img-wrapper {
   width: 100%;
