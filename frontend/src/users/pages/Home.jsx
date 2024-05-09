@@ -10,9 +10,9 @@ const Home = () => {
     <Fragment>
       <Hero />
       <Categories />
-      <Ebook />
+      {/* <Ebook />
       <NewRelease />
-      <FeaturedBook/>
+      <FeaturedBook/> */}
     </Fragment>
   );
 };
