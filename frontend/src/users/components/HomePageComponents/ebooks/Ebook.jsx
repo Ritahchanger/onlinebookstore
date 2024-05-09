@@ -1,6 +1,8 @@
 import React from "react";
-import "./Ebook.css"
+
+import "./Ebook.css";
 const Ebook = () => {
+
   return (
     <div className="ebook">
       <div className="container">
