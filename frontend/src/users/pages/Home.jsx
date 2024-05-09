@@ -5,6 +5,7 @@ import Ebook from "../components/HomePageComponents/ebooks/Ebook";
 import NewRelease from "../components/HomePageComponents/NewReleases/NewRelease";
 import FeaturedBook from "../components/HomePageComponents/FeaturedBook/FeaturedBook";
 import NewsLetter from "../components/HomePageComponents/NewsLetter/NewsLetter";
+import Footer from "../components/Footer/Footer";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <NewRelease />
       <FeaturedBook/>
       <NewsLetter/>
+      <Footer/>
     </Fragment>
   );
 };

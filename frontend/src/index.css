@@ -18,6 +18,9 @@ html{
   scroll-behavior:smooth;
   overflow-x:hidden;
 }
+ul{
+  list-style:none;
+}
 section{
   width:100%;
 }

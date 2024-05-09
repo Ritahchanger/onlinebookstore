@@ -16,7 +16,7 @@ const NewsLetter = () => {
             <form action="#" className="newsLetterForm">
               <input
                 type="email"
-                placeholder="Enter your email is address here..."
+                placeholder="Enter your email is address..."
               />
               <button type="submit">
                 SEND
@@ -25,7 +25,6 @@ const NewsLetter = () => {
             </form>
           </div>
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero possimus, in fuga quibusdam sed ex adipisci facere enim magni perspiciatis porro ullam earum cupiditate odio ab eveniet, dolorum veritatis corporis similique nihil a alias! Sapiente doloremque dignissimos quam voluptates voluptas voluptatibus illo quaerat iure porro eaque culpa hic numquam, harum voluptatem sunt quos eligendi, eum magnam sed repudiandae a, ratione earum perspiciatis ex?</p>
       </div>
     </div>
   );
