@@ -11,8 +11,8 @@ const Home = () => {
       <Hero />
       <Categories />
       <Ebook />
-      {/* <NewRelease />
-      <FeaturedBook/> */}
+      <NewRelease />
+      {/* <FeaturedBook/> */}
     </Fragment>
   );
 };
