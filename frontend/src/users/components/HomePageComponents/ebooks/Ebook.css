@@ -1,28 +1,30 @@
-.ebook input{
-    border:none;
+.ebook input {
+  border: none;
+  height: 40px;
 }
-.ebook .newsLetter .input-group{
-    display:flex;
+.ebook .newsLetter .input-group {
+  display: flex;
+  width: 100%;
 }
-.ebook .newsLetter .input-group{
-    height:45px;
-    outline:none;
-    margin-bottom:3rem;
+.ebook .newsLetter .input-group input[type="email"] {
+  border-bottom: 2px solid var(--gray);
+  margin-bottom: 1rem;
+  outline: none;
+}
+.ebook .newsLetter .input-group input[type="email"]:focus {
+  border-bottom: 2px solid var(--green);
+}
+.ebook .newsLetter .input-group input[type="submit"] {
+  display: flex;
+  width: 100%;
+  background: var(--green);
 }
 
-.ebook .newsLetter .input-group input[type=submit]{
-    flex-basis:20%;
-    border:none;
-    height:100%;
-    background:var(--green);
-    color:var(--white);
-    background:var( --orange);
-}
-.ebook .newsLetter .input-group input[type=email]{
-    flex-basis:80%;
-    height:100%;
-    background:var(--green);
-    outline:none;
-    color:var(--white);
-    padding:10px;
+@media (max-width: 880px) {
+  .ebook .newsLetter .input-group {
+    flex-direction: column;
+  }
+  .ebook .newsLetter .input-group input {
+    width: 100%;
+  }
 }
