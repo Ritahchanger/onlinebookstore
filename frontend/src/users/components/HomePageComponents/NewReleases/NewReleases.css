@@ -8,9 +8,6 @@
 .new-releases .book{
     padding:10px;
 }
-.container-wrapper{
-    width:100%;
-}
 .new-releases .book .img-wrapper{
     padding:20px;
     box-shadow: 0 0 5px rgba(0,0,0,0.25);
@@ -25,5 +22,14 @@
     color:var(--gray)
 }
 .new-releases .book-price{
-    color:var(--orange)
+    color:var(--orange);
+}
+.new-releases .container{
+    width:90%;
+    max-width:1200px;
+    margin:0 auto;
+}
+
+.new-releases .container .container-wrapper{
+    width:100%;
 }
