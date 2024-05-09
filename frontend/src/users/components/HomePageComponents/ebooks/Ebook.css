@@ -16,7 +16,6 @@
   border-bottom: 2px solid var(--green);
 }
 .ebook .newsLetter .input-group input[type="submit"] {
-  display: flex;
   width: 100%;
   background: var(--green);
   margin-bottom:1rem;
