@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "./Categories.css";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import { CategoriesData } from "../../Data/CategoriesData";
 
 const Categories = () => {
@@ -71,7 +70,6 @@ const Categories = () => {
           </Slider>
         </div>
       </div>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat vero sit ducimus accusamus sunt sapiente, at molestiae adipisci. Similique porro pariatur dignissimos quibusdam? Perferendis labore molestias nam, eveniet vitae culpa possimus voluptas obcaecati doloribus! Fugit officia veniam earum sit nulla illo deserunt natus iusto. Cupiditate cumque suscipit ullam laudantium molestias?</p>
     </div>
   );
 };

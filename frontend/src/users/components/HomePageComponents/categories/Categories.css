@@ -1,8 +1,15 @@
+.categories{
+    padding:3rem 0rem;
+}
+.categories .books-categories{
+    margin-top:3rem;
+}
 .book-show{
-    box-shadow:0 0 5px rgba(0,0,0,0.25);
+    border:3px solid var(--blue);
     border-bottom-right-radius:10px;
     border-bottom-left-radius:10px;
     text-align:center;
+    padding:10px;
 }
  
 
