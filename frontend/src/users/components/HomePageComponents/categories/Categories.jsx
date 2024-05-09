@@ -8,34 +8,28 @@ import "slick-carousel/slick/slick-theme.css";
 import { CategoriesData } from "../../Data/CategoriesData";
 
 const Categories = () => {
+  const [slidesToScroll, setSlidesToShow] = useState(3);
 
-  const [slidesToScroll,setSlidesToShow] = useState(3);
-
-  useEffect(()=>{
-
-    const handleResize = () =>{
-
-      if(window.innerWidth <=670){
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 500) {
+        setSlidesToShow(1);
+      } else if (window.innerWidth <= 670) {
         setSlidesToShow(2);
-      }else{
+      } else {
         setSlidesToShow(3);
       }
-
-    }
-    handleResize();
-
-    window.addEventListener("resize",handleResize);
-
-
-  })
-
+    };
+    handleResize();    
+    window.addEventListener("resize", handleResize);
+  });
 
   var settings = {
     dots: true,
     infinite: false,
     speed: 700,
-    slidesToShow:slidesToScroll,
-    slidesToScroll:2,
+    slidesToShow: slidesToScroll,
+    slidesToScroll: 2,
   };
   return (
     <div className="categories">
