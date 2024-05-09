@@ -5,6 +5,7 @@
 .lower_navbar {
   background: var(--white);
   height: 50px;
+  z-index:99;
 }
 .fixed {
   position: fixed;
@@ -74,7 +75,6 @@
     left: -100%;
     right: 0;
     top:0;
-    bottom:100%;
     transition:all 0.5s;
   }
   .lower_navbar .container .navigation.active{

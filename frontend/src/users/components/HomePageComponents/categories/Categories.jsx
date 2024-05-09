@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "./Categories.css";
 
@@ -7,12 +7,34 @@ import "slick-carousel/slick/slick-theme.css";
 import { CategoriesData } from "../../Data/CategoriesData";
 
 const Categories = () => {
+
+  const [slidesToScroll,setSlidesToShow] = useState(3);
+
+  useEffect(()=>{
+
+    const handleResize = () =>{
+
+      if(window.innerWidth <=670){
+        setSlidesToShow(2);
+      }else{
+        setSlidesToShow(3);
+      }
+
+    }
+    handleResize();
+
+    window.addEventListener("resize",handleResize);
+
+
+  })
+
+
   var settings = {
     dots: true,
     infinite: false,
     speed: 700,
-    slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToShow:slidesToScroll,
+    slidesToScroll:2,
   };
   return (
     <div className="categories">
@@ -49,6 +71,7 @@ const Categories = () => {
           </Slider>
         </div>
       </div>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat vero sit ducimus accusamus sunt sapiente, at molestiae adipisci. Similique porro pariatur dignissimos quibusdam? Perferendis labore molestias nam, eveniet vitae culpa possimus voluptas obcaecati doloribus! Fugit officia veniam earum sit nulla illo deserunt natus iusto. Cupiditate cumque suscipit ullam laudantium molestias?</p>
     </div>
   );
 };
