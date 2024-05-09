@@ -19,7 +19,12 @@
   display: flex;
   width: 100%;
   background: var(--green);
+  margin-bottom:1rem;
   color:var(--white);
+  transition:All 0.5s;
+}
+.ebook .newsLetter .input-group input[type="submit"]:hover{
+    background:var(--orange);
 }
 
 @media (max-width: 880px) {
