@@ -57,6 +57,11 @@
 
 }
 
+.blog .container{
+    padding:0 2rem;
+}
+
+
 
 @media(max-width:684px){
     .blog-grid{
