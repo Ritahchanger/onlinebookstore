@@ -9,6 +9,7 @@ dotenv.config();
 const app = express();
 
 app.use(helmet());
+app.use(express.json());
 
 
 app.use(morgan("combined"));
@@ -16,6 +17,12 @@ app.use(morgan("combined"));
 const PORT = process.env.PORT || 8000;
 
 
+// ROUTE IMPORTS
+
+const AuthenticationRoute = require("../routes/AuthenticationRoute");
+
+
+app.use('/api/auth',AuthenticationRoute);
 
 
 
