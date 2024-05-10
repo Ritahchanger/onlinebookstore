@@ -10,6 +10,19 @@ const Blog = () => {
       <LowerNavbar />
       <div className="blog">
         <div className="container">
+          <div className="search_container">
+            <div className="input-search">
+              <input type="text" name="" id="" placeholder="Search blog.." />
+              <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div className="filter-input">
+              <p className="fiter-title">Filter by</p>
+              <select>
+                <option value="DATE">DATE</option>
+                <option value="DATE">BLOG NAME</option>
+              </select>
+            </div>
+          </div>
           <p className="small-header">Latest Blogs</p>
           <div className="blog-grid">
             {blogSampleData.map((item, index) => (
