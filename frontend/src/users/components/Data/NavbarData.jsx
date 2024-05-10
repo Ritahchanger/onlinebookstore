@@ -44,7 +44,7 @@ export const sectioncNavigation = [
   },
   {
     menu_name: 'BLOG',
-    path: '#'
+    path: '/blog'
   },
 //   {
 //     menu_name: 'LOGOUT',
