@@ -10,6 +10,8 @@ import Blog from './users/pages/Blog'
 
 import SingleBlog from './users/pages/SingleBlog'
 
+import Authors from './users/pages/Authors'
+
 const App = () => {
   return (
     <div className='app'>
@@ -20,6 +22,7 @@ const App = () => {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/single-blog' element={<SingleBlog />} />
+          <Route path='/authors' element={<Authors />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -24,7 +24,10 @@ export const sectionbNavigation = [
 export const sectioncNavigation = [
   {
     menu_name: 'CATEGORIES',
-    path: '#'
+    path: '#',
+    navItems:[
+      ''
+    ]
   },
   {
     menu_name: 'HOME',
@@ -36,7 +39,7 @@ export const sectioncNavigation = [
   },
   {
     menu_name: 'AUTHORS',
-    path: '#'
+    path: '/authors',
   },
   {
     menu_name: 'NEW RELEASE',
