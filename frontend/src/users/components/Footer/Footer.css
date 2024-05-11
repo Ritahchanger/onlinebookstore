@@ -8,21 +8,30 @@
     gap:1rem;
 }
 .footer .social_media{
-    display:flex;
-    align-items:start;
-    background:#f2f2f2;
+   display:flex;
+  
 }
 .footer .social_media li{
     width:50px;
     height:50px;
     margin:1rem;
-}
-.footer .social_media li {
-    background:var(--green);
     display:flex;
-    align-items:center;
+    background:var(--white);
     justify-content:center;
-    border-radius:50rem;
+    align-items:center;
+    text-align:center;
+    border-radius:50%;
+    transition:all 0.5s;
+    cursor: pointer;
+}
+.footer .description{
+    color:var(--white);
+}
+.footer .small-header{
+    font-size:1.2rem;
+}
+.footer .social_media li:hover{
+box-shadow:0 0 5px #ff004f,0 0 10px #ff004f,0 0 15px #ff004f;   
 }
 .footer .social_media li a i{
     font-size:1.4rem;
@@ -64,7 +73,5 @@
         height:40px;
         margin:0.5rem;
     }
-    .footer .social_media li:nth-child(1){
-        margin-left:-5px;
-    }
+   
 }
