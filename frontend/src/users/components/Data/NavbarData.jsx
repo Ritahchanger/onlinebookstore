@@ -28,7 +28,7 @@ export const sectioncNavigation = [
   },
   {
     menu_name: 'HOME',
-    path: '#'
+    path: '/'
   },
   {
     menu_name: 'ABOUT US',

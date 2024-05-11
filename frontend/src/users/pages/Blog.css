@@ -45,6 +45,11 @@
 .blog .blog-card .blog-btn a {
   color: var(--white);
 }
+.blog .blog-card .blog-btn:hover{
+  background:var(--blue);
+  border-radius:5px;
+  cursor:pointer;
+}
 
 .blog span {
   color: var(--white);
