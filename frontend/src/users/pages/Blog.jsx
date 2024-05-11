@@ -5,6 +5,8 @@ import "./Blog.css";
 import { blogSampleData } from "../components/Data/BlogData";
 import { Link } from "react-router-dom";
 
+import BlogItem from "../components/BlogPageComponents/BlogItem";
+
 const Blog = () => {
   return (
     <Fragment>
@@ -30,23 +32,7 @@ const Blog = () => {
           <p className="small-header">Latest Blogs</p>
           <div className="blog-grid">
             {blogSampleData.map((item, index) => (
-              <div className="blog-card">
-                <div className="img-wrapper">
-                  <img src={item.imgUrl} alt="" />
-                </div>
-                <div className="overlay">
-                  <p className="small-header">{item.blogTitle}</p>
-                  <p className="description">{item.description}</p>
-                  <div className="cardfooter">
-                    <span className="card_dates">{item.cardDates}</span>
-                    <span className="blog-btn">
-                      <Link to="/single-blog">
-                        MORE <i class="fa fa-arrow-right"></i>
-                      </Link>
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <BlogItem item={item} />
             ))}
           </div>
 
@@ -68,30 +54,15 @@ const Blog = () => {
           </div>
 
           <p className="small-header">Earlier Blogs</p>
+          
           <div className="blog-grid">
             {blogSampleData.map((item, index) => (
-              <div className="blog-card">
-                <div className="img-wrapper">
-                  <img src={item.imgUrl} alt="" />
-                </div>
-                <div className="overlay">
-                  <p className="small-header">{item.blogTitle}</p>
-                  <p className="description">{item.description}</p>
-                  <div className="cardfooter">
-                    <span className="card_dates">{item.cardDates}</span>
-                    <span className="blog-btn">
-                      <Link to="/single-blog">
-                        MORE <i class="fa fa-arrow-right"></i>
-                      </Link>
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <BlogItem item={item} />
             ))}
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </Fragment>
   );
 };
