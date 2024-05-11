@@ -12,7 +12,11 @@
   position: fixed;
   top:0;
   width: 100%;
+  background:var(--green);
  
+}
+.fixed .navigation .nav-ul a{
+  color:var(--white);
 }
 .nav_li {
   padding: 0.5rem 1rem;
