@@ -37,6 +37,9 @@
 .categories .container .row .col:nth-child(1){
   flex-basis:40%;
 }
+.categories .container .row .col:nth-child(2) .description{
+  color:#000;
+}
 .categories .container .row .col:nth-child(2){
   flex-basis:53%;
 }

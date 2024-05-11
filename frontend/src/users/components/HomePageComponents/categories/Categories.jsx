@@ -35,7 +35,7 @@ const Categories = () => {
             <div className="medium-header">Explore our Top Categories</div>
           </div>
           <div className="col">
-            <p>
+            <p className="description">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
               ex, sit deserunt adipisci corrupti molestias excepturi, corporis
               nesciunt modi omnis odit quidem. Nulla molestiae, ducimus soluta

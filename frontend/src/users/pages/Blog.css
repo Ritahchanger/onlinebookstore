@@ -112,6 +112,33 @@
   margin:1rem 0rem;
 }
 
+.blog .blogs-advert{
+  width:100%;
+  background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),url('https://plus.unsplash.com/premium_photo-1675039871139-06cc792da9a7?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-attachment:fixed;
+  background-position:center;
+  background-size:cover;
+  padding:1rem;
+  border-radius:10px;
+  color:#fff;
+  margin:2rem 0rem;
+
+}
+
+.blog .blogs-advert p{
+  color:var(--white);
+}
+.blog .blogs-advert .medium-header{
+  color:var(--blue);
+}
+
+.blog .blogs-advert .small-header{
+  color:var(--orange);
+}
+
+
+
+
 
 @media(max-width:684px) {
   .blog-grid {

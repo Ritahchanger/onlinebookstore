@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import LowerNavbar from "../components/LowerNavbar/LowerNavbar";
-
+import Footer from "../components/Footer/Footer";
 import "./Blog.css";
 import { blogSampleData } from "../components/Data/BlogData";
 import { Link } from "react-router-dom";
@@ -49,6 +49,24 @@ const Blog = () => {
               </div>
             ))}
           </div>
+
+          <div className="blogs-advert">
+            <p className="medium-header">
+              A blog for Passionate people
+              <br />
+              And website lovers.
+            </p>
+            <p className="small-header">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit
+              officia omnis cum, dolorum fugiat autem, earum nostrum voluptate,
+              quas deleniti amet ipsam iusto placeat modi.
+            </p>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi
+              aliquid dolorum ipsam ratione, omnis ab!
+            </p>
+          </div>
+
           <p className="small-header">Earlier Blogs</p>
           <div className="blog-grid">
             {blogSampleData.map((item, index) => (
@@ -73,6 +91,7 @@ const Blog = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </Fragment>
   );
 };

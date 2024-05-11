@@ -1,9 +1,11 @@
 .footer{
     margin-top:5rem;
+    background:var(--green);
 }
 .footer .container .row{
     display:grid;
     grid-template-columns:repeat(4,1fr);
+    gap:1rem;
 }
 .footer .social_media{
     display:flex;
@@ -28,7 +30,12 @@
 }
 .footer .company p{
     text-align:start;
-
+}
+.footer a{
+    color:var(--white)
+}
+.footer .company a:hover{
+    text-decoration:underline;
 }
 .footer .section-b-footer{
     display:flex;
@@ -44,6 +51,7 @@
     .footer .container .row .col:nth-child(1){
         margin-bottom:2rem;
     }
+    
    
 }
 
