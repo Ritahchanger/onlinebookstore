@@ -12,11 +12,11 @@ const Home = () => {
     <Fragment>
       <Hero />
       <Categories />
-      {/* <Ebook /> */}
-      {/* <NewRelease />
+      <Ebook /> 
+       <NewRelease />
       <FeaturedBook/>
       <NewsLetter/>
-      <Footer/> */}
+      <Footer/>
     </Fragment>
   );
 };
