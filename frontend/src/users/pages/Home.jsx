@@ -13,10 +13,10 @@ const Home = () => {
       <Hero />
       <Categories />
       <Ebook />
-      <NewRelease />
+      {/* <NewRelease />
       <FeaturedBook/>
       <NewsLetter/>
-      <Footer/>
+      <Footer/> */}
     </Fragment>
   );
 };
