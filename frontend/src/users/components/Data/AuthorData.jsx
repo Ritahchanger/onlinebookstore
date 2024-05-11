@@ -98,19 +98,19 @@ export const AuthorData = [
   },
   {
     imgUrl: Author14,
-    authorName: "Lucy Mueni",
+    authorName: "Mary Tabitha",
     authorDescription:
       " Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam mollitia laboriosam, pariatur asperiores quisquam incidunt?",
   },
   {
     imgUrl: Author15,
-    authorName: "Lucy Mueni",
+    authorName: "Kimanthi Muli",
     authorDescription:
       " Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam mollitia laboriosam, pariatur asperiores quisquam incidunt?",
   },
   {
     imgUrl: Author16,
-    authorName: "Lucy Mueni",
+    authorName: "Mutie Mukelo",
     authorDescription:
       " Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam mollitia laboriosam, pariatur asperiores quisquam incidunt?",
   },
@@ -122,7 +122,7 @@ export const AuthorData = [
   },
   {
     imgUrl: Author18,
-    authorName: "Lucy Mueni",
+    authorName: "Hadijah Sebe",
     authorDescription:
       " Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam mollitia laboriosam, pariatur asperiores quisquam incidunt?",
   }
