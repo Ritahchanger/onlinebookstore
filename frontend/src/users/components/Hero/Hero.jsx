@@ -19,17 +19,14 @@ const Hero = () => {
               Offering an extensive collection of genres ranging from gripping
               <br />
               Thrillers to heartwarming romances, insightful non-fiction to
-              enchanting children's tales.Immerse yourself in the magic of words
-              as you explore our curated selection of bestselling novels,
-              <br /> timeless classics, and hidden gems waiting to be
-              discovered.
+              enchanting children's tales.
             </p>
             <a href="#" className="hero-btn">
               READ MORE
             </a>
           </div>
           <div className="col">
-            <img src={BannerImage} alt="" />
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
           </div>
         </div>
       </div>

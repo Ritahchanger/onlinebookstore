@@ -17,10 +17,20 @@
     width:100%;
     display:flex;
     justify-content:space-between;
-    padding:0 0.7rem;
+    padding:0 1rem;
 }
 .hero_content .col:nth-child(1){
     flex-basis:50%;
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
+   
+}
+.hero_content .col:nth-child(1) .hero-btn{
+    width:200px;
+}
+.hero_content .col:nth-child(1) .description{
+    font-size:1.4rem;
 }
 .hero_content .col:nth-child(2){
     flex-basis:50%;
@@ -47,6 +57,7 @@
     }
     .hero_content .col:nth-child(1){
         text-align:center;
+        align-items: center;
     }
     .hero_content .col:nth-child(2){
         display:flex;

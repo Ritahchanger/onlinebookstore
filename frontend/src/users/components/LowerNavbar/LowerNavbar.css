@@ -6,12 +6,13 @@
   background: var(--white);
   height: 50px;
   z-index:99;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
 }
 .fixed {
   position: fixed;
   top:0;
   width: 100%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+ 
 }
 .nav_li {
   padding: 0.5rem 1rem;

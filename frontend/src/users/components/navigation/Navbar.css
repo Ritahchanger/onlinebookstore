@@ -55,6 +55,7 @@
     justify-content: space-between;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    align-items:center;
 }
 
 .section-b .section-navigation {
@@ -84,6 +85,7 @@
     flex-basis: 45%;
     cursor: pointer;
     height: 40px;
+    margin-top:-3px;
 }
 
 .section-b .container .search_container input {
