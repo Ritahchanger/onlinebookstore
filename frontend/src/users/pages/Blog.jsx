@@ -3,6 +3,7 @@ import LowerNavbar from "../components/LowerNavbar/LowerNavbar";
 
 import "./Blog.css";
 import { blogSampleData } from "../components/Data/BlogData";
+import { Link } from "react-router-dom";
 
 const Blog = () => {
   return (
@@ -13,7 +14,9 @@ const Blog = () => {
           <div className="search_container">
             <div className="input-search">
               <input type="text" name="" id="" placeholder="Search blog.." />
-              <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+              <button type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
             </div>
             <div className="filter-input">
               <p className="fiter-title">Filter by</p>
@@ -23,6 +26,7 @@ const Blog = () => {
               </select>
             </div>
           </div>
+
           <p className="small-header">Latest Blogs</p>
           <div className="blog-grid">
             {blogSampleData.map((item, index) => (
@@ -36,9 +40,9 @@ const Blog = () => {
                   <div className="cardfooter">
                     <span className="card_dates">{item.cardDates}</span>
                     <span className="blog-btn">
-                      <a href="#">
-                        MORE <i class="fa fa-arrow-right"></i>{" "}
-                      </a>
+                      <Link to="/single-blog">
+                        MORE <i class="fa fa-arrow-right"></i>
+                      </Link>
                     </span>
                   </div>
                 </div>
@@ -58,9 +62,9 @@ const Blog = () => {
                   <div className="cardfooter">
                     <span className="card_dates">{item.cardDates}</span>
                     <span className="blog-btn">
-                      <a href="#">
-                        MORE <i class="fa fa-arrow-right"></i>{" "}
-                      </a>
+                      <Link to="/single-blog">
+                        MORE <i class="fa fa-arrow-right"></i>
+                      </Link>
                     </span>
                   </div>
                 </div>

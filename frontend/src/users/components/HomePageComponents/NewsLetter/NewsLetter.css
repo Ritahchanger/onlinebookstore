@@ -13,6 +13,7 @@
     display:flex;
     align-items:center;
     height:45px;
+    margin-top:2rem;
 }
 .newsletter button{
     border:none;

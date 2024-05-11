@@ -6,3 +6,14 @@
   flex-direction: column;
   justify-content: center;
 }
+
+
+
+@media(max-width:824px){
+  .ebook .container .row{
+    flex-direction:column;
+  }
+  .ebook .row .col-md-6:nth-child(1){
+    margin-bottom:2rem;
+  }
+}

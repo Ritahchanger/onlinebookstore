@@ -11,6 +11,7 @@
     justify-content: center;
     align-items:center;
     flex-direction:column;
+    flex-basis:46%;
 }
 .featured .col:nth-child(1) p{
     text-align:center;
@@ -20,6 +21,7 @@
     flex-direction: column;
     justify-content:center;
     align-items:start;
+    flex-basis:46%;
     
 }
 .featured .col:nth-child(2) p{
@@ -31,7 +33,9 @@
 .featured .col:nth-child(2) .small-header{
     color:var(--orange)
 }
-
+.featured .container .row{
+    justify-content: space-between;
+}
 
 @media(max-width:586px){
     .featured .img-wrapper{

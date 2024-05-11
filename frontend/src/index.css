@@ -29,6 +29,7 @@ section{
   margin:0 auto;
   width:100%;
   position: relative;
+  padding:0 1rem;
 }
 a{
   text-decoration:none;
@@ -37,8 +38,16 @@ input{
   width:100%;
 }
 .hero-btn{
-  background:var(--green);
+  color:var(--green);
   padding:0.5rem 3rem;
+  border:2px solid var(--green);
+  margin-top:1rem;
+  border-radius:5px;
+  cursor: pointer;
+  transition:all 0.5s;
+}
+.hero-btn:hover{
+  background: var(--green);
   color:var(--white);
 }
 .small-header{
@@ -49,7 +58,11 @@ input{
 .medium-header{
   font-size:2rem;
   font-weight:700;
-  color:var(--blue)
+  color:var(--blue);
+  margin:1rem 0rem;
+}
+.row{
+  display:flex;
 }
 img{
   width:100%;

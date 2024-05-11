@@ -46,6 +46,9 @@
 #close-menu {
   display: none;
 }
+.lower_navbar .navigation .nav-ul a{
+  color:var(--blue);
+}
 
 @media (max-width: 668px) {
   .lower_navbar .menu-icon,

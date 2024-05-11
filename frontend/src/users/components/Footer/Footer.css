@@ -38,6 +38,11 @@
 @media(max-width:796px){
     .footer .container .row{
        display:flex;
+       flex-wrap:wrap;
+       justify-content: space-between;
+    }
+    .footer .container .row .col:nth-child(1){
+        margin-bottom:2rem;
     }
    
 }

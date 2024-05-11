@@ -34,6 +34,10 @@
     margin-top:2rem;
     border-radius:10px;
 }
+.hero_content .hero-btn{
+    display:inline-flex;
+    margin-top: 2rem;
+}
 
 
 @media(max-width:850px){
@@ -55,12 +59,12 @@
    
 
 }
-
+/* 
 @media(max-width:590px){
     .hero_content .col:nth-child(2){
         display:none;
     }
-}
+} */
 
 @media(max-width:414px){
     .header_title{
