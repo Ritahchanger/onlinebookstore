@@ -6,6 +6,7 @@ const AuthenticationController = require("../controllers/AuthenticationControlle
 
 router.post('/login',AuthenticationController.Login)
 router.post('/signup',AuthenticationController.SignUp);
+router.post('/logout',AuthenticationController.logout);
 
 
 

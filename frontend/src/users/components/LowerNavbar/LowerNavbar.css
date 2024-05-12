@@ -5,18 +5,16 @@
 .lower_navbar {
   background: var(--white);
   height: 50px;
-  z-index:99;
+  z-index: 99;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
 }
 .fixed {
   position: fixed;
-  top:0;
+  top: 0;
   width: 100%;
-  background:var(--green);
- 
 }
-.fixed .navigation .nav-ul a{
-  color:var(--white);
+.fixed .navigation .nav-ul a {
+  color: var(--white);
 }
 .nav_li {
   padding: 0.5rem 1rem;
@@ -51,16 +49,22 @@
 #close-menu {
   display: none;
 }
-.lower_navbar .navigation .nav-ul a{
-  color:var(--blue);
+.lower_navbar .navigation .nav-ul a {
+  color: var(--blue);
 }
 
+.lower_navbar .navigation .accounts {
+  display: none;
+}
+.lower_navbar .navigation .nav-ul p a:nth-child(2){
+  display:none;
+}
 @media (max-width: 668px) {
   .lower_navbar .menu-icon,
   .lower_navbar .profile-logo {
     display: block;
   }
- 
+
   .lower_navbar .container {
     align-items: center;
     text-align: center;
@@ -72,37 +76,74 @@
   .lower_navbar .container {
     position: relative;
   }
-  .lower_navbar .container .navigation{
+  .lower_navbar .container .navigation {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     position: fixed;
     background: var(--white);
     width:100%;
     top:-400%;
-    height:100vh;
+    height: 100vh;
     left: 0%;
-    right:0;
-    transition:all 0.5s;
-    z-index:99;
+    right: 0;
+    transition: all 0.5s;
+    z-index: 99;
   }
-  .lower_navbar .container .navigation.active{
-    top:0;
+  .lower_navbar .container .navigation.active {
+    top: 0;
   }
   .lower_navbar .navigation .nav-ul {
     display: block;
   }
   .lower_navbar .navigation .nav-ul p {
-    width: 100%;
+    text-align: start;
+    padding: 1rem 10px;
+    border-bottom: 1px solid #ababab;
+    display:flex;
+    justify-content: space-between;
   }
-  .lower_navbar .navigation .close-icon {
-    font-size: 4rem;
+  .lower_navbar .navigation .nav-ul p a:nth-child(2){
+    margin-right:18px;
+    display:block;
   }
+  .lower_navbar .navigation .nav-ul p:hover i{
+    transform:translateX(15px);
+  }
+  .lower_navbar .navigation .nav-ul p:hover a {
+    transition: all 0.5s;
+    color: var(--white);top: -400%;
+  }
+
   #close-menu {
     display: block;
+    background: green;
+    text-align: end;
+    cursor: pointer;
+    color: var(--white);
+    padding-right: 1rem;
+    padding-right: 1rem;
+    font-weight: 700;
   }
   #close-menu:hover {
-    transform: scale(1.1);
-    color: var(--green);
+    color: #ff004f;
+  }
+  .lower_navbar .navigation .accounts {
+    display: block;
+  }
+  .lower_navbar .navigation .accounts p {
+    background: #ccc;
+    text-align: start;
+    padding: 1rem 10px;
+    background: var(--orange);
+    margin-top: 5px;
+    cursor:pointer;
+    transition:all 0.5s;
+  }
+  .lower_navbar .navigation .accounts p a {
+    color: var(--white);
+  }
+  .lower_navbar .navigation .accounts p:hover{
+    background:var(--blue);
   }
 }

@@ -17,33 +17,29 @@ const Login = async (req, res) => {
     if (!user) {
       return res
         .status(200)
-        .json({ success: false, emailFound: false, message: 'User not found' })
+        .json({ success: false, emailFound: false, message: 'Email not found' })
     }
     const isMatch = await bcrypt.compare(password, user.password)
 
     if (!isMatch) {
-      return res
-        .status(200)
-        .json({
-          success: false,
-          passwordFound: false,
-          message: 'The password did not match'
-        })
+      return res.status(200).json({
+        success: false,
+        passwordFound: false,
+        message: 'The password did not match'
+      })
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: '1d'
     })
 
-    res.cookie('token',token,{
-        httpOnly:true,
-        secure:true,
-        sameSite:"strict",
-        expires:new Date(Date.now() + 24 * 60 * 60 * 1000)
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000)
     })
 
-    return res
-      .status(200)
-      .json({ success: true, message: 'Login successfull'})
+    return res.status(200).json({ success: true, message: 'Login successfull' })
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message })
   }
@@ -95,4 +91,16 @@ const SignUp = async (req, res) => {
   }
 }
 
-module.exports = { Login, SignUp }
+const logout = async (req, res) => {
+  try {
+    res.cookie('token', '', {
+      maxAge: 0
+    })
+
+    res.status(200).json({ message: 'Logged out successfully' })
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message })
+  }
+}
+
+module.exports = { Login, SignUp, logout }

@@ -89,7 +89,7 @@ const Login = () => {
               <p className="error-message">{errors.passwordError}</p>
             )}
           </div>
-          <p>
+          <p className="forget-password">
             <Link to="#">Forgot password?</Link>
           </p>
           <div className="input-group">

@@ -1,6 +1,7 @@
 .footer{
     margin-top:5rem;
     background:var(--green);
+    padding-top:2rem;
 }
 .footer .container .row{
     display:grid;
