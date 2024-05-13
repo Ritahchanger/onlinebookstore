@@ -22,13 +22,14 @@
     border:none;
     outline:none;
     background:transparent;
+    font-size:1.3rem;
 }
 .seach_component .search button{
     flex-basis:15%;
     border:none;
     background:var(--green);
     color:var(--white);
-    font-size:1.3rem;
+    font-size:1.2rem;
     cursor:pointer;
 }
 .seach_component .search button:hover{
@@ -48,6 +49,8 @@
     height:40px;
     cursor:pointer;
     outline:none;
+    font-size:1.2rem;
+   
 }
 
 @media(max-width:650px){
