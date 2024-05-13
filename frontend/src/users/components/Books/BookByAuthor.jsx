@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import LowerNavbar from "../LowerNavbar/LowerNavbar";
 import "./BooksByAuthor.css";
 import { books } from "../Data/BookData";
 import FeaturedBook from "../../../assets/images/cover13.jpg";
 
 const BookByAuthor = () => {
+  const [ displayBook,setDisplayBook ] = useState(false);
+
+  const displayImageMoreDescription=()=>{
+    setDisplayBook(!displayBook);
+  }
+
   return (
     <div className="books">
       <LowerNavbar />
@@ -22,7 +28,7 @@ const BookByAuthor = () => {
                   <p className="shop-items-icons">
                     <i class="fa-solid fa-heart"></i>
                   </p>
-                  <p className="shop-items-icons">
+                  <p className="shop-items-icons" onClick={displayImageMoreDescription}>
                     <i class="fa fa-eye"></i>
                   </p>
                 </div>
@@ -36,9 +42,10 @@ const BookByAuthor = () => {
         </div>
         <p className="small-header">Ebooks</p>
       </div>
-      <div className="showBookModal">
+      <div className={`showBookModal ${displayBook ? "active" : ""} `}>
+      {/* <div className="showBookModal"> */}
         <div className="container">
-             <a href="#" className="close-item">&times;</a>
+             < p className="close-item" onClick={displayImageMoreDescription}>&times;</p>
           <div className="row">
             <div className="col">
               <div className="img-wrapper">
