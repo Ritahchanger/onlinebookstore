@@ -4,7 +4,6 @@
 }
 .lower_navbar {
   background: var(--white);
-  height: 50px;
   z-index: 99;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
 }
@@ -47,7 +46,7 @@
 }
 
 #close-menu {
-  display: none;
+  display:none;
 }
 .lower_navbar .navigation .nav-ul a {
   color: var(--blue);
@@ -56,9 +55,71 @@
 .lower_navbar .navigation .accounts {
   display: none;
 }
-.lower_navbar .navigation .nav-ul p a:nth-child(2){
+.lower_navbar .navigation .nav-ul p a:nth-child(2) {
+  display: none;
+}
+
+.lower_navbar .navigation .nav-ul p .child_navigation {
+  background: var(--white);
+  position: absolute;
+  top: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  left: 0;
+  background: var(--white);
+  border-top: 1px solid var(--green);
+  width:100%;
+  right:0;
+  border-bottom-left-radius:10px;
+  border-bottom-right-radius:10px;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.25);
+  z-index:99;
+  /*  */
   display:none;
 }
+.lower_navbar .navigation .sub_navigation ul p {
+  padding: 10px;
+}
+.lower_navbar .navigation .sub_navigation ul p:hover {
+  background: var(--green);
+}
+.lower_navbar .navigation .sub_navigation ul p:hover a {
+  color: var(--white);
+}
+.lower_navbar .navigation .small-header {
+  font-size: 1.1rem;
+  padding-left: 10px;
+}
+
+.lower_navbar .navigation .nav-ul p .child_navigation span {
+  color: var(--blue);
+  display: inline;
+  display: inline-flex;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.lower_navbar .sub_navigation {
+  width: 13rem;
+}
+
+@media (max-width: 1202px) {
+  .lower_navbar .navigation .nav-ul p .child_navigation {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media (max-width: 1020px) {
+  .lower_navbar .navigation .nav-ul p .child_navigation {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 778px) {
+  .lower_navbar .navigation .nav-ul p .child_navigation {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 668px) {
   .lower_navbar .menu-icon,
   .lower_navbar .profile-logo {
@@ -82,8 +143,8 @@
     justify-content: start;
     position: fixed;
     background: var(--white);
-    width:100%;
-    top:-400%;
+    width: 100%;
+    top: -400%;
     height: 100vh;
     left: 0%;
     right: 0;
@@ -100,19 +161,25 @@
     text-align: start;
     padding: 1rem 10px;
     border-bottom: 1px solid #ababab;
-    display:flex;
+    display: flex;
     justify-content: space-between;
   }
-  .lower_navbar .navigation .nav-ul p a:nth-child(2){
-    margin-right:18px;
-    display:block;
+  .lower_navbar .navigation .nav-ul p a:nth-child(2) {
+    margin-right: 18px;
+    display: block;
   }
-  .lower_navbar .navigation .nav-ul p:hover i{
-    transform:translateX(15px);
+  .lower_navbar .navigation .nav-ul p:hover i {
+    transform: translateX(15px);
   }
   .lower_navbar .navigation .nav-ul p:hover a {
     transition: all 0.5s;
-    color: var(--white);top: -400%;
+    color: var(--white);
+    top: -400%;
+  }
+
+
+    .lower_navbar .navigation .nav-ul .nav_li .angle{
+    display:none;
   }
 
   #close-menu {
@@ -137,13 +204,13 @@
     padding: 1rem 10px;
     background: var(--orange);
     margin-top: 5px;
-    cursor:pointer;
-    transition:all 0.5s;
+    cursor: pointer;
+    transition: all 0.5s;
   }
   .lower_navbar .navigation .accounts p a {
     color: var(--white);
   }
-  .lower_navbar .navigation .accounts p:hover{
-    background:var(--blue);
+  .lower_navbar .navigation .accounts p:hover {
+    background: var(--blue);
   }
 }

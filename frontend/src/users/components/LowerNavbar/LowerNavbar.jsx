@@ -53,10 +53,31 @@ const LowerNavbar = () => {
               <p key={index} className="nav_li" onClick={handleSideBar}>
                 <a href={item.path}>{item.menu_name}</a>
                 {item.navItems && (
-                  <a href="#" className="arrow">
-                    <i class="fa fa-arrow-right"></i>
-                  </a>
+                  <>
+                    <a href="#" className="angle">
+                      <i class="fa fa-angle-down"></i>
+                    </a>
+                    <a href="#" className="arrow">
+                      <i className="fa fa-arrow-right"></i>
+                    </a>
+                  </>
                 )}
+                <div className="child_navigation">
+                  {item.navItems &&
+                    item.navItems.map((navli, index) => (
+                      <div className="sub_navigation">
+                        <p className="small-header">{navli.booksTypes}</p>
+                        {navli.books &&
+                          navli.books.map((book, index) => (
+                            <ul key={index}>
+                              <p>
+                                <a href="#">{book}</a>
+                              </p>
+                            </ul>
+                          ))}
+                      </div>
+                    ))}
+                </div>
               </p>
             ))}
           </div>
