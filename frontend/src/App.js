@@ -12,6 +12,8 @@ import SingleBlog from './users/pages/SingleBlog'
 
 import Authors from './users/pages/Authors'
 
+import BookByAuthor from './users/components/Books/BookByAuthor'
+
 const App = () => {
   return (
     <div className='app'>
@@ -23,6 +25,7 @@ const App = () => {
           <Route path='/blog' element={<Blog />} />
           <Route path='/single-blog' element={<SingleBlog />} />
           <Route path='/authors' element={<Authors />} />
+          <Route path='/:id' element={<BookByAuthor />} />
         </Routes>
       </BrowserRouter>
     </div>

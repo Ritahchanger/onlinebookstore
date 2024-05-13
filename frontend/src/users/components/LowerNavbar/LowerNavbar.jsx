@@ -10,6 +10,8 @@ const LowerNavbar = () => {
 
   const [sidebar, setSideBar] = useState(false);
 
+  const [activeIndex, setActiveIndex] = useState(null);
+
   const handleSideBar = () => {
     setSideBar(!sidebar);
   };
@@ -28,6 +30,10 @@ const LowerNavbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleActiveNavItems = (index) => {
+    setActiveIndex(index);
+  };
 
   return (
     <div className={isFixed ? "lower_navbar fixed" : "lower_navbar"}>
@@ -50,7 +56,12 @@ const LowerNavbar = () => {
           </a>
           <div className="nav-ul">
             {sectioncNavigation.map((item, index) => (
-              <p key={index} className="nav_li" onClick={handleSideBar}>
+              <p
+                key={index}
+                className={`nav_li ${index === activeIndex ? "active" : ""}`}
+              onClick={()=>handleActiveNavItems(index)}
+              >
+                {/* <p key={index} className="nav_li"> */}
                 <a href={item.path}>{item.menu_name}</a>
                 {item.navItems && (
                   <>

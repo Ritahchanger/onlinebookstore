@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom"; 
 const AuthorItem = ({ item }) => {
   return (
     <div className="card">
@@ -9,10 +9,10 @@ const AuthorItem = ({ item }) => {
       <div className="card-body">
         <p className="small-header">{item.authorName}</p>
         <p>{item.authorDescription}</p>
-        <a href="#" className="hero-btn">
+        <Link  to="/123455" className="hero-btn">
           SEE BOOKS
           <i class="fa fa-arrow-right"></i>
-        </a>
+        </Link>
       </div>
     </div>
   );

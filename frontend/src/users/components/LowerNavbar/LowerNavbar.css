@@ -23,6 +23,9 @@
 .nav_li:hover {
   background: var(--green);
 }
+.nav_li.active{
+  background:var(--green);
+}
 .nav_li:hover a {
   color: var(--white);
 }

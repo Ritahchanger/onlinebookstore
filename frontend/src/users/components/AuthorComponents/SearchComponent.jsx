@@ -13,7 +13,7 @@ const SearchComponent = () => {
           </button>
         </form>
         <div className="filter_form">
-        <p className="small-header">Filter by</p>
+          <p className="small-header">Filter by</p>
           <select name="filterBy" id="#">
             <option value="nationality">Nationality</option>
             <option value="gender">Author Gender</option>
