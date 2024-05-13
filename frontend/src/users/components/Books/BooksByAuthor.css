@@ -44,17 +44,17 @@
 }
 
 @media(max-width:644px){
-    .grid{
+    .books .grid{
         grid-template-columns:repeat(4,1fr);
     }
 }
 @media(max-width:418px){
-    .grid{
+    .books .grid{
         grid-template-columns:repeat(3,1fr);
     }
 }
 @media(max-width:294px){
-    .grid{
+    .books .grid{
         grid-template-columns:repeat(2,1fr);
     }
 }
