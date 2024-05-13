@@ -7,7 +7,7 @@ const SearchComponent = () => {
     <div className="seach_component">
       <div className="row">
         <form className="search">
-          <input type="text" name="search" id="" placeholder="Search item..." />
+          <input type="text" name="search" id="" placeholder="Author name..." />
           <button type="submit">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
