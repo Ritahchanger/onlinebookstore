@@ -106,11 +106,6 @@
 @media (max-width: 619px) {
     .books .showBookModal .container .row{
         grid-template-columns:repeat(1,1fr);
-        height:100%;
-    }
-    .books .showBookModal{
-        height:100%;
-        overflow-y: visible;
     }
 }
 @media (max-width: 644px) {
