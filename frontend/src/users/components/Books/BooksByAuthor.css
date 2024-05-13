@@ -1,12 +1,46 @@
-.grid{
+.books .grid{
     display:grid;
     grid-template-columns:repeat(5,1fr);
-    grid-gap:1rem;
+    grid-column-gap:1rem;
+    grid-row-gap:2rem;
 }
-.grid .card{
+.books .grid .card{
     display:flex;
     justify-content:space-between;
     flex-direction: column;
+    position:relative;
+    cursor: pointer;
+    box-shadow: 0 4px 5px -2px rgba(0, 0, 0, 0.25);
+}
+.books .grid .card .img-wrapper{
+    position: relative;
+    overflow:hidden;
+}
+.books .grid .card .img-wrapper img{
+    width:100%;
+}
+.grid .card .overlay{
+    position:absolute;
+    top:0;
+    left:-100%;
+    background:linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75));
+}
+.books .grid .card-body{
+    padding:1rem;
+}
+
+.grid .card .overlay p:hover{
+    background:var(--blue);
+    color:#ff004f;
+}
+
+.grid .card:hover .overlay{
+    left:0;
+}
+
+.grid .card .overlay p{
+    padding:1rem;
+    color:var(--white)
 }
 .grid .card p{
     font-size:1rem;

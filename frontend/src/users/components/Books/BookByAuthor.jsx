@@ -1,6 +1,6 @@
 import React from "react";
 import LowerNavbar from "../LowerNavbar/LowerNavbar";
-import "./BooksByAuthor.css"
+import "./BooksByAuthor.css";
 import { books } from "../Data/BookData";
 
 const BookByAuthor = () => {
@@ -14,6 +14,17 @@ const BookByAuthor = () => {
             <div className="card">
               <div className="img-wrapper">
                 <img src={book.imgUrl} alt="" />
+                <div className="overlay">
+                  <p className="shop-items-icons">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                  </p>
+                  <p className="shop-items-icons">
+                    <i class="fa-solid fa-heart"></i>
+                  </p>
+                  <p className="shop-items-icons">
+                    <i class="fa fa-eye"></i>
+                  </p>
+                </div>
               </div>
               <div className="card-body">
                 <p className="book_title">{book.bookTitle}</p>
