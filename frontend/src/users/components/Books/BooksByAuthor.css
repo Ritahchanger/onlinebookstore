@@ -106,6 +106,7 @@
 @media (max-width: 619px) {
     .books .showBookModal .container .row{
         grid-template-columns:repeat(1,1fr);
+        max-height:500px;
     }
 }
 @media (max-width: 644px) {
