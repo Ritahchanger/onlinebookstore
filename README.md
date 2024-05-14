@@ -47,6 +47,5 @@ Open your browser and navigate to http://localhost:3000 to access the Online Boo
 Contributing
 Contributions are welcome! If you have any ideas, suggestions, or bug fixes, feel free to open an issue or submit a pull request.
 
-License
-This project is licensed under the MIT License.
+
 
