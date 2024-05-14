@@ -1,14 +1,14 @@
 export const sectionbNavigation = [
   {
-    menu_name: "Account",
-    path: "#",
+    menu_name: "ACCOUNT",
+    path: "/login",
   },
   {
-    menu_name: "Cart",
-    path: "#",
+    menu_name: "CART",
+    path: "/cart",
   },
   {
-    menu_name: "WishList",
+    menu_name: "WISHLIST",
     path: "#",
   },
   {
@@ -96,7 +96,7 @@ export const sectioncNavigation = [
     path: "/authors",
   },
   {
-    menu_name: "NEW RELEASE",
+    menu_name: "MOST SELLING",
     path: "#",
   },
   {

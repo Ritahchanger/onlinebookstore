@@ -1,5 +1,5 @@
 .books {
-  position: absolute;
+  position:relative;
 }
 .books .grid {
   display: grid;

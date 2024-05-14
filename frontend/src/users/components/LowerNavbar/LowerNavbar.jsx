@@ -59,7 +59,7 @@ const LowerNavbar = () => {
               <p
                 key={index}
                 className={`nav_li ${index === activeIndex ? "active" : ""}`}
-              onClick={()=>handleActiveNavItems(index)}
+                onClick={() => handleActiveNavItems(index)}
               >
                 {/* <p key={index} className="nav_li"> */}
                 <a href={item.path}>{item.menu_name}</a>
@@ -101,9 +101,22 @@ const LowerNavbar = () => {
             </p>
           </div>
         </div>
-        <a href="#" className="menu-icon" onClick={handleSideBar}>
-          <i class="fa-solid fa-bars-staggered"></i>
-        </a>
+        <div className="left-icon">
+          <div className="cart-icons">
+            <Link to="/cart">
+              <sup>4</sup>
+              {" "}
+              <i class="fa-solid fa-cart-shopping"></i>
+            </Link>
+            <Link to="#">
+              {" "}
+              <i class="fa-solid fa-heart"></i>
+            </Link>
+          </div>
+          <a href="#" className="menu-icon" onClick={handleSideBar}>
+            <i class="fa-solid fa-bars-staggered"></i>
+          </a>
+        </div>
       </div>
     </div>
   );

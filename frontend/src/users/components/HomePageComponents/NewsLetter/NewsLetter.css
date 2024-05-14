@@ -4,10 +4,13 @@
 .newsletter .container .row .col:nth-child(1) p{
     text-align:center;
 }
+.newsletter .container .row .col:nth-child(1) .medium-header{
+    text-align:start;
+}
 .newsletter .container .row .col:nth-child(1){
     display:flex;
-    justify-content:center;
-    align-items:center;
+    justify-content:start;
+    align-items:start;
 }
 .newsletter .newsLetterForm{
     display:flex;

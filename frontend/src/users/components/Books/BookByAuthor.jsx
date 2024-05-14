@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LowerNavbar from "../LowerNavbar/LowerNavbar";
 import "./BooksByAuthor.css";
 import { books } from "../Data/BookData";
 import FeaturedBook from "../../../assets/images/cover13.jpg";
+import { useParams } from "react-router-dom";
+
+import Footer from "../Footer/Footer";
 
 const BookByAuthor = () => {
   const [ displayBook,setDisplayBook ] = useState(false);
@@ -10,6 +13,15 @@ const BookByAuthor = () => {
   const displayImageMoreDescription=()=>{
     setDisplayBook(!displayBook);
   }
+
+  const { id } = useParams();
+
+  useEffect(function(){
+    window.scrollTo(0,0)
+  },[])
+
+
+  console.log(id)
 
   return (
     <div className="books">
@@ -71,6 +83,7 @@ const BookByAuthor = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

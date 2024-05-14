@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import LowerNavbar from "../components/LowerNavbar/LowerNavbar";
 import Footer from "../components/Footer/Footer";
 import "./Blog.css";
@@ -8,6 +8,11 @@ import { Link } from "react-router-dom";
 import BlogItem from "../components/BlogPageComponents/BlogItem";
 
 const Blog = () => {
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
+
   return (
     <Fragment>
       <LowerNavbar />

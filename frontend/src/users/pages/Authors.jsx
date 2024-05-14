@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import LowerNavbar from "../components/LowerNavbar/LowerNavbar";
 import Footer from "../components/Footer/Footer";
 
@@ -10,6 +10,11 @@ import AuthorItem from "../components/AuthorComponents/AuthorItem";
 import SearchComponent from "../components/AuthorComponents/SearchComponent";
 
 const Authors = () => {
+
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  },[])
+
   return (
     <Fragment>
       <LowerNavbar />
@@ -17,8 +22,8 @@ const Authors = () => {
         <div className="container">
           <SearchComponent />
           <div className="grid">
-            {AuthorData.map((item, index) => (
-              <AuthorItem key={index} item={item} />
+            {AuthorData.map((item, key) => (
+              <AuthorItem key={key} item={item} />
             ))}
           </div>
         </div>
