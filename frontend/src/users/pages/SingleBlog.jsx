@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import LowerNavbar from "../components/LowerNavbar/LowerNavbar";
 
 import { blogSampleData } from "../components/Data/BlogData";
@@ -12,9 +12,8 @@ import "./single-page.css";
 const SingleBlog = () => {
 
   useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
-
+    window.screenTop(0,0)
+  })
   return (
     <Fragment>
       <LowerNavbar />
