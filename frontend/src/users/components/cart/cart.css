@@ -18,7 +18,7 @@
   display: flex;
   justify-content: space-between;
 }
-.cart .container .row .medium-header {
+.cart .row .medium-header {
   font-size: 1.2rem;
 }
 .cart table {
@@ -136,9 +136,6 @@
   }
   .cart table .cart-image p {
     margin: 1rem 0rem;
-  }
-  .cart .container .row .medium-header {
-    font-size: 1.0rem;
   }
   .cart table{
     border-collapse:collapse;
