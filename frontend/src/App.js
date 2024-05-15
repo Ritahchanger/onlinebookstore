@@ -19,6 +19,8 @@ import Cart from './users/components/cart/Cart'
 
 import ForgotPassword from './users/components/authentication/users/ForgotPassword'
 
+import PasswordChanging from './users/components/authentication/users/PasswordChanging'
+
 const App = () => {
   return (
     <div className='app'>
@@ -33,6 +35,7 @@ const App = () => {
           <Route path='/:id' element={<BookByAuthor />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/forgot-password' element={<ForgotPassword/>} />
+          <Route path='/change-password' element={<PasswordChanging/>} />
         </Routes>
       </BrowserRouter>
     </div>
