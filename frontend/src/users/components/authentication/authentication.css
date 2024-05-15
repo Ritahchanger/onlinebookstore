@@ -28,6 +28,7 @@
   height: 45px;
   border-bottom: 2px solid var(--gray);
   outline: none;
+  background:transparent;
 }
 .authentication .input-group {
   margin-bottom: 1rem;
@@ -58,6 +59,16 @@
 }
 
 @media (max-width: 498px) {
+
+  .authentication .form-wrapper {
+    max-width: 600px;
+    width: 100%;
+    border-radius: 10px;
+    padding:0;
+    margin:0 1rem;
+    box-shadow:none;
+  }
+
   .authentication .input-group input[type="submit"] {
     height: 40px;
   }
