@@ -34,24 +34,6 @@
 .single_blog .img-wrapper img:hover{
     transform:scale(1.1);
 }
-
-
-@media(max-width:451px){
-
-    .single_blog .blog-post-body .description-body{
-        display:grid;
-        grid-template-columns:repeat(1,1fr);
-    }
-    .single_blog .blog-post-body .description-body .description{
-        padding:1rem;
-        border-right:none;
-        border-bottom:1px solid var(--gray);
-    }
-
-}
-
-
-
 @media(max-width:828px){
 
     .single_blog .grid{
