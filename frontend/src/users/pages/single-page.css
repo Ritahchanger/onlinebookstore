@@ -98,9 +98,6 @@
     .single_blog .grid{
         grid-template-columns:repeat(1,1fr);
     }
-    .single_blog .small-header{
-        background:#CCc;
-    }
 
 
 }

@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken')
 
 const bcrypt = require('bcrypt')
 
+const nodemailer = require("nodemailer")
+
 require('dotenv').config()
 
 const Login = async (req, res) => {
@@ -103,16 +105,42 @@ const logout = async (req, res) => {
   }
 }
 
-const forgotPassword = () => {
 
+
+
+const forgotPassword = async (req, res) => {
   try {
-
-  } catch (err) {
-
+    const { email } = req.body;
     
-    res.status(500).json({ success: false, message: err.message })
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user:"bedanc.chege@gmail.com",
+        pass: "onay wumy uyhl cvkr"
+      }
+    });
 
+    const info = await transporter.sendMail({
+      from: '"BEMI EDITORS LIMITED" <peterdennis573@gmail.com>',
+      to: email,
+      subject: 'Password Reset Request',
+      text: 'Request to change my password from the bookstore application',
+      html: "<b>Password Reset Request</b><p>Please follow the link to reset your password.</p</br>  <a href='https://onlinebookstore1.vercel.app/login'"
+    });
+
+    console.log('Message sent: %s', info.messageId);
+    console.log('The message was successfully sent');
+    res.status(200).send({ msg: 'The message was successfully sent' });
+  } catch (error) {
+    console.log('There was a problem in sending the email:', error);
+    res.status(500).send('There was a problem in sending the email');
   }
-}
+};
 
-module.exports = { Login, SignUp, logout }
+
+
+
+
+module.exports = { Login, SignUp, logout,forgotPassword}

@@ -16,6 +16,9 @@ import BookByAuthor from './users/components/Books/BookByAuthor'
 
 import Cart from './users/components/cart/Cart'
 
+
+import ForgotPassword from './users/components/authentication/users/ForgotPassword'
+
 const App = () => {
   return (
     <div className='app'>
@@ -29,6 +32,7 @@ const App = () => {
           <Route path='/authors' element={<Authors />} />
           <Route path='/:id' element={<BookByAuthor />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/forgot-password' element={<ForgotPassword/>} />
         </Routes>
       </BrowserRouter>
     </div>

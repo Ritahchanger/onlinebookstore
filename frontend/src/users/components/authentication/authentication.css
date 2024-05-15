@@ -41,6 +41,11 @@
   border: none;
   background: var(--green);
   color: var(--white);
+  transition:all 0.5s;
+}
+.authentication .input-group input[type="submit"]:hover{
+  background:var(--blue);
+  cursor: pointer;
 }
 .error-message {
   color: var(--pinkRed);

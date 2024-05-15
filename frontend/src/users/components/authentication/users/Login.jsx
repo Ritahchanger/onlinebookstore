@@ -90,7 +90,7 @@ const Login = () => {
             )}
           </div>
           <p className="forget-password">
-            <Link to="#">Forgot password?</Link>
+            <Link to="/forgot-password">Forgot password?</Link>
           </p>
           <div className="input-group">
             <input type="submit" value="LOGIN" />
