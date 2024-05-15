@@ -103,4 +103,16 @@ const logout = async (req, res) => {
   }
 }
 
+const forgotPassword = () => {
+
+  try {
+
+  } catch (err) {
+
+    
+    res.status(500).json({ success: false, message: err.message })
+
+  }
+}
+
 module.exports = { Login, SignUp, logout }
