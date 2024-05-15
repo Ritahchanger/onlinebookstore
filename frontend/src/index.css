@@ -4,7 +4,9 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:'Outfit',sans-serif;
+  /* font-family:'Outfit',sans-serif; */
+
+  font-family:var(--poppins);
 }
 :root{
   --orange:#e8b12e;
@@ -64,7 +66,7 @@ input{
   margin:1rem 0rem;
 }
 .description{
-  font-size:1.3rem;
+  font-size:1.1rem;
 }
 .row{
   display:flex;
