@@ -48,7 +48,6 @@ const SignUp = () => {
     } else {
       setErrors((prevState) => ({ ...prevState, emailError: "" }));
     }
-
     // Password validation
     if (!formData.password.trim()) {
       setErrors((prevState) => ({
