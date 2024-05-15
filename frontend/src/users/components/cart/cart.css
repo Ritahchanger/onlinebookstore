@@ -8,6 +8,10 @@
 }
 
 
+
+
+
+
 .cart .container .row {
   display: grid;
   grid-gap: 1rem;
@@ -62,6 +66,14 @@
 }
 .cart table .remove {
   color: var(--pinkRed);
+  text-align:center;
+  display:inline-block;
+  transition:all 0.5s;
+}
+.cart table .remove:hover{
+  cursor: pointer;
+  transform:scale(1.2);
+  color:var(--blue);
 }
 .cart .row .small-header {
   font-size: 1.1rem;

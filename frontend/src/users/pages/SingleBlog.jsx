@@ -3,17 +3,16 @@ import LowerNavbar from "../components/LowerNavbar/LowerNavbar";
 
 import { blogSampleData } from "../components/Data/BlogData";
 
-import BlogItem from "../components/BlogPageComponents/BlogItem"
+import BlogItem from "../components/BlogPageComponents/BlogItem";
 
 import Footer from "../components/Footer/Footer";
 
 import "./single-page.css";
 
 const SingleBlog = () => {
-
-  useEffect(()=>{
-    window.screenTop(0,0)
-  })
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <Fragment>
       <LowerNavbar />
@@ -72,7 +71,7 @@ const SingleBlog = () => {
           </div>
         </div>
         <div className="container">
-        <p className="small-header">Related Blogs</p>
+          <p className="small-header">Related Blogs</p>
           <div className="grid">
             {blogSampleData.map((item, index) => (
               <BlogItem item={item} key={index} />
@@ -80,7 +79,7 @@ const SingleBlog = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </Fragment>
   );
 };
