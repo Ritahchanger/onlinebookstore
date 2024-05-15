@@ -114,7 +114,7 @@ const forgotPassword = async (req, res) => {
       port: 465,
       secure: true,
       auth: {
-        user: 'bedanc.chege@gmail.com',
+        user: process.env.COMPANY_EMAIL,
         pass: process.env.COMPANY_EMAIL_PASSWORD,
       }
     })
