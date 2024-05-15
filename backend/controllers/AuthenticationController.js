@@ -124,7 +124,7 @@ const forgotPassword = async (req, res) => {
       to: email,
       subject: 'Password Reset Request',
       text: 'Request to change my password from the bookstore application',
-      html: "<b>Password Reset Request</b><p>Please follow the link to reset your password.</p</br>  <a href='http://localhost:3000/change-password'"
+      html: "<b>Password Reset Request</b><p>Please follow the link to reset your password.</p</br>  <a href='https://onlinebookstore1.vercel.app/change-password'"
     })
 
     console.log('Message sent: %s', info.messageId)
