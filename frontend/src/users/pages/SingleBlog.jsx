@@ -10,9 +10,6 @@ import Footer from "../components/Footer/Footer";
 import "./single-page.css";
 
 const SingleBlog = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
   return (
     <Fragment>
       <LowerNavbar />
