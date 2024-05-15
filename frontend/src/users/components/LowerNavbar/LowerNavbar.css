@@ -90,7 +90,11 @@
   transition: all 0.5s;
 } 
 .nav_li a{
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1rem;
+  display:inline-flex;
+}
+.nav_li a:hover{
+  color:var(--white);
 }
 .nav_li:hover {
   background: var(--green);
@@ -98,7 +102,7 @@
 .nav_li.active{
   background:var(--green);
 }
-.nav_li:hover a {
+.nav_li:hover a{
   color: var(--white);
 }
 .profile-logo img {
