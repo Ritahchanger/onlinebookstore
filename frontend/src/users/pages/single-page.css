@@ -1,9 +1,6 @@
 
 
-.single_blog .blog-post-body .description-body .description{
-    padding:1rem;
-    border-right:1px solid var(--gray);
-}
+
 
 .single_blog .grid{
     display:grid;
