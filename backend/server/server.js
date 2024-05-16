@@ -1,47 +1,45 @@
-const express = require("express");
-const helmet = require("helmet");
-const morgan = require("morgan");
-const dotenv = require("dotenv");
-const connectDatabase = require("../database/database");
+const express = require('express')
 
+const helmet = require('helmet')
 
-dotenv.config();
+const morgan = require('morgan')
 
-const app = express();
+const dotenv = require('dotenv')
 
-app.use(helmet());
-app.use(express.json());
+const connectDatabase = require('../database/database')
 
+const cors = require('cors')
 
-app.use(morgan("combined"));
+dotenv.config()
 
-const PORT = process.env.PORT || 8000;
+const app = express()
 
+// MIDDLEWARES
+app.use(helmet())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(morgan('combined'))
+
+app.use(cors())
+
+const PORT = process.env.PORT || 8000
 
 // ROUTE IMPORTS
 
-const AuthenticationRoute = require("../routes/AuthenticationRoute");
-const PaymentsRoutes = require("../routes/PaymentsRoutes");
+const AuthenticationRoute = require('../routes/AuthenticationRoute')
+const PaymentsRoutes = require('../routes/PaymentsRoutes')
+const UsersRoutes = require('../routes/UsersRoutes')
 
+app.use('/api/auth', AuthenticationRoute)
+app.use('/api/payment', PaymentsRoutes)
+app.use('/api/users', UsersRoutes)
 
-app.use('/api/auth',AuthenticationRoute);
-app.use('/api/payment',PaymentsRoutes);
+const connectServer = async () => {
+  await connectDatabase()
 
-
-
-
-const connectServer = async () =>{
-
-    await connectDatabase()
-
-    app.listen(PORT,()=>{
-
-        console.log(`The server is running on PORT ${PORT}`);
-    
-    })
-    
-
+  app.listen(PORT, () => {
+    console.log(`The server is running on PORT ${PORT}`)
+  })
 }
-
 
 connectServer()

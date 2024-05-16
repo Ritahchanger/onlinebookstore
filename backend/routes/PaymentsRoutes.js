@@ -7,16 +7,7 @@ const axios = require('axios')
 require('dotenv').config()
 
 
-
-
-
 var token = "" 
-
-
-
-
-
-
 
 
 const createToken = async (req, res, next) => {
@@ -98,8 +89,6 @@ const stkPush = async (req, res) => {
     }
   };
   
-
-
 
 
 
