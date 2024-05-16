@@ -7,17 +7,18 @@ import "./ForgotPassword.css";
 import EmailSecurity from "../../../../assets/svgs/padlock.svg";
 
 const ForgotPassword = () => {
-  const [buttonDisabled, setButtonDisabled] = useState(false);
-
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [email, setEmail] = useState("");
 
   const handleEmailChange = (event) => {
     const { value } = event.target;
     setEmail(value);
-    setButtonDisabled(!value);
+    setButtonDisabled(value === "");
   };
 
-  const handleSubmitButton = () => {};
+  const handleSubmitButton = (event) => {
+    event.preventDefault(); 
+  };
 
   return (
     <div className="authentication">
@@ -47,7 +48,7 @@ const ForgotPassword = () => {
               type="submit"
               value="GET VERIFICATION CODE"
               disabled={buttonDisabled}
-              className={`  ${
+              className={`${
                 buttonDisabled ? "button-deactivated" : "button-activated"
               }`}
             />
