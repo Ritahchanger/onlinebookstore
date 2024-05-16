@@ -12,6 +12,8 @@
 
 
 
+
+
 .cart .container .row {
   display: grid;
   grid-gap: 1rem;
@@ -107,6 +109,17 @@
 .cart .submit-btn:hover {
   background: var(--green);
 }
+
+
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 798px) {
   .cart .container .row {
