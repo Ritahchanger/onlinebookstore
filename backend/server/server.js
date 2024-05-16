@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const connectDatabase = require("../database/database");
 
+
 dotenv.config();
 
 const app = express();
@@ -20,9 +21,11 @@ const PORT = process.env.PORT || 8000;
 // ROUTE IMPORTS
 
 const AuthenticationRoute = require("../routes/AuthenticationRoute");
+const PaymentsRoutes = require("../routes/PaymentsRoutes");
 
 
 app.use('/api/auth',AuthenticationRoute);
+app.use('/api/payment',PaymentsRoutes);
 
 
 
