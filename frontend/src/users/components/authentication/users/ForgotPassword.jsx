@@ -13,11 +13,14 @@ const ForgotPassword = () => {
   const handleEmailChange = (event) => {
     const { value } = event.target;
     setEmail(value);
-    setButtonDisabled(value === "");
+    const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+    const isThisEmailValid = emailRegex.test(value);
+    setButtonDisabled(!isThisEmailValid || value === "");
   };
 
   const handleSubmitButton = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
+    console.log(email);
   };
 
   return (
@@ -27,7 +30,12 @@ const ForgotPassword = () => {
       </div>
 
       <div className="form-wrapper">
-        <form action="#" className="login-form" onSubmit={handleSubmitButton}>
+        <form
+          action="#"
+          className="login-form"
+          onSubmit={handleSubmitButton}
+          noValidate
+        >
           <p className="form-title">Forgot Password</p>
 
           <div className="img-wrapper">
@@ -43,6 +51,7 @@ const ForgotPassword = () => {
               onChange={handleEmailChange}
             />
           </div>
+          <p className="email-controller"> {` ${buttonDisabled ? "Please input correct email" : ""} `} </p>
           <div className="input-group">
             <input
               type="submit"
