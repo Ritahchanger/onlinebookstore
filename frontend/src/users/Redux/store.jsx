@@ -11,6 +11,8 @@ import cartSlice from "./features/cartSlice";
 
 import booksSlice from "./features/booksSlice";
 
+import BookDescriptionSlice from "./features/BookDescriptionSlice";
+
 
 export default configureStore({
   reducer: {
@@ -19,5 +21,6 @@ export default configureStore({
     user: userSlice.reducer,
     cart:cartSlice.reducer,
     books:booksSlice.reducer,
+    bookModal:BookDescriptionSlice.reducer,
   },
 });

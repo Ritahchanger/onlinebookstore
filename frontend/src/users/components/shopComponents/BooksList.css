@@ -1,4 +1,3 @@
-
   .books_list .card {
     display: flex;
     justify-content: space-between;
@@ -24,6 +23,7 @@
   .books_list .card .overlay p:hover {
     background: var(--blue);
     color: #ff004f;
+    cursor: pointer;
   }
   
   .books_list .card:hover .overlay {
@@ -36,4 +36,11 @@
   }
   .books_list .card p {
     font-size: 1rem;
+  }
+  .books_list .card .shop-items-icons{
+    cursor: pointer;
+  }
+
+  .books_list .card .overlay .overlay{
+    cursor: pointer;
   }

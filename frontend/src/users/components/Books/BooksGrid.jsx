@@ -7,7 +7,7 @@ import { books } from "../Data/BookData";
 import "./BooksGrid.css"
 
 
-const BooksGrid = ({displayImageMoreDescription}) => {
+const BooksGrid = () => {
  
 
   return (
@@ -15,7 +15,6 @@ const BooksGrid = ({displayImageMoreDescription}) => {
       {books.map((book, index) => (
         <BooksList
           book={book}
-          displayImageMoreDescription={displayImageMoreDescription}
           key={index}
         />
       ))}

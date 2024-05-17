@@ -11,6 +11,7 @@ import BooksGrid from "./BooksGrid";
 
 import BookDescriptionModal from "./BookDescriptionModal";
 
+
 const BookByAuthor = () => {
   const [displayBook, setDisplayBook] = useState(false);
 
@@ -32,17 +33,12 @@ const BookByAuthor = () => {
       <div className="container">
         <div className="small-header">Wanjiru Mukami</div>
 
-        <BooksGrid displayImageMoreDescription={displayImageMoreDescription} />
+        <BooksGrid/>
 
         <p className="small-header">Ebooks</p>
       </div>
 
-      <BookDescriptionModal
-        displayBook={displayBook}
-        displayImageMoreDescription={displayImageMoreDescription}
-      />
-
-     
+      <BookDescriptionModal />
 
       <Footer />
     </div>

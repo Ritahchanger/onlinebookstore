@@ -22,97 +22,116 @@ import Cover19 from "../../../assets/images/cover20.jpg"
 export const books=[
     {
         imgUrl:Cover1,
-        bookTitle:"The return of maasai's",
+        bookTitle:"The labyrinth of whispers",
         price:"sh.4000",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover2,
-        bookTitle:"The return of maasai's",
+        bookTitle:"Alone",
         price:"sh.4090",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover3,
-        bookTitle:"The return of maasai's",
+        bookTitle:"Hollywood secrets",
         price:"sh.3999",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover4,
-        bookTitle:"The return of maasai's",
+        bookTitle:"Get into silicon valley",
         price:"sh.4300",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover5,
-        bookTitle:"The return of maasai's",
+        bookTitle:"Last hope",
         price:"sh.6500",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover6,
-        bookTitle:"The return of maasai's",
+        bookTitle:"Soul",
         price:"sh.9000",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover7,
-        bookTitle:"The return of maasai's",
+        bookTitle:"Memory",
         price:"sh.7000",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover8,
-        bookTitle:"The return of maasai's",
+        bookTitle:"Hide and Seek",
         price:"sh.8000",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover9,
-        bookTitle:"The return of maasai's",
+        bookTitle:"Whispers of the shadow blade",
         price:"sh.8500",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover10,
-        bookTitle:"The return of maasai's",
+        bookTitle:"Shadow legacy",
         price:"sh.9200",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover11,
-        bookTitle:"The return of maasai's",
+        bookTitle:"The princess of the castle black",
         price:"sh.4270",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover12,
-        bookTitle:"The return of maasai's",
+        bookTitle:"The unexpected princess",
         price:"sh.4000",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover13,
-        bookTitle:"The return of maasai's",
+        bookTitle:"Princess of wind and sea",
         price:"sh.9899",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover14,
-        bookTitle:"The return of maasai's",
+        bookTitle:"The unexpected princess",
         price:"sh.6646",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover15,
-        bookTitle:"The return of maasai's",
+        bookTitle:"The princess of castle black",
         price:"sh.4000",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover16,
-        bookTitle:"The return of maasai's",
+        bookTitle:"The Goddess lessons",
         price:"sh.6743",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover17,
-        bookTitle:"The return of maasai's",
+        bookTitle:"The return of Mary",
         price:"sh.4000",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover18,
-        bookTitle:"The return of maasai's",
+        bookTitle:"The heiress",
         price:"sh.3000",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
     {
         imgUrl:Cover19,
-        bookTitle:"The return of maasai's",
+        bookTitle:"The Earl Takes All",
         price:"sh.3100",
+        description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque accusantium similique doloremque laborum quasi exercitationem praesentium ut illum, suscipit voluptates officia corrupti doloribus, sed sequi. Nostrum aspernatur cupiditate et praesentium."
     },
 ]

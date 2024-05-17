@@ -4,7 +4,20 @@ import sampleBook from "../../../assets/images/cover16.webp";
 
 import "./BooksList.css";
 
-const BooksList = ({ book, displayImageMoreDescription,key }) => {
+
+import { openBookModal } from "../../Redux/features/BookDescriptionSlice"; 
+
+import { useDispatch,useSelector } from "react-redux"; 
+
+
+const BooksList = ({ book,key }) => {
+
+  const dispatch = useDispatch()
+
+  const handleBookModal = () =>{
+    dispatch(openBookModal(book))
+  }
+
   return (
     <div className="books_list">
       <div className="card">
@@ -19,7 +32,7 @@ const BooksList = ({ book, displayImageMoreDescription,key }) => {
             </p>
             <p
               className="shop-items-icons"
-              onClick={displayImageMoreDescription}
+              onClick={handleBookModal}
             >
               <i class="fa fa-eye"></i>
             </p>
