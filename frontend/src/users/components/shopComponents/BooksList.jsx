@@ -19,8 +19,7 @@ const BooksList = ({ book,key }) => {
   }
 
   return (
-  
-      <div className="card">
+      <div className="card book-card">
         <div className="img-wrapper">
           <img src={book.imgUrl} alt="" />
           <div className="overlay">
