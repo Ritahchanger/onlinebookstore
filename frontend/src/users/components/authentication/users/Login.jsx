@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../authentication.css";
 
+
+
 const Login = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -44,6 +47,11 @@ const Login = () => {
 
     if (valid) {
       console.log("Form submitted:", formData);
+
+      localStorage.setItem("userEmail",formData.email);
+
+      navigate('/home')
+
     }
   };
 

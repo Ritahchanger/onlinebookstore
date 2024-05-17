@@ -85,7 +85,7 @@ export const sectioncNavigation = [
   },
   {
     menu_name: "HOME",
-    path: "/",
+    path: "/home",
   },
   {
     menu_name: "ABOUT US",
@@ -96,8 +96,8 @@ export const sectioncNavigation = [
     path: "/authors",
   },
   {
-    menu_name: "MOST SELLING",
-    path: "#",
+    menu_name: "SHOP",
+    path: "/shop",
   },
   {
     menu_name: "BLOG",

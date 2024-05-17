@@ -28,7 +28,7 @@
   height: 45px;
   border-bottom: 2px solid var(--gray);
   outline: none;
-  background:transparent;
+  background: transparent;
 }
 .authentication .input-group {
   margin-bottom: 1rem;
@@ -42,10 +42,10 @@
   border: none;
   background: var(--green);
   color: var(--white);
-  transition:all 0.5s;
+  transition: all 0.5s;
 }
-.authentication .input-group input[type="submit"]:hover{
-  background:var(--blue);
+.authentication .input-group input[type="submit"]:hover {
+  background: var(--blue);
   cursor: pointer;
 }
 .error-message {
@@ -59,15 +59,14 @@
 }
 
 @media (max-width: 498px) {
-
   .authentication .form-wrapper {
     max-width: 600px;
     width: 100%;
     border-radius: 10px;
-    padding:0;
-    margin:0 1rem;
-    box-shadow:none;
-    border-top:1px solid var(--gray);
+    padding: 0;
+    margin: 0 1rem;
+    box-shadow: none;
+    border-top: 1px solid var(--gray);
   }
 
   .authentication .input-group input[type="submit"] {

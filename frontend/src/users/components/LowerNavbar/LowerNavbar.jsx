@@ -51,9 +51,9 @@ const LowerNavbar = () => {
     <div className={isFixed ? "lower_navbar fixed" : "lower_navbar"}>
       <div className="container">
         <div className="profile-logo">
-          <a href="#">
+          <Link to="/home">
             <img src={ProfileImage} alt="" />
-          </a>
+          </Link>
         </div>
 
         <div className={`navigation ${sidebar ? "active" : null}`}>
@@ -73,15 +73,15 @@ const LowerNavbar = () => {
                 className={`nav_li ${index === activeIndex ? "active" : ""}`}
                 onClick={() => handleActiveNavItems(index)}
               >
-                <a href={item.path}>{item.menu_name}</a>
+                <Link to={item.path}>{item.menu_name}</Link>
                 {item.navItems && (
                   <>
-                    <a href="#" className="angle">
+                    <Link to="#" className="angle">
                       <i class="fa fa-angle-down"></i>
-                    </a>
-                    <a href="#" className="arrow">
+                    </Link>
+                    <Link to="#" className="arrow">
                       <i className="fa fa-arrow-right"></i>
-                    </a>
+                    </Link>
                   </>
                 )}
                 <div className="child_navigation">
@@ -93,7 +93,7 @@ const LowerNavbar = () => {
                           navli.books.map((book, index) => (
                             <ul key={index}>
                               <p>
-                                <a href="#">{book}</a>
+                                <Link to="#">{book}</Link>
                               </p>
                             </ul>
                           ))}
@@ -131,9 +131,9 @@ const LowerNavbar = () => {
               <i class="fa-solid fa-heart"></i>
             </Link>
           </div>
-          <a href="#" className="menu-icon" onClick={handleSideBar}>
+          <Link to="#" className="menu-icon" onClick={handleSideBar}>
             <i class="fa-solid fa-bars-staggered"></i>
-          </a>
+          </Link>
         </div>
       </div>
     </div>
