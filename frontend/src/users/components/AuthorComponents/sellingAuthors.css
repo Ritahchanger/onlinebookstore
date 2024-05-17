@@ -13,15 +13,30 @@
 }
 
 .selling-authors table tbody tr td{
-    padding:0.5rem 0;
+    padding:0.5rem;
     font-size:0.9rem;
     color:var(--white);
+}
+
+.selling-authors table tbody tr:nth-child(odd) td{
+    color:var(--blue);
+
+}
+.selling-authors table tbody tr:nth-child(odd)
+
+{
+
+    background:var(--white);
+   
+
+}
+.selling-authors table tbody tr:nth-child(even){
+    background: var(--green);
 }
 
 .selling-authors table tbody tr td:nth-child(3){
     display:flex;
     justify-content:space-between;
-    color:var(--blue);
 }
 
 .selling-authors table tbody tr td:nth-child(3) .shop-items-icons:hover{
