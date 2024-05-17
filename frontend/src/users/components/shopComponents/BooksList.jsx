@@ -19,7 +19,7 @@ const BooksList = ({ book,key }) => {
   }
 
   return (
-    <div className="books_list">
+  
       <div className="card">
         <div className="img-wrapper">
           <img src={book.imgUrl} alt="" />
@@ -42,7 +42,6 @@ const BooksList = ({ book,key }) => {
           <p className="book_title">{book.bookTitle}</p>
           <p className="book_price">{book.price}</p>
         </div>
-      </div>
     </div>
   );
 };

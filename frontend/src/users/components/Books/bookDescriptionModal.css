@@ -51,6 +51,7 @@
   }
   .showBookModal .hero-btn {
     display: inline-flex;
+    cursor: pointer;
   }
   .close-item {
     color: var(--white);
