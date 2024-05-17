@@ -1,0 +1,53 @@
+.selling-authors table{
+    width:100%;
+    border-collapse: collapse;
+}
+
+
+.selling-authors table thead tr td{
+    padding:0.5rem 0;
+
+    color:var(--darkGreen);
+    font-weight:700;
+   
+}
+
+.selling-authors table tbody tr td{
+    padding:0.5rem 0;
+    font-size:0.9rem;
+    color:var(--white);
+}
+
+.selling-authors table tbody tr td:nth-child(3){
+    display:flex;
+    justify-content:space-between;
+    color:var(--blue);
+}
+
+.selling-authors table tbody tr td:nth-child(3) .shop-items-icons:hover{
+
+    transform: scale(1.1);
+    color:var(--darkGreen);
+
+}
+
+.selling-authors table .shop-items-icons{
+    cursor: pointer;
+}
+.selling-authors{
+    background:linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+}
+
+
+
+@media(max-width:548px){
+    .selling-tables{
+        overflow:scroll;
+    }
+    .selling-authors table{
+        width:600px;
+    }
+}
+
+
+

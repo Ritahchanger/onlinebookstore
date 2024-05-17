@@ -17,6 +17,7 @@
   --white:#fff;
   --pinkRed:#ff004f;
   --poppins:'Poppins',sans-serif;
+  --darkGreen:rgb(0,255,0);
 }
 html{
   scroll-behavior:smooth;

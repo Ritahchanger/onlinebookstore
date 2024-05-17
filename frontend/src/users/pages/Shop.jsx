@@ -14,6 +14,7 @@ import BooksList from "../components/shopComponents/BooksList";
 import BookDescriptionModal from "../components/Books/BookDescriptionModal";
 
 import { useState } from "react";
+import BestSellingAuthors from "../components/AuthorComponents/BestSellingAuthors";
 
 const Shop = () => {
   const [displayBook, setDisplayBook] = useState(false);
@@ -55,7 +56,9 @@ const Shop = () => {
         displayImageMoreDescription={displayImageMoreDescription}
       />
 
+      <SectionTitle sectionTitle="HIGH SELLING AUTHORS" />
 
+      <BestSellingAuthors />
     </div>
   );
 };

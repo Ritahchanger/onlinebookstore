@@ -10,7 +10,7 @@ import { openBookModal } from "../../Redux/features/BookDescriptionSlice";
 import { useDispatch,useSelector } from "react-redux"; 
 
 
-const BooksList = ({ book,key }) => {
+const BooksList = ({ book }) => {
 
   const dispatch = useDispatch()
 
