@@ -86,3 +86,17 @@
 }
 
 
+@media(max-width:560px){
+  .books .showBookModal .container .row .col:nth-child(2) .small-header{
+    font-size:1rem;
+  } 
+  .books .showBookModal .container .row .col:nth-child(2) .description{
+    font-size:0.9rem;
+  }
+  .books .showBookModal .container .row .col:nth-child(1) img{
+    max-width:150px;
+    width:100%;
+  }
+}
+
+
