@@ -97,6 +97,10 @@
     max-width:150px;
     width:100%;
   }
+  .books .showBookModal .container .row {
+    grid-template-columns: repeat(1, 1fr);
+    max-height: 500px;
+  }
 }
 
 
