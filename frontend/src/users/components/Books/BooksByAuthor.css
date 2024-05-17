@@ -1,50 +1,10 @@
 .books {
   position:relative;
 }
-.books .grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-column-gap: 1rem;
-  grid-row-gap: 2rem;
-}
-.books .grid .card {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  position: relative;
-  cursor: pointer;
-  box-shadow: 0 4px 5px -2px rgba(0, 0, 0, 0.25);
-}
-.books .grid .card .img-wrapper {
-  position: relative;
-  overflow: hidden;
-}
-.books .grid .card .img-wrapper img {
-  width: 100%;
-}
-.grid .card .overlay {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
-}
 
-.grid .card .overlay p:hover {
-  background: var(--blue);
-  color: #ff004f;
-}
 
-.grid .card:hover .overlay {
-  left: 0;
-}
 
-.grid .card .overlay p {
-  padding: 1rem;
-  color: var(--white);
-}
-.grid .card p {
-  font-size: 1rem;
-}
+
 
 /* VIEW BOOK MODAL */
 .books .showBookModal {
@@ -54,15 +14,15 @@
   right: 0;
   top: 0;
   bottom: 0;
-  display: none;
+  display:none;
   justify-content: center;
   align-items: center;
   z-index: 999;
-  background: rgba(0, 0, 0, 0.75);
+  background: #000;
   transition: all 0.5s;
 }
 .books .showBookModal.active {
-  display: initial;
+  display:flex;
 }
 .books .showBookModal .container .row {
   display: grid;
@@ -124,18 +84,5 @@
     max-width: 200px;
   }
 }
-@media (max-width: 644px) {
-  .books .grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-@media (max-width: 418px) {
-  .books .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media (max-width: 294px) {
-  .books .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+
+

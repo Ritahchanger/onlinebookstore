@@ -41,7 +41,6 @@ const createToken = async (req, res, next) => {
 
 
 
-
 const stkPush = async (req, res) => {
     try {
       const shortCode = 174379;

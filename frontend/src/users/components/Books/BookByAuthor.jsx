@@ -7,57 +7,40 @@ import { useParams } from "react-router-dom";
 
 import Footer from "../Footer/Footer";
 
-const BookByAuthor = () => {
-  const [ displayBook,setDisplayBook ] = useState(false);
+import BooksGrid from "./BooksGrid";
 
-  const displayImageMoreDescription=()=>{
+const BookByAuthor = () => {
+  const [displayBook, setDisplayBook] = useState(false);
+
+  const displayImageMoreDescription = () => {
     setDisplayBook(!displayBook);
-  }
+  };
 
   const { id } = useParams();
 
-  useEffect(function(){
-    window.scrollTo(0,0)
-  },[])
+  useEffect(function () {
+    window.scrollTo(0, 0);
+  }, []);
 
-
-  console.log(id)
+  console.log(id);
 
   return (
     <div className="books">
       <LowerNavbar />
       <div className="container">
         <div className="small-header">Wanjiru Mukami</div>
-        <div className="grid">
-          {books.map((book, index) => (
-            <div className="card">
-              <div className="img-wrapper">
-                <img src={book.imgUrl} alt="" />
-                <div className="overlay">
-                  <p className="shop-items-icons">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                  </p>
-                  <p className="shop-items-icons">
-                    <i class="fa-solid fa-heart"></i>
-                  </p>
-                  <p className="shop-items-icons" onClick={displayImageMoreDescription}>
-                    <i class="fa fa-eye"></i>
-                  </p>
-                </div>
-              </div>
-              <div className="card-body">
-                <p className="book_title">{book.bookTitle}</p>
-                <p className="book_price">{book.price}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+
+        <BooksGrid displayImageMoreDescription={displayImageMoreDescription} />
+
         <p className="small-header">Ebooks</p>
       </div>
       <div className={`showBookModal ${displayBook ? "active" : ""} `}>
-      {/* <div className="showBookModal"> */}
+        
+        
         <div className="container">
-             < p className="close-item" onClick={displayImageMoreDescription}>&times;</p>
+          <p className="close-item" onClick={displayImageMoreDescription}>
+            &times;
+          </p>
           <div className="row">
             <div className="col">
               <div className="img-wrapper">
@@ -83,7 +66,7 @@ const BookByAuthor = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
