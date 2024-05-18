@@ -1,103 +1,114 @@
-.checkout .container .grid{
-    grid-template-columns:2fr 1fr;
+.checkout .container .grid {
+  grid-template-columns: 2fr 1fr;
 }
-.checkout .container form{
-    width:100%;
+.checkout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
 }
-.checkout .container .row{
-
-    justify-content:space-between;
-
+.checkout .container form {
+  width: 100%;
 }
-.checkout .container .grid .input-group{
-    margin:0.5rem 0rem;
-    cursor: pointer;
+.checkout .container .row {
+  justify-content: space-between;
 }
-.checkout .submit-btn{
-    margin-top:0.5rem;
-    transition:all 0.5s;
-    height:40px;
+.checkout .container {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  padding: 1rem;
+  margin: 0rem 1rem;
+  margin-top: 2rem;
 }
-.checkout .container .grid .input-group input{
-    border:none;
-    height:40px;
-    border-bottom:1px solid var(--gray);
-    outline:none;
+.checkout .container .grid .input-group {
+  margin: 0.5rem 0rem;
+  cursor: pointer;
 }
-.checkout .container .grid .row .input-group{
-    flex-basis:48%;
+.checkout .submit-btn {
+  margin-top: 0.5rem;
+  transition: all 0.5s;
+  height: 40px;
 }
-.checkout .container .grid .home{
-    display:flex;
-    justify-content:space-between;
+.checkout .container .grid .input-group input {
+  border: none;
+  height: 40px;
+  border-bottom: 1px solid var(--gray);
+  outline: none;
 }
-.checkout .container .medium-header{
-    font-size:1.2rem;
-    text-align:center;
-    border-bottom:1px solid var(--blue);
+.checkout .container .grid .row .input-group {
+  flex-basis: 48%;
 }
-.checkout .container .grid .home .input-group{
-    flex-basis:32%;
+.checkout .container .grid .home {
+  display: flex;
+  justify-content: space-between;
 }
-.checkout .container .pay-row{
-    align-items:center;
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    justify-content:space-between;
-    width:100%;
-    gap:1rem;
+.checkout .container .medium-header {
+  font-size: 1.2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--blue);
 }
-.checkout .container .pay-row .card:nth-child(2) img{
-    width:150px;
+.checkout .container .grid .home .input-group {
+  flex-basis: 32%;
 }
-.checkout .container .pay-row .card{
-    box-shadow:0 0 5px rgb(0,0,0,0.25);
-    height:90px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:5px;
-    cursor:pointer;
+.checkout .container .pay-row {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
 }
-.checkout .container .pay-row .card i{
-    font-size:3rem;
+.checkout .container .pay-row .card:nth-child(2) img {
+  width: 150px;
 }
-.checkout .check-items-cart{
-    border-bottom:1px solid var(--gray);
-    margin-top:1.5rem;
+.checkout .container .pay-row .card {
+  box-shadow: 0 0 5px rgb(0, 0, 0, 0.25);
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
 }
-
-.checkout  .cart-item{
-    margin:1rem 0rem;
+.checkout .container .pay-row .card i {
+  font-size: 3rem;
 }
-.checkout-link{
-
-    color:var(--blue)
-
-}
-
-
-@media(max-width:900px){
-    .checkout .container .pay-row{
-        grid-template-columns:repeat(1,1fr);
-    }
-}
-@media(max-width:750px){
-    .checkout .container .pay-row{
-        grid-template-columns:repeat(2,1fr);
-    }
-    .checkout .container .grid{
-        grid-template-columns:repeat(1,1fr);
-    }
+.checkout .check-items-cart {
+  border-bottom: 1px solid var(--gray);
+  margin-top: 1.5rem;
 }
 
+.checkout .cart-item {
+  margin: 1rem 0rem;
+}
+.checkout-link {
+  color: var(--blue);
+}
 
-@media(max-width:400px){
+@media (max-width: 900px) {
+  .checkout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .checkout .container .pay-row {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (max-width: 750px) {
+  .checkout .container .pay-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .checkout .container .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 
-    .checkout .container .medium-header{
-        font-size:1rem;
-        text-align:center;
-        border-bottom:1px solid var(--blue);
-    }
-
+@media (max-width: 400px) {
+  .checkout .container .medium-header {
+    font-size: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--blue);
+  }
 }

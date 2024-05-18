@@ -13,14 +13,14 @@ const Checkout = () => {
         <p className="medium-header">CHECKOUT</p>
         <div className="grid">
           <div className="col">
-            
             <form action="#">
-              <div className="input-group">
-                <input type="text" placeholder="Email" />
-              </div>
               <p className="small-header">Shipping address</p>
               <div className="input-group">
                 <input type="text" placeholder="Country/Location" />
+              </div>
+
+              <div className="input-group">
+                <input type="text" placeholder="Email" />
               </div>
 
               <div className="row">
@@ -52,10 +52,14 @@ const Checkout = () => {
 
               <div className="input-group">
                 <input type="text" placeholder="Phone (optional)" />
-
-                
               </div>
             </form>
+            <p className="link-text">
+              <Link to="/shop">
+                {" "}
+                <i className="fa fa-arrow-left"></i>Continue shopping?
+              </Link>
+            </p>
           </div>
 
           <div className="col">
@@ -100,10 +104,10 @@ const Checkout = () => {
               <p className="medium-header">$78.00</p>
             </div>
             <input
-                  type="submit"
-                  value="PROCEED TO PAY"
-                  className="submit-btn"
-                />
+              type="submit"
+              value="PROCEED TO PAY"
+              className="submit-btn"
+            />
           </div>
         </div>
       </div>
