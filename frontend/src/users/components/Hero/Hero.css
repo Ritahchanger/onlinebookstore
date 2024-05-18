@@ -96,5 +96,8 @@
     .hero_content .col:nth-child(1) .description{
         color:var(--white);
     }
+    .hero_content .col:nth-child(1) .description{
+        font-size:1rem;
+    }
 
 }

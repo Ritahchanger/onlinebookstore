@@ -26,6 +26,8 @@ import Shop from './users/pages/Shop'
 
 import ProtectedRoutes from './users/components/authentication/users/ProtectedRoutes'
 
+import CategoriesNavbar from './users/components/navigation/CategoriesNavbar'
+
 const App = () => {
   return (
     <div className='app'>
@@ -79,6 +81,14 @@ const App = () => {
             element={
               <ProtectedRoutes>
                 <Cart />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/categories'
+            element={
+              <ProtectedRoutes>
+                <CategoriesNavbar/>
               </ProtectedRoutes>
             }
           />

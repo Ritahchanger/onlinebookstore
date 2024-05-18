@@ -22,7 +22,7 @@
     border:none;
     outline:none;
     background:transparent;
-    font-size:1.3rem;
+    font-size:1rem;
 }
 .seach_component .search button{
     flex-basis:15%;
@@ -49,7 +49,7 @@
     height:40px;
     cursor:pointer;
     outline:none;
-    font-size:1.2rem;
+    font-size:1rem;
    
 }
 

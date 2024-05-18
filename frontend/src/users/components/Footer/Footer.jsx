@@ -8,6 +8,9 @@ const Footer = () => {
     <div className="footer">
       <div className="container">
         <div className="row">
+
+
+          
           <div className="col">
             <p className="description">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
@@ -66,6 +69,7 @@ const Footer = () => {
               ))}
             </div>
           </div>
+
          
         </div>
         <hr />

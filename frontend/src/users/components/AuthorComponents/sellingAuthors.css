@@ -5,7 +5,7 @@
 
 
 .selling-authors table thead tr td{
-    padding:0.5rem 0;
+    padding:0.5rem 1rem;
 
     color:var(--darkGreen);
     font-weight:700;

@@ -84,22 +84,6 @@ const LowerNavbar = () => {
                     </Link>
                   </>
                 )}
-                <div className="child_navigation">
-                  {item.navItems &&
-                    item.navItems.map((navli, index) => (
-                      <div className="sub_navigation">
-                        <p className="small-header">{navli.booksTypes}</p>
-                        {navli.books &&
-                          navli.books.map((book, index) => (
-                            <ul key={index}>
-                              <p>
-                                <Link to="#">{book}</Link>
-                              </p>
-                            </ul>
-                          ))}
-                      </div>
-                    ))}
-                </div>
               </p>
             ))}
           </div>
