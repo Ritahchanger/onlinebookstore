@@ -99,17 +99,6 @@
   padding: 10px;
   margin: 1rem 0rem;
 }
-.cart .submit-btn {
-  border: none;
-  background: var(--blue);
-  color: var(--white);
-  font-size: 1rem;
-  cursor: pointer;
-}
-.cart .submit-btn:hover {
-  background: var(--green);
-}
-
 
 
 

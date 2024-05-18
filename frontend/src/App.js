@@ -28,6 +28,8 @@ import ProtectedRoutes from './users/components/authentication/users/ProtectedRo
 
 import CategoriesNavbar from './users/components/navigation/CategoriesNavbar'
 
+import Checkout from './users/components/cart/Checkout'
+
 const App = () => {
   return (
     <div className='app'>
@@ -89,6 +91,14 @@ const App = () => {
             element={
               <ProtectedRoutes>
                 <CategoriesNavbar/>
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/check-out'
+            element={
+              <ProtectedRoutes>
+                <Checkout/>
               </ProtectedRoutes>
             }
           />

@@ -2,6 +2,8 @@ import React, { Fragment, useEffect } from "react";
 import LowerNavbar from "../LowerNavbar/LowerNavbar";
 import "./cart.css";
 
+import { useNavigate } from "react-router-dom"; 
+
 import { Link } from "react-router-dom";
 
 import CartItem from "./CartItem";
@@ -9,6 +11,12 @@ import CartItem from "./CartItem";
 import Footer from "../Footer/Footer";
 
 const Cart = () => {
+
+  const navigate = useNavigate();
+
+  const openCheckOutPage=()=>{
+    navigate("/check-out")
+  }
 
   useEffect(()=>{
     window.scrollTo(0,0)
@@ -66,7 +74,7 @@ const Cart = () => {
                 <p className="small-header">TOTAL COST</p>
                 <p className="small-header">SH 78000</p>
               </div>
-              <input type="submit" value="CHECKOUT" className="submit-btn" />
+              <input type="submit" value="CHECKOUT" className="submit-btn"  onClick={openCheckOutPage}  />
             </div>
           </div>
           <p className="link-text">
