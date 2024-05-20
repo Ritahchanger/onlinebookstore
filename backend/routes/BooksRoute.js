@@ -4,9 +4,11 @@ const BookController = require("../controllers/BookController")
 
 
 
-router.get("/get",(req,res)=>{
-    return res.status(200).json({message:"Books has been gotten"})
-})
+
+
+router.get('/',BookController.getBooks)
+router.get('/authors/:id',BookController.getBooksByAuthors)
+
 
 
 

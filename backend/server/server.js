@@ -17,7 +17,6 @@ const app = express()
 // MIDDLEWARES
 app.use(helmet())
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 app.use(morgan('combined'))
 
 app.use(cors())
@@ -35,10 +34,15 @@ const UsersRoutes = require('../routes/UsersRoutes')
 const BooksRoute = require("../routes/BooksRoute")
 
 
+const BooksCategoriesRoutes = require("../routes/BooksCategoriesRoutes")
+
+
+
 app.use('/api/auth', AuthenticationRoute)
 app.use('/api/payment', PaymentsRoutes)
 app.use('/api/users', UsersRoutes)
 app.use('/api/books', BooksRoute)
+app.use('/api/categories', BooksCategoriesRoutes)
 
 
 
