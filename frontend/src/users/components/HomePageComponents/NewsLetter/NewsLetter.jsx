@@ -6,7 +6,7 @@ const NewsLetter = () => {
       <div className="container">
         <div className="row">
           <div className="col">
-            <p className="medium-header">Subscribe To Our Newsletter</p>
+            <p className="subscribe medium-header">Subscribe To Our Newsletter</p>
           </div>
           <div className="col">
             <p className="description">
