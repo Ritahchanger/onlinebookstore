@@ -29,10 +29,13 @@
     margin-left:1rem;
 }
 .testmonials .container{
-    box-shadow:0 0 5px rgba(0,0,0,0.25);
     padding-bottom:2rem;
 }
 
+.testmonials .card-item{
+    border:3px solid var(--blue);
+    padding:1rem;
+}
 
 
 @media(max-width:510px){
@@ -48,13 +51,12 @@
         align-items:center;
         justify-content:center;
     }
-    .testmonials .card p{
+    .testmonials .card-item p{
         text-align:center;
     }
-    .testmonials .card{
-        border-bottom:1px solid var(--gray);
+    .testmonials .card-item{
+        border:3px solid var(--blue);
         padding-bottom:1rem;
-        border-right:1px solid var(--gray);
         padding-right:1rem;
     }
   }

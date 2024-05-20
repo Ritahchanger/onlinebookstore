@@ -21,7 +21,7 @@ const Testmonials = () => {
 
         if(window.innerWidth <= 670){
 
-            setSlidesToShow(2)
+            setSlidesToShow(1)
 
         }else{
 
@@ -57,7 +57,7 @@ const Testmonials = () => {
           
           <Slider {...settings} >
 
-          <div className="card">
+          <div className="card-item">
             <p className="description">
               <sup className="quotes">"</sup>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quos
@@ -76,7 +76,7 @@ const Testmonials = () => {
               </div>
             </div>
           </div>
-          <div className="card">
+          <div className="card-item">
             <p className="description">
               <sup className="quotes">"</sup>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quos
@@ -95,7 +95,7 @@ const Testmonials = () => {
               </div>
             </div>
           </div>
-          <div className="card">
+          <div className="card-item">
             <p className="description">
               <sup className="quotes">"</sup>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quos
@@ -114,7 +114,7 @@ const Testmonials = () => {
               </div>
             </div>
           </div>
-          <div className="card">
+          <div className="card-item">
             <p className="description">
               <sup className="quotes">"</sup>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quos
@@ -133,7 +133,7 @@ const Testmonials = () => {
               </div>
             </div>
           </div>
-          <div className="card">
+          <div className="card-item">
             <p className="description">
               <sup className="quotes">"</sup>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quos
@@ -152,7 +152,7 @@ const Testmonials = () => {
               </div>
             </div>
           </div>
-          <div className="card">
+          <div className="card-item">
             <p className="description">
               <sup className="quotes">"</sup>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quos
@@ -171,7 +171,7 @@ const Testmonials = () => {
               </div>
             </div>
           </div>
-          <div className="card">
+          <div className="card-item">
             <p className="description">
               <sup className="quotes">"</sup>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quos
