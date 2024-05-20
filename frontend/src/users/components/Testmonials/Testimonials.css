@@ -1,0 +1,60 @@
+.quotes{
+    font-size:3rem;
+    color:var(--blue)
+}
+.profile-image{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid var(--blue);
+}
+.profile-image img{
+    border-radius:50%;
+    height:40px;
+    width:40px;
+}
+.testmonials .small-header{
+    font-size:1rem;
+}
+.testmonials .medium-header{
+    text-align:center;
+}
+.testmonials .row{
+    margin-top:1rem;
+}
+.testmonials .row .col{
+    margin-left:1rem;
+}
+.testmonials .container{
+    box-shadow:0 0 5px rgba(0,0,0,0.25);
+    padding-bottom:2rem;
+}
+
+
+
+@media(max-width:510px){
+    .testmonials .container .medium-header{
+      font-size:1.2rem;
+    }
+  }
+
+
+  @media(max-width:408px){
+    .testmonials .row{
+        flex-direction: column;
+        align-items:center;
+        justify-content:center;
+    }
+    .testmonials .card p{
+        text-align:center;
+    }
+    .testmonials .card{
+        border-bottom:1px solid var(--gray);
+        padding-bottom:1rem;
+        border-right:1px solid var(--gray);
+        padding-right:1rem;
+    }
+  }

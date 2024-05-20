@@ -7,7 +7,7 @@
     padding-bottom:2rem;
 }
 .newsletter .container .row .col:nth-child(1) p{
-    text-align:center;
+    text-align:start;
 }
 .newsletter .medium-header{
     text-align:start;
@@ -50,9 +50,12 @@
 }
 
 .newsletter .newsLetterForm input::placeholder{
-    color:var(--blue);
+    color:var(--white);
 }
 
+.newsletter .container .row .col:nth-child(2) p{
+    color:var(--black);
+}
 
 
 

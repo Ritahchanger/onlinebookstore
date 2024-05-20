@@ -8,6 +8,7 @@ import NewsLetter from "../components/HomePageComponents/NewsLetter/NewsLetter";
 import Footer from "../components/Footer/Footer";
 
 import './Home.css'
+import Testmonials from "../components/Testmonials/Testmonials";
 
 const Home = () => {
 
@@ -22,6 +23,7 @@ const Home = () => {
       <Ebook /> 
        <NewRelease />
       <FeaturedBook/>
+      <Testmonials/>
       <NewsLetter/>
       <Footer/>
     </div>
