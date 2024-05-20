@@ -35,7 +35,7 @@ const BookByAuthor = () => {
 
         <BooksGrid/>
 
-        <p className="small-header">Audio</p>
+        <p className="small-header">Audiow</p>
       </div>
 
       <BookDescriptionModal />

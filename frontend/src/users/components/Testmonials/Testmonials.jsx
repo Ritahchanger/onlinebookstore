@@ -37,7 +37,7 @@ const Testmonials = () => {
   return (
     <div className="testmonials">
       <div className="container">
-      <p className="medium-header">Testmonials</p>
+        <p className="medium-header">Testmonials</p>
         <div className="testmonials-wrapper">
           <Slider {...settings}>
             <div className="card-item">
@@ -50,24 +50,22 @@ const Testmonials = () => {
                 amet consectetur adipisicing elit.
               </p>
               <div className="row">
-                <div className="profile-image">
-                  <img src={TestmonialImage} alt="" />
-                </div>
-                <div className="col">
-                  <p className="small-header">Alexander Ndanu</p>
-                  <p className="description">Senior Manager</p>
-                </div>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
               </div>
-            </div>
-            <div className="card-item">
-              <p className="description">
-                <sup className="quotes">"</sup>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-                quos maiores distinctio cupiditate vero in error, illo minus
-                earum, nemo inventore facilis rerum natus quas voluptatibus
-                pariatur provident? Modi, consequuntur? Lorem ipsum dolor sit
-                amet consectetur adipisicing elit.
-              </p>
               <div className="row">
                 <div className="profile-image">
                   <img src={TestmonialImage} alt="" />
@@ -88,24 +86,22 @@ const Testmonials = () => {
                 amet consectetur adipisicing elit.
               </p>
               <div className="row">
-                <div className="profile-image">
-                  <img src={TestmonialImage} alt="" />
-                </div>
-                <div className="col">
-                  <p className="small-header">Alexander Ndanu</p>
-                  <p className="description">Senior Manager</p>
-                </div>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
               </div>
-            </div>
-            <div className="card-item">
-              <p className="description">
-                <sup className="quotes">"</sup>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-                quos maiores distinctio cupiditate vero in error, illo minus
-                earum, nemo inventore facilis rerum natus quas voluptatibus
-                pariatur provident? Modi, consequuntur? Lorem ipsum dolor sit
-                amet consectetur adipisicing elit.
-              </p>
               <div className="row">
                 <div className="profile-image">
                   <img src={TestmonialImage} alt="" />
@@ -126,24 +122,22 @@ const Testmonials = () => {
                 amet consectetur adipisicing elit.
               </p>
               <div className="row">
-                <div className="profile-image">
-                  <img src={TestmonialImage} alt="" />
-                </div>
-                <div className="col">
-                  <p className="small-header">Alexander Ndanu</p>
-                  <p className="description">Senior Manager</p>
-                </div>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
               </div>
-            </div>
-            <div className="card-item">
-              <p className="description">
-                <sup className="quotes">"</sup>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-                quos maiores distinctio cupiditate vero in error, illo minus
-                earum, nemo inventore facilis rerum natus quas voluptatibus
-                pariatur provident? Modi, consequuntur? Lorem ipsum dolor sit
-                amet consectetur adipisicing elit.
-              </p>
               <div className="row">
                 <div className="profile-image">
                   <img src={TestmonialImage} alt="" />
@@ -163,6 +157,131 @@ const Testmonials = () => {
                 pariatur provident? Modi, consequuntur? Lorem ipsum dolor sit
                 amet consectetur adipisicing elit.
               </p>
+              <div className="row">
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
+              </div>
+              <div className="row">
+                <div className="profile-image">
+                  <img src={TestmonialImage} alt="" />
+                </div>
+                <div className="col">
+                  <p className="small-header">Alexander Ndanu</p>
+                  <p className="description">Senior Manager</p>
+                </div>
+              </div>
+            </div>
+            <div className="card-item">
+              <p className="description">
+                <sup className="quotes">"</sup>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
+                quos maiores distinctio cupiditate vero in error, illo minus
+                earum, nemo inventore facilis rerum natus quas voluptatibus
+                pariatur provident? Modi, consequuntur? Lorem ipsum dolor sit
+                amet consectetur adipisicing elit.
+              </p>
+              <div className="row">
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
+              </div>
+              <div className="row">
+                <div className="profile-image">
+                  <img src={TestmonialImage} alt="" />
+                </div>
+                <div className="col">
+                  <p className="small-header">Alexander Ndanu</p>
+                  <p className="description">Senior Manager</p>
+                </div>
+              </div>
+            </div>
+            <div className="card-item">
+              <p className="description">
+                <sup className="quotes">"</sup>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
+                quos maiores distinctio cupiditate vero in error, illo minus
+                earum, nemo inventore facilis rerum natus quas voluptatibus
+                pariatur provident? Modi, consequuntur? Lorem ipsum dolor sit
+                amet consectetur adipisicing elit.
+              </p>
+              <div className="row">
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
+              </div>
+              <div className="row">
+                <div className="profile-image">
+                  <img src={TestmonialImage} alt="" />
+                </div>
+                <div className="col">
+                  <p className="small-header">Alexander Ndanu</p>
+                  <p className="description">Senior Manager</p>
+                </div>
+              </div>
+            </div>
+            <div className="card-item">
+              <p className="description">
+                <sup className="quotes">"</sup>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
+                quos maiores distinctio cupiditate vero in error, illo minus
+                earum, nemo inventore facilis rerum natus quas voluptatibus
+                pariatur provident? Modi, consequuntur? Lorem ipsum dolor sit
+                amet consectetur adipisicing elit.
+              </p>
+              <div className="row">
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
+                <p>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+                </p>
+              </div>
               <div className="row">
                 <div className="profile-image">
                   <img src={TestmonialImage} alt="" />

@@ -45,6 +45,10 @@
     width:100%;
 }
 
+.testmonials .fa-regular{
+    margin-right:1rem;
+    color:var(--orange);
+}
 
 
 @media(max-width:510px){

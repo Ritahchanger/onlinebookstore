@@ -30,6 +30,8 @@ import CategoriesNavbar from './users/components/navigation/CategoriesNavbar'
 
 import Checkout from './users/components/cart/Checkout'
 
+import WishList from './users/pages/WishList'
+
 const App = () => {
   return (
     <div className='app'>
@@ -90,7 +92,7 @@ const App = () => {
             path='/categories'
             element={
               <ProtectedRoutes>
-                <CategoriesNavbar/>
+                <CategoriesNavbar />
               </ProtectedRoutes>
             }
           />
@@ -98,13 +100,28 @@ const App = () => {
             path='/check-out'
             element={
               <ProtectedRoutes>
-                <Checkout/>
+                <Checkout />
               </ProtectedRoutes>
             }
           />
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/change-password' element={<PasswordChanging />} />
-          <Route path='/shop' element={<Shop />} />
+          <Route
+            path='/shop'
+            element={
+              <ProtectedRoutes>
+                <Shop />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/wish-list'
+            element={
+              <ProtectedRoutes>
+                <WishList/>
+              </ProtectedRoutes>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
