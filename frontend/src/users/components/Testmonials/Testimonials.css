@@ -51,6 +51,20 @@
 }
 
 
+.testmonials .rating{
+    display:flex;
+}
+
+@media(max-width:670px){
+
+    .testmonials .row:nth-child(1){
+
+        flex-direction:row;
+
+    }
+
+}
+
 @media(max-width:510px){
     .testmonials .container .medium-header{
       font-size:1.2rem;
