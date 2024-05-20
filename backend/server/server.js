@@ -22,17 +22,25 @@ app.use(morgan('combined'))
 
 app.use(cors())
 
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 5000
 
 // ROUTE IMPORTS
 
 const AuthenticationRoute = require('../routes/AuthenticationRoute')
 const PaymentsRoutes = require('../routes/PaymentsRoutes')
+
 const UsersRoutes = require('../routes/UsersRoutes')
+
+
+const BooksRoute = require("../routes/BooksRoute")
+
 
 app.use('/api/auth', AuthenticationRoute)
 app.use('/api/payment', PaymentsRoutes)
 app.use('/api/users', UsersRoutes)
+app.use('/api/books', BooksRoute)
+
+
 
 const connectServer = async () => {
   await connectDatabase()
