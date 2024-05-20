@@ -24,7 +24,7 @@ const Categories = () => {
     infinite: false,
     speed: 700,
     slidesToShow: slidesToScroll,
-    slidesToScroll: 2,
+    slidesToScroll: 1,
   };
   return (
     <div className="categories">
