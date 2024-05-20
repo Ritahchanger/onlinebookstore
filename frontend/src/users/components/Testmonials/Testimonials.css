@@ -28,14 +28,20 @@
 .testmonials .row .col{
     margin-left:1rem;
 }
-.testmonials .container{
-    padding-bottom:2rem;
-}
-
 .testmonials .card-item{
     border:3px solid var(--blue);
     padding:1rem;
 }
+
+.testmonials .card-item .description{
+    color:var(--black);
+}
+
+.testmonials-wrapper{
+    padding:1rem;
+    width:100%;
+}
+
 
 
 @media(max-width:510px){
