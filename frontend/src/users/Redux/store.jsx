@@ -14,6 +14,10 @@ import booksSlice from "./features/booksSlice";
 import BookDescriptionSlice from "./features/BookDescriptionSlice";
 
 
+import wishListSlice from "./features/wishListSlice";
+
+
+
 export default configureStore({
   reducer: {
     alerts: alertSlice.reducer,
@@ -22,5 +26,6 @@ export default configureStore({
     cart:cartSlice.reducer,
     books:booksSlice.reducer,
     bookModal:BookDescriptionSlice.reducer,
-  },
+    wishList:wishListSlice.reducer,
+  }
 });

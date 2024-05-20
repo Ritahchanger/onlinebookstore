@@ -1,10 +1,12 @@
 .ebook{
     margin-top:5rem;
 }
+
 .ebook .row .col-md-6:nth-child(1){
   display:flex;
   flex-direction: column;
   justify-content: center;
+
 }
 .ebook .row .col-md-6:nth-child(1) .description{
   color:var(--black);
@@ -17,5 +19,17 @@
   }
   .ebook .row .col-md-6:nth-child(1){
     margin-bottom:2rem;
+  }
+  .ebook .container .row{
+    text-align:center;
+  }
+}
+
+
+@media(max-width:551px){
+  .ebook .medium-header{
+      font-size:1.3rem;
+  }.ebook .small-header{
+      font-size:1rem;
   }
 }

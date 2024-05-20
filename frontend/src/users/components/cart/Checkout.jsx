@@ -1,5 +1,7 @@
 import React from "react";
 
+import axios from "axios";
+
 import "./checkout.css";
 
 import { Link } from "react-router-dom";
@@ -7,6 +9,8 @@ import { Link } from "react-router-dom";
 import MpesaLogo from "../../../assets/images/mpesa.png";
 
 const Checkout = () => {
+  const inititateStkPush = () => {};
+
   return (
     <div className="checkout">
       <div className="container">
@@ -69,7 +73,7 @@ const Checkout = () => {
                   <i class="fa-brands fa-paypal"></i>
                 </p>
               </div>
-              <div className="card">
+              <div className="card" onClick={inititateStkPush}>
                 <p>
                   <img src={MpesaLogo} />
                 </p>

@@ -47,7 +47,6 @@ input{
   padding:0.5rem 3rem;
   border:2px solid var(--green);
   margin-top:1rem;
-  border-radius:5px;
   cursor: pointer;
   transition:all 0.5s;
 }
@@ -86,3 +85,19 @@ img{
   background: var(--green);
 }
 
+.cart-buttons{
+  background:transparent;
+  border:none;
+  cursor: pointer;
+  border:2px solid var(--green);
+  padding:0.5rem 1rem;
+  border-radius:5rem;
+  margin-right:1rem;
+  color:var(--green)z
+}
+.cart-buttons:hover{
+  background:var(--green);
+}
+.cart-buttons:hover{
+  color:var(--white);
+}

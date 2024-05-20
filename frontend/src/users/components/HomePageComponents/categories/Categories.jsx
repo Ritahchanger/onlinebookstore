@@ -31,7 +31,7 @@ const Categories = () => {
       <div className="container">
         <div className="row">
           <div className="col">
-            <p className="small-header">Categories</p>
+            <p className="small-header">Featured Categories</p>
             <div className="medium-header">Explore our Top Categories</div>
           </div>
           <div className="col">

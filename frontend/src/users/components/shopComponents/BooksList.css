@@ -4,7 +4,8 @@
   flex-direction: column;
   position: relative;
   cursor: pointer;
-  box-shadow: 0 4px 5px -2px rgba(0, 0, 0, 0.25);
+  text-align:center;
+  border-bottom:1px solid var(--gray);
 }
 .book-card .img-wrapper {
   position: relative;

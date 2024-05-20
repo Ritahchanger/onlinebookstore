@@ -28,7 +28,7 @@
   .accordion {
     background-color: #fff;
     /* border: 1px solid #ddd; */
-    border-radius: 4px;
+    /* border-radius: 4px; */
     overflow: hidden;
     transition: max-height 0.3s ease;
   }
@@ -46,7 +46,8 @@
   
   .categories-title p {
     margin: 0;
-    font-size: 16px;
+    font-size:1rem;
+    text-transform:uppercase;
   }
   
   .accordion-body {
@@ -59,7 +60,7 @@
   
   .accordion-body p {
     margin: 10px 0;
-    font-size: 14px;
+    font-size: 0.9rem;
   }
   .accordion-body p:hover{
     cursor: pointer;

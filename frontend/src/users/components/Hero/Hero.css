@@ -9,7 +9,7 @@
     position:relative;
 }
 .header_title{
-    font-size:4rem;
+    font-size:3rem;
 }
 .hero_content{
     max-width:1200px;
@@ -30,7 +30,8 @@
     width:200px;
 }
 .hero_content .col:nth-child(1) .description{
-    font-size:1.4rem;
+    font-size:1rem;
+    line-height:2rem;
 }
 .hero_content .col:nth-child(2){
     flex-basis:50%;
@@ -46,7 +47,7 @@
 }
 .hero_content .hero-btn{
     display:inline-flex;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 

@@ -1,10 +1,15 @@
 .newsletter{
     margin-top:4rem;
 }
+.newsletter .container{
+    box-shadow:0  0 5px rgba(0,0,0,0.25);
+    padding-top:2rem;
+    padding-bottom:2rem;
+}
 .newsletter .container .row .col:nth-child(1) p{
     text-align:center;
 }
-.newsletter .container .row .col:nth-child(1) .medium-header{
+.newsletter .medium-header{
     text-align:start;
 }
 .newsletter .container .row .col:nth-child(1){
@@ -63,7 +68,16 @@
     .newsletter .row{
         flex-direction:column;
     }
-    .newsletter .container .row .col:nth-child(1) p{
-        text-align:start;
+    .newsletter .container .row p{
+        text-align:center;
+    }
+    .newsletter .medium-header{
+        text-align:center;
     }
 }
+
+@media(max-width:551px){
+    .newsletter .medium-header{
+        font-size:1.3rem;
+    }
+  }

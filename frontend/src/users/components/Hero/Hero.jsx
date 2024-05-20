@@ -12,7 +12,7 @@ const Hero = () => {
         <LowerNavbar />
         <div className="hero_content">
           <div className="col">
-            <p className="header_title">Welcome!</p>
+            <p className="header_title">Find Your Favourite<br/><span style={{color:"var(--blue)"}}>Book Here</span></p>
             <p className="description">
               Our online bookstore is a sanctuary for book lovers,
               <br />

@@ -11,6 +11,7 @@
 
     display:flex;
     justify-content:space-between;
+    flex:1;
 }
 
 .footer .container .row .col:nth-child(1){

@@ -34,12 +34,12 @@
     background: var(--green);
 }
 
-.selling-authors table tbody tr td:nth-child(3){
+.selling-authors table tbody tr td:nth-child(5){
     display:flex;
     justify-content:space-between;
 }
 
-.selling-authors table tbody tr td:nth-child(3) .shop-items-icons:hover{
+.selling-authors table tbody tr td:nth-child(5) .shop-items-icons:hover{
 
     transform: scale(1.1);
     color:var(--darkGreen);

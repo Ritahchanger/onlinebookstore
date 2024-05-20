@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { div, useEffect } from "react";
 import Hero from "../components/Hero/Hero";
 import Categories from "../components/HomePageComponents/categories/Categories";
 import Ebook from "../components/HomePageComponents/ebooks/Ebook";
@@ -7,6 +7,8 @@ import FeaturedBook from "../components/HomePageComponents/FeaturedBook/Featured
 import NewsLetter from "../components/HomePageComponents/NewsLetter/NewsLetter";
 import Footer from "../components/Footer/Footer";
 
+import './Home.css'
+
 const Home = () => {
 
   useEffect(()=>{
@@ -14,7 +16,7 @@ const Home = () => {
   },[])
 
   return (
-    <Fragment>
+    <div className="home">
       <Hero />
       <Categories />
       <Ebook /> 
@@ -22,7 +24,7 @@ const Home = () => {
       <FeaturedBook/>
       <NewsLetter/>
       <Footer/>
-    </Fragment>
+    </div>
   );
 };
 
