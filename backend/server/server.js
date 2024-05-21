@@ -10,14 +10,23 @@ const connectDatabase = require('../database/database')
 
 const cors = require('cors')
 
+
+
 dotenv.config()
 
 const app = express()
 
 // MIDDLEWARES
 app.use(helmet())
+
+
 app.use(express.json())
+
+
 app.use(morgan('combined'))
+
+app.use('/uploads',express.static('uploads'))
+
 
 app.use(cors())
 
@@ -36,6 +45,9 @@ const BooksRoute = require("../routes/BooksRoute")
 
 const BooksCategoriesRoutes = require("../routes/BooksCategoriesRoutes")
 
+const BlogRoutes = require("../routes/BlogRoutes")
+
+
 
 
 app.use('/api/auth', AuthenticationRoute)
@@ -43,10 +55,12 @@ app.use('/api/payment', PaymentsRoutes)
 app.use('/api/users', UsersRoutes)
 app.use('/api/books', BooksRoute)
 app.use('/api/categories', BooksCategoriesRoutes)
+app.use('/api/blog',BlogRoutes)
 
 
 
-const connectServer = async () => {
+const connectServer = async () => {const BlogRoutes = require("../routes/BlogRoutes")
+
   await connectDatabase()
 
   app.listen(PORT, () => {

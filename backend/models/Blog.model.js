@@ -10,9 +10,11 @@ const BlogPostSchema = mongoose.Schema({
         type:String,
         required:true,
     },
-    createdAt:{
-        type:Date,
-        default:Date.now
+    filePath:{
+        type:String,
+    },
+    createdOn:{
+        type:String
     }
 
 })
