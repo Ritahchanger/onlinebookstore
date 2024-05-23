@@ -8,15 +8,11 @@ import userSlice from "./features/userSlice";
 
 import cartSlice from "./features/cartSlice";
 
-
 import booksSlice from "./features/booksSlice";
 
 import BookDescriptionSlice from "./features/BookDescriptionSlice";
 
-
-// import wishListSlice from "./features/wishListSlice";
-
-
+import blogsSlice from "./features/blogsSlice";
 
 export default configureStore({
   reducer: {
@@ -26,6 +22,6 @@ export default configureStore({
     cart:cartSlice.reducer,
     books:booksSlice.reducer,
     bookModal:BookDescriptionSlice.reducer,
-    // wishList:wishListSlice.reducer,
+    blogs:blogsSlice.reducer
   }
 });

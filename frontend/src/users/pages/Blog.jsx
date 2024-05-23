@@ -1,13 +1,50 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import LowerNavbar from "../components/LowerNavbar/LowerNavbar";
 import Footer from "../components/Footer/Footer";
 import "./Blog.css";
 import { blogSampleData } from "../components/Data/BlogData";
-import { Link } from "react-router-dom";
+
+import axios from "axios"
+import { Link, useBeforeUnload } from "react-router-dom";
 
 import BlogItem from "../components/BlogPageComponents/BlogItem";
 
 const Blog = () => {
+
+
+  const [data,getData] = useState([]);
+
+  const handleDataFromBackend = async () =>{
+
+    try{
+
+      const response = await axios.get("http://localhost:5000/api/blog/get");
+
+      if(response.status!=200){
+
+        throw new Error("Error getting data from the backend");
+
+      }
+
+      getData(response.data);
+
+
+    }catch(err){
+
+      console.log(err)
+
+    }
+
+  }
+
+  // useEffect(()=>{
+
+  //   handleDataFromBackend()
+
+  //   console.log(data);
+
+  // })
+
 
   useEffect(()=>{
     window.scrollTo(0,0)

@@ -1,15 +1,74 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../authentication.css";
 
+import { Navigate } from "react-router-dom";
+
+import axios from "axios";
+
 const SignUp = () => {
+  const navigate = useNavigate();
+
+  const [usernameFound, setusernameFound] = useState(false);
+  const [emailFound, setEmailFound] = useState(false);
+  const sentDataToDatabase = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/signup",
+        {
+          firstName: formData.firstName,
+          secondName: formData.secondName,
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        },
+        {
+          headers: {
+            "Content-Type": "Application/json",
+          },
+        }
+      );
+
+      if (response.status !== 200) {
+        throw new Error("There is problem with the server!");
+      }
+
+      const backendResult = response.data;
+
+      if (backendResult.usernameFound) {
+        setusernameFound(true);
+      } else {
+        setusernameFound(false);
+      }
+      if (backendResult.emailFound) {
+        setEmailFound(true);
+      } else {
+        setEmailFound(false);
+      }
+
+      if (!usernameFound && !emailFound) {
+        navigate("/login");
+      }
+
+      console.log(backendResult);
+    } catch (error) {
+      console.log(
+        `The following error arised while sending data to the database:-> ${error.message}`
+      );
+    }
+  };
+
   const [formData, setFormData] = useState({
+    firstName: "",
+    secondName: "",
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({
+    firstNameError: "",
+    secondNameError: "",
     usernameError: "",
     emailError: "",
     passwordError: "",
@@ -22,6 +81,24 @@ const SignUp = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // Username validation
+    if (!formData.secondName.trim()) {
+      setErrors((prevState) => ({
+        ...prevState,
+        secondNameError: "Secondname is required",
+      }));
+      valid = false;
+    } else {
+      setErrors((prevState) => ({ ...prevState, usernameError: "" }));
+    }
+    if (!formData.firstName.trim()) {
+      setErrors((prevState) => ({
+        ...prevState,
+        firstNameError: "Firstname is required",
+      }));
+      valid = false;
+    } else {
+      setErrors((prevState) => ({ ...prevState, usernameError: "" }));
+    }
     if (!formData.username.trim()) {
       setErrors((prevState) => ({
         ...prevState,
@@ -73,6 +150,7 @@ const SignUp = () => {
     // If form is valid, submit the form data
     if (valid) {
       console.log("Form submitted:", formData);
+      sentDataToDatabase();
     }
   };
 
@@ -97,6 +175,30 @@ const SignUp = () => {
           <div className="input-group">
             <input
               type="text"
+              name="firstName"
+              placeholder="Enter firstname"
+              value={formData.firstName}
+              onChange={handleChange}
+            />
+            {errors.firstNameError && (
+              <p className="error-message">{errors.firstNameError}</p>
+            )}
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
+              name="secondName"
+              placeholder="Enter secondname"
+              value={formData.secondName}
+              onChange={handleChange}
+            />
+            {errors.secondNameError && (
+              <p className="error-message">{errors.secondNameError}</p>
+            )}
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
               name="username"
               placeholder="Enter username"
               value={formData.username}
@@ -104,6 +206,9 @@ const SignUp = () => {
             />
             {errors.usernameError && (
               <p className="error-message">{errors.usernameError}</p>
+            )}
+            {usernameFound && (
+              <p className="error-message">Username already used!</p>
             )}
           </div>
           <div className="input-group">
@@ -117,6 +222,7 @@ const SignUp = () => {
             {errors.emailError && (
               <p className="error-message">{errors.emailError}</p>
             )}
+            {emailFound && <p className="error-message">Email is used!</p>}
           </div>
           <div className="input-group">
             <input

@@ -1,0 +1,90 @@
+.account{
+    position:relative;
+    width:100%;
+}
+.account .profile{
+    top:0;
+    position:absolute;
+    width:300px;
+    background:var(--blue);
+    padding:1rem;
+    padding-top:0;
+    z-index:99;
+    left:-100%;
+    transition:all 0.5s;
+}
+.account .profile.active{
+    left:0%;
+}
+.account .img-wrapper{
+    background:#fff;
+    margin:0 auto;
+}
+.account .profile .profile-description{
+    display:flex;
+    justify-content:space-between;
+    font-size:16px;
+    margin-top:1rem;
+}
+.account .profile .profile-description span{
+    font-size:14px;
+    color:var(--white);
+    font-weight:500;
+}
+.account .profile .profile-description span:nth-child(1){
+    flex-basis:35%;
+
+}
+.account .description{
+    background:var(--white);
+    padding:1rem;
+    margin-top:1rem;
+    color:var(--black);
+    font-size:14px;
+}
+.account .profile .profile-description span:nth-child(2){
+    flex-basis:62%;
+}
+.account .profile-button{
+    background:var(--green);
+    border:none;
+    width:100%;
+    padding:0.7rem;
+    color:var(--white);
+    font-weight:600;
+    cursor: pointer;
+    margin-top:1rem;
+}
+
+.account .close-icon{
+    cursor: pointer;
+    transition:all 0.5s;
+    display:inline-block;
+}
+.account .close-icon:hover{
+    transform: scale(1.1);
+    color:var(--pinkRed)
+}
+
+.account .books .header .menu-icon{
+    color:var(--black);
+    cursor: pointer;
+}
+
+.account .books .header .menu-icon:hover{
+
+    transform: scale(1.1);
+    color:var(--pinkRed)
+}
+
+.account .books .header{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    box-shadow:0 0 5px rgba(0,0,0,0.25);
+    padding-right:1rem;
+    padding-left:1rem;
+}
+.account .books .header .medium-header{
+    font-size:1.3rem;
+}

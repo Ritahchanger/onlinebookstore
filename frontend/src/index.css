@@ -101,3 +101,8 @@ img{
 .cart-buttons:hover{
   color:var(--white);
 }
+.modal-icon{
+  font-size:1.4rem;
+  color:var(--white);
+  font-size:2rem;
+}

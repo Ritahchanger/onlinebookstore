@@ -1,19 +1,19 @@
 export const sectionbNavigation = [
   {
-    menu_name: "ACCOUNT",
-    path: "/login",
-  },
-  {
     menu_name: "CART",
     path: "/cart",
   },
   {
-    menu_name: "WISHLIST",
-    path: "#",
+    menu_name: "ACCOUNT",
+    path: "/account",
   },
   {
     menu_name: "LOGIN",
     path: "/login",
+  },
+  {
+    menu_name: "SIGNUP",
+    path: "/signup",
   },
   //   {
   //     menu_name: 'LOGOUT',

@@ -32,6 +32,8 @@ import Checkout from './users/components/cart/Checkout'
 
 import WishList from './users/pages/WishList'
 
+import Account from './users/pages/Account/Account'
+
 const App = () => {
   return (
     <div className='app'>
@@ -118,10 +120,12 @@ const App = () => {
             path='/wish-list'
             element={
               <ProtectedRoutes>
-                <WishList/>
-              </ProtectedRoutes>
+                <WishList />
+              </ProtectedRoutes> 
             }
           />
+
+          <Route path='account' element={<Account/>} />
         </Routes>
       </BrowserRouter>
     </div>
