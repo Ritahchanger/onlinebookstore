@@ -35,8 +35,8 @@ const Account = () => {
 
       <div className="books">
         <div className="header">
-          <p className="modal-icon menu-icon" onClick={handleProfileModal}>
-            &#9776;
+          <p className="menu-icon" onClick={handleProfileModal}>
+          <img src={ProfileImage} alt="" />
           </p>
           <p className="medium-header">BOOKS MANAGEMENT</p>
         </div>

@@ -85,14 +85,15 @@
   color: var(--pinkRed);
 }
 
-.account .books .header .menu-icon {
-  color: var(--black);
+.account .books .header .menu-icon img{
+  width:40px;
   cursor: pointer;
+  margin-top:5px;
+
 }
 
 .account .books .header .menu-icon:hover {
   transform: scale(1.1);
-  color: var(--pinkRed);
 }
 
 .account .books .header {
@@ -105,6 +106,7 @@
 }
 .account .books .header .medium-header {
   font-size: 1.1rem;
+  margin:0rem;
 }
 .account .grid {
   display: grid;
@@ -171,6 +173,9 @@
   }
   .account .my-books table  td{
     font-size:12px;
+  }
+  .account .small-header{
+    font-size:1rem;
   }
 }
 
