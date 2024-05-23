@@ -42,7 +42,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  margin-top: 1rem;
+  margin-top:0.5rem;
 }
 .account .profile .profile-description span {
   font-size: 14px;
@@ -55,7 +55,7 @@
 .account .description {
   background: var(--white);
   padding: 1rem;
-  margin-top: 1rem;
+  margin-top:0.5rem;
   color: var(--black);
   font-size: 14px;
   border-radius: 10px;
@@ -71,7 +71,7 @@
   color: var(--white);
   font-weight: 600;
   cursor: pointer;
-  margin-top: 1rem;
+  margin-top:0.5rem;
   border:2px solid var(--green);
 }
 
@@ -128,7 +128,7 @@
 .account .profile-card {
   padding: 1rem;
   background: var(--white);
-  margin-top: 1rem;
+  margin-top:0.5rem;
   border-radius: 5px;
 }
 .account .uploading{
