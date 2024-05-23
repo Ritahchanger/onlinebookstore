@@ -11,11 +11,8 @@ const Account = () => {
 
   return (
     <div className="account">
-      <div className={ `profile ${isProfileShown && "active" }` }>
-        <p
-          className={`close-icon modal-icon`}
-          onClick={handleProfileModal}
-        >
+      <div className={`profile ${isProfileShown && "active"}`}>
+        <p className={`close-icon modal-icon`} onClick={handleProfileModal}>
           &times;
         </p>
 
@@ -42,6 +39,167 @@ const Account = () => {
             &#9776;
           </p>
           <p className="medium-header">BOOKS MANAGEMENT</p>
+        </div>
+
+        <div className="grid">
+          <div className="card">
+            <p className="small-header">Active Books</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Purchases</td>
+                  <td>Amount Paid</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="card">
+            <p className="small-header">Pending Books</p>
+            <table>
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Purchases</td>
+                  <td>Amount Paid</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+                <tr>
+                  <td>The great kenya</td>
+                  <td>60,000</td>
+                  <td>70,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="my-books">
+          <p className="small-header">My Books</p>
+          <table>
+            <thead>
+              <tr>
+                <td>NAME</td>
+                <td>VIEWS</td>
+                <td>PURCHASES</td>
+                <td>RATINGS</td>
+                <td>REVIEWS</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>The Great Kenya</td>
+                <td>78,000</td>
+                <td>67</td>
+                <td>5</td>
+                <td>8000</td>
+              </tr>
+              <tr>
+                <td>The Great Kenya</td>
+                <td>78,000</td>
+                <td>67</td>
+                <td>5</td>
+                <td>8000</td>
+              </tr>
+              <tr>
+                <td>The Great Kenya</td>
+                <td>78,000</td>
+                <td>67</td>
+                <td>5</td>
+                <td>8000</td>
+              </tr>
+              <tr>
+                <td>The Great Kenya</td>
+                <td>78,000</td>
+                <td>67</td>
+                <td>5</td>
+                <td>8000</td>
+              </tr>
+              <tr>
+                <td>The Great Kenya</td>
+                <td>78,000</td>
+                <td>67</td>
+                <td>5</td>
+                <td>8000</td>
+              </tr>
+              <tr>
+                <td>The Great Kenya</td>
+                <td>78,000</td>
+                <td>67</td>
+                <td>5</td>
+                <td>8000</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
