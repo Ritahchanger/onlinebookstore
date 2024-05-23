@@ -5,6 +5,14 @@ import "./Account.css";
 const Account = () => {
   const [isProfileShown, setIsProfileShown] = useState(false);
 
+  const [ terminateModal,setTerminateModal ] = useState(false);
+
+  const handleTerminateModal = () =>{
+
+    setTerminateModal(!terminateModal)
+
+  }
+
   const handleProfileModal = () => {
     setIsProfileShown(!isProfileShown);
   };
@@ -30,7 +38,7 @@ const Account = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
           provident dicta, consequuntur quidem corporis fugit.
         </p>
-        <button className="profile-button">REQUEST ACCOUNT TERMINATION?</button>
+        <button className="profile-button" onClick={handleTerminateModal} >REQUEST ACCOUNT TERMINATION?</button>
       </div>
 
       <div className="books">
@@ -287,9 +295,9 @@ const Account = () => {
         </div>
       </div>
 
-      <div className="terminate-account-modal">
+      <div className={`terminate-account-modal ${terminateModal ? "active" : "" }`}>
         <form>
-          <a  href="#" className="close-modal">&times;</a>
+          <a  href="#" className="close-modal" onClick={handleTerminateModal}>&times;</a>
           <p className="medium-header">ACCOUNT TERMINATION</p>
           <div className="input-group">
             <input
