@@ -125,6 +125,16 @@
   margin-top: 1rem;
   border-radius: 5px;
 }
+.account .uploading{
+  display:flex;
+  padding:1rem;
+  border-radius:5px;
+}
+
+.account table thead tr td{
+  color:var(--white);
+  font-weight:500;
+}
 
 .account .card {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
@@ -152,7 +162,7 @@
 }
 
 .account table thead {
-  background: var(--gray);
+  background:#000;
   color: var(--white);
 }
 .account td {
@@ -163,6 +173,43 @@
   background: var(--green);
   color: var(--white);
 }
+
+.account .instructions{
+  background:var(--black);
+  padding:1rem;
+  border-radius:5px;
+}
+
+.account .instructions p{
+ color:var(--white);
+}
+
+
+
+
+
+/* PUBLISHING */
+
+.account .publishing .file{
+  color:var(--blue);
+  font-weight:500;
+}
+.account .card.publishing{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+
+/*  */
+
+
+
+
+
+
+
 
 @media (max-width: 594px) {
   .account .grid {

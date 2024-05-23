@@ -36,7 +36,7 @@ const Account = () => {
       <div className="books">
         <div className="header">
           <p className="menu-icon" onClick={handleProfileModal}>
-          <img src={ProfileImage} alt="" />
+            <img src={ProfileImage} alt="" />
           </p>
           <p className="medium-header">BOOKS MANAGEMENT</p>
         </div>
@@ -93,7 +93,7 @@ const Account = () => {
             </table>
           </div>
           <div className="card">
-            <p className="small-header">Pending Books</p>
+            <p className="small-header">Pending Approvals</p>
             <table>
               <thead>
                 <tr>
@@ -137,6 +137,90 @@ const Account = () => {
                   <td>The great kenya</td>
                   <td>60,000</td>
                   <td>70,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="grid">
+          <div className="card publishing">
+            <p className="small-header">Editing and Publishing</p>
+            <div className="instructions">
+              <p>
+                Before publishing a book, it has to be approved by the company.
+                Then necessary charges relating to the book, considering issues
+                like pages and length, will be calculated.After approval, you'll
+                be notified by the system.
+              </p>
+            </div>
+            <div className="uploading">
+              <div className="input-group">
+                <p className="file">Upload Ebook Here!</p>
+                <input type="file" name="uploadEbook" id="uploadEbook" />
+              </div>
+              <div className="input-group">
+                <p className="file">Upload Audio Here!</p>
+                <input type="file" name="uploadAudio" id="uploadAudio" />
+              </div>
+            </div>
+          </div>
+
+          <div className="card">
+            <p className="small-header">Books Read</p>
+            <table>
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Author</td>
+                  <td>View</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>The Great Kenya</td>
+                  <td>Margaret Ogolla</td>
+                  <td>
+                    <p>
+                      <i class="fa fa-eye"></i>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>The Great Kenya</td>
+                  <td>Margaret Ogolla</td>
+                  <td>
+                    <p>
+                      <i class="fa fa-eye"></i>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>The Great Kenya</td>
+                  <td>Margaret Ogolla</td>
+                  <td>
+                    <p>
+                      <i class="fa fa-eye"></i>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>The Great Kenya</td>
+                  <td>Margaret Ogolla</td>
+                  <td>
+                    <p>
+                      <i class="fa fa-eye"></i>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>The Great Kenya</td>
+                  <td>Margaret Ogolla</td>
+                  <td>
+                    <p>
+                      <i class="fa fa-eye"></i>
+                    </p>
+                  </td>
                 </tr>
               </tbody>
             </table>
