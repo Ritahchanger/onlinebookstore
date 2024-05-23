@@ -3,7 +3,7 @@ import ProfileImage from "../../../assets/icons/boy.png";
 import "./Account.css";
 
 const Account = () => {
-  const [isProfileShown, setIsProfileShown] = useState(true);
+  const [isProfileShown, setIsProfileShown] = useState(false);
 
   const handleProfileModal = () => {
     setIsProfileShown(!isProfileShown);

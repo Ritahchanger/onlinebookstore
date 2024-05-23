@@ -1,166 +1,198 @@
-.account{
-    position:relative;
-    width:100%;
+.account {
+  position: relative;
+  width: 100%;
 }
-
-
+.account .card table td {
+  font-size: 14px;
+}
 .account .profile {
-    top: 0;
-    position: fixed;
-    width: 300px;
-    background: #f2f2f2;
-    padding: 1rem;
-    padding-top: 0;
-    z-index: 99;
-    left: -100%;
-    height: 100vh;
-    transition: all 0.5s;
-    overflow-y: scroll;
+  top: 0;
+  position: fixed;
+  width: 300px;
+  background: #f2f2f2;
+  padding: 1rem;
+  padding-top: 0;
+  z-index: 99;
+  left: -100%;
+  height: 100vh;
+  transition: all 0.5s;
+  overflow-y: scroll;
 }
 
 .account .profile::-webkit-scrollbar {
-    width: 5px; 
+  width: 5px;
 }
 .account .profile::-webkit-scrollbar-thumb {
-    background-color: #888; 
-    border-radius: 10px;
+  background-color: #888;
+  border-radius: 10px;
 }
 .account .profile::-webkit-scrollbar-track {
-    background: #f2f2f2; 
+  background: #f2f2f2;
 }
 
-.account .profile.active{
-    left:0%;
+.account .profile.active {
+  left: 0%;
 }
-.account .img-wrapper{
-    background:#fff;
-    margin:0 auto;
-    border-radius:10px;
+.account .img-wrapper {
+  background: #fff;
+  margin: 0 auto;
+  border-radius: 10px;
 }
-.account .profile .profile-description{
-    display:flex;
-    justify-content:space-between;
-    font-size:16px;
-    margin-top:1rem;
+.account .profile .profile-description {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-top: 1rem;
 }
-.account .profile .profile-description span{
-    font-size:14px;
-    color:var(--blue);
-    font-weight:500;
+.account .profile .profile-description span {
+  font-size: 14px;
+  color: var(--blue);
+  font-weight: 500;
 }
-.account .profile .profile-description span:nth-child(1){
-    flex-basis:35%;
-
+.account .profile .profile-description span:nth-child(1) {
+  flex-basis: 35%;
 }
-.account .description{
-    background:var(--white);
-    padding:1rem;
-    margin-top:1rem;
-    color:var(--black);
-    font-size:14px;
-    border-radius:10px;
+.account .description {
+  background: var(--white);
+  padding: 1rem;
+  margin-top: 1rem;
+  color: var(--black);
+  font-size: 14px;
+  border-radius: 10px;
 }
-.account .profile .profile-description span:nth-child(2){
-    flex-basis:62%;
+.account .profile .profile-description span:nth-child(2) {
+  flex-basis: 62%;
 }
-.account .profile-button{
-    background:var(--green);
-    border:none;
-    width:100%;
-    padding:0.7rem;
-    color:var(--white);
-    font-weight:600;
-    cursor: pointer;
-    margin-top:1rem;
-}
-
-.account .close-icon{
-    cursor: pointer;
-    transition:all 0.5s;
-    display:inline-block;
-    color:var(--blue)
-}
-.account .close-icon:hover{
-    transform: scale(1.1);
-    color:var(--pinkRed)
+.account .profile-button {
+  background: var(--green);
+  border: none;
+  width: 100%;
+  padding: 0.7rem;
+  color: var(--white);
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
 }
 
-.account .books .header .menu-icon{
-    color:var(--black);
-    cursor: pointer;
+.account .close-icon {
+  cursor: pointer;
+  transition: all 0.5s;
+  display: inline-block;
+  color: var(--blue);
+}
+.account .close-icon:hover {
+  transform: scale(1.1);
+  color: var(--pinkRed);
 }
 
-.account .books .header .menu-icon:hover{
-
-    transform: scale(1.1);
-    color:var(--pinkRed)
+.account .books .header .menu-icon {
+  color: var(--black);
+  cursor: pointer;
 }
 
-.account .books .header{
-    display:flex;
-    justify-content: space-between;
-    align-items:center;
-    box-shadow:0 0 5px rgba(0,0,0,0.25);
-    padding-right:1rem;
-    padding-left:1rem;
-}
-.account .books .header .medium-header{
-    font-size:1.1rem;
-}
-.account .grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    padding:0 1rem;
-    margin-top:1rem;
+.account .books .header .menu-icon:hover {
+  transform: scale(1.1);
+  color: var(--pinkRed);
 }
 
-.account .card table{
-    width:100%;
+.account .books .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+.account .books .header .medium-header {
+  font-size: 1.1rem;
+}
+.account .grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0 1rem;
+  margin-top: 1rem;
 }
 
-.account .profile-card{
-    padding:1rem;
-    background:var(--white);
-    margin-top:1rem;
-    border-radius:5px;
+.account .card table {
+  width: 100%;
 }
 
-.account .card{
-    box-shadow:0 0 5px rgba(0,0,0,0.25);
-    padding:10px;
-    border-radius:5px;
-}
-.account table{
-    width:100%;
+.account .profile-card {
+  padding: 1rem;
+  background: var(--white);
+  margin-top: 1rem;
+  border-radius: 5px;
 }
 
-.grid .card table{
-    width:100%;
-    border-collapse: collapse;
+.account .card {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  border-radius: 5px;
 }
-.my-books{
-    padding:1rem;
-    box-shadow:0 0 5px rgba(0,0,0,0.25);
-    margin:1rem;
-    border-radius:5px;
-}
-.my-books table{
-    box-shadow:0 0 5px rgba(0,0,0,0.25);
-    border-radius:5px;
-    border-collapse: collapse;
+.account table {
+  width: 100%;
 }
 
-.account table thead{
-    background:var(--gray);
-    color:var(--white);
+.grid .card table {
+  width: 100%;
+  border-collapse: collapse;
 }
-.account table td{
-    padding:0.5rem
+.my-books {
+  padding: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  margin: 1rem;
+  border-radius: 5px;
 }
-.account table  tbody td{
-    font-size:0.9rem;
+.my-books table {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  border-collapse: collapse;
 }
-.account table  tbody tr:nth-child(even){
-    background:var(--green);
-    color:var(--white);
+
+.account table thead {
+  background: var(--gray);
+  color: var(--white);
+}
+.account table td {
+  padding: 0.5rem;
+}
+
+.account table tbody tr:nth-child(even) {
+  background: var(--green);
+  color: var(--white);
+}
+
+@media (max-width: 594px) {
+  .account .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .account .card table td {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 554px) {
+   
+    .my-books{
+        overflow-x: scroll;
+    }
+
+  .account .my-books table{
+    overflow-x:scroll;
+    width:628px;
+
+  }
+
+  .account .my-books::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .account .my-books::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+  }
+
+  .account .my-books::-webkit-scrollbar-track {
+    background: #f2f2f2;
+  }
 }
