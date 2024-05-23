@@ -223,6 +223,8 @@
   }
   .account .small-header{
     font-size:1rem;
+  }.account .instructions p{
+    font-size:12px;
   }
 }
 
