@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import ProfileImage from "../../../assets/icons/boy.png";
 import "./Account.css";
-
+import { Link } from "react-router-dom"
+import ArrowBack from "../../../assets/icons/arrow.png"
 const Account = () => {
   const [isProfileShown, setIsProfileShown] = useState(false);
 
-  const [ terminateModal,setTerminateModal ] = useState(false);
+  const [terminateModal, setTerminateModal] = useState(false);
 
-  const handleTerminateModal = () =>{
-
-    setTerminateModal(!terminateModal)
-
-  }
+  const handleTerminateModal = () => {
+    setTerminateModal(!terminateModal);
+  };
 
   const handleProfileModal = () => {
     setIsProfileShown(!isProfileShown);
@@ -38,14 +37,21 @@ const Account = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
           provident dicta, consequuntur quidem corporis fugit.
         </p>
-        <button className="profile-button" onClick={handleTerminateModal} >REQUEST ACCOUNT TERMINATION?</button>
+        <button className="profile-button" onClick={handleTerminateModal}>
+          REQUEST ACCOUNT TERMINATION?
+        </button>
       </div>
 
       <div className="books">
         <div className="header">
-          <p className="menu-icon" onClick={handleProfileModal}>
-            <img src={ProfileImage} alt="" />
-          </p>
+          <div className="navigation-items">
+            <p className="arrow-back">
+             <Link to="/shop"><img src={ArrowBack} alt="" /></Link>
+            </p>
+            <p className="menu-icon" onClick={handleProfileModal}>
+              <img src={ProfileImage} alt="" />
+            </p>
+          </div>
           <p className="medium-header">BOOKS MANAGEMENT</p>
         </div>
 
@@ -295,9 +301,13 @@ const Account = () => {
         </div>
       </div>
 
-      <div className={`terminate-account-modal ${terminateModal ? "active" : "" }`}>
+      <div
+        className={`terminate-account-modal ${terminateModal ? "active" : ""}`}
+      >
         <form>
-          <a  href="#" className="close-modal" onClick={handleTerminateModal}>&times;</a>
+          <a href="#" className="close-modal" onClick={handleTerminateModal}>
+            &times;
+          </a>
           <p className="medium-header">ACCOUNT TERMINATION</p>
           <div className="input-group">
             <input

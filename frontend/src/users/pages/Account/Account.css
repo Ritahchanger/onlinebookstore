@@ -91,16 +91,29 @@
   color: var(--pinkRed);
 }
 
+.account .navigation-items{
+  display:flex;
+  justify-content:center;
+  align-items: center;
+}
+.account .navigation-items .arrow-back{
+  width:20px;
+  cursor: pointer;
+}
 .account .books .header .menu-icon img{
   width:40px;
   cursor: pointer;
   margin-top:5px;
 
 }
+.account .books .header .menu-icon{
+  margin-left:1.4rem;
+}
 
 .account .books .header .menu-icon:hover {
   transform: scale(1.1);
 }
+
 
 .account .books .header {
   display: flex;
