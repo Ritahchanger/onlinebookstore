@@ -82,20 +82,34 @@ const deleteBlog = async (req, res) => {
     }
 }
 
-const editBlog = async (req,res) =>{
-
-    try{
 
 
-    }catch(error){
 
-        return res.status(500).json({ success: false, error: `${error.message}` })
+const updateBlog = async (req, res) => {
+    const { id } = req.params; 
 
+    try {
+     
+        const updatedBlog = await Blog.findByIdAndUpdate(id, req.body, { new: true });
+
+        if (!updatedBlog) {
+            
+            return res.status(404).json({ success: false, error: 'Blog post not found' });
+        }
+
+        
+        return res.status(200).json({ success: true, data: updatedBlog });
+    } catch (error) {
+        
+        return res.status(500).json({ success: false, error: error.message });
     }
+};
 
-}
+module.exports = { updateBlog };
 
 
 
 
-module.exports = { editBlog,getBlogs,postBlogs,deleteBlog }
+
+
+module.exports = { getBlogs,postBlogs,deleteBlog,updateBlog }

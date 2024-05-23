@@ -41,7 +41,9 @@ const Login = async (req, res) => {
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000)
     })
 
-    return res.status(200).json({ success: true, message: 'Login successfull' })
+    return res
+      .status(200)
+      .json({ success: true, message: 'Login successfull',userId: user._id})
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message })
   }
@@ -54,7 +56,7 @@ const SignUp = async (req, res) => {
     const existingUsername = await User.findOne({ username })
 
     if (existingUsername) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         usernameFound: true,
         message: 'Username already exists'
@@ -64,7 +66,7 @@ const SignUp = async (req, res) => {
     const existingEmail = await User.findOne({ email })
 
     if (existingEmail) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         emailFound: true,
         message: 'Email already exists'
@@ -115,7 +117,7 @@ const forgotPassword = async (req, res) => {
       secure: true,
       auth: {
         user: process.env.COMPANY_EMAIL,
-        pass: process.env.COMPANY_EMAIL_PASSWORD,
+        pass: process.env.COMPANY_EMAIL_PASSWORD
       }
     })
 
