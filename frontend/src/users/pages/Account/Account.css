@@ -164,6 +164,11 @@
   width: 100%;
 }
 
+.account .medium-header{
+  font-size:1.2rem;
+}
+
+
 
 /* MODAL */
 
@@ -239,6 +244,20 @@
   background:var(--blue);
   border:2px solid var(--blue);
 }
+.account .view-icon{
+  color:var(--blue);
+  cursor: pointer;
+  background:var(--green);
+  height:100%;
+  color:var(--white);
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  border-bottom:2px solid var(--blue);
+  /* background:var(--black); */
+}
+
+
 
 /* MODAL */
 
@@ -319,7 +338,7 @@
   .account .my-books table  td{
     font-size:12px; 
   }
-  .account .small-header{
+  .account .medium-header{
     font-size:1rem;
   }.account .instructions p{
     font-size:12px;

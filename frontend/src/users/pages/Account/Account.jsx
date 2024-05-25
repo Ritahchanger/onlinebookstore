@@ -57,7 +57,7 @@ const Account = () => {
 
         <div className="grid">
           <div className="card">
-            <p className="small-header">Active Books</p>
+            <p className="medium-header">Active Books</p>
 
             <table>
               <thead>
@@ -107,7 +107,7 @@ const Account = () => {
             </table>
           </div>
           <div className="card">
-            <p className="small-header">Pending Approvals</p>
+            <p className="medium-header">Pending Approvals</p>
             <table>
               <thead>
                 <tr>
@@ -159,7 +159,7 @@ const Account = () => {
 
         <div className="grid">
           <div className="card publishing">
-            <p className="small-header">Editing and Publishing</p>
+            <p className="medium-header">Editing and Publishing</p>
             <div className="instructions">
               <p>
                 Before publishing a book, it has to be approved by the company.
@@ -181,7 +181,7 @@ const Account = () => {
           </div>
 
           <div className="card">
-            <p className="small-header">Books Read</p>
+            <p className="medium-header">Books Read</p>
             <table>
               <thead>
                 <tr>
@@ -194,7 +194,7 @@ const Account = () => {
                 <tr>
                   <td>The Great Kenya</td>
                   <td>Margaret Ogolla</td>
-                  <td>
+                  <td className="view-icon">
                     <p>
                       <i class="fa fa-eye"></i>
                     </p>
@@ -203,7 +203,7 @@ const Account = () => {
                 <tr>
                   <td>The Great Kenya</td>
                   <td>Margaret Ogolla</td>
-                  <td>
+                  <td className="view-icon">
                     <p>
                       <i class="fa fa-eye"></i>
                     </p>
@@ -212,7 +212,7 @@ const Account = () => {
                 <tr>
                   <td>The Great Kenya</td>
                   <td>Margaret Ogolla</td>
-                  <td>
+                  <td className="view-icon">
                     <p>
                       <i class="fa fa-eye"></i>
                     </p>
@@ -221,7 +221,7 @@ const Account = () => {
                 <tr>
                   <td>The Great Kenya</td>
                   <td>Margaret Ogolla</td>
-                  <td>
+                  <td className="view-icon">
                     <p>
                       <i class="fa fa-eye"></i>
                     </p>
@@ -230,7 +230,7 @@ const Account = () => {
                 <tr>
                   <td>The Great Kenya</td>
                   <td>Margaret Ogolla</td>
-                  <td>
+                  <td className="view-icon">
                     <p>
                       <i class="fa fa-eye"></i>
                     </p>
@@ -242,7 +242,7 @@ const Account = () => {
         </div>
 
         <div className="my-books">
-          <p className="small-header">My Books</p>
+          <p className="medium-header">My Books</p>
           <table>
             <thead>
               <tr>
