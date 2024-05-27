@@ -8,10 +8,14 @@ const Account = () => {
 
   const [sidebar,showSidebar] = useState(false)
 
+  const handleSidebar = () =>{
+    showSidebar(!sidebar)
+  }
+
   return (
     <div className="account">
-      <AccountNavbar/>
-      <SideBar/>
+      <AccountNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
+      <SideBar sidebar={sidebar}/>
     </div>
   );
 };

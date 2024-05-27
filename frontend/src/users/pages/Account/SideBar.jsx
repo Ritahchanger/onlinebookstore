@@ -1,11 +1,9 @@
 import "./SideBar.css";
 import { Link } from "react-router-dom";
 import CloseIcon from "../../../assets/icons/close.png";
-const SideBar = () => {
+const SideBar = ({ sidebar }) => {
   return (
-    <div className="sidebar">
-
-
+    <div className={`sidebar ${!sidebar && "active"}`}>
       <ul className="sidebar-navigation">
         <li>
           <Link to="#">

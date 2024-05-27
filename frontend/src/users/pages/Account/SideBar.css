@@ -2,6 +2,14 @@
   width: 250px;
   height: 100vh;
   background: var(--green);
+  position:fixed;
+  left:-100%;
+  display:block;
+  transition:all 0.5s;
+  border-top:2px solid var(--white);
+}
+.sidebar.active{
+    left:0;
 }
 .sidebar .sidebar-navigation li a {
   display: flex;
@@ -21,4 +29,12 @@
 }
 .sidebar .sidebar-navigation li a:hover p {
   color: var(--blue);
+}
+
+
+
+@media(max-width:524px){
+    .sidebar{
+        width:200px;
+    }
 }

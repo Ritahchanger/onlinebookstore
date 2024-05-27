@@ -6,25 +6,32 @@
     align-items:center;
     justify-content:space-between;
     padding:0rem 1rem;
+    background:var(--green);
 }
-.account-navigation .profile-section{
+.account-navigation .profile{
     display:flex;
     justify-content:center;
     align-items:center;
 }
-.account-navigation .profile-section img{
+.account-navigation .profile img{
     border:none;
-    height:30px;
     width:30px;
-    margin-right:14px;
+    margin-right:9px;
+}
+.account-navigation .menu-icon{
+    width:40px;
+
 }
 .account-navigation .menu-icon p{
-    font-size:2rem;
+    font-size:35px;
     transition:all 0.5s;
 }
 .account-navigation .menu-icon p:hover{
     transform:scale(1.1);
     cursor: pointer;
+}
+.account-navigation .close-icon{
+    width:40px;
 }
 .account-navigation .close-icon img{
     width:25px;
@@ -34,3 +41,18 @@
 .account-navigation .close-icon img:hover{
     transform:scale(1.1);
 }
+.account-navigation p{
+    font-size:14px;
+    color:var(--white)
+}
+.account-navigation .profile img{
+    cursor:pointer;
+}
+.account-navigation .profile img{
+    cursor:pointer;
+    transition:all 0.5s;
+}
+.account-navigation .profile img:hover{
+    transform:scale(1.1);
+}
+
