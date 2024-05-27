@@ -12,7 +12,7 @@
   }
   
 .sidebar.active{
-    left:-100%;
+    left:0%;
 }
 .sidebar .sidebar-navigation li a {
   display: flex;
