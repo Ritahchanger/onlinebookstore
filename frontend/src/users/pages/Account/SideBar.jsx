@@ -70,6 +70,10 @@ const SideBar = ({ sidebar }) => {
           </Link>
         </li>
       </ul>
+      <div className="section amount">
+        <p>Amount</p>
+        <p>sh 78,000</p>
+      </div>
     </div>
   );
 };

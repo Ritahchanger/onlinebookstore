@@ -55,4 +55,52 @@
 .account-navigation .profile img:hover{
     transform:scale(1.1);
 }
+.account-navigation .section p{
+    text-transform:uppercase;
+    font-weight:700;
+}
+.account-navigation .profile p{
+    font-size:12px;
+    text-transform: uppercase;
+    font-weight:700;
+}
+.account-navigation .section{
+    display:flex;
+}
+.account-navigation .section p:nth-child(2){
+    margin-left:1rem;
+}
 
+
+@media(max-width:614px){
+    .account-navigation .section{
+        display:flex;
+        flex-direction: column;
+    }
+    .account-navigation .section p:nth-child(2){
+        margin:0;
+        align-items: center;
+        justify-content: end;
+    } 
+}
+
+@media(max-width:498px){
+    .account-navigation .amount{
+       display:none; 
+    }
+    .account-navigation .id{
+        display:none;
+    }
+    .account-navigation .date{
+        display:flex;
+        flex-direction:row;
+    }
+    .account-navigation .date p:nth-child(2){
+        margin-left:5px;
+        text-transform:uppercase;
+    } 
+    .account-navigation .date p{
+        font-size:12px;
+        font-weight:700;
+    }
+}

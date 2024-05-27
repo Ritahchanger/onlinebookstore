@@ -31,10 +31,26 @@
   color: var(--blue);
 }
 
+.sidebar .amount{
+    display:none;
+}
 
 
 @media(max-width:524px){
     .sidebar{
         width:200px;
+    }
+}
+
+@media(max-width:498px){
+    .sidebar .amount{
+        display:flex;
+        padding:1rem;
+        background:var(--black);
+        color:var(--white)
+    }
+    .sidebar .section.amount p:nth-child(2){
+        margin-left:10px;
+        text-transform:uppercase;
     }
 }
