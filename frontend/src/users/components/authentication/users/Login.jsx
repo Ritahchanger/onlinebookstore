@@ -58,7 +58,7 @@ const Login = () => {
 
       if (backendData.success) {
         dispatch(login({ userId: backendData.userId }));
-        navigate('/home')
+        navigate('/account')
        }
     } catch (error) {
       console.log(

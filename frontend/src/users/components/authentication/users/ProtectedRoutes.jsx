@@ -14,7 +14,7 @@ const ProtectedRoutes = ({ children }) => {
   if (isUserLogged) {
     return children;
   } else {
-    return <Navigate to="/" />;
+    return <Navigate to="/login" />;
   }
 };
 

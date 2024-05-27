@@ -1,0 +1,36 @@
+.account-navigation{
+    width:100%;
+    box-shadow:0 0 5px rgba(0,0,0,0.25);
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0rem 1rem;
+}
+.account-navigation .profile-section{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.account-navigation .profile-section img{
+    border:none;
+    height:30px;
+    width:30px;
+    margin-right:14px;
+}
+.account-navigation .menu-icon p{
+    font-size:2rem;
+    transition:all 0.5s;
+}
+.account-navigation .menu-icon p:hover{
+    transform:scale(1.1);
+    cursor: pointer;
+}
+.account-navigation .close-icon img{
+    width:25px;
+    cursor: pointer;
+    transition:all 0.5s;
+}
+.account-navigation .close-icon img:hover{
+    transform:scale(1.1);
+}
