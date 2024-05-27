@@ -1,12 +1,12 @@
 import "./SideBar.css";
 import { Link } from "react-router-dom";
 import CloseIcon from "../../../assets/icons/close.png";
-const SideBar = ({ sidebar,handleTerminationModel }) => {
+const SideBar = ({ sidebar, handleTerminationModel }) => {
   return (
     <div className={`sidebar ${sidebar && "active"}`}>
       <ul className="sidebar-navigation">
         <li>
-          <Link to="#">
+          <Link to="/account">
             <p>
               <i class="fas fa-book"></i>
             </p>
@@ -22,15 +22,15 @@ const SideBar = ({ sidebar,handleTerminationModel }) => {
           </Link>
         </li>
         <li>
-          <Link to="#">
+          <Link to="/mybooks">
             <p>
               <i class="fas fa-book-open"></i>
             </p>
-            <p>My Books</p>
+            <p>Published Books</p>
           </Link>
         </li>
         <li>
-          <Link to="#">
+          <Link to="/approvals">
             <p>
               <i class="fas fa-hourglass-half"></i>
             </p>
@@ -38,7 +38,7 @@ const SideBar = ({ sidebar,handleTerminationModel }) => {
           </Link>
         </li>
         <li>
-          <Link to="#">
+          <Link to="/publishing">
             <p>
               <i class="fas fa-pen"></i>
             </p>
@@ -46,7 +46,7 @@ const SideBar = ({ sidebar,handleTerminationModel }) => {
           </Link>
         </li>
         <li>
-          <Link to="#">
+          <Link to="/books-read">
             <p>
               <i class="fas fa-check"></i>
             </p>

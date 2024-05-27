@@ -36,12 +36,20 @@ import Account from './users/pages/Account/Account'
 
 import Profile from './users/pages/Account/Profile'
 
+import MyBooks from './users/pages/Account/MyBooks'
+
+import PendingApprovals from './users/pages/Account/PendingApprovals'
+
+import BooksRead from './users/pages/Account/BooksRead'
+
+import Publishing from './users/pages/Account/EditingAndPublishing'
+
 const App = () => {
   return (
     <div className='app'>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={ <Home />} />
+          <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
 
@@ -122,6 +130,10 @@ const App = () => {
 
           <Route path='/account' element={<Account />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/mybooks' element={<MyBooks />} />
+          <Route path='/approvals' element={<PendingApprovals />} />
+          <Route path='/books-read' element={<BooksRead />} />
+          <Route path='/publishing' element={<Publishing />} />
         </Routes>
       </BrowserRouter>
     </div>
