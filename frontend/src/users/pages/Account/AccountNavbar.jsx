@@ -14,7 +14,7 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
 
   return (
     <div className="account-navigation">
-      {sidebar ? (
+      {!sidebar ? (
         <div className="menu-icon">
           <p onClick={handleSidebar}>&#9776;</p>
         </div>

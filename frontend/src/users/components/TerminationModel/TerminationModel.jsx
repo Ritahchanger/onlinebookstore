@@ -1,11 +1,11 @@
 import React from "react";
 import "./TerminationModel.css";
-const TerminationModel = () => {
+const TerminationModel = ({handleTerminationModel,terminationModel}) => {
   return (
-    <div className="termination_page">
-      <div className="terminate-account-modal">
+   
+      <div className={`terminate-account-modal ${terminationModel ? "active" : null }`} >
         <form>
-          <a href="#" className="close-modal">
+          <a href="#" className="close-modal" onClick={handleTerminationModel}>
             &times;
           </a>
           <p className="medium-header">ACCOUNT TERMINATION</p>
@@ -29,7 +29,7 @@ const TerminationModel = () => {
             <input type="submit" value="REQUEST TERMINATION" />
           </div>
         </form>
-      </div>
+    
     </div>
   );
 };

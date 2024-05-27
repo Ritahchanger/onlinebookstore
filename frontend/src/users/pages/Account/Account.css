@@ -2,3 +2,40 @@
   position:relative;
   width:100%;
 }
+.account .container{
+  max-width:1400px;
+  margin:0 auto;
+}
+.account .medium-header{
+  margin:0;
+  margin-top:45px;
+  font-size:var(---mobile-font);
+  text-align: center;
+}
+.account table{
+  width:100%;
+  border-collapse: collapse;
+} 
+.account table thead{
+  background:var(--black);
+}
+.account table td{
+  padding:0.5rem 1rem;
+}
+.account table  td{
+  color:var(--white)
+}
+.account table tbody tr:nth-child(even) {
+  background: var(--green);
+}
+.account table tbody tr:nth-child(odd){
+  background:var(--pinkRed);
+}
+
+.account table tbody tr td:nth-child(5) i{
+  color:var(--white);
+  cursor: pointer;
+}
+.account table tbody tr td:nth-child(5) i:hover{
+  transform:scale(1.4);
+}

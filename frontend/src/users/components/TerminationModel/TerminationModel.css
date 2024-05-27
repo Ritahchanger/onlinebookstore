@@ -1,8 +1,4 @@
-.termination_page{
-    width:100%;
-    height:100vh;
-    position: relative;
-}
+
 .terminate-account-modal{
     background:linear-gradient(rgba(0,0,0,0.95),rgba(0,0,0,0.95));
     position:fixed;
@@ -16,6 +12,9 @@
     align-items:center;
     flex-direction: column;
     transition:all 0.5s;
+  }
+  .terminate-account-modal.active{
+    display:flex;
   }
  
   .terminate-account-modal .medium-header{

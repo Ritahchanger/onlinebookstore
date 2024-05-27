@@ -1,9 +1,9 @@
 import "./SideBar.css";
 import { Link } from "react-router-dom";
 import CloseIcon from "../../../assets/icons/close.png";
-const SideBar = ({ sidebar }) => {
+const SideBar = ({ sidebar,handleTerminationModel }) => {
   return (
-    <div className={`sidebar ${!sidebar && "active"}`}>
+    <div className={`sidebar ${sidebar && "active"}`}>
       <ul className="sidebar-navigation">
         <li>
           <Link to="#">
@@ -62,7 +62,7 @@ const SideBar = ({ sidebar }) => {
           </Link>
         </li>
         <li>
-          <Link to="#">
+          <Link to="#" onClick={handleTerminationModel}>
             <p>
               <i class="fas fa-times"></i>
             </p>
