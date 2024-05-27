@@ -18,6 +18,7 @@
   --pinkRed:#ff004f;
   --poppins:'Poppins',sans-serif;
   --darkGreen:rgb(0,255,0);
+  ---mobile-font:14px;
 }
 html{
   scroll-behavior:smooth;

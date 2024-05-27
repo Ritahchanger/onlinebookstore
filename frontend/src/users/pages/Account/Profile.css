@@ -1,0 +1,7 @@
+.profile{
+    margin-top:45px;
+}
+.profile p{
+    text-align:center;
+    font-size:var(---mobile-font);
+}

@@ -1,15 +1,18 @@
 .sidebar {
-  width: 250px;
-  height: 100vh;
-  background: var(--green);
-  position:fixed;
-  left:-100%;
-  display:block;
-  transition:all 0.5s;
-  border-top:2px solid var(--white);
-}
+    width: 250px;
+    height: calc(100vh - 45px);
+    background: var(--green);
+    position: fixed;
+    left:-100%;
+    display: block;
+    transition: all 0.5s;
+    border-top: 2px solid var(--white);
+    z-index: 9;
+    top: 45px;
+  }
+  
 .sidebar.active{
-    left:0;
+    left:-100%;
 }
 .sidebar .sidebar-navigation li a {
   display: flex;

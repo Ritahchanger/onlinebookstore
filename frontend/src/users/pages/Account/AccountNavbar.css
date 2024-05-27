@@ -7,13 +7,17 @@
     justify-content:space-between;
     padding:0rem 1rem;
     background:var(--green);
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
 }
-.account-navigation .profile{
+.account-navigation .profile-section{
     display:flex;
     justify-content:center;
     align-items:center;
 }
-.account-navigation .profile img{
+.account-navigation .profile-section img{
     border:none;
     width:30px;
     margin-right:9px;
@@ -45,21 +49,21 @@
     font-size:14px;
     color:var(--white)
 }
-.account-navigation .profile img{
+.account-navigation .profile-section img{
     cursor:pointer;
 }
-.account-navigation .profile img{
+.account-navigation .profile-section img{
     cursor:pointer;
     transition:all 0.5s;
 }
-.account-navigation .profile img:hover{
+.account-navigation .profile-section img:hover{
     transform:scale(1.1);
 }
 .account-navigation .section p{
     text-transform:uppercase;
     font-weight:700;
 }
-.account-navigation .profile p{
+.account-navigation .profile-section p{
     font-size:12px;
     text-transform: uppercase;
     font-weight:700;

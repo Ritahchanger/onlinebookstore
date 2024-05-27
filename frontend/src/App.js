@@ -34,6 +34,8 @@ import WishList from './users/pages/WishList'
 
 import Account from './users/pages/Account/Account'
 
+import Profile from './users/pages/Account/Profile'
+
 const App = () => {
   return (
     <div className='app'>
@@ -118,7 +120,8 @@ const App = () => {
             }
           />
 
-          <Route path='account' element={<Account />} />
+          <Route path='/account' element={<Account />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </div>

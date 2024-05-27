@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import CloseIcon from "../../../assets/icons/close.png";
 import ProfileIcon from "../../../assets/icons/boy.png";
 
-const  AccountNavbar = ({ handleSidebar, sidebar }) => {
+import { useNavigate } from "react-router-dom";
+
+const AccountNavbar = ({ handleSidebar, sidebar }) => {
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate("/profile");
+  };
+
   return (
     <div className="account-navigation">
       {sidebar ? (
@@ -29,9 +37,9 @@ const  AccountNavbar = ({ handleSidebar, sidebar }) => {
         <p>8986787</p>
       </div>
 
-      <div className="profile">
+      <div className="profile-section">
         <div className="img-wrapper">
-          <img src={ProfileIcon} alt="" />
+          <img src={ProfileIcon} alt="" onClick={handleNavigation} />
         </div>
         {/* <div className="name">
           <p>settings</p>
