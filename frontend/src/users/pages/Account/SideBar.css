@@ -25,6 +25,7 @@
 }
 .sidebar .sidebar-navigation li a.active{
   background:var(--white);
+  color:var(--blue)
 }
 .sidebar .sidebar-navigation li a p {
   font-size: 14px;
