@@ -46,21 +46,23 @@ const PaymentDetails = () => {
         <div className="container">
           <p className="medium-header">PAYMENT DETAILS</p>
 
-          <div className="cart-items">
-            <p className="small-header">Carted Items</p>
+          <p className="small-header">Carted Items</p>
+          <div className="table_wrapper">
             <table>
               <thead>
                 <tr>
-                  <th>Book Cover</th>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Price</th>
+                  <td>Book Cover</td>
+                  <td>Name</td>
+                  <td>Type</td>
+                  <td>Price</td>
                 </tr>
               </thead>
               <tbody>
                 {cartItems.map((item) => (
                   <tr key={item.id}>
-                    <td><img src={item.cover} alt={item.name} /></td>
+                    <td>
+                      <img src={item.cover} alt={item.name} />
+                    </td>
                     <td>{item.name}</td>
                     <td>{item.type}</td>
                     <td>${item.price}</td>
@@ -68,13 +70,13 @@ const PaymentDetails = () => {
                 ))}
               </tbody>
             </table>
-            <p className="total-price">Total Price: ${totalPrice}</p>
           </div>
+          <p className="total-price">Total Price: ${totalPrice}</p>
 
           <div className="payment-options">
             <p>Select payment method:</p>
-            <button onClick={() => handlePayment("paypal")}>PayPal</button>
-            <button onClick={() => handlePayment("safaricom")}>
+            <button onClick={() => handlePayment("paypal")} className="cart-buttons">PayPal</button>
+            <button onClick={() => handlePayment("safaricom")} className="cart-buttons" >
               Safaricom
             </button>
           </div>

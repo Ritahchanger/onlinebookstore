@@ -1,7 +1,7 @@
 import "./Account.css";
 import SideBar from "./SideBar";
 import AccountNavbar from "./AccountNavbar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ActiveBooks from "./ActiveBooks";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 
