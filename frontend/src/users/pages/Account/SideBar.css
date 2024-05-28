@@ -23,6 +23,9 @@
   color: var(--white);
   transition: all 0.5s;
 }
+.sidebar .sidebar-navigation li a.active{
+  background:var(--white);
+}
 .sidebar .sidebar-navigation li a p {
   font-size: 14px;
 }

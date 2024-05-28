@@ -1,73 +1,74 @@
 import "./SideBar.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import CloseIcon from "../../../assets/icons/close.png";
+
 const SideBar = ({ sidebar, handleTerminationModel }) => {
   return (
     <div className={`sidebar ${sidebar && "active"}`}>
       <ul className="sidebar-navigation">
         <li>
-          <Link to="/account">
+          <NavLink to="/account" activeClassName="active">
             <p>
-              <i class="fas fa-book"></i>
+              <i className="fas fa-book"></i>
             </p>
             <p>Active Books</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="#">
+          <NavLink to="/pending-payments" activeClassName="active">
             <p>
-              <i class="fas fa-money-bill-wave"></i>
+              <i className="fas fa-money-bill-wave"></i>
             </p>
             <p>Pending Payments</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/mybooks">
+          <NavLink to="/mybooks" activeClassName="active">
             <p>
-              <i class="fas fa-book-open"></i>
+              <i className="fas fa-book-open"></i>
             </p>
             <p>Published Books</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/approvals">
+          <NavLink to="/approvals" activeClassName="active">
             <p>
-              <i class="fas fa-hourglass-half"></i>
+              <i className="fas fa-hourglass-half"></i>
             </p>
             <p>Pending Approvals</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/editing-publishing">
+          <NavLink to="/editing-publishing" activeClassName="active">
             <p>
-              <i class="fas fa-pen"></i>
+              <i className="fas fa-pen"></i>
             </p>
             <p>Editing & Publishing</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/books-read">
+          <NavLink to="/books-read" activeClassName="active">
             <p>
-              <i class="fas fa-check"></i>
+              <i className="fas fa-check"></i>
             </p>
             <p>Books Read</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/payment-details">
+          <NavLink to="/payment-details" activeClassName="active">
             <p>
-              <i class="fas fa-credit-card"></i>
+              <i className="fas fa-credit-card"></i>
             </p>
             <p>Payment Details</p>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="#" onClick={handleTerminationModel}>
+          <NavLink to="#" onClick={handleTerminationModel}>
             <p>
-              <i class="fas fa-times"></i>
+              <i className="fas fa-times"></i>
             </p>
             <p>Terminate Account</p>
-          </Link>
+          </NavLink>
         </li>
       </ul>
       <div className="section amount">
