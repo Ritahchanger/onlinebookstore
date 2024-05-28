@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import ActiveBooks from "./ActiveBooks";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 
+import "./EditingAndPublishing.css"
+
 const Account = () => {
   const [sidebar, showSidebar] = useState(false);
   const [terminationModel, showTerminationModel] = useState(false);
@@ -14,9 +16,6 @@ const Account = () => {
   const handleTerminationModel = () => {
     showTerminationModel(!terminationModel);
   };
-
-
-
   return (
     <div className="account">
       <AccountNavbar handleSidebar={handleSidebar} sidebar={sidebar} />

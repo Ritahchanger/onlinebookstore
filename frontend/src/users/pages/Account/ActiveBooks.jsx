@@ -3,6 +3,7 @@ const ActiveBooks = () => {
     <div className="active-books">
       <div className="container">
         <p className="medium-header">ACTIVE BOOKS</p>
+        <div className="table_wrapper">
         <table>
             <thead>
                 <tr>
@@ -136,6 +137,7 @@ const ActiveBooks = () => {
                 
             </tbody>
         </table>
+        </div>
       </div>
     </div>
   );

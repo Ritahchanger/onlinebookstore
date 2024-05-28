@@ -38,7 +38,7 @@ const SideBar = ({ sidebar, handleTerminationModel }) => {
           </Link>
         </li>
         <li>
-          <Link to="/publishing">
+          <Link to="/editing-publishing">
             <p>
               <i class="fas fa-pen"></i>
             </p>

@@ -26,7 +26,8 @@ const PendingApprovals = () => {
       <div className="my-books">
         <div className="container">
           <p className="medium-header">PENDING APPROVALS</p>
-          <table>
+         <div className="table_wrapper">
+         <table>
             <thead>
               <tr>
                 <td>NAME</td>
@@ -109,6 +110,7 @@ const PendingApprovals = () => {
               </tr>
             </tbody>
           </table>
+         </div>
         </div>
       </div>
 

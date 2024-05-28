@@ -26,7 +26,8 @@ const MyBooks = () => {
       <div className="my-books">
         <div className="container">
           <p className="medium-header">PUBLISHED BOOKS</p>
-          <table>
+         <div className="table_wrapper">
+         <table>
             <thead>
               <tr>
                 <td>NAME</td>
@@ -129,6 +130,7 @@ const MyBooks = () => {
               </tr>
             </tbody>
           </table>
+         </div>
         </div>
       </div>
 

@@ -9,8 +9,8 @@ const Profile = () => {
   const [sidebar, showSidebar] = useState(false);
   const [terminationModel, showTerminationModel] = useState(false);
   const [wishlist, setWishlist] = useState([
-    { id: 1, title: 'Book Title 1', author: 'Author 1', price: '10.99' },
-    { id: 2, title: 'Book Title 2', author: 'Author 2', price: '15.49' }
+    { id: 1, title: "Book Title 1", author: "Author 1", price: "10.99" },
+    { id: 2, title: "Book Title 2", author: "Author 2", price: "15.49" },
   ]);
 
   const handleSidebar = () => {
@@ -22,7 +22,7 @@ const Profile = () => {
   };
 
   const removeBook = (id) => {
-    setWishlist(wishlist.filter(book => book.id !== id));
+    setWishlist(wishlist.filter((book) => book.id !== id));
   };
 
   const addBook = () => {
@@ -30,7 +30,7 @@ const Profile = () => {
       id: wishlist.length + 1,
       title: `Book Title ${wishlist.length + 1}`,
       author: `Author ${wishlist.length + 1}`,
-      price: (Math.random() * 20 + 10).toFixed(2)
+      price: (Math.random() * 20 + 10).toFixed(2),
     };
     setWishlist([...wishlist, newBook]);
   };
@@ -38,9 +38,15 @@ const Profile = () => {
   return (
     <div className="account">
       <AccountNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
-      <SideBar sidebar={sidebar} handleTerminationModel={handleTerminationModel} />
-      <TerminationModel handleTerminationModel={handleTerminationModel} terminationModel={terminationModel} />
-      
+      <SideBar
+        sidebar={sidebar}
+        handleTerminationModel={handleTerminationModel}
+      />
+      <TerminationModel
+        handleTerminationModel={handleTerminationModel}
+        terminationModel={terminationModel}
+      />
+
       <div className="profile">
         <p className="medium-header">PROFILE SECTION</p>
         <div className="container">
@@ -49,7 +55,9 @@ const Profile = () => {
               <div className="profile-image">
                 <img src={ProfileIcon} alt="Profile" />
               </div>
-              <label htmlFor="change-profile" className="edit-profile-label">Edit Profile</label>
+              <label htmlFor="change-profile" className="edit-profile-label">
+                Edit Profile
+              </label>
               <input type="file" name="change-profile" id="change-profile" />
             </div>
             <div className="profile-card">
@@ -74,7 +82,7 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="main-section">
             <div className="wishlist-container">
               <h2>My Wishlist</h2>

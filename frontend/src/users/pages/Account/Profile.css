@@ -42,7 +42,8 @@
   text-align: start;
 }
 .profile .profile-image {
-  max-width: 270px;
+  max-width:270px;
+  width:100%;
 }
 .profile .main-section .wishlist-container {
   padding: 20px;
@@ -114,4 +115,27 @@
     .profile .container{
         grid-template-columns:repeat(1,1fr);
     } 
+    .profile .user-information{
+        display:flex;
+    }
+    .profile .user-information .profile-card{
+        flex-basis:48%;
+    }
+    .profile .user-information .profile-card:nth-child(1){
+
+
+        padding-right:1rem;
+
+    }
+    .profile .user-information .profile-card p{
+        text-align:start;
+    }
+    .profile .user-information .profile-card .small-header{
+        text-align:start;
+    } 
+} 
+@media(max-width:448px){
+    .profile .user-information{
+        flex-direction: column;
+    }
 }

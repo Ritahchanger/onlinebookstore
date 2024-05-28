@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ActiveBooks from "./ActiveBooks";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 
-const BooksRead = () => {
+const Publishing = () => {
   const [sidebar, showSidebar] = useState(false);
   const [terminationModel, showTerminationModel] = useState(false);
   const handleSidebar = () => {
@@ -122,4 +122,4 @@ const BooksRead = () => {
   );
 };
 
-export default BooksRead;
+export default Publishing;

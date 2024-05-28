@@ -15,6 +15,7 @@
 .account table{
   width:100%;
   border-collapse: collapse;
+  min-width:400px;
 } 
 .account table thead{
   background:var(--black);
@@ -39,3 +40,34 @@
 .account table tbody tr td:nth-child(5) i:hover{
   transform:scale(1.4);
 }
+.account .table_wrapper {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  overflow: scroll;
+  max-height: calc(100vh - 65px);
+}
+
+
+.account .table_wrapper::-webkit-scrollbar {
+  width: 10px; 
+}
+
+.account .table_wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 5px; 
+}
+
+.account .table_wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px; 
+}
+
+.account .table_wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+/* Firefox */
+.account .table_wrapper {
+  scrollbar-width: thin; /* Thin scrollbar */
+  scrollbar-color: #888 #f1f1f1; /* Thumb color and track color */
+}
+

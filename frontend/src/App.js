@@ -42,7 +42,9 @@ import PendingApprovals from './users/pages/Account/PendingApprovals'
 
 import BooksRead from './users/pages/Account/BooksRead'
 
-import Publishing from './users/pages/Account/EditingAndPublishing'
+import Publishing from './users/pages/Account/Publishing'
+
+import EditingAndPublishing from './users/pages/Account/EditingAndPublishing'
 
 const App = () => {
   return (
@@ -134,6 +136,7 @@ const App = () => {
           <Route path='/approvals' element={<PendingApprovals />} />
           <Route path='/books-read' element={<BooksRead />} />
           <Route path='/publishing' element={<Publishing />} />
+          <Route path='/editing-publishing' element={<EditingAndPublishing/>} />
         </Routes>
       </BrowserRouter>
     </div>
