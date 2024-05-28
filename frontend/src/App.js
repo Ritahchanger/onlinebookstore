@@ -46,6 +46,8 @@ import Publishing from './users/pages/Account/Publishing'
 
 import EditingAndPublishing from './users/pages/Account/EditingAndPublishing'
 
+import PaymentDetails from './users/pages/Account/PaymentDetails'
+
 const App = () => {
   return (
     <div className='app'>
@@ -137,6 +139,7 @@ const App = () => {
           <Route path='/books-read' element={<BooksRead />} />
           <Route path='/publishing' element={<Publishing />} />
           <Route path='/editing-publishing' element={<EditingAndPublishing/>} />
+          <Route path='/payment-details' element={<PaymentDetails/>} />
         </Routes>
       </BrowserRouter>
     </div>

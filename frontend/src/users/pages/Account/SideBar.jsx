@@ -54,7 +54,7 @@ const SideBar = ({ sidebar, handleTerminationModel }) => {
           </Link>
         </li>
         <li>
-          <Link to="#">
+          <Link to="/payment-details">
             <p>
               <i class="fas fa-credit-card"></i>
             </p>
