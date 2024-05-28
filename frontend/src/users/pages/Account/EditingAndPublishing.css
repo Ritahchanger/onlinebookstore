@@ -1,4 +1,4 @@
-.upload-form {
+.editing .upload-form {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
@@ -7,17 +7,17 @@
     background-color: #f9f9f9;
   }
   
-  .form-group {
+  .editing .form-group {
     margin-bottom: 15px;
   }
   
-  .form-group label {
+  .editing  .form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
   }
   
-  .form-control {
+  .editing .form-control {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -25,17 +25,17 @@
     font-size: 16px;
   }
   
-  .form-control:focus {
+  .editing .form-control:focus {
     border-color: #007bff;
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   }
   
-  .form-control[type="file"] {
+  .editing  .form-control[type="file"] {
     padding: 3px; /* Adjust padding for file input */
   }
   
-  .btn {
+  .editing .btn {
     display: inline-block;
     padding: 10px 20px;
     font-size: 16px;
@@ -48,11 +48,11 @@
     text-align: center;
   }
   
-  .btn:hover {
+  .editing  .btn:hover {
     background-color: #0056b3;
   }
   
-  .notice {
+  .editing  .notice {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     padding: 15px;
@@ -60,7 +60,7 @@
     border-radius: 4px;
   }
  
-.account input[type=text]{
+  .editing .account input[type=text]{
     height:40px;
     border: 1px solid #ddd;
 }
@@ -78,7 +78,7 @@
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius:5px;
     background-color: #f9f9f9;
   }
   
@@ -89,7 +89,7 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    font-size:var(---mobile-font);
     margin-top: 0.7rem;
   }
   
@@ -109,11 +109,11 @@
     color: white;
     border: none;
     border-radius: 4px;
-    font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.5s;
+    font-size:var(---mobile-font);
   }
   
   .account .editing .container .submit-btn:hover {
@@ -128,5 +128,9 @@
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
+    font-size:var(---mobile-font);
   }
   
+.editing p, .editing input[type=text]{
+    font-size:var(---mobile-font);
+}

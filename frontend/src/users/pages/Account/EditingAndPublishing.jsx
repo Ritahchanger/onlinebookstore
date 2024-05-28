@@ -63,7 +63,6 @@ const EditingAndPublishing = () => {
   const BookList = ({ books }) => {
     return (
       <div>
-        <h3>My Books</h3>
         <ul>
           {books.map(book => (
             <li key={book.id}>{book.title} ({book.type}) - {book.status}</li>
