@@ -7,12 +7,13 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 
 const SignUp = () => {
+  const[loading,setLoading] = useState(false)
   const navigate = useNavigate();
-
   const [usernameFound, setusernameFound] = useState(false);
   const [emailFound, setEmailFound] = useState(false);
   const sentDataToDatabase = async () => {
     try {
+      setLoading(true)
       const response = await axios.post(
         "http://localhost:5000/api/auth/signup",
         {
@@ -31,26 +32,29 @@ const SignUp = () => {
 
       if (response.status !== 200) {
         throw new Error("There is problem with the server!");
+        setLoading(false);
       }
 
       const backendResult = response.data;
+
+      console.log(backendResult);
 
       if (backendResult.usernameFound) {
         setusernameFound(true);
       } else {
         setusernameFound(false);
+        setLoading(false)
       }
       if (backendResult.emailFound) {
         setEmailFound(true);
       } else {
         setEmailFound(false);
+        setLoading(false)
       }
 
-      if (!usernameFound && !emailFound) {
+      if (!backendResult.usernameFound && !backendResult.emailFound) {
         navigate("/login");
       }
-
-      console.log(backendResult);
     } catch (error) {
       console.log(
         `The following error arised while sending data to the database:-> ${error.message}`
@@ -249,7 +253,7 @@ const SignUp = () => {
             )}
           </div>
           <div className="input-group">
-            <input type="submit" value="SIGNUP" />
+            <input type="submit" value={`${loading ? 'REGISTERING...' : 'SIGNUP'}`} />
           </div>
           <p>
             Have an account?<Link to="/login  ">Login</Link>

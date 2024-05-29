@@ -140,4 +140,8 @@ const forgotPassword = async (req, res) => {
 
 const changePassword = async (req, res) => {}
 
+
+
+
+
 module.exports = { Login, SignUp, logout, forgotPassword, changePassword }

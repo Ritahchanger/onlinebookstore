@@ -1,29 +1,42 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema({
-  title: {
+  name: {
     type: String,
     required: true
   },
   author: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true
+  },
+  reviews: {
+    type: Number,
+    default: 0 
+  },
+  ratings: {
+    type: Number,
+    default: 0 
   },
   description: {
     type: String,
-    required: true
+    required: true 
   },
   filePath: {
     type: String,
+    required: true 
+  },
+  coverImage: {
+    type: String,
     required: true
   },
-  categories: [{
+  category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category'
-  }],
+  },
   uploadedAt: {
     type: Date,
-    default: Date.now
+    default: Date.now 
   }
 });
 

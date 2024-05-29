@@ -4,12 +4,16 @@ import "../authentication.css";
 
 import { login } from "../../../Redux/features/authSlice";
 
-import { useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 
 import axios from "axios";
 
 const Login = () => {
+
   const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
+
   const [emailFound, setEmailFound] = useState(true);
   const [passwordMatch, setPasswordMatch] = useState(true);
 
@@ -27,6 +31,7 @@ const Login = () => {
 
   const sentDataToDatabase = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(
         "http://localhost:5000/api/auth/login",
         {
@@ -41,25 +46,29 @@ const Login = () => {
         }
       );
       if (response.status !== 200) {
+        setLoading(false);
         throw new Error("There was a problem with the server!");
       }
       const backendData = response.data;
       if (backendData.emailFound === false) {
         setEmailFound(false);
+        setLoading(false);
       } else {
         setEmailFound(true);
       }
 
       if (backendData.passwordFound === false) {
         setPasswordMatch(false);
+        setLoading(false);
       } else {
         setPasswordMatch(true);
       }
 
       if (backendData.success) {
         dispatch(login({ userId: backendData.userId }));
-        navigate('/account')
-       }
+        navigate("/account");
+      }
+      setLoading(false);
     } catch (error) {
       console.log(
         `The following error arised while sending data to the database: -> ${error.message} `
@@ -155,7 +164,7 @@ const Login = () => {
             <Link to="/forgot-password">Forgot password?</Link>
           </p>
           <div className="input-group">
-            <input type="submit" value="LOGIN" />
+            <input type="submit" value={`${loading ? "LOGGING.." : "LOGIN"}`} />
           </div>
           <p>
             Don't have an account?<Link to="/signup">SignUp</Link>

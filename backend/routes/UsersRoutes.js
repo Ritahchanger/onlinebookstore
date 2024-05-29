@@ -2,7 +2,22 @@ const router = require("express").Router();
 
 const UsersController = require("../controllers/UsersController")
 
+const multer = require("multer");
 
+const path = require("path")
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const uploadDirectory = path.join(__dirname, '../uploads/');
+        cb(null, uploadDirectory);
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now();
+        cb(null, uniqueSuffix + file.originalname);
+    }
+});
+const upload = multer({ storage : storage });
 
 
 
@@ -14,9 +29,7 @@ router.get('/admins',UsersController.getAdmins)
 router.put('/:id/update-role',UsersController.updateUserRole)
 
 
-
-
-
+router.put('/:id/update-profile',upload.single('file'),UsersController.updatePassport)
 
 
 module.exports = router;

@@ -1,17 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const AuthorItem = ({ item, key }) => {
+
+const AuthorItem = ({ author }) => {
   return (
     <div className="card">
       <div className="img-wrapper">
-        <img src={item.imgUrl} alt="" />
+        {author.passport ? (
+          <img
+            src="http://localhost:5000/uploads/1716903205747profile-15.jpg"
+            alt={`${author.firstName} ${author.secondName}`}
+          />
+        ) : (
+          <div className="placeholder-image">No Image Available</div>
+        )}
       </div>
       <div className="card-body">
-        <p className="small-header">{item.authorName}</p>
-        <p>{item.authorDescription}</p>
-        <Link to={`/${key}`} className="hero-btn">
+        <p className="small-header">{`${author.firstName} ${author.secondName}`}</p>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+          Perspiciatis, asperiores? Soluta, a tempora suscipit necessitatibus
+          esse magnam quas porro nobis aspernatur! Quia optio et fugiat dolorum
+          rem obcaecati, architecto delectus.
+        </p>
+        <Link to={`/authors/${author._id}`} className="hero-btn">
           SEE BOOKS
-          <i class="fa fa-arrow-right"></i>
+          <i className="fa fa-arrow-right"></i>
         </Link>
       </div>
     </div>

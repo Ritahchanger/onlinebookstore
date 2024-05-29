@@ -41,42 +41,92 @@ const getAdmins = async (req, res) => {
         .status(404)
         .json({ status: 404, success: true, data: 'No admins found' })
     }
-
     return res.status(200).json({ status: 200, success: true, data: authors })
   } catch (error) {
     return res.status(500).json({ success: false, error: `${error.message}` })
   }
 }
 
-const updateUserRole = async () => {
-  const { id } = req.params
 
-  const { role } = req.body
 
-  if (!['user', 'author', 'admin'].includes(role)) {
-    return res
-      .status(200)
-      .json({ status: 400, message: 'Invalid role provided', success: false })
+const updateUserRole = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { role } = req.body;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        message: 'User not found in the system'
+      });
+    }
+
+    const roles = ['admin', 'author', 'user'];
+
+    if (!roles.includes(role)) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        message: 'The role is not found in the system'
+      });
+    }
+
+    if (user.roles.includes(role)) {
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        message: `The user already has the ${role} role`
+      });
+    }
+
+    user.roles.push(role);
+
+    await user.save();
+
+    return res.status(201).json({
+      status: 201,
+      success: true,
+      message: `The user's role has been updated to ${role}`
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message
+    });
   }
+};
+
+
+
+const updatePassport = async (req, res) => {
+  const { id } = req.params
+  const passport = req.file.filename
   try {
     const user = await User.findById(id)
 
     if (!user) {
-      return res.status(200).json({
-        success: false,
-        status: 404,
-        message: 'User not found'
-      })
-
-      user.roles = [role]
-
-      await user.save()
-
-      return res
-        .status(200)
-        .json({ status: 200, message: `User role updated to ${role}` })
+      return res.status(404).json({ success: false, message: 'User not found' })
     }
-  } catch (error) {}
+
+    user.passport = passport
+
+    await user.save()
+
+    return res
+      .status(200)
+      .json({ success: true, message: 'Passport updated successfully' })
+  } catch (error) {
+    return res.status(500).json({ success: false, error: `${error.message}` })
+  }
 }
 
-module.exports = { getUsers, getAuthors, getAdmins, updateUserRole }
+module.exports = {
+  getUsers,
+  getAuthors,
+  getAdmins,
+  updateUserRole,
+  updatePassport
+}

@@ -13,7 +13,7 @@ const CategoriesNavbar = () => {
 
   return (
     <div className="classifications">
-      <Link to="/home" className="arrow">
+      <Link to="/" className="arrow">
         <i className="fa fa-arrow-left"></i>
       </Link>
       <div className="container">

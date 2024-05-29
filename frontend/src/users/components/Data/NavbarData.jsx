@@ -29,7 +29,7 @@ export const sectioncNavigation = [
   },
   {
     menu_name: "HOME",
-    path: "/home",
+    path: "/",
   },
   {
     menu_name: "ABOUT US",

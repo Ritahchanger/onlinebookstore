@@ -53,13 +53,17 @@ const App = () => {
     <div className='app'>
       <BrowserRouter>
         <Routes>
-          <Route path='/home' element={<Home />} />
+          <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/single-blog' element={<SingleBlog />} />
           <Route path='/authors' element={<Authors />} />
-          <Route path='/:id' element={<BookByAuthor />} />
+
+
+          <Route path='/authors/:id' element={<BookByAuthor />} />
+
+
           <Route path='/cart' element={<Cart />} />
           <Route path='/categories' element={<CategoriesNavbar />} />
           <Route path='/check-out' element={<Checkout />} />

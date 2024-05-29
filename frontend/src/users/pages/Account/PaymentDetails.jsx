@@ -74,7 +74,7 @@ const PaymentDetails = () => {
             </table>
           </div>
           <p className="link-text">
-            <Link to="/78546894386">
+            <Link to="/shop">
               {" "}
               <i className="fa fa-arrow-left"></i>Continue shopping?
             </Link>
