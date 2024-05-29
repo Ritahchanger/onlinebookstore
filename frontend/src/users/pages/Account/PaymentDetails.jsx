@@ -5,6 +5,8 @@ import { useState } from "react";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 import BookCover from "../../../assets/images/cover12.webp";
 
+import { Link } from "react-router-dom"; 
+
 import "./PaymentDetails.css";
 
 const cartItems = [
@@ -71,12 +73,26 @@ const PaymentDetails = () => {
               </tbody>
             </table>
           </div>
+          <p className="link-text">
+            <Link to="/78546894386">
+              {" "}
+              <i className="fa fa-arrow-left"></i>Continue shopping?
+            </Link>
+          </p>
           <p className="total-price">Total Price: ${totalPrice}</p>
 
           <div className="payment-options">
             <p>Select payment method:</p>
-            <button onClick={() => handlePayment("paypal")} className="cart-buttons">PayPal</button>
-            <button onClick={() => handlePayment("safaricom")} className="cart-buttons" >
+            <button
+              onClick={() => handlePayment("paypal")}
+              className="cart-buttons"
+            >
+              PayPal
+            </button>
+            <button
+              onClick={() => handlePayment("safaricom")}
+              className="cart-buttons"
+            >
               Safaricom
             </button>
           </div>

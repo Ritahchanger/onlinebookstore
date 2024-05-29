@@ -85,35 +85,57 @@
   background: var(--white);
   z-index: 99;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  height:50px;
+  display:flex;
 }
 .fixed {
   position: fixed;
   top: 0;
   width: 100%;
 }
-.fixed .navigation .nav-ul a {
-  color: var(--white);
-}
+
 .nav_li {
   cursor: pointer;
   transition: all 0.5s;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content: center;
 } 
-.nav_li a{
-  padding: 0.7rem 1rem;
-  display:inline-flex;
+
+.lower_navbar .nav-ul{
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-.nav_li a:hover{
-  color:var(--white);
+
+.lower_navbar .nav-ul .nav_li a{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  color:var(--blue);
+  position:relative;
 }
-.nav_li:hover {
-  background: var(--green);
+.lower_navbar .nav-ul .nav_li a::before{
+  position:absolute;
+  height:3px;
+  content:"";
+  width:0;
+  background:var(--blue);
+  bottom:0;
+  transition:all 0.3s;
 }
-.nav_li.active{
-  background:var(--green);
+
+.lower_navbar .nav-ul .nav_li a:hover::before{
+  width:100%;
 }
-.nav_li:hover a{
-  color: var(--white);
+
+
+.lower_navbar .nav-ul .nav_li a.active::before{
+  width:100%;
 }
+
 .profile-logo img {
   width: 45px;
 }
@@ -136,9 +158,7 @@
 #close-menu {
   display:none;
 }
-.lower_navbar .navigation .nav-ul a {
-  color: var(--blue);
-}
+
 
 .lower_navbar .navigation .accounts {
   display: none;

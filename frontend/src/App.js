@@ -53,93 +53,31 @@ const App = () => {
     <div className='app'>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
-
-          <Route
-            path='/blog'
-            element={
-              <ProtectedRoutes>
-                <Blog />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path='/single-blog'
-            element={
-              <ProtectedRoutes>
-                <SingleBlog />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path='/authors'
-            element={
-              <ProtectedRoutes>
-                <Authors />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path='/:id'
-            element={
-              <ProtectedRoutes>
-                <BookByAuthor />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path='/cart'
-            element={
-              <ProtectedRoutes>
-                <Cart />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path='/categories'
-            element={
-              <ProtectedRoutes>
-                <CategoriesNavbar />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path='/check-out'
-            element={
-              <ProtectedRoutes>
-                <Checkout />
-              </ProtectedRoutes>
-            }
-          />
+          <Route path='/blog' element={<Blog />} />
+          <Route path='/single-blog' element={<SingleBlog />} />
+          <Route path='/authors' element={<Authors />} />
+          <Route path='/:id' element={<BookByAuthor />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/categories' element={<CategoriesNavbar />} />
+          <Route path='/check-out' element={<Checkout />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/change-password' element={<PasswordChanging />} />
-          <Route
-            path='/shop'
-            element={
-              <ProtectedRoutes>
-                <Shop />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path='/wish-list'
-            element={
-              <ProtectedRoutes>
-                <WishList />
-              </ProtectedRoutes>
-            }
-          />
-
+          <Route path='/shop' element={<Shop />} />
+          <Route path='/wish-list' element={<WishList />} />
           <Route path='/account' element={<Account />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/mybooks' element={<MyBooks />} />
           <Route path='/approvals' element={<PendingApprovals />} />
           <Route path='/books-read' element={<BooksRead />} />
           <Route path='/publishing' element={<Publishing />} />
-          <Route path='/editing-publishing' element={<EditingAndPublishing/>} />
-          <Route path='/payment-details' element={<PaymentDetails/>} />
+          <Route
+            path='/editing-publishing'
+            element={<EditingAndPublishing />}
+          />
+          <Route path='/payment-details' element={<PaymentDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

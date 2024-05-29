@@ -9,7 +9,14 @@ import AuthorItem from "../components/AuthorComponents/AuthorItem";
 
 import SearchComponent from "../components/AuthorComponents/SearchComponent";
 
+
+import axios from "axios"
+
 const Authors = () => {
+
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  
+  console.log(BASE_URL);
 
   useEffect(()=>{
     window.scrollTo(0,0);

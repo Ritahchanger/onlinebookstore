@@ -33,7 +33,7 @@ export const sectioncNavigation = [
   },
   {
     menu_name: "ABOUT US",
-    path: "#",
+    path: "/about",
   },
   {
     menu_name: "AUTHORS",

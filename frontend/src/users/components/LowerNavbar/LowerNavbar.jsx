@@ -3,7 +3,7 @@ import { sectioncNavigation } from "../Data/NavbarData";
 import ProfileImage from "../../../assets/images/bemi.png";
 import "./LowerNavbar.css";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const LowerNavbar = () => {
   const [isFixed, setIsFixed] = useState(false);
@@ -51,9 +51,9 @@ const LowerNavbar = () => {
     <div className={isFixed ? "lower_navbar fixed" : "lower_navbar"}>
       <div className="container">
         <div className="profile-logo">
-          <Link to="/home">
+          <NavLink to="/home" activeClassName="active">
             <img src={ProfileImage} alt="" />
-          </Link>
+          </NavLink>
         </div>
 
         <div className={`navigation ${sidebar ? "active" : null}`}>
@@ -70,10 +70,12 @@ const LowerNavbar = () => {
             {sectioncNavigation.map((item, index) => (
               <p
                 key={index}
-                className={`nav_li ${index === activeIndex ? "active" : ""}`}
+                className="nav_li"
                 onClick={() => handleActiveNavItems(index)}
               >
-                <Link to={item.path}>{item.menu_name}</Link>
+                <NavLink to={item.path} activeClassName="active">
+                  {item.menu_name}
+                </NavLink>
                 {item.navItems && (
                   <>
                     <Link to="#" className="angle">
