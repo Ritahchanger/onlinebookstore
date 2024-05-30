@@ -26,12 +26,21 @@ app.use(express.json())
 
 app.use(morgan('combined'))
 
-app.use('/uploads', express.static('uploads'));
+// app.use('/uploads', express.static('uploads'));
+
+
+app.use('/uploads', express.static('uploads', {
+  setHeaders: (res) => {
+    res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+  }
+}));
+
 
 app.use(cors({
   credentials: true,
   origin: ['http://localhost:3000', 'http://localhost:5000']
 }));
+
 
 const PORT = process.env.PORT || 5000
 

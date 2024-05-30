@@ -1,18 +1,36 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import LowerNavbar from "../components/LowerNavbar/LowerNavbar";
-
-import { blogSampleData } from "../components/Data/BlogData";
-
 import BlogItem from "../components/BlogPageComponents/BlogItem";
-
 import Footer from "../components/Footer/Footer";
-
 import "./single-page.css";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const SingleBlog = () => {
+  const { userId } = useParams(); // Destructure userId from useParams
+  const dispatch = useDispatch();
+  const blogs = useSelector((state) => state.blogs.blogs);
+  const [singleBlog, setSingleBlog] = useState(null);
+
+  const handleSingleBlogCall = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/blog/get/${userId}`);
+      
+      if (!response.data.success) {
+        throw new Error("An error occurred while fetching data from the backend");
+      }
+
+      setSingleBlog(response.data.data);
+    } catch (error) {
+      console.log(`There was a problem accessing the server! -> ${error.message}`);
+    }
+  };
+
   useEffect(() => {
+    handleSingleBlogCall(); // Call the function to fetch single blog
     window.scrollTo(0, 0);
-  }, []);
+  }, [userId]); // Fetch when component mounts or userId changes
 
   return (
     <Fragment>
@@ -21,82 +39,25 @@ const SingleBlog = () => {
         <div className="container">
           <div className="blog-post">
             <div className="blog-post-body">
-              <p className="small-header">MIAMI LIFE</p>
-              <div className="description-body">
-                <p className="description">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Veniam nesciunt laborum quod quae nostrum ipsam quisquam
-                  placeat atque totam commodi inventore quaerat accusantium
-                  maiores consectetur eveniet alias tempore, veritatis
-                  consequatur, impedit optio. Quas, cupiditate perferendis! Ipsa
-                  ducimus hic nemo sequi at doloremque sint? Dicta magni cum
-                  rerum aut doloribus voluptates facere soluta, assumenda at,
-                  reiciendis perferendis quod maiores odio! Expedita, nobis
-                  similique quia sint facere itaque dignissimos recusandae at
-                  fuga?
-                  <img
-                    src="https://images.unsplash.com/photo-1578878703120-42d9fb8fd0af?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
-                </p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Veniam nesciunt laborum quod quae nostrum ipsam quisquam
-                  placeat atque totam commodi inventore quaerat accusantium
-                  maiores consectetur eveniet alias tempore, veritatis
-                  consequatur, impedit optio. Quas, cupiditate perferendis! Ipsa
-                  ducimus hic nemo sequi at doloremque sint? Dicta magni cum
-                  rerum aut doloribus voluptates facere soluta, assumenda at,
-                  reiciendis perferendis quod maiores odio! Expedita, nobis
-                  similique quia sint facere itaque dignissimos recusandae at
-                  fuga?
-                  <img
-                    src="https://plus.unsplash.com/premium_photo-1694475405897-c359309feeec?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
-                </p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Veniam nesciunt laborum quod quae nostrum ipsam quisquam
-                  placeat atque totam commodi inventore quaerat accusantium
-                  maiores consectetur eveniet alias tempore, veritatis
-                  consequatur, impedit optio. Quas, cupiditate perferendis! Ipsa
-                  ducimus hic nemo sequi at doloremque sint? Dicta magni cum
-                  rerum aut doloribus voluptates facere soluta, assumenda at,
-                  reiciendis perferendis quod maiores odio! Expedita, nobis
-                  similique quia sint facere itaque dignissimos recusandae at
-                  fuga?
-                  <img
-                    src="https://images.unsplash.com/photo-1613961314852-2182add356a0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
-                </p>
-                <p className="description">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Veniam nesciunt laborum quod quae nostrum ipsam quisquam
-                  placeat atque totam commodi inventore quaerat accusantium
-                  maiores consectetur eveniet alias tempore, veritatis
-                  consequatur, impedit optio. Quas, cupiditate perferendis! Ipsa
-                  ducimus hic nemo sequi at doloremque sint? Dicta magni cum
-                  rerum aut doloribus voluptates facere soluta, assumenda at,
-                  reiciendis perferendis quod maiores odio! Expedita, nobis
-                  similique quia sint facere itaque dignissimos recusandae at
-                  fuga?
-                  <img
-                    src="https://images.unsplash.com/photo-1578878703120-42d9fb8fd0af?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
-                </p>
-              </div>
-              <p className="date">6/12/2024</p>
+              {/* Render single blog post if available */}
+              {singleBlog && (
+                <Fragment>
+                  <p className="small-header">{singleBlog.title}</p>
+                  <div className="description-body">
+                    <p className="description">{singleBlog.content}</p>
+                    <img src={`http://localhost:5000/uploads/${singleBlog.filePath}`} alt="" />
+                  </div>
+                  <p className="date">6/12/2024</p>
+                </Fragment>
+              )}
             </div>
           </div>
         </div>
         <div className="container">
           <p className="small-header">Related Blogs</p>
-          <div className="grid">
-            {blogSampleData.map((item, index) => (
-              <BlogItem item={item} key={index} />
+          <div className="blog-grid">
+            {blogs.map((blog) => (
+              <BlogItem blog={blog} key={blog._id} />
             ))}
           </div>
         </div>

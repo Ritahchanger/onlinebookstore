@@ -26,6 +26,8 @@ router.post('/post',upload.single('file'),BlogController.postBlogs);
 
 router.get('/get',BlogController.getBlogs)
 
+router.get('/get/:id',BlogController.getBlogById)
+
 
 router.delete('/delete/:id',BlogController.deleteBlog)
 

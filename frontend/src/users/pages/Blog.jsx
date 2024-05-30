@@ -21,11 +21,7 @@ const Blog = () => {
     dispatch(fetchBlogs());
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    console.log(blogs);
-  }, [blogs]);
-
+  
   return (
     <Fragment>
       <LowerNavbar />

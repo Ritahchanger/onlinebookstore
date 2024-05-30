@@ -105,6 +105,33 @@ const updateBlog = async (req, res) => {
     }
 };
 
+
+
+const getBlogById = async (req,res) =>{
+
+    try{
+
+        const { id } = req.params
+
+        const singleBlog = await Blog.findById(id)
+
+        if(!singleBlog) {
+
+            return res.status(200).json({status:404,success: false, error: 'Blog post not found' });
+        }
+
+        return res.status(200).json({ success: true, data: singleBlog });
+
+    }catch(error){
+
+        return res.status(500).json({ success: false, error: error.message });
+
+    }
+
+}
+
+
+
 module.exports = { updateBlog };
 
 
@@ -112,4 +139,4 @@ module.exports = { updateBlog };
 
 
 
-module.exports = { getBlogs,postBlogs,deleteBlog,updateBlog }
+module.exports = { getBlogs,postBlogs,deleteBlog,updateBlog,getBlogById }

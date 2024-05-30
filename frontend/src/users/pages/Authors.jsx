@@ -52,8 +52,8 @@ const Authors = () => {
             <p className="medium-header">Loading</p>
           ) : (
             <div className="grid">
-              {authorData.map((author, key) => (
-                <AuthorItem key={key} author={author} />
+              {authorData.map((author) => (
+                <AuthorItem key={author._id} author={author} />
               ))}
             </div>
           )}

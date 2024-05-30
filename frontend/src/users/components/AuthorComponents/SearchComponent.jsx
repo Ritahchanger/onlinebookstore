@@ -9,7 +9,7 @@ const SearchComponent = () => {
         <form className="search">
           <input type="text" name="search" id="" placeholder="Author name..." />
           <button type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i className="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
         <div className="filter_form">
