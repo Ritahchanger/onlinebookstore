@@ -47,7 +47,7 @@ const SingleBlog = () => {
                     <p className="description">{singleBlog.content}</p>
                     <img src={`http://localhost:5000/uploads/${singleBlog.filePath}`} alt="" />
                   </div>
-                  <p className="date">6/12/2024</p>
+                  <p className="date">{`Created on ${singleBlog.createdOn}`}</p>
                 </Fragment>
               )}
             </div>

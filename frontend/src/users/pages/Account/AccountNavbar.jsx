@@ -1,12 +1,20 @@
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./AccountNavbar.css";
-import { Link } from "react-router-dom";
 import CloseIcon from "../../../assets/icons/close.png";
 import ProfileIcon from "../../../assets/icons/boy.png";
 
-import { useNavigate } from "react-router-dom";
-
 const AccountNavbar = ({ handleSidebar, sidebar }) => {
+  const user = useSelector((state) => state.auth.user);
+  const [profileImage, setProfileImage] = useState(ProfileIcon);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    
+    setProfileImage(user.user.passport)
+
+  }, [user]);
 
   const handleNavigation = () => {
     navigate("/profile");
@@ -15,18 +23,22 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
   return (
     <div className="account-navigation">
       {!sidebar ? (
-        <div className="menu-icon">
-          <p onClick={handleSidebar}>&#9776;</p>
+        <div className="menu-icon" onClick={handleSidebar}>
+          <p>&#9776;</p>
         </div>
       ) : (
         <div className="close-icon">
-          <img src={CloseIcon} alt="" onClick={handleSidebar} />
+          <img
+            src={CloseIcon}
+            alt="CloseIcon"
+            onClick={handleSidebar}
+          />
         </div>
       )}
 
       <div className="section date">
         <p>Joined on</p>
-        <p>7-may-2015</p>
+        <p>7-May-2015</p>
       </div>
       <div className="section amount">
         <p>Amount</p>
@@ -37,13 +49,10 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
         <p>8986787</p>
       </div>
 
-      <div className="profile-section">
+      <div className="profile-section" onClick={handleNavigation}>
         <div className="img-wrapper">
-          <img src={ProfileIcon} alt="" onClick={handleNavigation} />
+          <img src={`http://localhost:5000/uploads/${profileImage}`} alt="Profile" />
         </div>
-        {/* <div className="name">
-          <p>settings</p>
-        </div> */}
       </div>
     </div>
   );

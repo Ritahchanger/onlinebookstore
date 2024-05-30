@@ -60,9 +60,7 @@ const App = () => {
           <Route path='/blog/:userId' element={<SingleBlog />} />
           <Route path='/authors' element={<Authors />} />
 
-
           <Route path='/authors/:id' element={<BookByAuthor />} />
-
 
           <Route path='/cart' element={<Cart />} />
           <Route path='/categories' element={<CategoriesNavbar />} />
@@ -71,17 +69,70 @@ const App = () => {
           <Route path='/change-password' element={<PasswordChanging />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='/wish-list' element={<WishList />} />
-          <Route path='/account' element={<Account />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/mybooks' element={<MyBooks />} />
-          <Route path='/approvals' element={<PendingApprovals />} />
-          <Route path='/books-read' element={<BooksRead />} />
-          <Route path='/publishing' element={<Publishing />} />
+          <Route
+            path='/account'
+            element={
+              <ProtectedRoutes>
+                <Account />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/profile'
+            element={
+              <ProtectedRoutes>
+                <Profile />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/mybooks'
+            element={
+              <ProtectedRoutes>
+                <MyBooks />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/approvals'
+            element={
+              <ProtectedRoutes>
+                <PendingApprovals />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/books-read'
+            element={
+              <ProtectedRoutes>
+                <BooksRead />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/publishing'
+            element={
+              <ProtectedRoutes>
+                <Publishing />
+              </ProtectedRoutes>
+            }
+          />
           <Route
             path='/editing-publishing'
-            element={<EditingAndPublishing />}
+            element={
+              <ProtectedRoutes>
+                <EditingAndPublishing />
+              </ProtectedRoutes>
+            }
           />
-          <Route path='/pending-payments' element={<PaymentDetails />} />
+          <Route
+            path='/pending-payments'
+            element={
+              <ProtectedRoutes>
+                <PaymentDetails />
+              </ProtectedRoutes>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

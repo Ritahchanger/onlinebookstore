@@ -68,14 +68,15 @@ const Login = () => {
       }
 
       if (backendData.success) {
-       
-
         if (accountTerminationRequest) {
-          
-          navigate("/account")
-
+          navigate("/account");
         } else {
-          dispatch(login({ userId: backendData.userId }));
+          const getUser = await axios.get(
+            `http://localhost:5000/api/users/userId/${backendData.userId}`
+          );
+
+          dispatch(login({ user: getUser.data.data }));
+
           navigate("/account");
         }
       }
@@ -118,7 +119,6 @@ const Login = () => {
     }
 
     if (valid) {
-      console.log("Form submitted:", formData);
       sentDataToDatabase();
     }
   };

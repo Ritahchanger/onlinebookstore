@@ -35,10 +35,6 @@ const Authors = () => {
   }, []);
 
   useEffect(() => {
-    console.log(authorData);
-  }, [authorData]);
-
-  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (

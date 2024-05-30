@@ -22,6 +22,7 @@
     border:none;
     width:30px;
     margin-right:9px;
+    border-radius:50%;
 }
 .account-navigation .menu-icon{
     width:40px;

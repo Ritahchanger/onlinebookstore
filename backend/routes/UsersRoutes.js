@@ -32,4 +32,7 @@ router.put('/:id/update-role',UsersController.updateUserRole)
 router.put('/:id/update-profile',upload.single('file'),UsersController.updatePassport)
 
 
+router.get('/userId/:id',UsersController.getUserById)
+
+
 module.exports = router;

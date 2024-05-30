@@ -51,7 +51,7 @@ const LowerNavbar = () => {
     <div className={isFixed ? "lower_navbar fixed" : "lower_navbar"}>
       <div className="container">
         <div className="profile-logo">
-          <NavLink to="/home" activeClassName="active">
+          <NavLink to="/" activeClassName="active">
             <img src={ProfileImage} alt="" />
           </NavLink>
         </div>

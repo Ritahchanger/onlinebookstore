@@ -94,7 +94,7 @@
   width: 100%;
 }
 
-.nav_li {
+.lower_navbar .nav_li {
   cursor: pointer;
   transition: all 0.5s;
   height:100%;
@@ -224,53 +224,58 @@
     position: relative;
   }
   .lower_navbar .container .navigation {
-    display: flex;
+    position:fixed; 
+    top:0;
+    width:100%;
+    z-index:99;
+    display:block;
+     left:-100%;
+    height:100vh;
+    justify-content:center;
+    background:#fff;
+    transition:all 0.3s;
+  }
+
+  .lower_navbar .container .nav-ul{
     flex-direction: column;
-    justify-content: start;
-    position: fixed;
-    background: var(--white);
-    width: 100%;
-    top: -400%;
-    height: 100vh;
-    left: 0%;
-    right: 0;
-    transition: all 0.5s;
-    z-index: 99;
+    width:100%;
+  
+    align-items:center;
+    justify-content:center;
   }
+
+  .lower_navbar .container .nav-ul .nav_li{
+    height:40px;
+    width:100%;
+  }
+
+  .lower_navbar .container .nav-ul .nav_li a{
+    padding:0rem 1rem;
+    transition:all 0.5s;
+  }
+
   .lower_navbar .container .navigation.active {
-    top: 0;
-  }
-  .lower_navbar .navigation .nav-ul {
-    display: block;
-  }
-  .lower_navbar .navigation .nav-ul p {
-    text-align: start;
-    display: flex;
-    justify-content: space-between;
-  }
-  .lower_navbar .navigation .nav-ul p a{
-    height:100%;
-  }
-  .lower_navbar .navigation .nav-ul p a:hover{
-    text-decoration:underline;
-  }
-  .lower_navbar .navigation .nav-ul p a:nth-child(2) {
-    margin-right: 18px;
-    display: block;
-  }
-  .lower_navbar .navigation .nav-ul p:hover i {
-    transform: translateX(15px);
-  }
-  .lower_navbar .navigation .nav-ul p:hover a {
-    transition: all 0.5s;
-    color: var(--white);
-    top: -400%;
+   left:0;
   }
 
-
-    .lower_navbar .navigation .nav-ul .nav_li .angle{
-    display:none;
+  .lower_navbar .nav-ul .nav_li a.active::before{
+    width:0;
   }
+
+  .lower_navbar .nav-ul .nav_li a.active{
+    background:var(--green);
+    color:var(--white)
+  }
+
+  .lower_navbar .nav-ul .nav_li a:hover{
+    background:var(--green);
+    color:var(--white);
+  }
+
+  .lower_navbar .nav-ul .nav_li a:hover::before{
+    width:0;
+  }
+
 
   #close-menu {
     display: block;

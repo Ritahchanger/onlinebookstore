@@ -102,7 +102,9 @@ const updateUserRole = async (req, res) => {
 
 
 const updatePassport = async (req, res) => {
+  
   const { id } = req.params
+
   const passport = req.file.filename
   try {
     const user = await User.findById(id)
@@ -119,14 +121,44 @@ const updatePassport = async (req, res) => {
       .status(200)
       .json({ success: true, message: 'Passport updated successfully' })
   } catch (error) {
+
     return res.status(500).json({ success: false, error: `${error.message}` })
+
   }
 }
+
+
+
+const getUserById = async (req,res) =>{
+
+
+  try{
+
+    const { id } = req.params;
+
+    const singleUser = await User.findById(id);
+
+    if(!singleUser){
+
+      return res.status(200).json({status:404, success:false, message:'User not found' })
+
+    }
+
+    return res.status(200).json({status:200, success: true, data:singleUser });
+
+
+  }catch(error){
+    return res.status(500).json({ success: false, error: `${error.message}` })
+  }
+
+}
+
 
 module.exports = {
   getUsers,
   getAuthors,
   getAdmins,
   updateUserRole,
-  updatePassport
+  updatePassport,
+  getUserById,
 }
