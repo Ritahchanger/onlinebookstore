@@ -4,12 +4,11 @@ import "../authentication.css";
 
 import { login } from "../../../Redux/features/authSlice";
 
-import {  useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
 
 const Login = () => {
-
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
@@ -28,6 +27,10 @@ const Login = () => {
   });
 
   axios.defaults.withCredentials = true;
+
+  const accountTerminationRequest = useSelector(
+    (state) => state.accountTermination.accountTerminationRequest
+  );
 
   const sentDataToDatabase = async () => {
     try {
@@ -65,8 +68,16 @@ const Login = () => {
       }
 
       if (backendData.success) {
-        dispatch(login({ userId: backendData.userId }));
-        navigate("/account");
+       
+
+        if (accountTerminationRequest) {
+          
+          navigate("/account")
+
+        } else {
+          dispatch(login({ userId: backendData.userId }));
+          navigate("/account");
+        }
       }
       setLoading(false);
     } catch (error) {

@@ -14,14 +14,16 @@
 }
 .account table{
   width:100%;
-  border-collapse: collapse;
+  border:1px solid var(--green);
   min-width:400px;
+  border-collapse: collapse;
 } 
 .account table thead{
-  background:var(--black);
+  background:var(--green);
 }
 .account table td{
   padding:0.5rem 1rem;
+  border:1px solid var(--orange);
 }
 .account table  td{
   color:var(--white)
@@ -29,26 +31,28 @@
 .account table tbody tr:nth-child(even) {
   background: var(--green);
 }
-.account table tbody tr:nth-child(odd){
-  background:var(--pinkRed);
+.account table tbody tr:nth-child(odd) td{
+ color:var(--black)
+}
+.account table thead  td{
+ border:1px solid var(--green)
 }
 
 .account table tbody tr td:nth-child(5) i{
-  color:var(--white);
+  color:var(--blue);
   cursor: pointer;
 }
 .account table tbody tr td:nth-child(5) i:hover{
   transform:scale(1.4);
 }
 .account .table_wrapper {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
   overflow: scroll;
   max-height: calc(100vh - 65px);
 }
 
 
 .account .table_wrapper::-webkit-scrollbar {
-  width: 10px; 
+  width: 15px; 
 }
 
 .account .table_wrapper::-webkit-scrollbar-track {

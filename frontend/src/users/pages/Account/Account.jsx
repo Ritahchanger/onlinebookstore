@@ -7,9 +7,14 @@ import TerminationModel from "../../components/TerminationModel/TerminationModel
 
 import "./EditingAndPublishing.css"
 
+import { useSelector } from "react-redux"; 
+
 const Account = () => {
+
+  const accountTerminationRequest = useSelector((state)=>state.accountTermination.accountTerminationRequest);
+
   const [sidebar, showSidebar] = useState(false);
-  const [terminationModel, showTerminationModel] = useState(false);
+  const [terminationModel, showTerminationModel] = useState(accountTerminationRequest);
   const handleSidebar = () => {
     showSidebar(!sidebar);
   };

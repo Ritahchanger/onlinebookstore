@@ -81,7 +81,7 @@ const App = () => {
             path='/editing-publishing'
             element={<EditingAndPublishing />}
           />
-          <Route path='/payment-details' element={<PaymentDetails />} />
+          <Route path='/pending-payments' element={<PaymentDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

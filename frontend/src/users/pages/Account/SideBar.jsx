@@ -1,8 +1,27 @@
 import "./SideBar.css";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import CloseIcon from "../../../assets/icons/close.png";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import { authenticateTerminatingUser } from "../../Redux/features/AccountTerminationSlice";
+
 const SideBar = ({ sidebar, handleTerminationModel }) => {
+  const dispatch = useDispatch();
+
+  const accountTerminationRequest = useSelector(
+    (state) => state.accountTermination.accountTerminationRequest
+  );
+
+  const handleAccountTermination = () => {
+    const user = {
+      userId: "39688058",
+      phoneNo: "0712195228",
+    };
+
+    dispatch(authenticateTerminatingUser(user));
+  };
+
   return (
     <div className={`sidebar ${sidebar && "active"}`}>
       <ul className="sidebar-navigation">
@@ -63,18 +82,40 @@ const SideBar = ({ sidebar, handleTerminationModel }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="#" onClick={handleTerminationModel}>
+          <NavLink to="/login" onClick={handleAccountTermination}>
             <p>
               <i className="fas fa-times"></i>
             </p>
             <p>Terminate Account</p>
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/" activeClassName="active">
+            <p>
+              <i className="fas fa-home"></i>
+            </p>
+            <p>Home</p>
+          </NavLink>
+        </li>
+        {/* <li>
+          <NavLink to="#" onClick={handleTerminationModel}>
+            <p>
+              <i className="fas fa-times"></i>
+            </p>
+            <p>Terminate Account</p>
+          </NavLink>
+        </li> */}
       </ul>
       <div className="section amount">
         <p>Amount</p>
         <p>sh 78,000</p>
       </div>
+      <p className="link-text">
+        <Link to="/shop">
+          {" "}
+          <i className="fa fa-arrow-left"></i>Continue shopping?
+        </Link>
+      </p>
     </div>
   );
 };

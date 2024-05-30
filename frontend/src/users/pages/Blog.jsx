@@ -2,53 +2,29 @@ import React, { Fragment, useEffect, useState } from "react";
 import LowerNavbar from "../components/LowerNavbar/LowerNavbar";
 import Footer from "../components/Footer/Footer";
 import "./Blog.css";
-import { blogSampleData } from "../components/Data/BlogData";
+// import { blogSampleData } from "../components/Data/BlogData";
 
-import axios from "axios"
-import { Link, useBeforeUnload } from "react-router-dom";
+import axios from "axios";
 
 import BlogItem from "../components/BlogPageComponents/BlogItem";
 
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchBlogs } from "../Redux/features/blogsSlice";
+
 const Blog = () => {
+  const dispatch = useDispatch();
 
+  const blogs = useSelector((state) => state.blogs.blogs);
 
-  const [data,getData] = useState([]);
+  useEffect(() => {
+    dispatch(fetchBlogs());
+    window.scrollTo(0, 0);
+  }, []);
 
-  const handleDataFromBackend = async () =>{
-
-    try{
-
-      const response = await axios.get("http://localhost:5000/api/blog/get");
-
-      if(response.status!=200){
-
-        throw new Error("Error getting data from the backend");
-
-      }
-
-      getData(response.data);
-
-
-    }catch(err){
-
-      console.log(err)
-
-    }
-
-  }
-
-  // useEffect(()=>{
-
-  //   handleDataFromBackend()
-
-  //   console.log(data);
-
-  // })
-
-
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    console.log(blogs);
+  }, [blogs]);
 
   return (
     <Fragment>
@@ -73,8 +49,8 @@ const Blog = () => {
 
           <p className="small-header">Latest Blogs</p>
           <div className="blog-grid">
-            {blogSampleData.map((item, index) => (
-              <BlogItem item={item} />
+            {blogs.map((blog) => (
+              <BlogItem blog={blog} key={blog._id} />
             ))}
           </div>
 
@@ -96,10 +72,10 @@ const Blog = () => {
           </div>
 
           <p className="small-header">Earlier Blogs</p>
-          
+
           <div className="blog-grid">
-            {blogSampleData.map((item, index) => (
-              <BlogItem item={item} />
+            {blogs.map((blog) => (
+              <BlogItem blog={blog} key={blog._id} />
             ))}
           </div>
         </div>

@@ -9,12 +9,6 @@
 .account table tbody tr:nth-child(even) {
   background: var(--white);
 }
-.account table tbody tr:nth-child(odd){
-    background:var(--green);
-}
-.account table tbody tr:nth-child(odd) td{
-    color:var(--white);
-}
 .account table tbody td {
   color: var(--black);
 }

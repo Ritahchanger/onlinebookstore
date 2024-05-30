@@ -32,81 +32,44 @@ const BooksRead = () => {
                 <tr>
                   <td>NAME</td>
                   <td>AUTHOR</td>
-                  <td>RE-READ</td>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>Kifo kisimani</td>
                   <td>Dennis Munyao</td>
-                  <td>
-                    {" "}
-                    <i class="fa fa-eye"></i>
-                  </td>
                 </tr>
                 <tr>
                   <td>Kifo kisimani</td>
                   <td>Dennis Munyao</td>
-                  <td>
-                    {" "}
-                    <i class="fa fa-eye"></i>
-                  </td>
                 </tr>
                 <tr>
                   <td>Kifo kisimani</td>
                   <td>Dennis Munyao</td>
-                  <td>
-                    {" "}
-                    <i class="fa fa-eye"></i>
-                  </td>
                 </tr>
                 <tr>
                   <td>Kifo kisimani</td>
                   <td>Dennis Munyao</td>
-                  <td>
-                    {" "}
-                    <i class="fa fa-eye"></i>
-                  </td>
                 </tr>
                 <tr>
                   <td>Kifo kisimani</td>
                   <td>Dennis Munyao</td>
-                  <td>
-                    {" "}
-                    <i class="fa fa-eye"></i>
-                  </td>
                 </tr>
                 <tr>
                   <td>Kifo kisimani</td>
                   <td>Dennis Munyao</td>
-                  <td>
-                    {" "}
-                    <i class="fa fa-eye"></i>
-                  </td>
                 </tr>
                 <tr>
                   <td>Kifo kisimani</td>
                   <td>Dennis Munyao</td>
-                  <td>
-                    {" "}
-                    <i class="fa fa-eye"></i>
-                  </td>
                 </tr>
                 <tr>
                   <td>Kifo kisimani</td>
                   <td>Dennis Munyao</td>
-                  <td>
-                    {" "}
-                    <i class="fa fa-eye"></i>
-                  </td>
                 </tr>
                 <tr>
                   <td>Kifo kisimani</td>
                   <td>Dennis Munyao</td>
-                  <td>
-                    {" "}
-                    <i class="fa fa-eye"></i>
-                  </td>
                 </tr>
               </tbody>
             </table>

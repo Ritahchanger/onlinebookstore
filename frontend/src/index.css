@@ -9,9 +9,9 @@
   /* font-family:var(--poppins); */
 }
 :root{
-  --orange:#e8b12e;
-  --blue:#2f0ad6;
-  --green:#08a34e;
+  --orange:rgb(249,186,19);
+  --blue:rgb(40, 75, 159);
+  --green:rgb(45,167,80);
   --black:#000;
   --gray:#ababab;
   --white:#fff;

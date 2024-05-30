@@ -103,7 +103,7 @@ const EditingAndPublishing = () => {
 
       <div className="editing">
         <div className="container">
-          <p className="medium-header">EDITING AND PUBLISHING</p>
+          <p className="medium-header" style={{textTransform:"uppercase"}}>Files to be edited and/or  Published</p>
           <div className="notice">
             <p>Please note that your eBook and audiobook must be approved by an admin before they can be published.</p>
           </div>

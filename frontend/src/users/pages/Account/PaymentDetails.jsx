@@ -46,7 +46,7 @@ const PaymentDetails = () => {
 
       <div className="payment">
         <div className="container">
-          <p className="medium-header">PAYMENT DETAILS</p>
+          <p className="medium-header">PENDING PAYMENTS</p>
 
           <p className="small-header">Carted Items</p>
           <div className="table_wrapper">

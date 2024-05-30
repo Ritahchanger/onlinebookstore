@@ -14,6 +14,8 @@ import BookDescriptionSlice from "./features/BookDescriptionSlice";
 
 import blogsSlice from "./features/blogsSlice";
 
+import AccountTerminationSlice from "./features/AccountTerminationSlice";
+
 export default configureStore({
   reducer: {
     alerts: alertSlice.reducer,
@@ -22,6 +24,7 @@ export default configureStore({
     cart:cartSlice.reducer,
     books:booksSlice.reducer,
     bookModal:BookDescriptionSlice.reducer,
-    blogs:blogsSlice.reducer
+    blogs:blogsSlice.reducer,
+    accountTermination:AccountTerminationSlice.reducer
   }
 });

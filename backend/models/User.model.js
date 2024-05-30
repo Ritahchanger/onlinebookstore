@@ -30,7 +30,10 @@ const UserSchema = new mongoose.Schema({
     type: [String],
     enum: ['user', 'author', 'admin'],
     default: ['user']
-  }
+  },
+  createdOn:{
+    type:String
+}
 })
 
 const User = mongoose.model('User', UserSchema)
