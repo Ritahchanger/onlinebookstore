@@ -8,7 +8,7 @@ const BookController = require("../controllers/BookController")
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDirectory = path.join(__dirname, '../uploads/');
+        const uploadDirectory = path.join(__dirname, '../upload/books');
         cb(null, uploadDirectory);
     },
     filename: function (req, file, cb) {
@@ -20,9 +20,14 @@ const upload = multer({ storage : storage });
 
 
 
-router.post("/add", upload.array('files', 2), BookController.addBooks);
+router.post("/add", upload.fields([{name:'book',maxCount:1},{name:'coverImage',maxCount:1}]), BookController.addBooks);
 
 router.get('/',BookController.getBooks)
+
+
+router.post('/', upload.fields([{ name: 'book', maxCount: 1 }, { name: 'coverImage', maxCount: 1 }]), BookController.getFileDetails);
+
+
 router.get('/authors/:id',BookController.getBooksByAuthors)
 
 

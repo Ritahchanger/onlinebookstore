@@ -4,10 +4,20 @@ import CloseIcon from "../../../assets/icons/close.png";
 
 import { useDispatch, useSelector } from "react-redux";
 
+import { logout } from "../../Redux/features/authSlice"; 
+
+import { useNavigate } from "react-router-dom"; 
+
 import { authenticateTerminatingUser } from "../../Redux/features/AccountTerminationSlice";
 
+import axios from "axios";
+
 const SideBar = ({ sidebar, handleTerminationModel }) => {
+
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
+
 
   const accountTerminationRequest = useSelector(
     (state) => state.accountTermination.accountTerminationRequest
@@ -20,6 +30,23 @@ const SideBar = ({ sidebar, handleTerminationModel }) => {
     };
 
     dispatch(authenticateTerminatingUser(user));
+  };
+
+  const handleUserLogout = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/logout"
+      )
+
+      navigate('/login')
+      
+      dispatch(logout())
+      
+    } catch (error) {
+
+      console.log(`A process occurred ${error.message}`);
+
+    }
   };
 
   return (
@@ -97,14 +124,14 @@ const SideBar = ({ sidebar, handleTerminationModel }) => {
             <p>Home</p>
           </NavLink>
         </li>
-        {/* <li>
-          <NavLink to="#" onClick={handleTerminationModel}>
+        <li>
+          <Link to="#" onClick={handleUserLogout}>
             <p>
-              <i className="fas fa-times"></i>
+              <i className="fas fa-lock-open"></i>
             </p>
-            <p>Terminate Account</p>
-          </NavLink>
-        </li> */}
+            <p>LOGOUT</p>
+          </Link>
+        </li>
       </ul>
       <div className="section amount">
         <p>Amount</p>

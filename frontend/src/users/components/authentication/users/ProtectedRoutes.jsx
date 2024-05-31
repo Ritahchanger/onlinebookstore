@@ -12,9 +12,13 @@ const ProtectedRoutes = ({ children }) => {
   const isUserLogged = useSelector((state) => state.auth.isLoggedIn);
 
   if (isUserLogged) {
+
     return children;
+
   } else {
+
     return <Navigate to="/login" />;
+
   }
 };
 

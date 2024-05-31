@@ -11,9 +11,7 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    
-    setProfileImage(user.user.passport)
-
+    setProfileImage(user.user.passport);
   }, [user]);
 
   const handleNavigation = () => {
@@ -28,11 +26,7 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
         </div>
       ) : (
         <div className="close-icon">
-          <img
-            src={CloseIcon}
-            alt="CloseIcon"
-            onClick={handleSidebar}
-          />
+          <img src={CloseIcon} alt="CloseIcon" onClick={handleSidebar} />
         </div>
       )}
 
@@ -51,7 +45,10 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
 
       <div className="profile-section" onClick={handleNavigation}>
         <div className="img-wrapper">
-          <img src={`http://localhost:5000/uploads/${profileImage}`} alt="Profile" />
+          <img
+            src={`http://localhost:5000/uploads/${user.user.passport}`}
+            alt="Profile"
+          />
         </div>
       </div>
     </div>

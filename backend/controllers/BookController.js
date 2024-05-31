@@ -39,14 +39,16 @@ const getBooksByAuthors = async (req, res) => {
   }
 }
 
-
 const addBooks = async (req, res) => {
-  const { name, author, reviews, ratings, description} = req.body
+  const { name, author, reviews, ratings, description } = req.body
 
-  const filename = req.file.filename
-  const coverImage = req.coverImage.filename
 
-  if (!filename || !coverImage) {
+  const book = req.files['book'][0].filename;
+
+  const coverImage = req.files['coverImage'][0].filename;
+
+
+  if (!book || !coverImage) {
     return res.status(400).json({
       success: false,
       error: 'Both filename and coverImage are required.'
@@ -60,7 +62,7 @@ const addBooks = async (req, res) => {
       reviews,
       ratings,
       description,
-      filename,
+      book,
       coverImage
     })
 
@@ -72,5 +74,25 @@ const addBooks = async (req, res) => {
   }
 }
 
+const getFileDetails = async (req, res) => {
+  try {
 
-module.exports = { getBooks, getBooksByAuthors, addBooks }
+    const bookFilename = req.files['book'][0].filename;
+
+    const coverImageFilename = req.files['coverImage'][0].filename
+
+    console.log(`The book filename is ${bookFilename}`)
+
+
+    console.log(`The book coverImage filename is ${coverImageFilename}`)
+  
+
+  } catch (error) {
+
+    return res.status(500).json({ success: false, error: error.message })
+
+
+  }
+}
+
+module.exports = { getBooks, getBooksByAuthors, addBooks, getFileDetails }

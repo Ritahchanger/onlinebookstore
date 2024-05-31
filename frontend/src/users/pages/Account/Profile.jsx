@@ -5,34 +5,10 @@ import { useEffect, useState } from "react";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 import ProfileIcon from "../../../assets/icons/boy.png";
 
-import { useSelector } from "react-redux"; 
-
-
-
-
+import { useSelector } from "react-redux";
 
 const Profile = () => {
-
-  const user = useSelector((state)=>state.auth.user)
-
-  const [ userData,setUserData ] = useState(null);
-
-
-
-
-  useEffect(()=>{
-    setUserData(user.user);
-  },[])
-
-
-
-
-
-
-
-
-
-
+  const user = useSelector((state) => state.auth.user);
 
   const [sidebar, showSidebar] = useState(false);
   const [terminationModel, showTerminationModel] = useState(false);
@@ -81,7 +57,17 @@ const Profile = () => {
           <div className="user-information">
             <div className="profile-card">
               <div className="profile-image">
-              <img src={`http://localhost:5000/uploads/${userData.passport}`} alt="Profile" />
+                {user.user.passport ? (
+                  <img
+                    src={`http://localhost:5000/uploads/${user.user.passport}`}
+                    alt={`${user.user.firstName} ${user.user.lastName}`}
+                  />
+                ) : (
+                  <img
+                    src={ProfileIcon}
+                    alt={`${user.user.firstName} ${user.user.lastName}`}
+                  />
+                )}
               </div>
               <label htmlFor="change-profile" className="edit-profile-label">
                 Edit Profile
@@ -89,7 +75,7 @@ const Profile = () => {
               <input type="file" name="change-profile" id="change-profile" />
             </div>
             <div className="profile-card">
-              <p className="small-header">{`${user.firstName} ${user.secondName}`}</p>
+              <p className="small-header">{`${user.user.firstName} ${user.user.secondName}`}</p>
               <p className="description">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Distinctio, dolore, iste odio recusandae in totam nihil,
@@ -102,11 +88,11 @@ const Profile = () => {
               </div>
               <div className="row profile-details">
                 <p className="small-header">Peter</p>
-                <p className="small-header">{`${user.email}`}</p>
+                <p className="small-header">{`${user.user.email}`}</p>
               </div>
               <div className="row profile-details">
                 <p className="small-header">Username</p>
-                <p className="small-header">{`${user.username}`}</p>
+                <p className="small-header">{`${user.user.username}`}</p>
               </div>
             </div>
           </div>

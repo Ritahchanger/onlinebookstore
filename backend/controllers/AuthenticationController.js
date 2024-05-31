@@ -100,7 +100,7 @@ const logout = async (req, res) => {
     res.cookie('token', '', {
       maxAge: 0
     })
-
+    
     res.status(200).json({ message: 'Logged out successfully' })
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message })

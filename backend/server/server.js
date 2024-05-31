@@ -20,6 +20,7 @@ const app = express()
 // MIDDLEWARES
 app.use(helmet())
 
+app.use(cookieParser());
 
 app.use(express.json())
 

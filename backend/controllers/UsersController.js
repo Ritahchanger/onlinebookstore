@@ -47,31 +47,29 @@ const getAdmins = async (req, res) => {
   }
 }
 
-
-
 const updateUserRole = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { role } = req.body;
+    const { id } = req.params
+    const { role } = req.body
 
-    const user = await User.findById(id);
+    const user = await User.findById(id)
 
     if (!user) {
       return res.status(400).json({
         status: 400,
         success: false,
         message: 'User not found in the system'
-      });
+      })
     }
 
-    const roles = ['admin', 'author', 'user'];
+    const roles = ['admin', 'author', 'user']
 
     if (!roles.includes(role)) {
       return res.status(400).json({
         status: 400,
         success: false,
         message: 'The role is not found in the system'
-      });
+      })
     }
 
     if (user.roles.includes(role)) {
@@ -79,30 +77,27 @@ const updateUserRole = async (req, res) => {
         status: 200,
         success: true,
         message: `The user already has the ${role} role`
-      });
+      })
     }
 
-    user.roles.push(role);
+    user.roles.push(role)
 
-    await user.save();
+    await user.save()
 
     return res.status(201).json({
       status: 201,
       success: true,
       message: `The user's role has been updated to ${role}`
-    });
+    })
   } catch (error) {
     return res.status(500).json({
       success: false,
       error: error.message
-    });
+    })
   }
-};
-
-
+}
 
 const updatePassport = async (req, res) => {
-  
   const { id } = req.params
 
   const passport = req.file.filename
@@ -121,37 +116,43 @@ const updatePassport = async (req, res) => {
       .status(200)
       .json({ success: true, message: 'Passport updated successfully' })
   } catch (error) {
-
     return res.status(500).json({ success: false, error: `${error.message}` })
-
   }
 }
 
+const getUserById = async (req, res) => {
+  try {
+    const { id } = req.params
 
+    const singleUser = await User.findById(id)
 
-const getUserById = async (req,res) =>{
-
-
-  try{
-
-    const { id } = req.params;
-
-    const singleUser = await User.findById(id);
-
-    if(!singleUser){
-
-      return res.status(200).json({status:404, success:false, message:'User not found' })
-
+    if (!singleUser) {
+      return res
+        .status(200)
+        .json({ status: 404, success: false, message: 'User not found' })
     }
 
-    return res.status(200).json({status:200, success: true, data:singleUser });
-
-
-  }catch(error){
+    return res
+      .status(200)
+      .json({ status: 200, success: true, data: singleUser })
+  } catch (error) {
     return res.status(500).json({ success: false, error: `${error.message}` })
   }
-
 }
+
+
+const getUserCookie = (req, res) => {
+  try {
+    // Retrieve the user data cookie from the request
+    const userDataCookie = req.cookies.token;
+
+    // Respond with the user data cookie
+    res.status(200).json({ user: userDataCookie });
+  } catch (err) {
+    // If an error occurs, handle it and send an error response
+    res.status(500).json({ error: err.message });
+  }
+};
 
 
 module.exports = {
@@ -161,4 +162,5 @@ module.exports = {
   updateUserRole,
   updatePassport,
   getUserById,
+  getUserCookie
 }

@@ -10,6 +10,10 @@ const bookSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
+  price:{
+    type:String,
+    required:true,
+  },
   reviews: {
     type: Number,
     default: 0 
@@ -22,17 +26,13 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: true 
   },
-  filename: {
+  book: {
     type: String,
     required: true 
   },
   coverImage: {
     type: String,
     required: true
-  },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category'
   },
   uploadedAt: {
     type: Date,
