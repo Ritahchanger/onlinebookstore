@@ -32,7 +32,7 @@ const BookByAuthor = () => {
         if (authorResponse.status !== 200 || booksResponse.status !== 200) {
 
           throw new Error("There was a problem fetching data");
-          
+
         }
 
         setAuthor(authorResponse.data.data);
@@ -53,7 +53,6 @@ const BookByAuthor = () => {
   }, [id]);
 
   const displayImageMoreDescription = (book) => {
-    setSelectedBook(book);
     setDisplayBook(!displayBook);
   };
 
@@ -79,6 +78,7 @@ const BookByAuthor = () => {
       )}
 
       <Footer />
+      <BookDescriptionModal displayBook={displayBook} displayImageMoreDescription={displayImageMoreDescription} />
     </div>
   );
 };

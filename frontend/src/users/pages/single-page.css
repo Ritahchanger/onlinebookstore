@@ -18,3 +18,7 @@
     font-weight:600;
 
 }
+.single_blog .description{
+    color:var(--black);
+    line-height:1.6rem;
+}

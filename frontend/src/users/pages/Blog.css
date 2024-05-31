@@ -55,6 +55,9 @@
   color: #fff;
   margin: 2rem 0rem;
 }
+.blog .blogs-advert  .description{
+  color:var(--black);
+}
 
 
 

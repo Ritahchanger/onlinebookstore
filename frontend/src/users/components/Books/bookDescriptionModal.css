@@ -66,8 +66,14 @@
     background: red;
     cursor: pointer;
   }
+  .showBookModal .container .row .col:nth-child(2) .small-header{
+    text-align:start;
+  } 
   
   @media (max-width: 619px) {
+    .showBookModal .container .row .col:nth-child(2) .small-header{
+      text-align:center;
+    } 
     .showBookModal .container .row {
       grid-template-columns: repeat(1, 1fr);
       max-height: 700px;

@@ -6,8 +6,10 @@ import "./bookDescriptionModal.css";
 
 const BookDescriptionModal = () => {
   const dispatch = useDispatch();
-  const displayBookModal = useSelector(state => state.bookModal.displayBookModal);
-  const selectedBook = useSelector(state => state.bookModal.selectedBook);
+  const displayBookModal = useSelector(
+    (state) => state.bookModal.displayBookModal
+  );
+  const selectedBook = useSelector((state) => state.bookModal.selectedBook);
 
   const handleCloseModal = () => {
     dispatch(closeBookModal());
@@ -27,15 +29,18 @@ const BookDescriptionModal = () => {
           <div className="col">
             <div className="img-wrapper">
               <img
-                src={selectedBook.imgUrl || FeaturedBook}
-                alt={selectedBook.bookTitle || "Book cover"}
+                src={`http://localhost:5000/upload/books/${selectedBook.coverImage}`}
+                alt={selectedBook.title || "Book cover"}
               />
             </div>
           </div>
           <div className="col">
-            <p className="small-header">{selectedBook.bookTitle || "No Title Available"}</p>
+            <p className="small-header">
+              {selectedBook.title || "No Title Available"}
+            </p>
             <p className="description">
-              {selectedBook.description || "No description available for this book."}
+              {selectedBook.description ||
+                "No description available for this book."}
             </p>
             <a href="#" className="hero-btn">
               ADD TO CART
