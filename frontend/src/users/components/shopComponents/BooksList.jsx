@@ -21,7 +21,7 @@ const BooksList = ({ book }) => {
   return (
       <div className="card book-card">
         <div className="img-wrapper">
-          <img src={book.imgUrl} alt="" />
+          <img src={`http://localhost:5000/upload/books/${book.coverImage}`} alt="" />
           <div className="overlay">
             <p className="shop-items-icons">
               <i class="fa-solid fa-cart-shopping"></i>
@@ -38,7 +38,7 @@ const BooksList = ({ book }) => {
           </div>
         </div>
         <div className="card-body">
-          <p className="book_title">{book.bookTitle}</p>
+          <p className="book_title">{book.title}</p>
           <p className="book_price">{book.price}</p>
         </div>
     </div>

@@ -1,5 +1,18 @@
 const express = require('express')
+
 const Book = require('../models/Book.model')
+
+function formatCurrentDate () {
+  const now = new Date()
+
+  const options = {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  }
+
+  return now.toLocaleDateString('en-US', options)
+}
 
 const getBooks = async (req, res) => {
   try {
@@ -40,30 +53,31 @@ const getBooksByAuthors = async (req, res) => {
 }
 
 const addBooks = async (req, res) => {
-  const { name, author, reviews, ratings, description } = req.body
-
-
-  const book = req.files['book'][0].filename;
-
-  const coverImage = req.files['coverImage'][0].filename;
-
-
-  if (!book || !coverImage) {
-    return res.status(400).json({
-      success: false,
-      error: 'Both filename and coverImage are required.'
-    })
-  }
-
   try {
+    const { title, author, price, reviews, ratings, description } = req.body
+
+    const formattedDate = formatCurrentDate()
+
+    const book = req.files['book'][0].filename
+
+    const coverImage = req.files['coverImage'][0].filename
+
+    if (!book || !coverImage) {
+      return res.status(400).json({
+        success: false,
+        error: 'Both filename and coverImage are required.'
+      })
+    }
     const newBook = new Book({
-      name,
+      title,
       author,
+      price,
       reviews,
       ratings,
       description,
       book,
-      coverImage
+      coverImage,
+      uploadedAt: formattedDate
     })
 
     const savedBook = await newBook.save()
@@ -76,22 +90,15 @@ const addBooks = async (req, res) => {
 
 const getFileDetails = async (req, res) => {
   try {
-
-    const bookFilename = req.files['book'][0].filename;
+    const bookFilename = req.files['book'][0].filename
 
     const coverImageFilename = req.files['coverImage'][0].filename
 
     console.log(`The book filename is ${bookFilename}`)
 
-
     console.log(`The book coverImage filename is ${coverImageFilename}`)
-  
-
   } catch (error) {
-
     return res.status(500).json({ success: false, error: error.message })
-
-
   }
 }
 

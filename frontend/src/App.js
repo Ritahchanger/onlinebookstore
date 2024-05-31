@@ -60,7 +60,7 @@ const App = () => {
           <Route path='/blog/:userId' element={<SingleBlog />} />
           <Route path='/authors' element={<Authors />} />
 
-          <Route path='/authors/:id' element={<BookByAuthor />} />
+          <Route path='/authors/books/:id' element={<BookByAuthor />} />
 
           <Route path='/cart' element={<Cart />} />
           <Route path='/categories' element={<CategoriesNavbar />} />

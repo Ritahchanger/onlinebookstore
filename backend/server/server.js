@@ -10,8 +10,7 @@ const connectDatabase = require('../database/database')
 
 const cors = require('cors')
 
-const cookieParser = require("cookie-parser")
-
+const cookieParser = require('cookie-parser')
 
 dotenv.config()
 
@@ -20,67 +19,67 @@ const app = express()
 // MIDDLEWARES
 app.use(helmet())
 
-app.use(cookieParser());
+app.use(cookieParser())
 
 app.use(express.json())
-
 
 app.use(morgan('combined'))
 
 // app.use('/uploads', express.static('uploads'));
 
+app.use(
+  '/upload/books',
+  express.static('upload/books', {
+    setHeaders: res => {
+      res.set('Cross-Origin-Resource-Policy', 'cross-origin')
+    }
+  })
+)
 
-app.use('/uploads', express.static('uploads', {
-  setHeaders: (res) => {
-    res.set('Cross-Origin-Resource-Policy', 'cross-origin');
-  }
-}));
+app.use(
+  '/uploads',
+  express.static('uploads', {
+    setHeaders: res => {
+      res.set('Cross-Origin-Resource-Policy', 'cross-origin')
+    }
+  })
+)
 
-
-app.use(cors({
-  credentials: true,
-  origin: ['http://localhost:3000', 'http://localhost:5000']
-}));
-
+app.use(
+  cors({
+    credentials: true,
+    origin: ['http://localhost:3000', 'http://localhost:5000']
+  })
+)
 
 const PORT = process.env.PORT || 5000
 
-
 // ROUTE IMPORTS
-
-
 
 const AuthenticationRoute = require('../routes/AuthenticationRoute')
 
-
-
 const PaymentsRoutes = require('../routes/PaymentsRoutes')
-
-
 
 const UsersRoutes = require('../routes/UsersRoutes')
 
+const BooksRoute = require('../routes/BooksRoute')
 
-const BooksRoute = require("../routes/BooksRoute")
+const BooksCategoriesRoutes = require('../routes/BooksCategoriesRoutes')
 
+const BlogRoutes = require('../routes/BlogRoutes')
 
-const BooksCategoriesRoutes = require("../routes/BooksCategoriesRoutes")
-
-const BlogRoutes = require("../routes/BlogRoutes")
-
-
-
+const AuthorRoutes = require('../routes/AuthorsRoutes')
 
 app.use('/api/auth', AuthenticationRoute)
 app.use('/api/payment', PaymentsRoutes)
 app.use('/api/users', UsersRoutes)
 app.use('/api/books', BooksRoute)
 app.use('/api/categories', BooksCategoriesRoutes)
-app.use('/api/blog',BlogRoutes)
+app.use('/api/blog', BlogRoutes)
+app.use('/api/author', AuthorRoutes)
 
-
-
-const connectServer = async () => {const BlogRoutes = require("../routes/BlogRoutes")
+const connectServer = async () => {
+  const BlogRoutes = require('../routes/BlogRoutes')
 
   await connectDatabase()
 

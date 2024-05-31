@@ -22,7 +22,7 @@ const AuthorItem = ({ author }) => {
           esse magnam quas porro nobis aspernatur! Quia optio et fugiat dolorum
           rem obcaecati, architecto delectus.
         </p>
-        <Link to={`/authors/${author._id}`} className="hero-btn">
+        <Link to={`/authors/books/${author._id}`} className="hero-btn">
           SEE BOOKS
           <i className="fa fa-arrow-right"></i>
         </Link>
@@ -32,3 +32,5 @@ const AuthorItem = ({ author }) => {
 };
 
 export default AuthorItem;
+
+
