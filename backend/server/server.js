@@ -70,6 +70,10 @@ const BlogRoutes = require('../routes/BlogRoutes')
 
 const AuthorRoutes = require('../routes/AuthorsRoutes')
 
+
+const CartRoute = require("../routes/CartRoute")
+
+
 app.use('/api/auth', AuthenticationRoute)
 app.use('/api/payment', PaymentsRoutes)
 app.use('/api/users', UsersRoutes)
@@ -77,6 +81,9 @@ app.use('/api/books', BooksRoute)
 app.use('/api/categories', BooksCategoriesRoutes)
 app.use('/api/blog', BlogRoutes)
 app.use('/api/author', AuthorRoutes)
+
+
+app.use('/api/cart', AuthorRoutes)
 
 const connectServer = async () => {
   const BlogRoutes = require('../routes/BlogRoutes')
