@@ -33,8 +33,8 @@ const Navbar = () => {
           </div>
 
           <div className="section-navigation">
-            {sectionbNavigation.map((item, index) => (
-              <p className="nav-li" key={index}>
+            {sectionbNavigation.map((item) => (
+              <p className="nav-li" key={item.id}>
                 <Link to={item.path}>{item.menu_name}</Link>
               </p>
             ))}

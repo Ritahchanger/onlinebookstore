@@ -111,6 +111,46 @@
   opacity: 0.8;
 }
 
+
+/* Profile.css */
+/* .profile .file-input {
+  display: none;
+} */
+
+.profile .custom-file-label {
+  display: inline-block;
+  cursor: pointer;
+  background-color: transparent; /* Ensure the background is transparent */
+  border: none; /* Remove border */
+  padding: 0; /* Remove padding */
+  display:flex;
+  justify-content:center;
+}
+
+.profile .custom-file-label img {
+  width: 50px; /* Set desired width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.profile .custom-file-label:hover img {
+  opacity: 0.8; /* Add a hover effect if desired */
+}
+
+/* Profile.css */
+.profile .file-message {
+  margin-top: 10px;
+  color: green; /* Adjust the color as needed */
+  font-size: 14px; /* Adjust the font size as needed */
+}
+
+.profile .alter_profile{
+  display:flex;
+  flex-direction:column;
+  align-self:center; 
+  justify-content:center;
+}
+
+
 @media(max-width:650px){
     .profile .container{
         grid-template-columns:repeat(1,1fr);

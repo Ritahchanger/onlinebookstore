@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import "./PaymentDetails.css";
 import { useSelector } from "react-redux";
 
+import MpesaLogo from "../../../assets/images/mpesa.png";
+
 const PaymentDetails = () => {
   const user = useSelector((state) => state.auth.user);
   const [sidebar, showSidebar] = useState(false);
@@ -84,6 +86,7 @@ const PaymentDetails = () => {
           ) : (
             <>
               <p className="small-header">Carted Items</p>
+
               <div className="table_wrapper">
                 <table>
                   <thead>
@@ -120,15 +123,19 @@ const PaymentDetails = () => {
             </Link>
           </p>
           <p className="total-price">Total Price: ${totalPrice}</p>
-
+          <p>Select payment method:</p>
           <div className="payment-options">
-            <p>Select payment method:</p>
-            <button
-              onClick={() => handlePayment("paypal")}
-              className="cart-buttons"
-            >
-              PayPal
-            </button>
+            <div className="mpesa_logo">
+              <img src={MpesaLogo} alt="" />
+            </div>
+            <div className="input-group">
+              <input
+                type="text"
+                name="phoneNo"
+                id=""
+                placeholder="Enter phone No (07--)"
+              />
+            </div>
             <button
               onClick={() => handlePayment("safaricom")}
               className="cart-buttons"

@@ -7,7 +7,7 @@ const AuthorItem = ({ author }) => {
       <div className="img-wrapper">
         {author.passport ? (
           <img
-            src={`http://localhost:5000/uploads/${author.passport}`}
+            src={`http://localhost:5000/upload/authors/${author.passport}`}
             alt={`${author.firstName} ${author.secondName}`}
           />
         ) : (

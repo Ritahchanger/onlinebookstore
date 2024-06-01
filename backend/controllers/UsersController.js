@@ -1,3 +1,9 @@
+const fs = require("fs");
+
+const path = require("path")
+
+const uploadDirectory = path.join(__dirname, '../upload/authors/');
+
 const User = require('../models/User.model')
 
 const getUsers = async (req, res) => {
@@ -98,27 +104,42 @@ const updateUserRole = async (req, res) => {
 }
 
 const updatePassport = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
 
-  const passport = req.file.filename
+
+  const passport = req.file.filename;
+
   try {
-    const user = await User.findById(id)
+    const user = await User.findById(id);
 
     if (!user) {
-      return res.status(404).json({ success: false, message: 'User not found' })
+      return res.status(404).json({ success: false, message: 'User not found' });
     }
 
-    user.passport = passport
+    if (user.passport) {
+      const oldPassportPath = path.join(uploadDirectory, user.passport);
 
-    await user.save()
+      fs.unlink(oldPassportPath, (err) => {
+        if (err) {
+          console.error('Error deleting old passport file:', err);
+        }
+      });
+    }
 
-    return res
-      .status(200)
-      .json({ success: true, message: 'Passport updated successfully' })
+  
+    user.passport = passport;
+
+    await user.save();
+
+    return res.status(200).json({ success: true, message: 'Passport updated successfully' });
+
+    
   } catch (error) {
-    return res.status(500).json({ success: false, error: `${error.message}` })
+    return res.status(500).json({ success: false, error: `${error.message}` });
   }
-}
+};
+
+
 
 const getUserById = async (req, res) => {
   try {

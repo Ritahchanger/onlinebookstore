@@ -11,18 +11,13 @@ import CartItem from "./CartItem";
 import Footer from "../Footer/Footer";
 
 const Cart = () => {
-
   const navigate = useNavigate();
-
   const openCheckOutPage=()=>{
     navigate("/check-out")
   }
-
   useEffect(()=>{
     window.scrollTo(0,0)
   })
-
-
   return (
     <Fragment>
       <LowerNavbar />

@@ -5,10 +5,18 @@ import SellingItem from "./SellingItem";
 import Footer from "../Footer/Footer";
 import axios from "axios";
 
+
+
+
 const BestSellingAuthors = () => {
+
   const [sellingAuthors, setSellingAuthors] = useState(null);
+
   const [loading, setLoading] = useState(true);
+
   const [error, setError] = useState(null);
+
+  
 
   const getSellingAuthors = async () => {
     try {

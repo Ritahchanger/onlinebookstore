@@ -37,8 +37,8 @@ app.use(
 )
 
 app.use(
-  '/uploads',
-  express.static('uploads', {
+  '/upload/authors',
+  express.static('upload/authors', {
     setHeaders: res => {
       res.set('Cross-Origin-Resource-Policy', 'cross-origin')
     }

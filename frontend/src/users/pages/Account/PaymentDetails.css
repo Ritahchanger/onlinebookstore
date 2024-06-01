@@ -2,13 +2,35 @@
   max-width: 1100px;
   margin: 0 auto;
 }
+
 .account .payment .container table tbody img {
   width: 50px;
   height: 50px;
 }
+
 .account table tbody tr:nth-child(even) {
   background: var(--white);
 }
+
 .account table tbody td {
   color: var(--black);
+}
+
+.account .payment-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.account .payment-options img {
+  width: 200px;
+}
+
+.account .mpesa_logo {
+  border: 2px solid var(--green);
+}
+
+.account .payment .cart-buttons {
+  border-radius: 5px;
 }

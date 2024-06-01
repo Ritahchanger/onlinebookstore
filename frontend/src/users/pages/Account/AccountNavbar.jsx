@@ -41,7 +41,7 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
       <div className="profile-section" onClick={handleNavigation}>
         <div className="img-wrapper">
           <img
-            src={`http://localhost:5000/uploads/${user.user.passport}`}
+            src={`http://localhost:5000/upload/authors/${user.user.passport}`}
             alt="Profile"
           />
         </div>
