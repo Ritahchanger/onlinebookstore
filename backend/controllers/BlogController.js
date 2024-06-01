@@ -43,25 +43,20 @@ const postBlogs = async (req,res) =>{
 
 }
 
-const getBlogs = async (req,res) =>{
+const getBlogs = async (req, res) => {
+    try {
+        const blogs = await Blog.find({}).sort({ createdAt: -1 }); // Sort by createdAt field in descending order
 
-    try{
+        if (blogs.length === 0) {
+            return res.status(404).json({ status: 404, success: false, message: 'There are no blogs in the system' });
+        }
 
-
-        const blogs = await Blog.find({});
-
-        if(!blogs) return res.status(200).json({ status:404, success: false, message:'There are no blogs in the system' })
-
-        return res.status(200).json({status:200, success: true, data:blogs })
-
-
-    }catch(error){
-
-        return res.status(500).json({ success: false, error: `${error.message}` })
-
+        return res.status(200).json({ status: 200, success: true, data: blogs });
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
     }
+};
 
-}
 
 const deleteBlog = async (req, res) => {
     try {

@@ -1,103 +1,128 @@
 .showBookModal {
-    position: fixed;
-    height: 100vh;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    display:none;
-    justify-content: center;
-    align-items: center;
-    z-index: 99;
-    background: #000;
-    transition: all 0.5s;
-  }
-  .showBookModal.active {
-    display:flex;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  background: #000;
+  transition: all 0.5s;
+  overflow-y: scroll;
+}
+
+.showBookModal.active {
+  display: flex;
+}
+
+.showBookModal .container .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  max-height: 700px;
+  overflow-y: auto; /* Change to auto to enable scrollbars */
+}
+
+.showBookModal .container .row::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.showBookModal .container .row::-webkit-scrollbar-track {
+  background: transparent; /* Track color */
+}
+
+.showBookModal .container .row::-webkit-scrollbar-thumb {
+  background: #888; /* Thumb color */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.showBookModal .container .row::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Thumb color on hover */
+}
+
+.showBookModal .container .row .col:nth-child(1) {
+  flex-basis: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showBookModal .container .row .col:nth-child(1) img {
+  max-width: 300px;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.showBookModal .container .row .col:nth-child(2) {
+  flex-basis: 40%;
+  text-align: start;
+  padding: 1rem;
+}
+
+.showBookModal .container .row .col:nth-child(2) .description {
+  color: var(--black);
+  font-size: 1rem;
+}
+
+.showBookModal .hero-btn {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.close-item {
+  color: var(--white);
+  font-size: 2.4rem;
+  float: right;
+  padding: 5px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: red;
+  cursor: pointer;
+}
+
+.showBookModal .container .row .col:nth-child(2) .small-header {
+  text-align: start;
+}
+
+@media (max-width: 619px) {
+  .showBookModal .container .row .col:nth-child(2) .small-header {
+    text-align: center;
   }
   .showBookModal .container .row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: space-between;
-    background: #fff;
-    padding: 1rem;
-    border-radius: 10px;
-    position: relative;
-    width: 100%;
-    height: fit-content;
+    grid-template-columns: repeat(1, 1fr);
     max-height: 700px;
-    overflow-y: scroll;
-  }
-  .showBookModal .container .row .col:nth-child(1) {
-    flex-basis: 60%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   .showBookModal .container .row .col:nth-child(1) img {
-    max-width: 300px;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
+    max-width: 200px;
   }
-  .showBookModal .container .row .col:nth-child(2) {
-    flex-basis: 40%;
-    text-align: start;
-    padding: 1rem;
-  }
-  .showBookModal .container .row .col:nth-child(2) .description {
-    color: var(--black);
+}
+
+@media (max-width: 560px) {
+  .showBookModal .container .row .col:nth-child(2) .small-header {
     font-size: 1rem;
   }
-  .showBookModal .hero-btn {
-    display: inline-flex;
-    cursor: pointer;
+  .showBookModal .container .row .col:nth-child(2) .description {
+    font-size: 0.9rem;
   }
-  .close-item {
-    color: var(--white);
-    font-size: 2.4rem;
-    float: right;
-    padding: 5px;
-    height: 30px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: red;
-    cursor: pointer;
+  .showBookModal .container .row .col:nth-child(1) img {
+    max-width: 150px;
+    width: 100%;
   }
-  .showBookModal .container .row .col:nth-child(2) .small-header{
-    text-align:start;
-  } 
-  
-  @media (max-width: 619px) {
-    .showBookModal .container .row .col:nth-child(2) .small-header{
-      text-align:center;
-    } 
-    .showBookModal .container .row {
-      grid-template-columns: repeat(1, 1fr);
-      max-height: 700px;
-    }
-    .showBookModal .container .row .col:nth-child(1) img {
-      max-width: 200px;
-    }
+  .showBookModal .container .row {
+    grid-template-columns: repeat(1, 1fr);
+    max-height: 500px;
   }
-  
-  @media(max-width:560px){
-    .showBookModal .container .row .col:nth-child(2) .small-header{
-      font-size:1rem;
-    } 
-    .showBookModal .container .row .col:nth-child(2) .description{
-      font-size:0.9rem;
-    }
-    .showBookModal .container .row .col:nth-child(1) img{
-      max-width:150px;
-      width:100%;
-    }
-    .showBookModal .container .row {
-      grid-template-columns: repeat(1, 1fr);
-      max-height: 500px;
-    }
-  }
-  
-  
+}

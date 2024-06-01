@@ -32,6 +32,8 @@ router.post('/', upload.fields([{ name: 'book', maxCount: 1 }, { name: 'coverIma
 
 router.get('/authors/:id',BookController.getBooksByAuthors)
 
+router.post('/:id/update_sales',BookController.updateBookSales)
+
 
 
 

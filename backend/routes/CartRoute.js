@@ -4,7 +4,7 @@ const router = require("express").Router();
 
 
 
-router.post('/cart',CartController.addCartItem);
+router.post('/post',CartController.addCartItem);
 
 router.get('/:id',CartController.getCartItems);
 

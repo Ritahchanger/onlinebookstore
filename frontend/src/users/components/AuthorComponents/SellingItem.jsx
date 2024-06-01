@@ -1,12 +1,11 @@
 import React from "react";
 
-const SellingItem = ({ sellingItem }) => {
+const SellingItem = ({ sellingAuthor }) => {
   return (
     <tr>
-      <td>{sellingItem.author}</td>
-      <td>{sellingItem.book}</td>
-      <td>{sellingItem.year}</td>
-      <td>{sellingItem.reviews}</td>
+      <td>{`${sellingAuthor.firstName} ${sellingAuthor.secondName}`}</td>
+      <td>{`${sellingAuthor.mostSellingBookTitle}`}</td>
+      <td>{`${sellingAuthor.totalSales}`}</td>
       <td>
         <p className="shop-items-icons">
           <i class="fa fa-eye"></i>

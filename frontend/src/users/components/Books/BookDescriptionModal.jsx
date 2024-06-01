@@ -1,23 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import FeaturedBook from "../../../assets/images/cover17.webp";
 import { closeBookModal } from "../../Redux/features/BookDescriptionSlice";
 import "./bookDescriptionModal.css";
+import axios from "axios";
 
 const BookDescriptionModal = () => {
   const dispatch = useDispatch();
-  const displayBookModal = useSelector(
-    (state) => state.bookModal.displayBookModal
-  );
+  const isUserLogged = useSelector((state) => state.auth.isUserLogged);
+  const displayBookModal = useSelector((state) => state.bookModal.displayBookModal);
   const selectedBook = useSelector((state) => state.bookModal.selectedBook);
+  const userId = useSelector((state) => state.auth.user?.user._id);
+
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showLoginMessage, setShowLoginMessage] = useState(false);
 
   const handleCloseModal = () => {
     dispatch(closeBookModal());
+    setShowSuccessMessage(false);
+    setShowLoginMessage(false);
   };
 
   if (!selectedBook) {
     return null;
   }
+
+  const descriptionShortened = selectedBook.description
+    ? selectedBook.description.split(" ").slice(0, 80).join(" ") + "..."
+    : "No description available for this book.";
+
+  const addItemToCart = async () => {
+    if (!isUserLogged) {
+      setShowLoginMessage(true);
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/cart/post", {
+        userId: userId,
+        productId: selectedBook._id,
+        quantity: 1
+      });
+      setShowSuccessMessage(true);
+      setShowLoginMessage(false);
+      console.log("Item added to cart:", response.data);
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+  };
 
   return (
     <div className={`showBookModal ${displayBookModal ? "active" : ""}`}>
@@ -38,13 +67,19 @@ const BookDescriptionModal = () => {
             <p className="small-header">
               {selectedBook.title || "No Title Available"}
             </p>
-            <p className="description">
-              {selectedBook.description ||
-                "No description available for this book."}
-            </p>
-            <a href="#" className="hero-btn">
-              ADD TO CART
-            </a>
+            <p className="description">{descriptionShortened}</p>
+            {showSuccessMessage ? (
+              <p className="small-header">Book added to cart!</p>
+            ) : (
+              <>
+                <button className="hero-btn" onClick={addItemToCart}>
+                  ADD TO CART
+                </button>
+                {showLoginMessage && (
+                  <p className="small-header">Please log in to add items to the cart.</p>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -73,7 +73,6 @@ const AuthorRoutes = require('../routes/AuthorsRoutes')
 
 const CartRoute = require("../routes/CartRoute")
 
-
 app.use('/api/auth', AuthenticationRoute)
 app.use('/api/payment', PaymentsRoutes)
 app.use('/api/users', UsersRoutes)
@@ -83,7 +82,7 @@ app.use('/api/blog', BlogRoutes)
 app.use('/api/author', AuthorRoutes)
 
 
-app.use('/api/cart', AuthorRoutes)
+app.use('/api/cart',CartRoute)
 
 const connectServer = async () => {
   const BlogRoutes = require('../routes/BlogRoutes')

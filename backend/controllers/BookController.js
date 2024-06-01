@@ -97,9 +97,36 @@ const getFileDetails = async (req, res) => {
     console.log(`The book filename is ${bookFilename}`)
 
     console.log(`The book coverImage filename is ${coverImageFilename}`)
+
   } catch (error) {
+
     return res.status(500).json({ success: false, error: error.message })
+
+
   }
 }
 
-module.exports = { getBooks, getBooksByAuthors, addBooks, getFileDetails }
+
+
+
+const updateBookSales = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const { sales } = req.body
+
+    const user = await Book.findByIdAndUpdate(
+      id,
+      { $inc: { sales: sales } }, // Increment the existing sales by the new sales value
+      { new: true } // To return the updated document
+    )
+
+    res.status(200).json({ success: true, data: user })
+  } catch (error) {
+    res.status(500).json({ status: 200, error: 'An error occurred' })
+  }
+}
+
+
+
+module.exports = { getBooks, getBooksByAuthors, addBooks, getFileDetails,updateBookSales }

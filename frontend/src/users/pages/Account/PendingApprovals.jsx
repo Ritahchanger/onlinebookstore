@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ActiveBooks from "./ActiveBooks";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 
-const PendingApprovals = () => {
+const PendingPayments = () => {
   const [sidebar, showSidebar] = useState(false);
   const [terminationModel, showTerminationModel] = useState(false);
   const handleSidebar = () => {
@@ -122,4 +122,4 @@ const PendingApprovals = () => {
   );
 };
 
-export default PendingApprovals;
+export default PendingPayments;

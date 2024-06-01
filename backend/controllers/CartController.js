@@ -49,7 +49,7 @@ const addCartItem = async (req, res) => {
 const getCartItems = async (req, res) => {
     try {
         // Extract user ID from request
-        const userId = req.params.userId;
+        const userId = req.params.id;
 
         // Check if the user ID is provided
         if (!userId) {

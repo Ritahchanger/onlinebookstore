@@ -30,6 +30,9 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: true 
   },
+  sales:{
+    type:Number,
+  },
   coverImage: {
     type: String,
     required: true

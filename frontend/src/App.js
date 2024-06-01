@@ -38,8 +38,6 @@ import Profile from './users/pages/Account/Profile'
 
 import MyBooks from './users/pages/Account/MyBooks'
 
-import PendingApprovals from './users/pages/Account/PendingApprovals'
-
 import BooksRead from './users/pages/Account/BooksRead'
 
 import Publishing from './users/pages/Account/Publishing'
@@ -47,6 +45,8 @@ import Publishing from './users/pages/Account/Publishing'
 import EditingAndPublishing from './users/pages/Account/EditingAndPublishing'
 
 import PaymentDetails from './users/pages/Account/PaymentDetails'
+
+import PendingPayments from './users/pages/Account/PendingApprovals'
 
 const App = () => {
   return (
@@ -97,7 +97,7 @@ const App = () => {
             path='/approvals'
             element={
               <ProtectedRoutes>
-                <PendingApprovals />
+                <PendingPayments />
               </ProtectedRoutes>
             }
           />

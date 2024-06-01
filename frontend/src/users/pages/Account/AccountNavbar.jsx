@@ -7,12 +7,7 @@ import ProfileIcon from "../../../assets/icons/boy.png";
 
 const AccountNavbar = ({ handleSidebar, sidebar }) => {
   const user = useSelector((state) => state.auth.user);
-  const [profileImage, setProfileImage] = useState(ProfileIcon);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setProfileImage(user.user.passport);
-  }, [user]);
 
   const handleNavigation = () => {
     navigate("/profile");

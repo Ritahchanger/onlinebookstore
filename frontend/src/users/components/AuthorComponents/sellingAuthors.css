@@ -6,15 +6,13 @@
 
 .selling-authors table thead tr td{
     padding:0.5rem 1rem;
-
     color:var(--darkGreen);
     font-weight:700;
-   
 }
 
 .selling-authors table tbody tr td{
     padding:0.5rem;
-    font-size:0.9rem;
+    font-size:var(--mobile-font);
     color:var(--white);
 }
 

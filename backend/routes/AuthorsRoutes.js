@@ -10,8 +10,4 @@ router.get('/books/',AuthorController.getBooks)
 
 router.get('/:id',AuthorController.getAuthorById)
 
-
-
-
-
 module.exports = router
