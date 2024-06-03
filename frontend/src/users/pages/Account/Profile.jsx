@@ -4,11 +4,17 @@ import AccountNavbar from "./AccountNavbar";
 import { useEffect, useState } from "react";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 import ProfileIcon from "../../../assets/icons/boy.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import uploadIcon from "../../../assets/icons/upload.png";
+
 import axios from "axios";
 
+import UpdateUserProfile from "./UpdateUserProfile";
+
+import { updateUserData } from "../../Redux/features/userSlice";
+
 const Profile = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [sidebar, showSidebar] = useState(false);
   const [terminationModel, showTerminationModel] = useState(false);
@@ -16,8 +22,9 @@ const Profile = () => {
     { id: 1, title: "Book Title 1", author: "Author 1", price: "10.99" },
     { id: 2, title: "Book Title 2", author: "Author 2", price: "15.49" },
   ]);
-  const [fileMessage, setFileMessage] = useState(""); // New state for file upload message
-  const [selectedFile, setSelectedFile] = useState(null); // State for the selected file
+  const [fileMessage, setFileMessage] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [profileImage, setProfileImage] = useState(user.user.passport);
 
   const handleSidebar = () => {
     showSidebar(!sidebar);
@@ -59,33 +66,45 @@ const Profile = () => {
       setFileMessage("Please select a file to upload.");
       return;
     }
-  
+
     const formData = new FormData();
     formData.append("file", selectedFile);
-
-    console.log(formData)
-  
     try {
-      const result = await axios.post(
+      const result = await axios.put(
         `http://localhost:5000/api/users/${user.user._id}/update-profile`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-  
+
+      const updatedUserData = await axios.get(
+        `http://localhost:5000/api/users/userId/${user.user._id}`
+      );
+
+      dispatch(updateUserData({ user: updatedUserData.data.data }));
+
+      setProfileImage(result.data.data);
+
       setFileMessage("File uploaded successfully");
 
-      console.log(result.data); 
-
+      console.log(result.data);
     } catch (error) {
       setFileMessage(
         `There was a problem accessing the server: ${error.message}`
       );
-      console.error(error); // Log the error to the console
+      console.error(error);
     }
   };
-  
+  useEffect(() => {
+    setProfileImage(user.user.passport);
+  }, [user.user.passport]);
+
+  const [updateInformationModal, setUpdateInformationModal] = useState(false);
+
+  const displayUpdateInformationModal = () => {
+    setUpdateInformationModal(!updateInformationModal);
+  };
 
   return (
     <div className="account">
@@ -105,9 +124,9 @@ const Profile = () => {
           <div className="user-information">
             <div className="profile-card">
               <div className="profile-image">
-                {user.user.passport ? (
+                {profileImage ? (
                   <img
-                    src={`http://localhost:5000/upload/authors/${user.user.passport}`}
+                    src={`http://localhost:5000/upload/authors/${profileImage}`}
                     alt={`${user.user.firstName} ${user.user.lastName}`}
                   />
                 ) : (
@@ -118,9 +137,13 @@ const Profile = () => {
                 )}
               </div>
               <form className="alter_profile" onSubmit={uploadProfileImage}>
-                {/* <label htmlFor="change-profile" className="custom-file-label">
-                  <img src={uploadIcon} alt="Upload Icon" />
-                </label> */}
+                <label htmlFor="change-profile" className="upload-icon-wrapper">
+                  <img
+                    src={uploadIcon}
+                    alt="Upload Profile"
+                    className="upload-icon"
+                  />
+                </label>
                 <input
                   type="file"
                   name="changeProfile"
@@ -129,14 +152,13 @@ const Profile = () => {
                   className="file-input"
                   onChange={handleFileChange}
                 />
-
                 {fileMessage && <p className="file-message">{fileMessage}</p>}
-                {/* Display file upload message */}
                 <button type="submit" className="cart-buttons">
                   SAVE
                 </button>
               </form>
             </div>
+
             <div className="profile-card">
               <p className="small-header">{`${user.user.firstName} ${user.user.secondName}`}</p>
               <p className="description">
@@ -150,7 +172,7 @@ const Profile = () => {
                 <p className="small-header">0712195228</p>
               </div>
               <div className="row profile-details">
-                <p className="small-header">Peter</p>
+                <p className="small-header">Email</p>
                 <p className="small-header">{`${user.user.email}`}</p>
               </div>
               <div className="row profile-details">
@@ -161,6 +183,14 @@ const Profile = () => {
           </div>
 
           <div className="main-section">
+            <div className="edit_profile">
+              <button
+                className="cart-buttons"
+                onClick={displayUpdateInformationModal}
+              >
+                Edit profile information?
+              </button>
+            </div>
             <div className="wishlist-container">
               <h2>My Wishlist</h2>
               {wishlist.length > 0 ? (
@@ -190,6 +220,10 @@ const Profile = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className={ `edit_profile_modal ${updateInformationModal ? 'active' : null }` }>
+        <UpdateUserProfile displayUpdateInformationModal={displayUpdateInformationModal} />
       </div>
     </div>
   );

@@ -27,15 +27,15 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
 
       <div className="section date">
         <p>Joined on</p>
-        <p>7-May-2015</p>
+        <p>{`${user.user.createdOn}`}</p>
       </div>
       <div className="section amount">
         <p>Amount</p>
         <p>sh 78,000</p>
       </div>
       <div className="section id">
-        <p>ID</p>
-        <p>8986787</p>
+        <p>Username</p>
+        <p>{user.user.username}</p>
       </div>
 
       <div className="profile-section" onClick={handleNavigation}>

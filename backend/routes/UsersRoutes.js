@@ -38,4 +38,8 @@ router.get('/userId/:id',UsersController.getUserById)
 router.get('/credentials',UsersController.getUserCookie)
 
 
+
+router.get('/delete/:id',UsersController.getUserCookie)
+
+
 module.exports = router;

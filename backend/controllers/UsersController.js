@@ -2,25 +2,27 @@ const fs = require("fs");
 
 const path = require("path")
 
+const Book = require("../models/Book.model")
+
 const uploadDirectory = path.join(__dirname, '../upload/authors/');
 
 const User = require('../models/User.model')
 
+
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find({}).select('-password') // Exclude the password field
+    const users = await User.find({}).select('-password'); // Exclude the password field
 
     if (users.length === 0) {
-      return res
-        .status(404)
-        .json({ status: 404, success: false, data: 'No users found' })
+      return res.status(404).json({ status: 404, success: false, data: 'No users found' });
     }
 
-    return res.status(200).json({ status: 200, success: true, data: users })
+    return res.status(200).json({ status: 200, success: true, data: users});
   } catch (error) {
-    return res.status(500).json({ success: false, error: `${error.message}` })
+    return res.status(500).json({ success: false, error: `${error.message}` });
   }
-}
+};
+
 
 const getAuthors = async (req, res) => {
   try {
@@ -131,7 +133,7 @@ const updatePassport = async (req, res) => {
 
     await user.save();
 
-    return res.status(200).json({ success: true, message: 'Passport updated successfully' });
+    return res.status(200).json({ success: true, message: 'Passport updated successfully',data:passport });
 
     
   } catch (error) {
@@ -171,9 +173,56 @@ const getUserCookie = (req, res) => {
     res.status(200).json({ user: userDataCookie });
   } catch (err) {
     // If an error occurs, handle it and send an error response
-    res.status(500).json({ error: err.message });
+    res.status(500).json({success:false,error: err.message });
   }
 };
+
+
+// Today
+
+const deleteUser = async (req,res) =>{
+
+  const { id } = req.params.id;
+
+  try{
+
+    const userToDelete = await User.findById(id)
+
+    if(!userToDelete){
+      return res.status(200).json({success:false,status:404, message: 'User not found' });
+    }
+
+    const booksAuthored = await Book.find({author:id});
+
+    if(booksAuthored.length > 0){
+      await Book.deleteMany({author:id})
+    }
+
+    await User.findByIdAndDelete(id);
+
+    res.status(200).json({status:200,success:true,message:"User and their books deleted successfully"});
+
+  }catch(error){
+    return res.status(500).json({ success: false, error: `${error.message}` })
+  }
+
+}
+
+
+const updateUserProfileInformation = async () =>{
+
+  try{
+
+
+  }catch(error){
+
+    
+  }
+
+
+}
+
+
 
 
 module.exports = {
@@ -183,5 +232,6 @@ module.exports = {
   updateUserRole,
   updatePassport,
   getUserById,
-  getUserCookie
+  deleteUser,
+  getUserCookie,
 }

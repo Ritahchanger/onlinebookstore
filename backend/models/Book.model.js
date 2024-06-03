@@ -20,7 +20,7 @@ const bookSchema = new mongoose.Schema({
   },
   ratings: {
     type: Number,
-    default: 0 
+    default:0
   },
   description: {
     type: String,
@@ -40,6 +40,14 @@ const bookSchema = new mongoose.Schema({
   uploadedAt: {
     type: Date,
     default: Date.now 
+  },
+  upproved:{
+    type:Boolean,
+    default:false,
+  },
+  audio:{
+    type:String,
+    default:null
   }
 });
 

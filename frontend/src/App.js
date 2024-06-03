@@ -46,7 +46,7 @@ import EditingAndPublishing from './users/pages/Account/EditingAndPublishing'
 
 import PaymentDetails from './users/pages/Account/PaymentDetails'
 
-import PendingPayments from './users/pages/Account/PendingApprovals'
+import PendingApprovals from './users/pages/Account/PendingApprovals'
 
 const App = () => {
   return (
@@ -97,7 +97,7 @@ const App = () => {
             path='/approvals'
             element={
               <ProtectedRoutes>
-                <PendingPayments />
+                <PendingApprovals/>
               </ProtectedRoutes>
             }
           />

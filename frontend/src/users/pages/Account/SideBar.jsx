@@ -4,20 +4,18 @@ import CloseIcon from "../../../assets/icons/close.png";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { logout } from "../../Redux/features/authSlice"; 
+import { logout } from "../../Redux/features/authSlice";
 
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 import { authenticateTerminatingUser } from "../../Redux/features/AccountTerminationSlice";
 
 import axios from "axios";
 
 const SideBar = ({ sidebar, handleTerminationModel }) => {
-
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-
 
   const accountTerminationRequest = useSelector(
     (state) => state.accountTermination.accountTerminationRequest
@@ -36,16 +34,13 @@ const SideBar = ({ sidebar, handleTerminationModel }) => {
     try {
       const response = await axios.post(
         "http://localhost:5000/api/auth/logout"
-      )
+      );
 
-      navigate('/login')
-      
-      dispatch(logout())
-      
+      navigate("/login");
+
+      dispatch(logout());
     } catch (error) {
-
       console.log(`A process occurred ${error.message}`);
-
     }
   };
 
@@ -129,7 +124,7 @@ const SideBar = ({ sidebar, handleTerminationModel }) => {
             <p>
               <i className="fas fa-lock-open"></i>
             </p>
-            <p>LOGOUT</p>
+            <p>Logout</p>
           </Link>
         </li>
       </ul>

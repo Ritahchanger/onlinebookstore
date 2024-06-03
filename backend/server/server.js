@@ -12,6 +12,8 @@ const cors = require('cors')
 
 const cookieParser = require('cookie-parser')
 
+
+
 dotenv.config()
 
 const app = express()
@@ -21,11 +23,12 @@ app.use(helmet())
 
 app.use(cookieParser())
 
+app.use(express.urlencoded({ extended: true })); // To parse URL-encoded bodies
+
 app.use(express.json())
 
 app.use(morgan('combined'))
 
-// app.use('/uploads', express.static('uploads'));
 
 app.use(
   '/upload/books',
@@ -44,6 +47,7 @@ app.use(
     }
   })
 )
+
 
 app.use(
   cors({

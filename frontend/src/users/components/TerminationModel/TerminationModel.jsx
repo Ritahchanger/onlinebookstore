@@ -34,26 +34,16 @@ const TerminationModel = ({ handleTerminationModel, terminationModel }) => {
           </div>
         ) : (
           <>
-            <p className="medium-header">ACCOUNT TERMINATION</p>
-            <div className="input-group">
-              <input
-                type="email"
-                name="email"
+            <div className="input_group">
+              <textarea
+                name="reasonForTermination"
                 id=""
-                placeholder="Enter your email.."
-              />
+                cols="30"
+                rows="10"
+                placeholder="Enter reason for account termination(Optional)..."
+              ></textarea>
             </div>
-            <div className="input-group">
-              <input
-                type="password"
-                name="password"
-                id=""
-                placeholder="Enter your password.."
-              />
-            </div>
-            <div className="input-group">
-              <input type="submit" value="REQUEST TERMINATION" onClick={deleteAccount} />
-            </div>
+            <button type="submit" className="cart-buttons">PROCEED TO TERMINATION</button>
           </>
         )}
       </form>

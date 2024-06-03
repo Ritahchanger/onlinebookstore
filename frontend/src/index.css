@@ -107,3 +107,62 @@ img{
   color:var(--white);
   font-size:2rem;
 }
+
+/* FORMS */
+
+.form_container{
+  max-width:800px;
+  background:var(--white);
+  margin:0rem auto;
+  padding:1rem;
+  width: 97%;
+  border-radius:3px;
+  position:relative;
+  overflow:hidden;
+}
+.form_container .close_icon{
+  color:var(--pinkRed);
+  font-size:2rem;
+  position: absolute;
+  z-index:9;
+  right:0;
+  top:0;
+  background:var(--pinkRed);
+  color:var(--white);
+  height:30px;
+  width:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor: pointer;
+  transition:all 0.5s;
+
+}
+
+.form_container .close_icon:hover{
+  transform:scale(1.1);
+  background:var(--green);
+}
+
+.form_container input{
+  border:none;
+  height:40px;
+  border-bottom:1px solid var(--gray);
+  outline:none;
+}
+.form_container input:focus{
+  border-bottom:1px solid var(--pinkRed);
+}
+.form_container .input_group{
+  padding-bottom:1rem;
+  cursor:pointer;
+}
+.form_container .input_group .error{
+  color:var(--pinkRed)
+}
+
+
+.books_message{
+  margin-top:50px;
+  text-align: center;
+}

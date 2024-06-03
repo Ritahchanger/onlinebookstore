@@ -1,5 +1,12 @@
 const mongoose = require('mongoose')
 
+function formatDate (date) {
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
+  return `${day}-${month}-${year}`
+}
+
 const UserSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -12,15 +19,21 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique:true,
+    unique: true
   },
   email: {
     type: String,
     required: true,
     unique: true
   },
-  passport:{
-    type:String,
+  phoneNo: {
+    type: String
+  },
+  amount: {
+    type: Number
+  },
+  passport: {
+    type: String
   },
   password: {
     type: String,
@@ -31,9 +44,10 @@ const UserSchema = new mongoose.Schema({
     enum: ['user', 'author', 'admin'],
     default: ['user']
   },
-  createdOn:{
-    type:String
-}
+  createdOn: {
+    type: String,
+    default: () => formatDate(new Date())
+  }
 })
 
 const User = mongoose.model('User', UserSchema)

@@ -16,6 +16,8 @@ const PaymentDetails = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [loading, setLoading] = useState(true); // Add loading state
+  const [phoneNo, setPhoneNo] = useState(""); // State to hold phone number
+  const [paymentSuccess, setPaymentSuccess] = useState(false); // State to track payment success
 
   const handleSidebar = () => {
     showSidebar(!sidebar);
@@ -25,14 +27,20 @@ const PaymentDetails = () => {
     showTerminationModel(!terminationModel);
   };
 
-  const handlePayment = async (paymentMethod) => {
-    if (paymentMethod === "paypal") {
-      // Handle PayPal payment
-    } else if (paymentMethod === "safaricom") {
+  const handlePayment = async () => {
+    if (!phoneNo) {
+      // Check if phone number is provided
+      alert("Please enter a phone number");
+      return;
+    }
+  
+    const paymentMethod = "safaricom";
+  
+    try {
       const makePayment = await axios.post(
         "http://localhost:5000/api/payment",
         {
-          phone: "0113174493",
+          phone: phoneNo, // Use the provided phone number
           amount: totalPrice,
         },
         {
@@ -41,8 +49,16 @@ const PaymentDetails = () => {
           },
         }
       );
+      // Handle payment response
+      setPaymentSuccess(true); // Set payment success state to true
+      setTimeout(() => {
+        setPaymentSuccess(false); // Clear payment success state after 10 seconds
+      }, 10000); // 10000 milliseconds = 10 seconds
+    } catch (error) {
+      console.error("Error making payment:", error);
     }
   };
+  
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -50,7 +66,7 @@ const PaymentDetails = () => {
         const response = await axios.get(
           `http://localhost:5000/api/cart/${user.user._id}`
         );
-        setLoading(false); // Set loading to false after response
+        setLoading(false);
         if (!response.data.success) {
           throw new Error("NO CART ITEMS");
         }
@@ -117,30 +133,37 @@ const PaymentDetails = () => {
             </>
           )}
 
-          <p className="link-text">
-            <Link to="/shop">
-              <i className="fa fa-arrow-left"></i>Continue shopping?
-            </Link>
-          </p>
-          <p className="total-price">Total Price: ${totalPrice}</p>
-          <p>Select payment method:</p>
-          <div className="payment-options">
+          <div className="payment-row">
+            <div className="card">
+              <p className="link-text">
+                <Link to="/shop">
+                  <i className="fa fa-arrow-left"></i>Continue shopping?
+                </Link>
+              </p>
+              <p className="total-price">Total Price: ${totalPrice}</p>
+            </div>
             <div className="mpesa_logo">
               <img src={MpesaLogo} alt="" />
             </div>
+          </div>
+          <p>Select payment method:</p>
+          <div className="payment-options">
             <div className="input-group">
               <input
                 type="text"
                 name="phoneNo"
-                id=""
+                id="phoneNo"
                 placeholder="Enter phone No (07--)"
+                value={phoneNo}
+                onChange={(e) => setPhoneNo(e.target.value)}
               />
             </div>
             <button
-              onClick={() => handlePayment("safaricom")}
+              onClick={handlePayment}
               className="cart-buttons"
+              disabled={paymentSuccess} // Disable button if payment is already successful
             >
-              Safaricom
+              {paymentSuccess ? "Payment Successful" : "Pay Now"}
             </button>
           </div>
         </div>

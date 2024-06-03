@@ -5,7 +5,13 @@ import { useEffect, useState } from "react";
 import ActiveBooks from "./ActiveBooks";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 
+import { useSelector } from "react-redux";
+
+import axios from "axios";
+
 const MyBooks = () => {
+  const user = useSelector((state) => state.auth.user);
+
   const [sidebar, showSidebar] = useState(false);
   const [terminationModel, showTerminationModel] = useState(false);
   const handleSidebar = () => {
@@ -14,6 +20,30 @@ const MyBooks = () => {
   const handleTerminationModel = () => {
     showTerminationModel(!terminationModel);
   };
+
+  const [books, setBooks] = useState(null);
+
+  const getApprovedBooks = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/author/books/approved/${user.user._id}`
+      );
+
+      if (response.status !== 200) {
+        throw new Error(`Server returned status ${response.status}`);
+      }
+
+      setBooks(response.data.data);
+    } catch (error) {
+      console.log(
+        `There was a problem fetching the data from the backend->${error.message}`
+      );
+    }
+  };
+
+  useEffect(() => {
+    getApprovedBooks();
+  }, [user.user._id]);
 
   return (
     <div className="account">
@@ -25,112 +55,41 @@ const MyBooks = () => {
 
       <div className="my-books">
         <div className="container">
-          <p className="medium-header">PUBLISHED BOOKS</p>
-         <div className="table_wrapper">
-         <table>
-            <thead>
-              <tr>
-                <td>NAME</td>
-                <td>AUTHOR</td>
-                <td>REVIEWS</td>
-                <td>RATINGS</td>
-                <td>VIEW</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Kifo kisimani</td>
-                <td>Dennis Munyao</td>
-                <td>78000</td>
-                <td>5</td>
-                <td>
-                  {" "}
-                  <i class="fa fa-eye"></i>
-                </td>
-              </tr>
-              <tr>
-                <td>Kifo kisimani</td>
-                <td>Dennis Munyao</td>
-                <td>78000</td>
-                <td>5</td>
-                <td>
-                  {" "}
-                  <i class="fa fa-eye"></i>
-                </td>
-              </tr>
-              <tr>
-                <td>Kifo kisimani</td>
-                <td>Dennis Munyao</td>
-                <td>78000</td>
-                <td>5</td>
-                <td>
-                  {" "}
-                  <i class="fa fa-eye"></i>
-                </td>
-              </tr>
-              <tr>
-                <td>Kifo kisimani</td>
-                <td>Dennis Munyao</td>
-                <td>78000</td>
-                <td>5</td>
-                <td>
-                  {" "}
-                  <i class="fa fa-eye"></i>
-                </td>
-              </tr>
-              <tr>
-                <td>Kifo kisimani</td>
-                <td>Dennis Munyao</td>
-                <td>78000</td>
-                <td>5</td>
-                <td>
-                  {" "}
-                  <i class="fa fa-eye"></i>
-                </td>
-              </tr>
-              <tr>
-                <td>Kifo kisimani</td>
-                <td>Dennis Munyao</td>
-                <td>78000</td>
-                <td>5</td>
-                <td>
-                  {" "}
-                  <i class="fa fa-eye"></i>
-                </td>
-              </tr>
-              <tr>
-                <td>Kifo kisimani</td>
-                <td>Dennis Munyao</td>
-                <td>78000</td>
-                <td>5</td>
-                <td>
-                  {" "}
-                  <i class="fa fa-eye"></i>
-                </td>
-              </tr>
-              <tr>
-                <td>Kifo kisimani</td>
-                <td>Dennis Munyao</td>
-                <td>78000</td>
-                <td>5</td>
-                <td>
-                  {" "}
-                  <i class="fa fa-eye"></i>
-                </td>
-              </tr>
-              <tr>
-                <td>Kifo kisimani</td>
-                <td>Dennis Munyao</td>
-                <td>78000</td>
-                <td>5</td>
-                <td>
-                  {" "}
-                  <i class="fa fa-eye"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-         </div>
+          {books ? (
+            <>
+              <p className="medium-header">PUBLISHED BOOKS</p>
+              <div className="table_wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <td>TITLE</td>
+                      <td>AUTHOR</td>
+                      <td>REVIEWS</td>
+                      <td>RATINGS</td>
+                      <td>VIEW</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {books.map((book) => (
+                      <tr key={book._id}>
+                        <td>{book.title}</td>
+                        <td>{`${user.user.firstName} ${user.user.secondName}`}</td>
+                        <td>{book.reviews}</td>
+                        <td>{book.ratings}</td>
+                        <td>
+                          <i className="fa fa-eye"></i>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          ) : (
+            <p className="books_message">
+              No books have been approved yet.
+            </p>
+          )}
         </div>
       </div>
 

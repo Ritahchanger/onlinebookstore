@@ -6,7 +6,8 @@ const getBooksByAuthors = async (req, res) => {
   const authorId = req.params.id
 
   try {
-    const books = await Book.find({ author: authorId })
+
+    const books = await Book.find({}).sort({ uploadedAt: -1 });
 
     if (!books.length) {
       return res.status(404).json({
@@ -29,6 +30,40 @@ const getBooksByAuthors = async (req, res) => {
   }
 }
 
+
+
+const getUnapprovedBooksByAuthor = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const unapprovedBooks = await Book.find({ author:id, upproved: false });
+
+    if (!unapprovedBooks.length) {
+      return res.status(404).json({ status: 404, success: false, message: 'No unapproved books found for this author' });
+    }
+
+    return res.status(200).json({ status: 200, success: true, data: unapprovedBooks });
+  } catch (error) {
+    return res.status(500).json({ status: 500, success: false, error: error.message });
+  }
+};
+
+const getApprovedBooksByAuthor = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const unapprovedBooks = await Book.find({ author:id, upproved: true });
+
+    if (!unapprovedBooks.length) {
+      return res.status(404).json({ status: 404, success: false, message: 'No Approved books found for this author' });
+    }
+
+    return res.status(200).json({ status: 200, success: true, data: unapprovedBooks });
+  } catch (error) {
+    return res.status(500).json({ status: 500, success: false, error: error.message });
+  }
+};
+
+
+
 const getAuthorById = async (req, res) => {
   try {
     const { id } = req.params
@@ -48,9 +83,11 @@ const getAuthorById = async (req, res) => {
   }
 }
 
+
+
 const getBooks = async (req, res) => {
   try {
-    // Aggregate to get total sales per author and their most selling book
+    
     const result = await Book.aggregate([
       {
         $group: {
@@ -98,4 +135,4 @@ const getBooks = async (req, res) => {
 
 
 
-module.exports = { getBooksByAuthors, getBooks, getAuthorById }
+module.exports = { getBooksByAuthors, getBooks, getAuthorById,getUnapprovedBooksByAuthor,getApprovedBooksByAuthor}

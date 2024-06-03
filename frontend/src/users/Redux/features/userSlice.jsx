@@ -23,9 +23,12 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    updateUserData(state, action) {
+      state.userData = action.payload;
+    },
   },
 });
 
 
-export const { getUserStart, getUserSuccess, getUserFailure } = userSlice.actions;
+export const { getUserStart, getUserSuccess, getUserFailure, updateUserData } = userSlice.actions;
 export default userSlice;

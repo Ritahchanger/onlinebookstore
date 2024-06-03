@@ -1,4 +1,3 @@
-
 .terminate-account-modal{
     background:linear-gradient(rgba(0,0,0,0.95),rgba(0,0,0,0.95));
     position:fixed;
@@ -7,7 +6,7 @@
     right:0;
     height:100vh;
     z-index:99;
-    display:none;
+    display:flex;
     justify-content:center;
     align-items:center;
     flex-direction: column;
@@ -16,7 +15,6 @@
   .terminate-account-modal.active{
     display:flex;
   }
- 
   .terminate-account-modal .medium-header{
     color:var(--green);
     border-bottom:1px solid var(--green);
@@ -44,31 +42,30 @@
     background:#fff;
     padding:1rem;
   }
-  .terminate-account-modal  form .input-group{
-    margin-top:0.5rem;
-  }
-  .terminate-account-modal  form .input-group input{
-    height:40px;
-    padding:8px;
-    background:none;
-    color:var(--green);
+  .terminate-account-modal form textarea{
+    width:100%;
     border:none;
-    border-bottom:1px solid var(--gray);
-    cursor: pointer;
-    font-weight:600;
     outline:none;
+    border:1px solid var(--gray);
+    padding:16px;
+    margin-bottom:1rem;
   }
-  .terminate-account-modal  form .input-group input::placeholder{
-    color:var(--gray);
-  }
-  .terminate-account-modal  form .input-group input[type=submit]{
+  .terminate-account-modal .cart-buttons{
+    width:100%;
     background:var(--green);
-    cursor: pointer;
     color:var(--white);
-    transition:all 0.5s;
+    font-weight:700;
     border:2px solid var(--green);
   }
-  .terminate-account-modal  form .input-group input[type=submit]:hover{
-    background:var(--blue);
-    border:2px solid var(--blue);
+  .terminate-account-modal .cart-buttons:hover{
+    width:100%;
+    background:var(--green);
+    color:var(--white);
+    font-weight:700;
+    border:2px solid var(--green);
+    transition:all 0.5s;
+  }
+  .terminate-account-modal .cart-buttons:hover{
+   background:transparent;
+   color:var(--green);
   }

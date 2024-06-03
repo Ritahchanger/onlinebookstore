@@ -1,95 +1,160 @@
 import "./Account.css";
 import SideBar from "./SideBar";
 import AccountNavbar from "./AccountNavbar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
-
-import "./EditingAndPublishing.css"
+import axios from 'axios';
+import { useSelector } from "react-redux";
+import "./EditingAndPublishing.css";
 
 const EditingAndPublishing = () => {
+  const user = useSelector((state) => state.auth.user);
+
   const [sidebar, showSidebar] = useState(false);
   const [terminationModel, showTerminationModel] = useState(false);
-  const [books, setBooks] = useState([]);
-  const [pendingBooks, setPendingBooks] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(false); // Assume we have a way to check if user is admin
-
-  useEffect(() => {
-    // Fetch books and pending books from API
-    // setBooks(fetchedBooks);
-    // setPendingBooks(fetchedPendingBooks);
-  }, []);
+  const [uploadMessage, setUploadMessage] = useState("");
 
   const handleSidebar = () => {
     showSidebar(!sidebar);
   };
-  
+
   const handleTerminationModel = () => {
     showTerminationModel(!terminationModel);
   };
 
-  const handleUpload = (newBook) => {
-    setPendingBooks([...pendingBooks, newBook]);
-  };
-
-  const handleApproval = (approvedBook) => {
-    setPendingBooks(pendingBooks.filter(book => book.id !== approvedBook.id));
-    setBooks([...books, approvedBook]);
-  };
-
-  const UploadForm = ({ handleUpload }) => {
+  const UploadForm = () => {
     const [title, setTitle] = useState("");
-    const [file, setFile] = useState(null);
+    const [bookFile, setBookFile] = useState(null);
+    const [coverImageFile, setCoverImageFile] = useState(null);
     const [type, setType] = useState("ebook");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState("");
+    const [errors, setErrors] = useState({});
 
-    const handleSubmit = (e) => {
+    const validate = () => {
+      const newErrors = {};
+
+      if (!title) newErrors.title = "Title is required";
+      if (!bookFile) newErrors.bookFile = "Book file is required";
+      if (!coverImageFile) newErrors.coverImageFile = "Cover image is required";
+      if (!price || isNaN(price)) newErrors.price = "Valid price is required";
+      if (!description) newErrors.description = "Description is required";
+      if (type !== "ebook") newErrors.type = "Only eBooks can be uploaded";
+
+      return newErrors;
+    };
+
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      const newBook = { id: Date.now(), title, file, type, status: "pending" };
-      handleUpload(newBook);
+      const newErrors = validate();
+
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("author", user.user._id);
+      formData.append("price", price);
+      formData.append("description", description);
+      formData.append("book", bookFile);
+      formData.append("coverImage", coverImageFile);
+
+      try {
+        const response = await axios.post('http://localhost:5000/api/books/add', formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        });
+        setUploadMessage("Book uploaded successfully!");
+
+        console.log(response.data)
+
+        // Clear form fields after successful upload if needed
+        setTitle("");
+        setBookFile(null);
+        setCoverImageFile(null);
+        setType("ebook");
+        setDescription("");
+        setPrice("");
+        setErrors({});
+      } catch (error) {
+        console.log(`There was an error uploading the book: ${error.message}`);
+      }
     };
 
     return (
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-        <input type="file" onChange={(e) => setFile(e.target.files[0])} required />
-        <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value="ebook">eBook</option>
-          <option value="audiobook">Audiobook</option>
-        </select>
-        <button type="submit" className="submit-btn">Upload</button>
+      <form onSubmit={handleSubmit} noValidate>
+        <div>
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          {errors.title && <span className="error">{errors.title}</span>}
+        </div>
+        <div className="row">
+          <div>
+            <label htmlFor="bookFile">Book (PDF)</label>
+            <input
+              type="file"
+              accept="application/pdf"
+              name="bookFile"
+              onChange={(e) => setBookFile(e.target.files[0])}
+              required
+            />
+            {errors.bookFile && <span className="error">{errors.bookFile}</span>}
+          </div>
+          <div>
+            <label htmlFor="coverImageFile">Cover Image</label>
+            <input
+              type="file"
+              accept="image/*"
+              name="coverImageFile"
+              onChange={(e) => setCoverImageFile(e.target.files[0])}
+              required
+            />
+            {errors.coverImageFile && <span className="error">{errors.coverImageFile}</span>}
+          </div>
+        </div>
+        <div>
+          <label htmlFor="price">Price</label>
+          <input
+            type="text"
+            name="price"
+            placeholder="Price.."
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+          {errors.price && <span className="error">{errors.price}</span>}
+        </div>
+        <div>
+          <textarea
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+            rows={5}
+            cols={50}
+          ></textarea>
+          {errors.description && <span className="error">{errors.description}</span>}
+        </div>
+        <div>
+          <select value={type} onChange={(e) => setType(e.target.value)}>
+            <option value="ebook">eBook</option>
+            <option value="audiobook">Audiobook</option>
+          </select>
+          {errors.type && <span className="error">{errors.type}</span>}
+        </div>
+        <button type="submit" className="submit-btn">
+          Upload
+        </button>
+        {uploadMessage && <div className="upload-message">{uploadMessage}</div>}
       </form>
-    );
-  };
-
-  const BookList = ({ books }) => {
-    return (
-      <div>
-        <ul>
-          {books.map(book => (
-            <li key={book.id}>{book.title} ({book.type}) - {book.status}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  };
-
-  const ApprovalPanel = ({ pendingBooks, handleApproval }) => {
-    const approveBook = (book) => {
-      const approvedBook = { ...book, status: "approved" };
-      handleApproval(approvedBook);
-    };
-
-    return (
-      <div>
-        <h3>Pending Approvals</h3>
-        <ul>
-          {pendingBooks.map(book => (
-            <li key={book.id}>
-              {book.title} ({book.type}) 
-              <button onClick={() => approveBook(book)}>Approve</button>
-            </li>
-          ))}
-        </ul>
-      </div>
     );
   };
 
@@ -103,13 +168,16 @@ const EditingAndPublishing = () => {
 
       <div className="editing">
         <div className="container">
-          <p className="medium-header" style={{textTransform:"uppercase"}}>Files to be edited and/or  Published</p>
+          <p className="medium-header" style={{ textTransform: "uppercase" }}>
+            Files to be edited and/or Published
+          </p>
           <div className="notice">
-            <p>Please note that your eBook and audiobook must be approved by an admin before they can be published.</p>
+            <p>
+              Please note that your eBook and audiobook must be approved by an
+              admin before they can be published.
+            </p>
           </div>
-          <UploadForm handleUpload={handleUpload} />
-          <BookList books={books} />
-          {isAdmin && <ApprovalPanel pendingBooks={pendingBooks} handleApproval={handleApproval} />}
+          <UploadForm />
         </div>
       </div>
 

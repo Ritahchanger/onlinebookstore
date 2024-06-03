@@ -1,139 +1,157 @@
 .editing .upload-form {
-    max-width: 600px;
-    margin: 90px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 2px;
-    background-color: #f9f9f9;
-  }
-  
-  .editing .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .editing  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .editing .form-control {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    font-size: 16px;
-  }
-  
-  .editing .form-control:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  }
-  
-  .editing  .form-control[type="file"] {
-    padding: 3px; /* Adjust padding for file input */
-  }
-  
-  .editing .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    text-align: center;
-  }
-  
-  .editing  .btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .editing  .notice {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-    margin-top:1.5rem;
-  }
- 
-  .editing .account input[type=text]{
-    height:40px;
-    border: 1px solid #ddd;
-    cursor: pointer;
+  max-width: 600px;
+  margin: 90px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  background-color: #f9f9f9;
 }
-.account .editing .container{
-    max-width:700px;
-    height:calc(100vh - 65px);
-    display:flex;
-    align-items:center;
-    justify-content: center;
-    flex-direction: column;
+
+.editing .form-group {
+  margin-bottom: 15px;
+}
+
+.editing .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.editing .form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  font-size: 16px;
+}
+
+.editing .form-control:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.editing .form-control[type="file"] {
+  padding: 3px; /* Adjust padding for file input */
+}
+
+.editing .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.editing textarea{
+  width:100%;
+  margin-top:1rem;
+  border: 1px solid #ccc;
+  border-radius:8px;
+  padding:16px;
+  outline:none;
+}
+
+.editing .btn:hover {
+  background-color: #0056b3;
+}
+
+.editing .notice {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  margin-top: 1.5rem;
+}
+
+.editing .account input[type="text"] {
+  height: 40px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+.account .editing .container {
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .account .editing .container form {
-    width: 100%;
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius:5px;
-    background-color: #f9f9f9;
-  }
-  
-  .account .editing .container input[type="text"],
-  .account .editing .container input[type="file"],
-  .account .editing .container select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size:var(---mobile-font);
-    margin-top: 0.7rem;
-    cursor: pointer;
-  }
-  
-  .account .editing .container input[type="text"]:focus,
-  .account .editing .container input[type="file"]:focus,
-  .account .editing .container select:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  }
-  
-  .account .editing .container .submit-btn {
-    width: 100%;
-    padding: 0.7rem;
-    margin-top: 0.7rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.5s;
-    font-size:var(---mobile-font);
-  }
-  
-  .account .editing .container .submit-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .account .editing .container .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  .account .editing .container .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    font-size:var(---mobile-font);
-  }
-  
-.editing p, .editing input[type=text]{
-    font-size:var(---mobile-font);
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.account .editing .container input[type="text"],
+.account .editing .container input[type="file"],
+.account .editing .container select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: var(---mobile-font);
+  margin-top: 0.7rem;
+  cursor: pointer;
+}
+
+.account .editing .container input[type="text"]:focus,
+.account .editing .container input[type="file"]:focus,
+.account .editing .container select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.account .editing .container .submit-btn {
+  width: 100%;
+  padding: 0.7rem;
+  margin-top: 0.7rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.5s;
+  font-size: var(---mobile-font);
+}
+
+.account .editing .container .submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.account .editing .container .form-group {
+  margin-bottom: 1rem;
+}
+
+.account .editing .container .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: var(---mobile-font);
+}
+
+.editing p,
+.editing input[type="text"] {
+  font-size: var(---mobile-font);
+}
+
+.editing .row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.editing .row div{
+  flex-basis:48%;
 }

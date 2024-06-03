@@ -6,6 +6,7 @@
 .account .payment .container table tbody img {
   width: 50px;
   height: 50px;
+  
 }
 
 .account table tbody tr:nth-child(even) {
@@ -18,14 +19,11 @@
 
 .account .payment-options {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   margin-top: 1rem;
 }
 
-.account .payment-options img {
-  width: 200px;
-}
 
 .account .mpesa_logo {
   border: 2px solid var(--green);
@@ -33,4 +31,24 @@
 
 .account .payment .cart-buttons {
   border-radius: 5px;
+}
+
+.account .payment .input-group input{
+  height:40px;
+  border:none;
+  border-bottom:1px solid var(--gray);
+  outline:none;
+}
+.payment-row{
+  display:flex;
+  justify-content: space-between;
+  margin-top:1rem;
+}
+.payment-row img{
+  width:200px;
+}
+
+.account .payment-options .input-group{
+  flex-basis:80%;
+  cursor: pointer;
 }

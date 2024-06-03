@@ -16,18 +16,19 @@ function formatCurrentDate () {
 
 const getBooks = async (req, res) => {
   try {
-    const books = await Book.find({})
+    const books = await Book.find({}).sort({ uploadedAt: -1 });
 
     if (!books.length)
       return res
         .status(404)
-        .json({ status: 404, success: false, data: 'No books found' })
+        .json({ status: 404, success: false, data: 'No books found' });
 
-    return res.status(200).json({ status: 200, success: true, data: books })
+    return res.status(200).json({ status: 200, success: true, data: books });
   } catch (error) {
-    return res.status(500).json({ success: false, error: `${error.message}` })
+    return res.status(500).json({ success: false, error: `${error.message}` });
   }
-}
+};
+
 
 const getBooksByAuthors = async (req, res) => {
   try {
@@ -54,7 +55,7 @@ const getBooksByAuthors = async (req, res) => {
 
 const addBooks = async (req, res) => {
   try {
-    const { title, author, price, reviews, ratings, description } = req.body
+    const { title, author, price, description } = req.body
 
     const formattedDate = formatCurrentDate()
 
@@ -72,8 +73,6 @@ const addBooks = async (req, res) => {
       title,
       author,
       price,
-      reviews,
-      ratings,
       description,
       book,
       coverImage,
@@ -97,17 +96,10 @@ const getFileDetails = async (req, res) => {
     console.log(`The book filename is ${bookFilename}`)
 
     console.log(`The book coverImage filename is ${coverImageFilename}`)
-
   } catch (error) {
-
     return res.status(500).json({ success: false, error: error.message })
-
-
   }
 }
-
-
-
 
 const updateBookSales = async (req, res) => {
   try {
@@ -127,6 +119,10 @@ const updateBookSales = async (req, res) => {
   }
 }
 
-
-
-module.exports = { getBooks, getBooksByAuthors, addBooks, getFileDetails,updateBookSales }
+module.exports = {
+  getBooks,
+  getBooksByAuthors,
+  addBooks,
+  getFileDetails,
+  updateBookSales
+}

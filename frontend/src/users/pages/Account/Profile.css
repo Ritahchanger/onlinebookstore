@@ -117,37 +117,77 @@
   display: none;
 } */
 
-.profile .custom-file-label {
-  display: inline-block;
-  cursor: pointer;
-  background-color: transparent; /* Ensure the background is transparent */
-  border: none; /* Remove border */
-  padding: 0; /* Remove padding */
-  display:flex;
-  justify-content:center;
-}
 
-.profile .custom-file-label img {
-  width: 50px; /* Set desired width */
-  height: auto; /* Maintain aspect ratio */
+.profile form img{
+  width:50px;
 }
-
-.profile .custom-file-label:hover img {
-  opacity: 0.8; /* Add a hover effect if desired */
-}
-
-/* Profile.css */
-.profile .file-message {
-  margin-top: 10px;
-  color: green; /* Adjust the color as needed */
-  font-size: 14px; /* Adjust the font size as needed */
-}
-
 .profile .alter_profile{
+  width:100%;
   display:flex;
-  flex-direction:column;
-  align-self:center; 
+  align-items:center;
+  flex-direction: column;
+  text-align:center;
+}
+.profile .alter_profile label{
+  width:100%;
+  display:flex;
   justify-content:center;
+}
+.profile .alter_profile input{
+display:none;
+
+}
+
+.profile .alter_profile .cart-buttons{
+  width:100%;
+  margin:0;
+}
+
+.profile .edit_profile button{
+  width:100%;
+  margin-bottom:1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Edit profile modal */
+
+.account .edit_profile_modal{
+  height:100vh;
+  width:100%;
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+  background:rgba(0, 0, 0, 0.75);
+  z-index:99;
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.account .edit_profile_modal.active{
+  display:flex;
+}
+
+.account .form_container  .medium-header{
+  margin:0;
+  text-transform:uppercase;
+}
+
+.account .edit_profile_modal .cart-buttons{
+  width:100%;
+  margin-top:1rem;
+  color:var(--blue);
+  font-weight:700;
 }
 
 
@@ -162,10 +202,7 @@
         flex-basis:48%;
     }
     .profile .user-information .profile-card:nth-child(1){
-
-
         padding-right:1rem;
-
     }
     .profile .user-information .profile-card p{
         text-align:start;
