@@ -1,13 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit"; 
-import { useNavigate } from "react-router-dom"; 
+import { createSlice } from "@reduxjs/toolkit";
 
+// Initial state
 const initialState = {
+    isLoggedIn: !!localStorage.getItem('user'),
+    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
+};
 
-    isLoggedIn:false,
-    user:null
-
-}
-
+// Create the slice
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -16,17 +15,16 @@ const authSlice = createSlice({
             const { payload } = action;
             state.isLoggedIn = true;
             state.user = payload;
+            localStorage.setItem('user', JSON.stringify(payload));
         },
-
-
         logout(state) {
             state.isLoggedIn = false;
-            state.user =null;
+            state.user = null;
+            localStorage.removeItem('user');
         },
     },
-})
+});
 
-
-export const { login,logout } = authSlice.actions;
-
-export default authSlice;
+// Export actions and reducer
+export const { login, logout } = authSlice.actions;
+export default authSlice

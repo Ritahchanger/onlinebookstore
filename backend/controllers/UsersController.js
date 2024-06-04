@@ -347,6 +347,51 @@ const updatePassword = async (req, res) => {
 };
 
 
+const updateNames = async (req, res) => {
+  const { id } = req.params;
+  const { firstName, secondName } = req.body;
+
+  try {
+    // Find the user by ID
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(200).json({
+        status:404,
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    // Update fields if provided in the request body
+    if (firstName) {
+      user.firstName = firstName;
+    }
+    if (secondName) {
+      user.secondName = secondName;
+    }
+
+    // Save the updated user information
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'User information updated successfully',
+      data:user
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message
+    });
+  }
+};
+
+
+
+
+
+
 
 
 
@@ -367,4 +412,5 @@ module.exports = {
   terminateAccount,
   updateUserContact,
   updatePassword,
+  updateNames,
 }

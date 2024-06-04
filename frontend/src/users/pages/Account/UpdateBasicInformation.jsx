@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const UpdateBasicInformation = () => {
+  const user = useSelector((state) => state.auth.user);
+
   const [formData, setFormData] = useState({
     firstName: "",
     secondName: ""
@@ -11,11 +15,12 @@ const UpdateBasicInformation = () => {
     secondName: ""
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  const handleChange = ({ target: { name, value } }) => {
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value.trim()
     });
     setErrors({
       ...errors,
@@ -23,23 +28,51 @@ const UpdateBasicInformation = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let validationErrors = {};
+  const validateForm = () => {
+    const validationErrors = {};
+    const namePattern = /^[a-zA-Z]+$/;
 
-    // Validate only if the field has been filled out
-    if (formData.firstName && !/^[a-zA-Z]+$/.test(formData.firstName)) {
+    if (formData.firstName && !namePattern.test(formData.firstName)) {
       validationErrors.firstName = "First name can only contain letters.";
     }
-    if (formData.secondName && !/^[a-zA-Z]+$/.test(formData.secondName)) {
+    if (formData.secondName && !namePattern.test(formData.secondName)) {
       validationErrors.secondName = "Second name can only contain letters.";
     }
+
+    return validationErrors;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validateForm();
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      // Perform the update action here
-      console.log("Form submitted:", formData);
+      try {
+        const response = await axios.patch(
+          `http://localhost:5000/api/users/${user.user._id}/update/names`,
+          {
+            firstName: formData.firstName,
+            secondName: formData.secondName
+          }
+        );
+
+        if (response.data.success) {
+          setSubmitSuccess(true);
+        } else {
+          setErrors({
+            firstName: response.data.message,
+            secondName: response.data.message
+          });
+        }
+      } catch (error) {
+        console.error("There was an error updating the user information:", error);
+        setErrors({
+          firstName: "There was an error updating the information.",
+          secondName: "There was an error updating the information."
+        });
+      }
     }
   };
 
@@ -69,6 +102,7 @@ const UpdateBasicInformation = () => {
       <button className="cart-buttons" type="submit">
         UPDATE
       </button>
+      {submitSuccess && <p className="success">Information updated successfully!</p>}
     </form>
   );
 };

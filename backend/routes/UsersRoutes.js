@@ -55,7 +55,10 @@ router.delete('delete/:id/termination/account',UsersController.terminateAccount)
 // USER PROFILE UPDATES
 
 router.put('/:id/update/phoneNo',UsersController.updateUserContact)
+
 router.put('/:id/update/password',UsersController.updatePassword)
+
+router.patch('/:id/update/names',UsersController.updateNames)
 
 
 
