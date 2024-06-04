@@ -6,7 +6,7 @@
     right:0;
     height:100vh;
     z-index:99;
-    display:flex;
+    display:none;
     justify-content:center;
     align-items:center;
     flex-direction: column;

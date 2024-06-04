@@ -149,9 +149,18 @@ display:none;
 }
 
 
+.account .edit-form .cart-buttons{
+  background:var(--green);
+  border:2px solid var(--green);
+  color:var(--white);
+}
 
-
-
+.account .edit-form .cart-buttons:hover{
+  background:transparent;
+  color:var(--green);
+  font-weight:600;
+  border:2px solid var(--green)
+}
 
 
 
@@ -169,7 +178,8 @@ display:none;
   left:0;
   background:rgba(0, 0, 0, 0.75);
   z-index:99;
-  display:none;
+  /* display:none; */
+  display:flex;
   justify-content:center;
   align-items:center;
 }
@@ -189,6 +199,25 @@ display:none;
   color:var(--blue);
   font-weight:700;
 }
+
+.account .edit-form input{
+  border:none;
+  height:40px;
+  border-bottom:1px solid var(--gray);
+  outline:none;
+}
+.account .edit-form input:focus{
+  border-bottom:1px solid var(--pinkRed);
+}
+.account .edit-form .input_group{
+  padding-bottom:1rem;
+  cursor:pointer;
+}
+
+.account .edit-form .errors{
+  color:var(--pinkRed)
+}
+
 
 
 @media(max-width:650px){

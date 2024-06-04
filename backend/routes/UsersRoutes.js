@@ -42,4 +42,21 @@ router.get('/credentials',UsersController.getUserCookie)
 router.get('/delete/:id',UsersController.getUserCookie)
 
 
+// ACCOUNTS TERMINATION
+
+
+router.post('/add/termination/account',UsersController.addAccountToTerminate)
+
+router.get('/get/termination/accounts',UsersController.getAccountsToTerminate)
+
+router.delete('delete/:id/termination/account',UsersController.terminateAccount)
+
+
+// USER PROFILE UPDATES
+
+router.put('/:id/update/phoneNo',UsersController.updateUserContact)
+router.put('/:id/update/password',UsersController.updatePassword)
+
+
+
 module.exports = router;

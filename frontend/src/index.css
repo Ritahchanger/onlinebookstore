@@ -162,7 +162,19 @@ img{
 }
 
 
+
 .books_message{
   margin-top:50px;
   text-align: center;
 }
+.account .edit-form{
+  box-shadow:0 0 5px rgba(0,0,0,0.25);
+  margin-bottom:1rem;
+  padding:1rem;
+  border-radius:3px;
+}
+.account .edit-form .medium-header{
+  margin:0;
+}
+
+

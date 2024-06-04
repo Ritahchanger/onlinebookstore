@@ -1,18 +1,29 @@
 import "./TerminationModel.css";
-
-import { useDispatch, useSelector } from "react-redux";
-
-import { clearTerminatingUser } from "../../Redux/features/AccountTerminationSlice";
-
 import { useState } from "react";
+import axios from "axios";
+
+import { useSelector } from "react-redux"; 
 
 const TerminationModel = ({ handleTerminationModel, terminationModel }) => {
-  const [isTerminationRequest, sentTerminationRequest] = useState(false);
 
-  const deleteAccount = () => {
-    // API CALL
+  const user = useSelector((state)=>state.auth.user)
 
-    sentTerminationRequest(true);
+  const [isTerminationRequest, setIsTerminationRequest] = useState(false);
+  const [reasonForTermination, setReasonForTermination] = useState("");
+
+  const deleteAccount = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/users/add/termination/account",
+        {
+          user:user.user._id,
+          reason: reasonForTermination,
+        }
+      );
+      setIsTerminationRequest(true);
+    } catch (error) {
+      console.error("Error sending termination request:", error);
+    }
   };
 
   return (
@@ -37,13 +48,20 @@ const TerminationModel = ({ handleTerminationModel, terminationModel }) => {
             <div className="input_group">
               <textarea
                 name="reasonForTermination"
-                id=""
+                value={reasonForTermination}
+                onChange={(e) => setReasonForTermination(e.target.value)}
                 cols="30"
                 rows="10"
-                placeholder="Enter reason for account termination(Optional)..."
+                placeholder="Enter reason for account termination (Optional)..."
               ></textarea>
             </div>
-            <button type="submit" className="cart-buttons">PROCEED TO TERMINATION</button>
+            <button
+              type="button" 
+              className="cart-buttons"
+              onClick={deleteAccount} 
+            >
+              PROCEED TO TERMINATION
+            </button>
           </>
         )}
       </form>

@@ -92,7 +92,7 @@ const SideBar = ({ sidebar, handleTerminationModel }) => {
             <p>
               <i className="fas fa-check"></i>
             </p>
-            <p>Books Read</p>
+            <p>Previously read books</p>
           </NavLink>
         </li>
         <li>
