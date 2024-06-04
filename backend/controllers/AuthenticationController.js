@@ -109,8 +109,16 @@ const logout = async (req, res) => {
 
 const forgotPassword = async (req, res) => {
   try {
-    const { email } = req.body
+    const { email } = req.body;
 
+    // Check if user exists with the provided email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(200).send({success:false,status:404,error: 'User not found' });
+    }
+
+    // If user exists, proceed with sending the password reset email
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
@@ -119,24 +127,25 @@ const forgotPassword = async (req, res) => {
         user: process.env.COMPANY_EMAIL,
         pass: process.env.COMPANY_EMAIL_PASSWORD
       }
-    })
+    });
 
     const info = await transporter.sendMail({
       from: '"BEMI EDITORS LIMITED" <peterdennis573@gmail.com>',
       to: email,
       subject: 'Password Reset Request',
       text: 'Request to change my password from the bookstore application',
-      html: "<b>Password Reset Request</b><p>Please follow the link to reset your password.</p</br>  <a href='https://onlinebookstore1.vercel.app/change-password'"
-    })
+      html: "<b>Password Reset Request</b><p>Please follow the link to reset your password.</p></br>  <a href='http://localhost:3000/change-password'>Reset Password</a>"
+    });
 
-    console.log('Message sent: %s', info.messageId)
-    console.log('The message was successfully sent')
-    res.status(200).send({ msg: 'The message was successfully sent' })
+    console.log('Message sent: %s', info.messageId);
+    console.log('The message was successfully sent');
+    res.status(200).send({success:true,status:200,msg: 'The message was successfully sent' });
   } catch (error) {
-    console.log('There was a problem in sending the email:', error)
-    res.status(500).send('There was a problem in sending the email')
+    console.log('There was a problem in sending the email:', error);
+    res.status(500).send('There was a problem in sending the email');
   }
-}
+};
+
 
 const changePassword = async (req, res) => {}
 

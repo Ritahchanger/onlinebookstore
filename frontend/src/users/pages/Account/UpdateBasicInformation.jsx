@@ -22,6 +22,8 @@ const UpdateBasicInformation = () => {
       ...formData,
       [name]: value.trim()
     });
+  
+    // Clear error for the field being edited
     setErrors({
       ...errors,
       [name]: ""
@@ -45,9 +47,14 @@ const UpdateBasicInformation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
-
+  
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+    } else if (!formData.firstName && !formData.secondName) {
+      setErrors({
+        firstName: "First name cannot be empty if second name is empty.",
+        secondName: "Second name cannot be empty if first name is empty."
+      });
     } else {
       try {
         const response = await axios.patch(
@@ -57,7 +64,7 @@ const UpdateBasicInformation = () => {
             secondName: formData.secondName
           }
         );
-
+  
         if (response.data.success) {
           setSubmitSuccess(true);
         } else {

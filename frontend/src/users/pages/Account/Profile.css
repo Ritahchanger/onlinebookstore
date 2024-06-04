@@ -198,6 +198,7 @@ display:none;
   margin-top:1rem;
   color:var(--blue);
   font-weight:700;
+  margin-top:1rem;
 }
 
 .account .edit-form input{
@@ -212,12 +213,20 @@ display:none;
 .account .edit-form .input_group{
   padding-bottom:1rem;
   cursor:pointer;
+  position:relative;
 }
 
 .account .edit-form .errors{
   color:var(--pinkRed)
 }
 
+.account .edit-form .error{
+  position:absolute;
+  color:var(--pinkRed)
+}
+.account .edit-form .success{
+  color:var(--green);
+}
 
 
 @media(max-width:650px){

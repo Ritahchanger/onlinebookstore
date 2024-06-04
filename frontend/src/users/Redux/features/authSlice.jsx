@@ -20,7 +20,7 @@ const authSlice = createSlice({
         logout(state) {
             state.isLoggedIn = false;
             state.user = null;
-            localStorage.removeItem('user');
+            localStorage.clear('user');
         },
     },
 });

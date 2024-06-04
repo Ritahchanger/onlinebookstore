@@ -52,7 +52,7 @@ const UpdateEmailInformation = () => {
     } else {
       try {
         const response = await axios.patch(
-          `http://localhost:5000/api/users/${user._id}/update/email`,
+          `http://localhost:5000/api/users/${user.user._id}/update/email`,
           {
             currentEmail: emails.currentEmail,
             newEmail: emails.newEmail

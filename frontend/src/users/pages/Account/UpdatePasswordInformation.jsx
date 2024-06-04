@@ -103,8 +103,10 @@ const UpdatePasswordInformation = () => {
           value={confirmNewPassword}
           onChange={handleChange(setConfirmNewPassword)}
         />
+         {passwordError && <p className="error">{passwordError}</p>}
       </div>
-      {passwordError && <p className="error">{passwordError}</p>}
+     
+
       {successMessage && <p className="error"style={{color:"var(--green)"}}>Password successfully updated</p>}
       
       <button className="cart-buttons" type="submit">
