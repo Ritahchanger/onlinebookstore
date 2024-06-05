@@ -35,6 +35,9 @@ router.get('/authors/:id',BookController.getBooksByAuthors)
 router.post('/:id/update_sales',BookController.updateBookSales)
 
 
+router.post('/approve/book',BookController.approveBook)
+
+
 
 
 

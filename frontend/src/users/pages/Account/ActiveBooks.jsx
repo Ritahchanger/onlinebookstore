@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import PDFViewer from "../../components/pdfViewer/pdfViewer";
+import PdfViewer from "../../components/pdfViewer/pdfViewer";
+import { openReadBookModal } from "../../Redux/features/readBookModalSlice";
 
 const ActiveBooks = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-
   const [books, setBooks] = useState(null);
 
   const getBooksByAuthor = async () => {
@@ -31,6 +32,10 @@ const ActiveBooks = () => {
     getBooksByAuthor();
   }, [user.user._id]);
 
+  const openBookModal = (book) => {
+    dispatch(openReadBookModal(book));
+  };
+
   return (
     <div className="active-books">
       <div className="container">
@@ -54,7 +59,7 @@ const ActiveBooks = () => {
                     <td>{`${user.user.firstName} ${user.user.secondName}`}</td>
                     <td>{book.reviews}</td>
                     <td>{book.ratings}</td>
-                    <td>
+                    <td onClick={() => openBookModal(book)}>
                       <i className="fa fa-eye"></i>
                     </td>
                   </tr>
@@ -63,12 +68,7 @@ const ActiveBooks = () => {
           </table>
         </div>
       </div>
-
-      <div className="book_view_modal">
-        <p className="close-icon">&times;</p>
-        <p className="medium-header book_modal">BOOKS TO READ</p>
-        <PDFViewer/>
-      </div>
+      <PdfViewer/>
     </div>
   );
 };

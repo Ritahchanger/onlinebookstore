@@ -119,10 +119,54 @@ const updateBookSales = async (req, res) => {
   }
 }
 
+
+
+
+// Define the controller function
+const approveBook = async (req, res) => {
+    try {
+        const { authorId, bookId } = req.body; // Assuming you pass the authorId and bookId in the request body
+
+        // Check if the user has the necessary permissions to approve the book
+        // This could involve checking if the user is an admin or has specific roles/permissions
+        // For simplicity, let's assume the user is authorized to approve the book
+
+        // Find the book by ID
+        const book = await Book.findById(bookId);
+
+        if (!book) {
+            return res.status(404).json({ success: false, message: 'Book not found' });
+        }
+
+        // Check if the author ID matches the author of the book
+        if (book.author.toString() !== authorId) {
+            return res.status(403).json({ success: false, message: 'Unauthorized to approve this book' });
+        }
+
+        // Update the book document to set upproved field to true
+        book.upproved = true;
+        await book.save();
+
+        // Return success response
+        return res.status(200).json({ success: true, message: 'Book approved successfully' });
+    } catch (error) {
+        console.error(`Error approving book: ${error.message}`);
+        return res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+};
+
+// Export the controller function
+module.exports = { approveBook };
+
+
+
 module.exports = {
   getBooks,
   getBooksByAuthors,
   addBooks,
   getFileDetails,
-  updateBookSales
+  updateBookSales,
+  approveBook,
 }
+
+

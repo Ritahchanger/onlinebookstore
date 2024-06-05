@@ -192,10 +192,6 @@ img{
   left:0;
 
   bottom:1rem;
-  border-radius:5px;
-
-
-  
 
   color:var(--black);
 
@@ -203,10 +199,19 @@ img{
 
   z-index:99;
 
+  display:none;
+
+}
+
+.book_view_modal.active{
+  display:block;
+  
 }
 
 .book_view_modal .medium-header.book_modal{
   margin-top:0.5rem;
+  text-transform:uppercase;
+  font-size:1.3rem;
 }
 
 .book_view_modal .close-icon{

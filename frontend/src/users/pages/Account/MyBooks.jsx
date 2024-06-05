@@ -5,11 +5,19 @@ import { useEffect, useState } from "react";
 import ActiveBooks from "./ActiveBooks";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import PdfViewer from "../../components/pdfViewer/pdfViewer";
+
+import { openReadBookModal } from "../../Redux/features/readBookModalSlice"; 
 
 import axios from "axios";
 
 const MyBooks = () => {
+
+  const dispatch = useDispatch()
+
+
   const user = useSelector((state) => state.auth.user);
 
   const [sidebar, showSidebar] = useState(false);
@@ -45,6 +53,12 @@ const MyBooks = () => {
     getApprovedBooks();
   }, [user.user._id]);
 
+  const openBookModal = (book) =>{ // Modify to accept book as argument
+    dispatch(openReadBookModal(book)) // Pass book along with action
+  }
+
+
+
   return (
     <div className="account">
       <AccountNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
@@ -76,7 +90,7 @@ const MyBooks = () => {
                         <td>{`${user.user.firstName} ${user.user.secondName}`}</td>
                         <td>{book.reviews}</td>
                         <td>{book.ratings}</td>
-                        <td>
+                        <td onClick={() => openBookModal(book)}> {/* Pass book when clicked */}
                           <i className="fa fa-eye"></i>
                         </td>
                       </tr>
@@ -97,6 +111,7 @@ const MyBooks = () => {
         handleTerminationModel={handleTerminationModel}
         terminationModel={terminationModel}
       />
+       <PdfViewer/>
     </div>
   );
 };

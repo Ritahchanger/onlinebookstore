@@ -1,18 +1,22 @@
-import "./Account.css";
-import SideBar from "./SideBar";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+
 import AccountNavbar from "./AccountNavbar";
-import { useEffect, useState } from "react";
-import ActiveBooks from "./ActiveBooks";
+import SideBar from "./SideBar";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
-import axios from "axios"; // Import axios for making API calls
-import { useSelector } from "react-redux";
+import PdfViewer from "../../components/pdfViewer/pdfViewer";
+import { openReadBookModal } from "../../Redux/features/readBookModalSlice";
+
+import "./Account.css";
 
 const PendingApprovals = () => {
   const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
 
   const [sidebar, showSidebar] = useState(false);
   const [terminationModel, showTerminationModel] = useState(false);
-  const [unapprovedBooks, setUnapprovedBooks] = useState([]); // State to store unapproved books
+  const [unapprovedBooks, setUnapprovedBooks] = useState([]);
 
   useEffect(() => {
     const getUnapprovedBooks = async () => {
@@ -20,14 +24,14 @@ const PendingApprovals = () => {
         const response = await axios.get(
           `http://localhost:5000/api/author/books/unapproved/${user.user._id}`
         );
-        setUnapprovedBooks(response.data.data); // Update state with unapproved books from the server
+        setUnapprovedBooks(response.data.data);
       } catch (error) {
         console.error("Error fetching unapproved books:", error);
       }
     };
 
-    getUnapprovedBooks(); // Call the function to fetch unapproved books when the component mounts
-  }, [user.user._id]); // Trigger useEffect whenever user ID changes
+    getUnapprovedBooks();
+  }, [user.user._id]);
 
   const handleSidebar = () => {
     showSidebar(!sidebar);
@@ -35,6 +39,10 @@ const PendingApprovals = () => {
 
   const handleTerminationModel = () => {
     showTerminationModel(!terminationModel);
+  };
+
+  const openBookModal = (book) => {
+    dispatch(openReadBookModal(book));
   };
 
   return (
@@ -64,7 +72,7 @@ const PendingApprovals = () => {
                       <tr key={book._id}>
                         <td>{book.title}</td>
                         <td>{`${user.user.firstName} ${user.user.secondName}`}</td>
-                        <td>
+                        <td onClick={() => openBookModal(book)}>
                           <i className="fa fa-eye"></i>
                         </td>
                       </tr>
@@ -83,6 +91,7 @@ const PendingApprovals = () => {
         handleTerminationModel={handleTerminationModel}
         terminationModel={terminationModel}
       />
+      <PdfViewer />
     </div>
   );
 };

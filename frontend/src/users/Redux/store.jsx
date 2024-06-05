@@ -16,6 +16,8 @@ import blogsSlice from "./features/blogsSlice";
 
 import AccountTerminationSlice from "./features/AccountTerminationSlice";
 
+import readBookModalSlice from "./features/readBookModalSlice";
+
 export default configureStore({
   reducer: {
     alerts: alertSlice.reducer,
@@ -25,6 +27,7 @@ export default configureStore({
     books:booksSlice.reducer,
     bookModal:BookDescriptionSlice.reducer,
     blogs:blogsSlice.reducer,
-    accountTermination:AccountTerminationSlice.reducer
+    accountTermination:AccountTerminationSlice.reducer,
+    readModal:readBookModalSlice.reducer
   }
 });

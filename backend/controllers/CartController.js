@@ -53,7 +53,7 @@ const getCartItems = async (req, res) => {
 
         // Check if the user ID is provided
         if (!userId) {
-            return res.status(400).json({ success: false, error: "User ID is required" });
+            return res.status(200).json({status:400, success: false, error: "User ID is required" });
         }
 
         // Find the user's cart
@@ -61,7 +61,7 @@ const getCartItems = async (req, res) => {
 
         // Check if the cart exists
         if (!cart) {
-            return res.status(404).json({ success: false, error: "Cart not found" });
+            return res.status(200).json({ status:404, success: false, error: "Cart not found" });
         }
 
         // Return the cart items
@@ -70,6 +70,14 @@ const getCartItems = async (req, res) => {
         // Handle errors
         return res.status(500).json({ success: false, error: error.message });
     }
+
+
 }
 
-module.exports = { addCartItem ,getCartItems};
+const getAllCartItems = async (req, res) => {
+
+  res.send("Hello")
+};
+
+
+module.exports = { addCartItem ,getCartItems,getAllCartItems};

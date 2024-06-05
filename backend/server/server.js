@@ -12,8 +12,6 @@ const cors = require('cors')
 
 const cookieParser = require('cookie-parser')
 
-
-
 dotenv.config()
 
 const app = express()
@@ -23,21 +21,22 @@ app.use(helmet())
 
 app.use(cookieParser())
 
-app.use(express.urlencoded({ extended: true })); // To parse URL-encoded bodies
+app.use(express.urlencoded({ extended: true })) // To parse URL-encoded bodies
 
 app.use(express.json())
 
 app.use(morgan('combined'))
 
-
 app.use(
   '/upload/books',
   express.static('upload/books', {
-    setHeaders: res => {
-      res.set('Cross-Origin-Resource-Policy', 'cross-origin')
-    }
+    setHeaders: (res) => {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+    },
   })
-)
+);
+
 
 app.use(
   '/upload/authors',
@@ -47,7 +46,6 @@ app.use(
     }
   })
 )
-
 
 app.use(
   cors({
@@ -74,8 +72,7 @@ const BlogRoutes = require('../routes/BlogRoutes')
 
 const AuthorRoutes = require('../routes/AuthorsRoutes')
 
-
-const CartRoute = require("../routes/CartRoute")
+const CartRoute = require('../routes/CartRoute')
 
 app.use('/api/auth', AuthenticationRoute)
 app.use('/api/payment', PaymentsRoutes)
@@ -85,8 +82,7 @@ app.use('/api/categories', BooksCategoriesRoutes)
 app.use('/api/blog', BlogRoutes)
 app.use('/api/author', AuthorRoutes)
 
-
-app.use('/api/cart',CartRoute)
+app.use('/api/cart', CartRoute)
 
 const connectServer = async () => {
   const BlogRoutes = require('../routes/BlogRoutes')

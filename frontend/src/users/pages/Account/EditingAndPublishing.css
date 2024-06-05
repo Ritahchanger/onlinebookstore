@@ -155,3 +155,6 @@
 .editing .row div{
   flex-basis:48%;
 }
+.editing .error{
+  color:var(--pinkRed);
+}

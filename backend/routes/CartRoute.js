@@ -8,6 +8,8 @@ router.post('/post',CartController.addCartItem);
 
 router.get('/:id',CartController.getCartItems);
 
+router.get('/get',CartController.getAllCartItems);
+
 
 
 module.exports = router
