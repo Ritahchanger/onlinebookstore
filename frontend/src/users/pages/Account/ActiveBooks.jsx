@@ -2,6 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
+import PDFViewer from "../../components/pdfViewer/pdfViewer";
+
 const ActiveBooks = () => {
   const user = useSelector((state) => state.auth.user);
 
@@ -60,6 +62,12 @@ const ActiveBooks = () => {
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div className="book_view_modal">
+        <p className="close-icon">&times;</p>
+        <p className="medium-header book_modal">BOOKS TO READ</p>
+        <PDFViewer/>
       </div>
     </div>
   );

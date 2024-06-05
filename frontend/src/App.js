@@ -66,7 +66,7 @@ const App = () => {
           <Route path='/categories' element={<CategoriesNavbar />} />
           <Route path='/check-out' element={<Checkout />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
-          <Route path='/change-password' element={<PasswordChanging />} />
+          <Route path='/change-password/:email'element={<PasswordChanging />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='/wish-list' element={<WishList />} />
           <Route

@@ -176,5 +176,47 @@ img{
 .account .edit-form .medium-header{
   margin:0;
 }
+.success{
+  color:var(--green)
+}
 
 
+.book_view_modal {
+
+  position:fixed;
+
+  top:0;
+
+  right:0;
+
+  left:0;
+
+  bottom:1rem;
+  border-radius:5px;
+
+
+  
+
+  color:var(--black);
+
+  background:var(--white);
+
+  z-index:99;
+
+}
+
+.book_view_modal .medium-header.book_modal{
+  margin-top:0.5rem;
+}
+
+.book_view_modal .close-icon{
+  position:absolute;
+  right:1rem;
+  font-size:2rem;
+  cursor: pointer;
+  transition:All 0.5s;
+  color:var(--pinkRed)
+}
+.book_view_modal .close-icon:hover{
+  scale:1.4;
+}
