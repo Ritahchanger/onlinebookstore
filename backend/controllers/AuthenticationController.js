@@ -43,7 +43,7 @@ const Login = async (req, res) => {
 
     return res
       .status(200)
-      .json({ success: true, message: 'Login successfull',userId: user._id})
+      .json({ success: true, message: 'Login successfull', userId: user._id })
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message })
   }
@@ -100,7 +100,7 @@ const logout = async (req, res) => {
     res.cookie('token', '', {
       maxAge: 0
     })
-    
+
     res.status(200).json({ message: 'Logged out successfully' })
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message })
@@ -109,13 +109,15 @@ const logout = async (req, res) => {
 
 const forgotPassword = async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email } = req.body
 
     // Check if user exists with the provided email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email })
 
     if (!user) {
-      return res.status(200).send({success:false,status:404,error: 'User not found' });
+      return res
+        .status(200)
+        .send({ success: false, status: 404, error: 'User not found' })
     }
 
     // If user exists, proceed with sending the password reset email
@@ -127,30 +129,106 @@ const forgotPassword = async (req, res) => {
         user: process.env.COMPANY_EMAIL,
         pass: process.env.COMPANY_EMAIL_PASSWORD
       }
-    });
+    })
 
     const info = await transporter.sendMail({
       from: '"BEMI EDITORS LIMITED" <peterdennis573@gmail.com>',
       to: email,
       subject: 'Password Reset Request',
       text: 'Request to change my password from the bookstore application',
-      html: "<b>Password Reset Request</b><p>Please follow the link to reset your password.</p></br>  <a href='http://localhost:3000/change-password'>Reset Password</a>"
-    });
+      html: `
+        <html>
+          <head>
+            <style>
+              /* CSS styles */
+              body {
+                font-family: Arial, sans-serif;
+                font-size: 16px;
+              }
+              .container {
+                margin: 20px;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              }
+              h1 {
+                color: #333;
+                margin-bottom: 20px;
+              }
+              p {
+                margin-bottom: 10px;
+              }
+              a {
+                display: inline-block;
+                background-color: #4CAF50;
+                color: #fff;
+                text-decoration: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+              }
+              a:hover {
+                background-color: #45a049;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>Password Reset Request</h1>
+              <p>Please follow the link to reset your password.</p>
+              <p><a href='http://localhost:3000/change-password/${email}'>Reset Password</a></p>
+            </div>
+          </body>
+        </html>
+      `
+    })
 
-    console.log('Message sent: %s', info.messageId);
-    console.log('The message was successfully sent');
-    res.status(200).send({success:true,status:200,msg: 'The message was successfully sent' });
+    console.log('Message sent: %s', info.messageId)
+    console.log('The message was successfully sent')
+    res
+      .status(200)
+      .send({
+        success: true,
+        status: 200,
+        msg: 'The message was successfully sent'
+      })
   } catch (error) {
-    console.log('There was a problem in sending the email:', error);
-    res.status(500).send('There was a problem in sending the email');
+    console.log('There was a problem in sending the email:', error)
+    res.status(500).send('There was a problem in sending the email')
+  }
+}
+
+
+const changePassword = async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    // If user not found, return an error
+    if (!user) {
+      return res.status(200).json({ success:false, status:404, message: "User not found" });
+    }
+
+    // Hash the new password before saving it
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update user's password
+    user.password = hashedPassword;
+
+    // Save the updated user
+    await user.save();
+
+    // Respond with success message
+    return res.status(200).json({success:true, status:200, message: "User password updated",userId:user._id});
+
+  } catch (error) {
+
+    console.error("Error updating password:", error);
+    return res.status(500).json({success:false,message: "Internal server error" });
   }
 };
-
-
-const changePassword = async (req, res) => {}
-
-
-
 
 
 module.exports = { Login, SignUp, logout, forgotPassword, changePassword }

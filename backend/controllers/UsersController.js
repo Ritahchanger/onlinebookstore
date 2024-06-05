@@ -148,23 +148,20 @@ const updatePassport = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    const { id } = req.params
+    const { id } = req.params;
 
-    const singleUser = await User.findById(id)
+    const singleUser = await User.findById(id).select('-password -email -roles -phoneNo');
 
     if (!singleUser) {
-      return res
-        .status(200)
-        .json({ status: 404, success: false, message: 'User not found' })
+      return res.status(404).json({ status: 404, success: false, message: 'User not found' });
     }
 
-    return res
-      .status(200)
-      .json({ status: 200, success: true, data: singleUser })
+    return res.status(200).json({ status: 200, success: true, data: singleUser });
   } catch (error) {
-    return res.status(500).json({ success: false, error: `${error.message}` })
+    return res.status(500).json({ success: false, error: error.message });
   }
-}
+};
+
 
 const getUserCookie = (req, res) => {
   try {
