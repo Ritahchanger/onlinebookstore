@@ -112,6 +112,7 @@ const PdfViewer = ({ fileUrl}) => {
           display: "flex",
           flexDirection: "column",
           height: "100%",
+          background:"green",
           marginTop: "1rem",
         }}
       >
@@ -121,6 +122,7 @@ const PdfViewer = ({ fileUrl}) => {
             display: "flex",
             justifyContent: "center",
             padding: "4px",
+            background:"green"
           }}
         >
           <div style={{ padding: "0px 2px" }}>

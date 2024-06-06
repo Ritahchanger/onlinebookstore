@@ -43,6 +43,15 @@ a{
 input{
   width:100%;
 }
+.content-wrapper {
+  height:calc(100vh - 50px);
+  text-align:center;
+  display:flex;
+  justify-content:center;
+  width:100%;
+  flex-direction: column;
+  color:var(--blue);
+}
 .hero-btn{
   color:var(--green);
   padding:0.5rem 3rem;
@@ -224,4 +233,8 @@ img{
 }
 .book_view_modal .close-icon:hover{
   scale:1.4;
+}
+.cart_success{
+  color:green;
+  margin-top:1rem;
 }

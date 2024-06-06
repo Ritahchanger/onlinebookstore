@@ -13,8 +13,6 @@ import { authenticateTerminatingUser } from "../../Redux/features/AccountTermina
 import axios from "axios";
 
 const SideBar = ({ sidebar, handleTerminationModel }) => {
-  const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   const accountTerminationRequest = useSelector(
@@ -28,20 +26,6 @@ const SideBar = ({ sidebar, handleTerminationModel }) => {
     };
 
     dispatch(authenticateTerminatingUser(user));
-  };
-
-  const handleUserLogout = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/logout"
-      );
-
-      navigate("/login");
-
-      dispatch(logout());
-    } catch (error) {
-      console.log(`A process occurred ${error.message}`);
-    }
   };
 
   return (
@@ -120,7 +104,7 @@ const SideBar = ({ sidebar, handleTerminationModel }) => {
           </NavLink>
         </li>
         <li>
-          <Link to="#" onClick={handleUserLogout}>
+          <Link to="/logout">
             <p>
               <i className="fas fa-lock-open"></i>
             </p>

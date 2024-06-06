@@ -18,34 +18,25 @@ const BookByAuthor = () => {
 
   useEffect(() => {
     const fetchAuthorAndBooks = async () => {
-
       try {
-
         const [authorResponse, booksResponse] = await Promise.all([
-
           axios.get(`http://localhost:5000/api/author/${id}`),
 
-          axios.get(`http://localhost:5000/api/author/books/${id}`)
-
+          axios.get(`http://localhost:5000/api/author/books/approved/${id}`),
         ]);
 
         if (authorResponse.status !== 200 || booksResponse.status !== 200) {
-
           throw new Error("There was a problem fetching data");
-
         }
 
         setAuthor(authorResponse.data.data);
 
         setBooks(booksResponse.data.data);
-
-
       } catch (error) {
-
-        console.log(`There was a problem fetching data from backend: ${error.message}`);
-
+        console.log(
+          `There was a problem fetching data from backend: ${error.message}`
+        );
       }
-
     };
 
     window.scrollTo(0, 0);
@@ -56,19 +47,23 @@ const BookByAuthor = () => {
     setDisplayBook(!displayBook);
   };
 
-  if (!books || !author) return <div>Loading...</div>;
-
   return (
     <div className="books">
       <LowerNavbar />
-      <div className="container">
-        <div className="small-header">{`${author.firstName} ${author.secondName}`}</div>
-        <BooksGrid
-          books={books}
-          onBookClick={displayImageMoreDescription}
-        />
-        <p className="small-header">Audio</p>
-      </div>
+
+      {books ? (
+        <div className="container">
+          <div className="small-header">{`${author.firstName} ${author.secondName}`}</div>
+          <BooksGrid books={books} onBookClick={displayImageMoreDescription} />
+          <p className="small-header">Audio</p>
+        </div>
+      ) : (
+        <>
+          <div className="content-wrapper">
+            <p>Author's books have not been approved</p>
+          </div>
+        </>
+      )}
 
       {displayBook && (
         <BookDescriptionModal
@@ -78,7 +73,10 @@ const BookByAuthor = () => {
       )}
 
       <Footer />
-      <BookDescriptionModal displayBook={displayBook} displayImageMoreDescription={displayImageMoreDescription} />
+      <BookDescriptionModal
+        displayBook={displayBook}
+        displayImageMoreDescription={displayImageMoreDescription}
+      />
     </div>
   );
 };

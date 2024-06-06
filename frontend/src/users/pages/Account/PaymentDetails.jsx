@@ -37,8 +37,8 @@ const PaymentDetails = () => {
     const paymentMethod = "safaricom";
   
     try {
-      const makePayment = await axios.post(
-        "http://localhost:5000/api/payment",
+      const response = await axios.post(
+        `http://localhost:5000/api/payment`,
         {
           phone: phoneNo, // Use the provided phone number
           amount: totalPrice,
@@ -49,6 +49,12 @@ const PaymentDetails = () => {
           },
         }
       );
+
+      
+
+      if(response.data.sucess){
+        console.log("Payment done")
+      }
       // Handle payment response
       setPaymentSuccess(true); // Set payment success state to true
       setTimeout(() => {

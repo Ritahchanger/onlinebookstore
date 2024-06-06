@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeBookModal } from "../../Redux/features/BookDescriptionSlice";
 import "./bookDescriptionModal.css";
@@ -6,10 +6,10 @@ import axios from "axios";
 
 const BookDescriptionModal = () => {
   const dispatch = useDispatch();
-  const isUserLogged = useSelector((state) => state.auth.isUserLogged);
+  const isUserLogged = useSelector((state) => state.auth.isLoggedIn);
   const displayBookModal = useSelector((state) => state.bookModal.displayBookModal);
   const selectedBook = useSelector((state) => state.bookModal.selectedBook);
-  const userId = useSelector((state) => state.auth.user?.user._id);
+  const user = useSelector((state) => state.auth.user);
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showLoginMessage, setShowLoginMessage] = useState(false);
@@ -19,6 +19,13 @@ const BookDescriptionModal = () => {
     setShowSuccessMessage(false);
     setShowLoginMessage(false);
   };
+
+  useEffect(() => {
+    console.log("User logged in:", isUserLogged);
+    if (user && user.user) {
+      console.log("User ID:", user.user._id);
+    }
+  }, [isUserLogged, user]);
 
   if (!selectedBook) {
     return null;
@@ -31,15 +38,28 @@ const BookDescriptionModal = () => {
   const addItemToCart = async () => {
     if (!isUserLogged) {
       setShowLoginMessage(true);
+      console.log("User is not logged in.");
       return;
     }
 
+    if (!user || !user.user) {
+      console.error("User information is missing.");
+      return;
+    }
+
+    console.log("User is logged in. Proceeding to add item to cart.");
+
     try {
       const response = await axios.post("http://localhost:5000/api/cart/post", {
-        userId: userId,
+        userId: user.user._id,
         productId: selectedBook._id,
         quantity: 1
       });
+
+      if (!response.data.success) {
+        throw new Error("There was a problem posting the data to the backend");
+      }
+
       setShowSuccessMessage(true);
       setShowLoginMessage(false);
       console.log("Item added to cart:", response.data);
@@ -69,14 +89,14 @@ const BookDescriptionModal = () => {
             </p>
             <p className="description">{descriptionShortened}</p>
             {showSuccessMessage ? (
-              <p className="small-header">Book added to cart!</p>
+              <p className="cart_success">Book added to cart!</p>
             ) : (
               <>
                 <button className="hero-btn" onClick={addItemToCart}>
                   ADD TO CART
                 </button>
                 {showLoginMessage && (
-                  <p className="small-header">Please log in to add items to the cart.</p>
+                  <p className="cart_success">Please log in to add items to the cart.</p>
                 )}
               </>
             )}

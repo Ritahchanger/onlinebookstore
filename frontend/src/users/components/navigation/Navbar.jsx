@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
-import { sectionbNavigation, sectioncNavigation } from "../Data/NavbarData";
 import "./Navbar.css";
-import ProfileImage from "../../../assets/images/bemi.png"
+import ProfileImage from "../../../assets/images/bemi.png";
+
+import { useSelector } from "react-redux";
+
 const Navbar = () => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   return (
     <nav className="nav">
       <section className="section-a">
@@ -33,11 +37,36 @@ const Navbar = () => {
           </div>
 
           <div className="section-navigation">
-            {sectionbNavigation.map((item) => (
-              <p className="nav-li" key={item.id}>
-                <Link to={item.path}>{item.menu_name}</Link>
-              </p>
-            ))}
+            {isLoggedIn ? (
+              <>
+                <p className="nav-li">
+                  <Link to="/cart">CART</Link>
+                </p>
+
+                <p className="nav-li">
+                  <Link to="/account">ACCOUNT</Link>
+                </p>
+                <p className="nav-li">
+                  <Link to="/login">LOGOUT</Link>
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="nav-li">
+                  <Link to="/cart">CART</Link>
+                </p>
+
+                <p className="nav-li">
+                  <Link to="/account">ACCOUNT</Link>
+                </p>
+                <p className="nav-li">
+                  <Link to="/login">LOGIN</Link>
+                </p>
+                <p className="nav-li">
+                  <Link to="/signup">SIGNUP</Link>
+                </p>
+              </>
+            )}
           </div>
         </div>
       </section>
