@@ -50,6 +50,19 @@
   max-height: calc(100vh - 65px);
 }
 
+.account table tbody tr .remove{
+  background:var(--orange);
+  text-align:center;
+  cursor: pointer;
+  background:var(--green);
+  color:var(--white)
+}
+.account table tbody tr .remove:hover i{
+  color:var(--pinkRed)
+}
+.account table tbody tr .remove i{
+  color:var(--white);
+}
 
 .account .table_wrapper::-webkit-scrollbar {
   width: 15px; 

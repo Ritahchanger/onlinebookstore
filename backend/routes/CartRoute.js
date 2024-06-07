@@ -6,9 +6,12 @@ const router = require("express").Router();
 
 router.post('/post',CartController.addCartItem);
 
-router.get('/:id',CartController.getCartItems);
+router.get('/get/:id',CartController.getCartItems);
 
-router.get('/get',CartController.getAllCartItems);
+router.get('/',CartController.getAllCartItems);
+
+
+router.delete('/delete/cartItem/:userId/:cartItemId',CartController.deleteCartItem);
 
 
 

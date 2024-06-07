@@ -7,9 +7,19 @@ import Footer from "../Footer/Footer";
 import BooksGrid from "./BooksGrid";
 import BookDescriptionModal from "./BookDescriptionModal";
 
+import { useSelector, useDispatch } from "react-redux";
+
 import "./BooksByAuthor.css";
 
+import { showLoading, hideLoading } from "../../Redux/features/alertSlice";
+
+import Preloaders from "../Preloaders/Preloaders";
+
 const BookByAuthor = () => {
+  const loading = useSelector((state) => state.alerts.loading);
+
+  const dispatch = useDispatch();
+
   const [displayBook, setDisplayBook] = useState(false);
   const [books, setBooks] = useState(null);
   const [author, setAuthor] = useState(null);
@@ -19,6 +29,8 @@ const BookByAuthor = () => {
   useEffect(() => {
     const fetchAuthorAndBooks = async () => {
       try {
+        dispatch(showLoading());
+
         const [authorResponse, booksResponse] = await Promise.all([
           axios.get(`http://localhost:5000/api/author/${id}`),
 
@@ -27,8 +39,11 @@ const BookByAuthor = () => {
 
         if (authorResponse.status !== 200 || booksResponse.status !== 200) {
           throw new Error("There was a problem fetching data");
+
+          dispatch(hideLoading());
         }
 
+        dispatch(hideLoading());
         setAuthor(authorResponse.data.data);
 
         setBooks(booksResponse.data.data);
@@ -36,6 +51,8 @@ const BookByAuthor = () => {
         console.log(
           `There was a problem fetching data from backend: ${error.message}`
         );
+
+        dispatch(hideLoading());
       }
     };
 
@@ -77,6 +94,7 @@ const BookByAuthor = () => {
         displayBook={displayBook}
         displayImageMoreDescription={displayImageMoreDescription}
       />
+      {loading && <Preloaders />}
     </div>
   );
 };

@@ -60,6 +60,8 @@ router.put('/:id/update/password',UsersController.updatePassword)
 
 router.patch('/:id/update/names',UsersController.updateNames)
 
+router.put('/:id/update/email',UsersController.updateEmail)
+
 
 
 module.exports = router;

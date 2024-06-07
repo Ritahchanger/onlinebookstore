@@ -27,13 +27,15 @@
 }
 .testmonials .row{
     margin-top:1rem;
+    align-items:center;
 }
-.testmonials .row .col{
+.testmonials .row p{
     margin-left:1rem;
 }
 .testmonials .card-item{
     border:3px solid var(--blue);
     padding:1rem;
+    cursor: pointer;
 }
 
 .testmonials .card-item .description{

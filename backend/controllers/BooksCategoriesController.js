@@ -92,6 +92,10 @@ const deleteCategory = async (req,res)=>{
 }
 
 
+
+
+
+
 const updateBookSales = async (req,res) =>{
 
   try{
@@ -112,4 +116,4 @@ const updateBookSales = async (req,res) =>{
 }
 
 
-module.exports = { postCategories, getCategories,deleteCategory }
+module.exports = { postCategories, getCategories,deleteCategory}

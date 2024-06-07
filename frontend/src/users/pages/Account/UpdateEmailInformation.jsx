@@ -51,7 +51,7 @@ const UpdateEmailInformation = () => {
       setErrors(validationErrors);
     } else {
       try {
-        const response = await axios.patch(
+        const response = await axios.put(
           `http://localhost:5000/api/users/${user.user._id}/update/email`,
           {
             currentEmail: emails.currentEmail,
@@ -71,6 +71,8 @@ const UpdateEmailInformation = () => {
             newEmail: response.data.message
           });
         }
+
+        console.log(response.data);
       } catch (error) {
         console.error("There was an error updating the email information:", error);
         setErrors({

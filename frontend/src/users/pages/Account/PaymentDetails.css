@@ -1,8 +1,12 @@
 .account .payment .container {
-  max-width: 1100px;
+  width:100%;
   margin: 0 auto;
 }
 
+.account .payment .row{
+  
+  align-items:center;
+}
 .account .payment .container table tbody img {
   width: 50px;
   height: 50px;
@@ -30,9 +34,14 @@
 }
 
 .account .payment .cart-buttons {
-  border-radius: 5px;
+  border-radius: 2px;
+  width:100%;
+  background:var(--green);
+  color:var(--white);
 }
-
+.account .payment .cart-buttons:hover{
+  background:var(--blue);
+}
 .account .payment .input-group input{
   height:40px;
   border:none;
@@ -43,6 +52,7 @@
   display:flex;
   justify-content: space-between;
   margin-top:1rem;
+  flex-direction: column;
 }
 .payment-row img{
   width:200px;
@@ -51,4 +61,91 @@
 .account .payment-options .input-group{
   flex-basis:80%;
   cursor: pointer;
+}
+
+.account .table_wrapper{
+  flex-basis:50%;
+}
+.account .payment_account{
+  box-shadow:0 0 5px rgba(0,0,0,0.25);
+  padding:1rem;
+  flex-basis:48%;
+}
+.account .payment_account .payment-row{
+  display:flex;
+  justify-content:space-between;
+}
+.account .payment_account .payment-row .safaricom{
+  flex-basis:48%;
+}
+.account .payment_account .payment-row .paypal{
+  flex-basis:48%;
+  margin-top:2rem;
+}
+.account .safaricom .payment-options{
+  justify-content:space-between;
+  align-items: baseline;
+}
+.account .payment_account input{
+  border:none;
+   margin-bottom:10px;
+   border:none;
+   border-bottom:1px solid var(--gray);
+   cursor: pointer;
+   outline:none;
+   padding-bottom:10px;
+}
+.account .paypal_icon{
+  color:var(--white);
+  background:var(--black);
+  padding:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.account .paypal_icon i{
+  font-size:4rem;
+}
+.account .payment .paypal .small-header{
+  font-size:1rem;
+  margin-bottom:0.7rem;
+}
+.account .payment-row .small-header{
+  font-size:var(--mobile-font);
+  color:var(--blue);
+}
+
+.account .paypal input{
+margin-top:1rem;
+}
+.account .payment .container .row.cart_row{
+  align-items:start;
+  justify-content:space-between;
+}
+
+
+@media(max-width:800px){
+  .account .payment .container .row.cart_row{
+    align-items:center;
+    justify-content:space-between;
+    flex-direction: column;
+  } 
+  .account .table_wrapper{
+    width:100%;
+  }
+  .account .payment_account{
+    width:100%;
+    margin-top:1rem;
+  }
+  .account .payment_account .payment-row{
+    display:flex;
+    flex-direction:row;
+  }
+}
+
+@media(max-width:554px){
+  .account .payment_account .payment-row{
+    display:flex;
+    flex-direction:column;
+  }
 }

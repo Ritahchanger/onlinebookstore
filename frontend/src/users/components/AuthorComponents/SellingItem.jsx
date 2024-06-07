@@ -4,37 +4,47 @@ import { useSelector } from "react-redux";
 
 const SellingItem = ({ sellingAuthor }) => {
   const user = useSelector((state) => state.auth.user);
-  const isUserLogged = useSelector((state) => state.auth.isUserLogged);
-  const userId = user?.user?._id; // Use optional chaining to prevent errors
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   const [message, setMessage] = useState("");
 
+  useEffect(() => {
+    let timer;
+    if (message) {
+      timer = setTimeout(() => {
+        setMessage("");
+      }, 2 * 60 * 1000); // 2 minutes in milliseconds
+    }
+    return () => clearTimeout(timer);
+  }, [message]);
+
   const addToCart = async () => {
-    if (!isUserLogged || !userId) {
-      // Set the message to prompt user to log in
+    if (!isLoggedIn || !user?.user?._id) {
       setMessage("Please log in to add item to cart");
-      // Clear the message after 2 minutes
       setTimeout(() => {
         setMessage("");
-      }, 10 * 1000); // 2 minutes in milliseconds
+      }, 10 * 1000); // 10 seconds in milliseconds
       return;
     }
 
     try {
       const url = `http://localhost:5000/api/cart/post`;
       const requestBody = {
-        userId: userId,
-        productId: sellingAuthor.mostSellingBookId, 
+        userId: user.user._id,
+        productId: sellingAuthor._id, 
         quantity: 1, 
       };
 
-      const response = await axios.post(url, requestBody);
+      const response = await axios.post(url, requestBody, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      console.log(response.data)
 
       if (response.status === 200) {
         setMessage("Item added to cart successfully");
-        // Clear the message after 2 minutes
-        setTimeout(() => {
-          setMessage("");
-        }, 2 * 60 * 1000); // 2 minutes in milliseconds
       } else {
         setMessage("Failed to add item to cart");
       }

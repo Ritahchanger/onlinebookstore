@@ -10,8 +10,10 @@ const User = require('../models/User.model')
 
 const AccountTermination = require('../models/AccountTerminationModel')
 
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+
+const nodemailer = require('nodemailer')
 
 const getUsers = async (req, res) => {
   try {
@@ -148,20 +150,25 @@ const updatePassport = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params
 
-    const singleUser = await User.findById(id).select('-password -email -roles -phoneNo');
+    const singleUser = await User.findById(id).select(
+      '-password -email -roles -phoneNo'
+    )
 
     if (!singleUser) {
-      return res.status(404).json({ status: 404, success: false, message: 'User not found' });
+      return res
+        .status(404)
+        .json({ status: 404, success: false, message: 'User not found' })
     }
 
-    return res.status(200).json({ status: 200, success: true, data: singleUser });
+    return res
+      .status(200)
+      .json({ status: 200, success: true, data: singleUser })
   } catch (error) {
-    return res.status(500).json({ success: false, error: error.message });
+    return res.status(500).json({ success: false, error: error.message })
   }
-};
-
+}
 
 const getUserCookie = (req, res) => {
   try {
@@ -213,185 +220,286 @@ const deleteUser = async (req, res) => {
 const addAccountToTerminate = async (req, res) => {
   try {
     // Extract the required fields from the request body
-    const { user, reason } = req.body;
+    const { user, reason } = req.body
 
     // Create a new account termination record
     const newTerminationAccount = await AccountTermination.create({
       user: user, // Assuming 'user' contains the user ID
       reason: reason
-    });
+    })
 
     // Return a success response
-    return res.status(200).json({ success: true, data: newTerminationAccount });
-
+    return res.status(200).json({ success: true, data: newTerminationAccount })
   } catch (error) {
     // Return an error response if something goes wrong
-    return res.status(500).json({ success: false, error: error.message });
+    return res.status(500).json({ success: false, error: error.message })
   }
-
-};
-
-const getAccountsToTerminate = async (req,res) =>{
-
-  try{
-    
-    const accounts = await AccountTermination.find({})
-
-    if(!accounts){
-
-      return res.status(200).json({status:404, success: false,message:'There are no accounts for termination' });
-
-    }
-
-    return res.status(200).json({ status:200,success:true,data:accounts});
-
-
-  }catch(error){
-
-    return res.status(500).json({ success: false, error: error.message });
-
-  }
-
 }
 
-const terminateAccount = async (req,res)=>{
-  try{
+const getAccountsToTerminate = async (req, res) => {
+  try {
+    const accounts = await AccountTermination.find({})
 
-    const { id } = req.params;
+    if (!accounts) {
+      return res
+        .status(200)
+        .json({
+          status: 404,
+          success: false,
+          message: 'There are no accounts for termination'
+        })
+    }
+
+    return res.status(200).json({ status: 200, success: true, data: accounts })
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message })
+  }
+}
+
+const terminateAccount = async (req, res) => {
+  try {
+    const { id } = req.params
 
     const terminateAccount = await AccountTermination.findByIdAndDelete(id)
 
-    if(!terminateAccount){
-      return res.status(200).json({status:404, success:false,message:'The account was not found' });
+    if (!terminateAccount) {
+      return res
+        .status(200)
+        .json({
+          status: 404,
+          success: false,
+          message: 'The account was not found'
+        })
     }
-    return res.status(200).json({status:200, success: true,message:'The account terminated successfully' });
-
-
-  }catch(error){
-    return res.status(500).json({ success: false, error: error.message });
+    return res
+      .status(200)
+      .json({
+        status: 200,
+        success: true,
+        message: 'The account terminated successfully'
+      })
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message })
   }
 }
-
-
-
 
 // USER UPDATES
 
 const updateUserContact = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { phoneNo } = req.body;
+    const { id } = req.params
+    const { phoneNo } = req.body
 
-    const user = await User.findById(id);
+    const user = await User.findById(id)
 
     if (!user) {
-      return res.status(200).json({ status: 404, success: false, error: `User not found` });
+      return res
+        .status(200)
+        .json({ status: 404, success: false, error: `User not found` })
     }
 
     // Basic validation for phone number format
     if (!phoneNo || !/^\d{10}$/.test(phoneNo)) {
-      return res.status(200).json({ status: 400, success: false, error: 'Invalid phone number format' });
+      return res
+        .status(200)
+        .json({
+          status: 400,
+          success: false,
+          error: 'Invalid phone number format'
+        })
     }
 
-    user.phoneNo = phoneNo;
-    await user.save();
+    user.phoneNo = phoneNo
+    await user.save()
 
     return res.status(200).json({
       status: 200,
       success: true,
-      message: 'Phone updated successfully',
-    });
+      message: 'Phone updated successfully'
+    })
   } catch (error) {
-    console.error('Error updating user phone:', error);
-    return res.status(500).json({ success: false, error: `${error.message}` });
+    console.error('Error updating user phone:', error)
+    return res.status(500).json({ success: false, error: `${error.message}` })
   }
-};
+}
 
 // UDATE USER PASSWORD
 
-
 const updatePassword = async (req, res) => {
-  const { currentPassword, newPassword } = req.body;
-  const { id }= req.params; // Assuming you have middleware to extract user ID from JWT
+  const { currentPassword, newPassword } = req.body
+  const { id } = req.params // Assuming you have middleware to extract user ID from JWT
 
   try {
     // Find the user by ID
-    const user = await User.findById(id);
+    const user = await User.findById(id)
 
     // Check if the user exists
     if (!user) {
-      return res.status(200).json({status:404,success: false, message: 'User not found' });
+      return res
+        .status(200)
+        .json({ status: 404, success: false, message: 'User not found' })
     }
 
     // Verify the current password
-    const passwordMatch = await bcrypt.compare(currentPassword, user.password);
+    const passwordMatch = await bcrypt.compare(currentPassword, user.password)
     if (!passwordMatch) {
-      return res.status(200).json({status:400,success: false, message: 'Incorrect current password',passwordDontMatch:true });
+      return res
+        .status(200)
+        .json({
+          status: 400,
+          success: false,
+          message: 'Incorrect current password',
+          passwordDontMatch: true
+        })
     }
 
     // Generate a hash for the new password
-    const newPasswordHash = await bcrypt.hash(newPassword, 10);
+    const newPasswordHash = await bcrypt.hash(newPassword, 10)
 
     // Update the user's password
-    user.password = newPasswordHash;
-    await user.save();
+    user.password = newPasswordHash
+    await user.save()
 
-    return res.status(200).json({ success: true, message: 'Password updated successfully' });
+    return res
+      .status(200)
+      .json({ success: true, message: 'Password updated successfully' })
   } catch (error) {
-    console.error('Error updating password:', error);
-    return res.status(500).json({ success: false, error: 'Internal server error' });
+    console.error('Error updating password:', error)
+    return res
+      .status(500)
+      .json({ success: false, error: 'Internal server error' })
   }
-};
-
+}
 
 const updateNames = async (req, res) => {
-  const { id } = req.params;
-  const { firstName, secondName } = req.body;
+  const { id } = req.params
+  const { firstName, secondName } = req.body
 
   try {
     // Find the user by ID
-    const user = await User.findById(id);
+    const user = await User.findById(id)
 
     if (!user) {
       return res.status(200).json({
-        status:404,
+        status: 404,
         success: false,
         message: 'User not found'
-      });
+      })
     }
 
     // Update fields if provided in the request body
     if (firstName) {
-      user.firstName = firstName;
+      user.firstName = firstName
     }
     if (secondName) {
-      user.secondName = secondName;
+      user.secondName = secondName
     }
 
     // Save the updated user information
-    await user.save();
+    await user.save()
 
     res.status(200).json({
       success: true,
       message: 'User information updated successfully',
-      data:user
-    });
+      data: user
+    })
   } catch (err) {
     return res.status(500).json({
       success: false,
       message: err.message
-    });
+    })
   }
-};
+}
 
+const updateEmail = async (req, res) => {
+  try {
+    const { currentEmail, newEmail } = req.body
 
+    const { id } = req.params
 
+    const findUser = await User.findOne({ _id: id })
 
+    if (findUser.email !== currentEmail) {
+      return res.status(200).json({
+        status: 404,
+        success: false,
+        message: 'Wrong email'
+      })
+    }
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.COMPANY_EMAIL,
+        pass: process.env.COMPANY_EMAIL_PASSWORD
+      }
+    })
+    const info = await transporter.sendMail({
+      from: '"BEMI EDITORS LIMITED" <peterdennis573@gmail.com>',
+      to: currentEmail,
+      subject: 'EMAIL CHANGE',
+      text: 'Request to change my email from the bookstore application',
+      html: `
+        <html>
+          <head>
+            <style>
+              /* CSS styles */
+              body {
+                font-family: Arial, sans-serif;
+                font-size: 16px;
+              }
+              .container {
+                margin: 20px;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              }
+              h1 {
+                color: #333;
+                margin-bottom: 20px;
+              }
+              p {
+                margin-bottom: 10px;
+              }
+              a {
+                display: inline-block;
+                background-color: #4CAF50;
+                color: #fff;
+                text-decoration: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+              }
+              p a:hover {
+                background-color: #45a049;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>Password Reset Request</h1>
+              <p>Please click the button below to authenticate email change</p>
+              <p><a href='http://localhost:3000/change-password/${currentEmail}'>VERIFY</a></p>
+            </div>
+          </body>
+        </html>
+      `
+    })
 
+    console.log('Message sent: %s', info.messageId)
 
-
-
-
+    res.status(200).json({
+      success: true,
+      message: 'User email updated successfully',
+    })
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message
+    })
+  }
+}
 
 
 module.exports = {
@@ -410,4 +518,5 @@ module.exports = {
   updateUserContact,
   updatePassword,
   updateNames,
+  updateEmail
 }

@@ -22,7 +22,7 @@ const Shop = () => {
 
   const getBooks = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/books/");
+      const response = await axios.get("http://localhost:5000/api/books/approved");
       if (response.status !== 200) {
         throw new Error("There was a problem fetching data from the server");
       }

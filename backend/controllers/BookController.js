@@ -155,10 +155,24 @@ const approveBook = async (req, res) => {
     }
 };
 
-// Export the controller function
-module.exports = { approveBook };
 
+const getApprovedBooks = async (req, res) => {
+  try {
+    const books = await Book.find({ upproved: true });
 
+    if (!books.length) {
+      return res.status(404).json({ status: 404, success: true, data: 'No approved books found' });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'Approved books retrieved successfully',
+      data: books
+    });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+}
 
 module.exports = {
   getBooks,
@@ -167,6 +181,7 @@ module.exports = {
   getFileDetails,
   updateBookSales,
   approveBook,
+  getApprovedBooks,
 }
 
 

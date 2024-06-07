@@ -12,6 +12,7 @@ const cors = require('cors')
 
 const cookieParser = require('cookie-parser')
 
+
 dotenv.config()
 
 const app = express()
@@ -74,13 +75,19 @@ const AuthorRoutes = require('../routes/AuthorsRoutes')
 
 const CartRoute = require('../routes/CartRoute')
 
-app.use('/api/auth', AuthenticationRoute)
-app.use('/api/payment', PaymentsRoutes)
-app.use('/api/users', UsersRoutes)
-app.use('/api/books', BooksRoute)
-app.use('/api/categories', BooksCategoriesRoutes)
-app.use('/api/blog', BlogRoutes)
-app.use('/api/author', AuthorRoutes)
+const PayPalRoute = require('../routes/PayPalRoute');
+
+const TestimonialRoute = require('../routes/TestmonialRoute')
+
+app.use('/api/auth', AuthenticationRoute);
+app.use('/api/payment', PaymentsRoutes);
+app.use('/api/payment/paypal', PaymentsRoutes);
+app.use('/api/users', UsersRoutes);
+app.use('/api/books', BooksRoute);
+app.use('/api/categories', BooksCategoriesRoutes);
+app.use('/api/blog', BlogRoutes);
+app.use('/api/author', AuthorRoutes);
+app.use('/api/testmonials',TestimonialRoute);
 
 app.use('/api/cart', CartRoute)
 

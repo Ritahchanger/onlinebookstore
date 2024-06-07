@@ -108,12 +108,13 @@ const PdfViewer = ({ fileUrl}) => {
 
       <div
         style={{
-          border: "1px solid rgba(0, 0, 0, 0.3)",
+          // border: "1px solid rgba(0, 0, 0, 0.3)",
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          background:"green",
+          // background:"green",
           marginTop: "1rem",
+         
         }}
       >
         <div
@@ -122,7 +123,8 @@ const PdfViewer = ({ fileUrl}) => {
             display: "flex",
             justifyContent: "center",
             padding: "4px",
-            background:"green"
+            boxShadow:"0 0 5px rgba(0,0,0,0.25)"
+            // background:"green"
           }}
         >
           <div style={{ padding: "0px 2px" }}>
