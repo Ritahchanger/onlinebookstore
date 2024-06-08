@@ -45,7 +45,7 @@ const postBlogs = async (req,res) =>{
 
 const getBlogs = async (req, res) => {
     try {
-        const blogs = await Blog.find({}).sort({ createdAt: -1 }); // Sort by createdAt field in descending order
+        const blogs = await Blog.find({}).sort({ createdOn: 1 }); // Sort by createdAt field in descending order
 
         if (blogs.length === 0) {
             return res.status(404).json({ status: 404, success: false, message: 'There are no blogs in the system' });

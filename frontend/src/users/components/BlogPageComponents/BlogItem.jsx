@@ -13,7 +13,7 @@ const BlogItem = ({blog}) => {
   return (
     <div className="blog-card">
       <div className="img-wrapper">
-        <img src={`http://localhost:5000/uploads/${blog.filePath}`} alt={blog.title} />
+        <img src={`http://localhost:5000/upload/blogs/${blog.filePath}`} alt={blog.title} />
       </div>
       <div className="overlay">
         <p className="small-header">{blog.title}</p>

@@ -45,7 +45,7 @@ const SingleBlog = () => {
                   <p className="small-header">{singleBlog.title}</p>
                   <div className="description-body">
                     <p className="description">{singleBlog.content}</p>
-                    <img src={`http://localhost:5000/uploads/${singleBlog.filePath}`} alt="" />
+                    <img src={`http://localhost:5000/upload/blogs/${singleBlog.filePath}`} alt="" />
                   </div>
                   <p className="date">{`Created on ${singleBlog.createdOn}`}</p>
                 </Fragment>

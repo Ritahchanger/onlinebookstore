@@ -47,6 +47,11 @@
 .categories .container .row .col:nth-child(2){
   flex-basis:53%;
 }
+.categories .container{
+  display:flex;
+  justify-content:center;
+  flex-direction: column;
+}
 
 @media(max-width:551px){
   .categories .medium-header{

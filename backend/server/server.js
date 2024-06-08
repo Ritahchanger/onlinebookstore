@@ -39,6 +39,7 @@ app.use(
 );
 
 
+
 app.use(
   '/upload/authors',
   express.static('upload/authors', {
@@ -47,6 +48,19 @@ app.use(
     }
   })
 )
+
+
+app.use(
+  '/upload/blogs',
+  express.static('upload/blogs', {
+    setHeaders: res => {
+      res.set('Cross-Origin-Resource-Policy', 'cross-origin')
+    }
+  })
+)
+
+
+
 
 app.use(
   cors({

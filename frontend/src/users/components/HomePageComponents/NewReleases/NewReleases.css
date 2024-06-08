@@ -21,6 +21,7 @@
 }
 .new-releases .book{
     padding:10px;
+    cursor: pointer;
 }
 .new-releases .book-body{
     text-align: center;

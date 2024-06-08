@@ -43,6 +43,7 @@ router.get('/new/release',BookController.getNewRelease)
 
 router.get('/highest/rating',BookController.getBookWithHighestRating)
 
+router.get('/category/:category',BookController.getBooksByCategory)
 
 
 

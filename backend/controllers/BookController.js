@@ -16,19 +16,18 @@ function formatCurrentDate () {
 
 const getBooks = async (req, res) => {
   try {
-    const books = await Book.find({}).sort({ uploadedAt: -1 });
+    const books = await Book.find({}).sort({ uploadedAt: -1 })
 
     if (!books.length)
       return res
         .status(404)
-        .json({ status: 404, success: false, data: 'No books found' });
+        .json({ status: 404, success: false, data: 'No books found' })
 
-    return res.status(200).json({ status: 200, success: true, data: books });
+    return res.status(200).json({ status: 200, success: true, data: books })
   } catch (error) {
-    return res.status(500).json({ success: false, error: `${error.message}` });
+    return res.status(500).json({ success: false, error: `${error.message}` })
   }
-};
-
+}
 
 const getBooksByAuthors = async (req, res) => {
   try {
@@ -55,7 +54,7 @@ const getBooksByAuthors = async (req, res) => {
 
 const addBooks = async (req, res) => {
   try {
-    const { title, author, price, description } = req.body
+    const { title, author, price, description, category } = req.body
 
     const formattedDate = formatCurrentDate()
 
@@ -76,6 +75,7 @@ const addBooks = async (req, res) => {
       description,
       book,
       coverImage,
+      category,
       uploadedAt: formattedDate
     })
 
@@ -119,121 +119,139 @@ const updateBookSales = async (req, res) => {
   }
 }
 
-
-
-
 // Define the controller function
 const approveBook = async (req, res) => {
-    try {
-        const { authorId, bookId } = req.body; // Assuming you pass the authorId and bookId in the request body
+  try {
+    const { authorId, bookId } = req.body // Assuming you pass the authorId and bookId in the request body
 
-        // Check if the user has the necessary permissions to approve the book
-        // This could involve checking if the user is an admin or has specific roles/permissions
-        // For simplicity, let's assume the user is authorized to approve the book
+    // Check if the user has the necessary permissions to approve the book
+    // This could involve checking if the user is an admin or has specific roles/permissions
+    // For simplicity, let's assume the user is authorized to approve the book
 
-        // Find the book by ID
-        const book = await Book.findById(bookId);
+    // Find the book by ID
+    const book = await Book.findById(bookId)
 
-        if (!book) {
-            return res.status(404).json({ success: false, message: 'Book not found' });
-        }
-
-        // Check if the author ID matches the author of the book
-        if (book.author.toString() !== authorId) {
-            return res.status(403).json({ success: false, message: 'Unauthorized to approve this book' });
-        }
-
-        // Update the book document to set upproved field to true
-        book.upproved = true;
-        await book.save();
-
-        // Return success response
-        return res.status(200).json({ success: true, message: 'Book approved successfully' });
-    } catch (error) {
-        console.error(`Error approving book: ${error.message}`);
-        return res.status(500).json({ success: false, message: 'Internal server error' });
+    if (!book) {
+      return res.status(404).json({ success: false, message: 'Book not found' })
     }
-};
 
+    // Check if the author ID matches the author of the book
+    if (book.author.toString() !== authorId) {
+      return res
+        .status(403)
+        .json({ success: false, message: 'Unauthorized to approve this book' })
+    }
+
+    // Update the book document to set upproved field to true
+    book.upproved = true
+    await book.save()
+
+    // Return success response
+    return res
+      .status(200)
+      .json({ success: true, message: 'Book approved successfully' })
+  } catch (error) {
+    console.error(`Error approving book: ${error.message}`)
+    return res
+      .status(500)
+      .json({ success: false, message: 'Internal server error' })
+  }
+}
 
 const getApprovedBooks = async (req, res) => {
   try {
-    const books = await Book.find({ upproved: true });
+    const books = await Book.find({ upproved: true })
 
     if (!books.length) {
-      return res.status(404).json({ status: 404, success: true, data: 'No approved books found' });
+      return res
+        .status(404)
+        .json({ status: 404, success: true, data: 'No approved books found' })
     }
 
     return res.status(200).json({
       success: true,
       message: 'Approved books retrieved successfully',
       data: books
-    });
+    })
   } catch (error) {
-    return res.status(500).json({ success: false, error: error.message });
+    return res.status(500).json({ success: false, error: error.message })
   }
 }
 
-
-const getNewRelease = async (req,res) =>{
+const getNewRelease = async (req, res) => {
   try {
-    const books = await Book.find({ upproved: true }) 
-        .populate('author', 'firstName secondName')
-        .sort({ uploadedAt: -1 }) 
-        .limit(10); 
+    const books = await Book.find({ upproved: true })
+      .populate('author', 'firstName secondName')
+      .sort({ uploadedAt: -1 })
+      .limit(10)
 
-    if(!books){
+    if (!books) {
       res.status(200).json({
         status: 404,
-        success:false,
-        message:'No books'
-    });
+        success: false,
+        message: 'No books'
+      })
     }
 
     res.status(200).json({
       status: 200,
       success: true,
       data: books
-  });
-} catch (error) {
+    })
+  } catch (error) {
     res.status(500).json({
-        status: 500,
-        success: false,
-        message: 'Failed to fetch books',
-        error: error.message
-    });
-}
+      status: 500,
+      success: false,
+      message: 'Failed to fetch books',
+      error: error.message
+    })
+  }
 }
 
 const getBookWithHighestRating = async (req, res) => {
   try {
-      const book = await Book.findOne({ upproved: true }) 
-          .sort({ ratings: -1 })
-          .limit(1); 
-      if (!book) {
-          return res.status(200).json({
-              status: 404,
-              success: false,
-              message: 'No book found with the highest rating',
-          });
-      }
+    const book = await Book.findOne({ upproved: true })
+      .sort({ ratings: -1 })
+      .limit(1)
+    if (!book) {
+      return res.status(200).json({
+        status: 404,
+        success: false,
+        message: 'No book found with the highest rating'
+      })
+    }
 
-      res.status(200).json({
-          status: 200,
-          success: true,
-          data: book,
-      });
+    res.status(200).json({
+      status: 200,
+      success: true,
+      data: book
+    })
   } catch (error) {
-      res.status(500).json({
-          status: 500,
-          success: false,
-          message: 'Failed to fetch book with the highest rating',
-          error: error.message,
-      });
+    res.status(500).json({
+      status: 500,
+      success: false,
+      message: 'Failed to fetch book with the highest rating',
+      error: error.message
+    })
   }
-};
+}
 
+const getBooksByCategory = async (req, res) => {
+  const { category } = req.params
+  try {
+    // Find approved books by category
+    const books = await Book.find({ category, upproved: true })
 
+    if (!books) {
+      res.status(200).json({ status: 404, success: true, message: 'No books' })
+    }
+
+    res.status(200).json({ success: true, data: books })
+  } catch (error) {
+    console.error(`Error fetching books by category: ${error}`)
+    res.status(500).json({ success: false, error: 'Server error' })
+  }
+}
 module.exports = {
   getBooks,
   getBooksByAuthors,
@@ -243,7 +261,6 @@ module.exports = {
   approveBook,
   getApprovedBooks,
   getNewRelease,
-  getBookWithHighestRating
+  getBookWithHighestRating,
+  getBooksByCategory
 }
-
-

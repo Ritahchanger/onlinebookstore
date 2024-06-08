@@ -2,26 +2,38 @@ import React, { Fragment, useEffect, useState } from "react";
 import LowerNavbar from "../components/LowerNavbar/LowerNavbar";
 import Footer from "../components/Footer/Footer";
 import "./Blog.css";
-// import { blogSampleData } from "../components/Data/BlogData";
-
-import axios from "axios";
-
 import BlogItem from "../components/BlogPageComponents/BlogItem";
-
 import { useSelector, useDispatch } from "react-redux";
-
 import { fetchBlogs } from "../Redux/features/blogsSlice";
 
 const Blog = () => {
   const dispatch = useDispatch();
-
   const blogs = useSelector((state) => state.blogs.blogs);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterType, setFilterType] = useState("TITLE");
 
   useEffect(() => {
     dispatch(fetchBlogs());
     window.scrollTo(0, 0);
-  }, []);
-  
+  }, [dispatch]);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleFilterChange = (e) => {
+    setFilterType(e.target.value);
+  };
+
+  const filteredBlogs = blogs.filter((blog) => {
+    if (filterType === "TITLE") {
+      return blog.title.toLowerCase().includes(searchTerm.toLowerCase());
+    } else if (filterType === "DATE" && blog.date) {
+      return blog.date.includes(searchTerm); // Check if blog.date exists before calling includes
+    }
+    return false;
+  });
+
   return (
     <Fragment>
       <LowerNavbar />
@@ -29,23 +41,28 @@ const Blog = () => {
         <div className="container">
           <div className="search_container">
             <div className="input-search">
-              <input type="text" name="" id="" placeholder="Search blog.." />
+              <input
+                type="text"
+                placeholder="Search blog.."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
               <button type="submit">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i className="fa-solid fa-magnifying-glass"></i>
               </button>
             </div>
             <div className="filter-input">
-              <p className="fiter-title">Filter by</p>
-              <select>
+              <p className="filter-title">Filter by</p>
+              <select value={filterType} onChange={handleFilterChange}>
+                <option value="TITLE">TITLE</option>
                 <option value="DATE">DATE</option>
-                <option value="DATE">BLOG NAME</option>
               </select>
             </div>
           </div>
 
           <p className="small-header">Latest Blogs</p>
           <div className="blog-grid">
-            {blogs.map((blog) => (
+            {filteredBlogs.map((blog) => (
               <BlogItem blog={blog} key={blog._id} />
             ))}
           </div>
@@ -68,9 +85,8 @@ const Blog = () => {
           </div>
 
           <p className="small-header">Earlier Blogs</p>
-
           <div className="blog-grid">
-            {blogs.map((blog) => (
+            {filteredBlogs.map((blog) => (
               <BlogItem blog={blog} key={blog._id} />
             ))}
           </div>

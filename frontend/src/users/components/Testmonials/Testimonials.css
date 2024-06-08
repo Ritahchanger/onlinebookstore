@@ -39,7 +39,7 @@
 }
 
 .testmonials .card-item .description{
-    color:var(--black);
+    color:var(--white);
 }
 
 .testmonials-wrapper{
@@ -57,6 +57,21 @@
     align-items:center;
     justify-content:center;
     display:flex;
+}
+
+.testmonials .container{
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+    url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+
+    padding:2rem;
+
+    background-position:center;
+
+    background-size:cover;
+
+    background-attachment: fixed;
+    display:flex;
+    flex-direction: column;
 }
 
 @media(max-width:670px){

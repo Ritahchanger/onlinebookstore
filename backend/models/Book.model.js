@@ -48,6 +48,10 @@ const bookSchema = new mongoose.Schema({
   audio:{
     type:String,
     default:null
+  },
+  category:{
+    type:String,
+    default:null 
   }
 });
 

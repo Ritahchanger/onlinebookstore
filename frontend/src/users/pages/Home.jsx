@@ -10,6 +10,8 @@ import Footer from "../components/Footer/Footer";
 import './Home.css'
 import Testmonials from "../components/Testmonials/Testmonials";
 
+import BookDescriptionModal from "../components/Books/BookDescriptionModal";
+
 const Home = () => {
 
   useEffect(()=>{
@@ -25,6 +27,7 @@ const Home = () => {
       <FeaturedBook/>
       <Testmonials/>
       <NewsLetter/>
+      <BookDescriptionModal/>
       <Footer/>
     </div>
   );

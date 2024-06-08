@@ -94,25 +94,4 @@ const deleteCategory = async (req,res)=>{
 
 
 
-
-const updateBookSales = async (req,res) =>{
-
-  try{
-
-    const { id } = req.params;
-
-    const { sales } = req.body;
-
-    const user = await Bo
-
-
-  }catch(error){
-
-
-  }
-
-
-}
-
-
 module.exports = { postCategories, getCategories,deleteCategory}

@@ -4,6 +4,7 @@ import "./Categories.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { CategoriesData } from "../../Data/CategoriesData";
+import { Link } from "react-router-dom"; 
 const Categories = () => {
   const [slidesToScroll, setSlidesToShow] = useState(3);
   useEffect(() => {
@@ -47,16 +48,18 @@ const Categories = () => {
 
         <div className="books-categories">
           <Slider {...settings}>
-            {CategoriesData.map((item, index) => (
-              <div className="book-show">
-                <div className="img-wrapper">
-                  <img src={item.imgUrl} alt="" />
+            {CategoriesData.map((item) => (
+              <Link to={item.path} key={item.path}>
+                <div className="book-show">
+                  <div className="img-wrapper">
+                    <img src={item.imgUrl} alt="" />
+                  </div>
+                  <div className="card-body">
+                    <p className="small-header">{item.smallHeader}</p>
+                    <p className="description">{item.description}</p>
+                  </div>
                 </div>
-                <div className="card-body">
-                  <p className="small-header">{item.smallHeader}</p>
-                  <p className="description">{item.description}</p>
-                </div>
-              </div>
+              </Link>
             ))}
           </Slider>
         </div>

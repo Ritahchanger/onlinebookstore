@@ -29,12 +29,12 @@ const Navbar = () => {
             </a>
           </div>
 
-          <div className="search_container">
+          {/* <div className="search_container">
             <input type="text" placeholder="Search..." />
             <button className="search">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-          </div>
+          </div> */}
 
           <div className="section-navigation">
             {isLoggedIn ? (

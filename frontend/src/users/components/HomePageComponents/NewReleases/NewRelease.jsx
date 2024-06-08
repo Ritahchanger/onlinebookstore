@@ -6,7 +6,14 @@ import "slick-carousel/slick/slick-theme.css";
 import "./NewReleases.css";
 import NewRelaseImage from "../../../../assets/images/cover.webp";
 
+import { useSelector,useDispatch} from "react-redux"; 
+
+import { openBookModal } from "../../../Redux/features/BookDescriptionSlice"; 
+
 const NewRelease = () => {
+
+  const dispatch = useDispatch();
+
   const [slidesToShow, setSlidesToShow] = useState(4);
   const [newReleaseBooks, setNewReleaseBooks] = useState([]);
 
@@ -55,6 +62,11 @@ const NewRelease = () => {
     slidesToScroll: 2,
   };
 
+
+  const viewBook = (book) =>{
+    dispatch(openBookModal(book))
+  }
+
   return (
   <div className="new-releases">
       <div className="container">
@@ -64,7 +76,9 @@ const NewRelease = () => {
         <div className="container-wrapper">
           <Slider {...settings}>
             {newReleaseBooks.map((book, index) => (
-              <div className="book" key={index}>
+              <div className="book" key={index} onClick={()=>{
+                viewBook(book)
+              }}>
                 <div className="img-wrapper">
                   {book.coverImage ? (
                     <img src={`http://localhost:5000/upload/books/${book.coverImage}`} alt={book.title} />

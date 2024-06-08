@@ -7,9 +7,10 @@ const path = require("path");
 
 const BlogController = require("../controllers/BlogController");
 
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDirectory = path.join(__dirname, '../uploads/');
+        const uploadDirectory = path.join(__dirname, '../upload/blogs/');
         cb(null, uploadDirectory);
     },
     filename: function (req, file, cb) {
@@ -17,6 +18,8 @@ const storage = multer.diskStorage({
         cb(null, uniqueSuffix + file.originalname);
     }
 });
+
+
 const upload = multer({ storage : storage });
 
 
