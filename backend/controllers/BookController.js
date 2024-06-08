@@ -174,6 +174,66 @@ const getApprovedBooks = async (req, res) => {
   }
 }
 
+
+const getNewRelease = async (req,res) =>{
+  try {
+    const books = await Book.find({ upproved: true }) 
+        .populate('author', 'firstName secondName')
+        .sort({ uploadedAt: -1 }) 
+        .limit(10); 
+
+    if(!books){
+      res.status(200).json({
+        status: 404,
+        success:false,
+        message:'No books'
+    });
+    }
+
+    res.status(200).json({
+      status: 200,
+      success: true,
+      data: books
+  });
+} catch (error) {
+    res.status(500).json({
+        status: 500,
+        success: false,
+        message: 'Failed to fetch books',
+        error: error.message
+    });
+}
+}
+
+const getBookWithHighestRating = async (req, res) => {
+  try {
+      const book = await Book.findOne({ upproved: true }) 
+          .sort({ ratings: -1 })
+          .limit(1); 
+      if (!book) {
+          return res.status(200).json({
+              status: 404,
+              success: false,
+              message: 'No book found with the highest rating',
+          });
+      }
+
+      res.status(200).json({
+          status: 200,
+          success: true,
+          data: book,
+      });
+  } catch (error) {
+      res.status(500).json({
+          status: 500,
+          success: false,
+          message: 'Failed to fetch book with the highest rating',
+          error: error.message,
+      });
+  }
+};
+
+
 module.exports = {
   getBooks,
   getBooksByAuthors,
@@ -182,6 +242,8 @@ module.exports = {
   updateBookSales,
   approveBook,
   getApprovedBooks,
+  getNewRelease,
+  getBookWithHighestRating
 }
 
 

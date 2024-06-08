@@ -1,16 +1,33 @@
 import React, { useState, useEffect } from "react";
-import NewRelaseImage from "../../../../assets/images/cover.webp";
-import "./NewReleases.css";
+import axios from "axios";
 import Slider from "react-slick";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { NewReleaseData } from "../../Data/NewRelasesData";
+import "./NewReleases.css";
+import NewRelaseImage from "../../../../assets/images/cover.webp";
 
 const NewRelease = () => {
   const [slidesToShow, setSlidesToShow] = useState(4);
+  const [newReleaseBooks, setNewReleaseBooks] = useState([]);
+
+  const fetchNewRelease = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/books/new/release");
+
+      if (!response.data.success) {
+        throw new Error('Internal server error');
+      }
+
+      setNewReleaseBooks(response.data.data);
+
+    } catch (error) {
+      console.log(`There was a problem fetching the data from the backend => ${error.message}`);
+    }
+  };
 
   useEffect(() => {
+    fetchNewRelease();
+
     function determineSlidesToShow() {
       const screenWidth = window.innerWidth;
       if (screenWidth >= 630) {
@@ -39,22 +56,26 @@ const NewRelease = () => {
   };
 
   return (
-    <div className="new-releases">
+  <div className="new-releases">
       <div className="container">
         <p className="small-header">SOME QUALITY ITEMS</p>
         <p className="medium-header">New Release Books</p>
 
         <div className="container-wrapper">
           <Slider {...settings}>
-            {NewReleaseData.map((item, index) => (
+            {newReleaseBooks.map((book, index) => (
               <div className="book" key={index}>
                 <div className="img-wrapper">
-                  <img src={item.imgUrl} alt="" />
+                  {book.coverImage ? (
+                    <img src={`http://localhost:5000/upload/books/${book.coverImage}`} alt={book.title} />
+                  ) : (
+                    <img src={NewRelaseImage} alt={book.title} />
+                  )}
                 </div>
                 <div className="book-body">
-                  <p className="book-title">{item.bookTitle}</p>
-                  <p className="book-author">{item.bookAuthor}</p>
-                  <p className="book-price">{`${item.bookPrice} sh`}</p>
+                  <p className="book-title">{book.title || "Title not available"}</p>
+                  <p className="book-author">{`${book.author?.firstName || 'Unknown'} ${book.author?.secondName || 'Author'}`}</p>
+                  <p className="book-price">{`${book.price || 0} sh`}</p>
                 </div>
               </div>
             ))}

@@ -39,6 +39,10 @@ router.post('/approve/book',BookController.approveBook)
 
 router.get('/approved',BookController.getApprovedBooks)
 
+router.get('/new/release',BookController.getNewRelease)
+
+router.get('/highest/rating',BookController.getBookWithHighestRating)
+
 
 
 

@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from "react";
-
 import "./Testimonials.css";
-
 import Slider from "react-slick";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 import TestmonialImage from "../../../assets/authors/profile-14.jpg";
-
 import axios from "axios";
-
-import { TestmonialsData } from "../Data/TestmonialsData";
-
 import { useSelector } from "react-redux";
 
 const Testmonials = () => {
   const user = useSelector((state) => state.auth.user);
-
   const [slidesToScroll, setSlidesToShow] = useState(3);
 
   useEffect(() => {
@@ -30,9 +21,9 @@ const Testmonials = () => {
     };
 
     handleResize();
-
     window.addEventListener("resize", handleResize);
-  });
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const [testmonies, setTestmonies] = useState(null);
 
@@ -44,32 +35,30 @@ const Testmonials = () => {
     slidesToScroll: 1,
   };
 
-  const fetchTestimonies = async (req, res) => {
+  const fetchTestimonies = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5000/api/testmonials/get`
-      );
-
+      const response = await axios.get(`http://localhost:5000/api/testmonials/get`);
       if (!response.data.success) {
-        throw new Error(
-          `There was an error fetching the data from the backend`
-        );
+        throw new Error(`There was an error fetching the data from the backend`);
       }
-
       setTestmonies(response.data.data);
-
-      console.log(response);
     } catch (error) {
-      console.error(
-        `There was an error fetching the data from the backend :${error.message}`
-      );
+      console.error(`There was an error fetching the data from the backend: ${error.message}`);
     }
   };
 
   useEffect(() => {
     fetchTestimonies();
-    console.log(testmonies);
   }, [user.user._id]);
+
+  // Function to truncate description to 20 words
+  const truncateDescription = (description) => {
+    const words = description.split(' ');
+    if (words.length > 20) {
+      return words.slice(0, 42).join(' ') + '...';
+    }
+    return description;
+  };
 
   return (
     <div className="testmonials">
@@ -82,32 +71,13 @@ const Testmonials = () => {
                 <div className="card-item" key={item._id}>
                   <p className="description">
                     <sup className="quotes">"</sup>
-                    {item.description}
+                    {truncateDescription(item.description)}
                   </p>
-                  {/* <div className="rating">
-                    <p>
-                      <i class="fa-regular fa-star"></i>
-                    </p>
-                    <p>
-                      <i class="fa-regular fa-star"></i>
-                    </p>
-                    <p>
-                      <i class="fa-regular fa-star"></i>
-                    </p>
-                    <p>
-                      <i class="fa-regular fa-star-half-stroke"></i>
-                    </p>
-                    <p>
-                      <i class="fa-regular fa-star-half-stroke"></i>
-                    </p>
-                  </div> */}
                   <div className="row">
                     <div className="profile-image">
                       <img src={`http://localhost:5000/upload/authors/${item.passport}`} alt="" />
                     </div>
-                    
-                      <p className="small-header">{`${item.firstName} ${item.secondName}`}</p>
-                    
+                    <p className="small-header">{`${item.firstName} ${item.secondName}`}</p>
                   </div>
                 </div>
               ))}

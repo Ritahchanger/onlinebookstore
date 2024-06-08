@@ -95,7 +95,6 @@ const deleteCategory = async (req,res)=>{
 
 
 
-
 const updateBookSales = async (req,res) =>{
 
   try{
