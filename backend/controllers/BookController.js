@@ -16,7 +16,7 @@ function formatCurrentDate () {
 
 const getBooks = async (req, res) => {
   try {
-    const books = await Book.find({}).sort({ uploadedAt: -1 })
+    const books = await Book.find({}).populate('author','firstName secondName').sort({ uploadedAt: -1 })
 
     if (!books.length)
       return res
@@ -252,6 +252,35 @@ const getBooksByCategory = async (req, res) => {
     res.status(500).json({ success: false, error: 'Server error' })
   }
 }
+
+const getAllUnapproved = async (req, res) => {
+  try {
+    const unapprovedBooks = await Book.find({ upproved: false }).populate('author', 'firstName secondName');
+    if (!unapprovedBooks) {
+      return res.status(404).json({
+        status: 404,
+        success: false,
+        message: "Books not fetched"
+      });
+    }
+    res.status(200).json({
+      status: 200,
+      success: true,
+      data: unapprovedBooks
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      success: false,
+      message: 'Server Error',
+      error: error.message
+    });
+  }
+};
+
+module.exports = getAllUnapproved;
+
+
 module.exports = {
   getBooks,
   getBooksByAuthors,
@@ -262,5 +291,6 @@ module.exports = {
   getApprovedBooks,
   getNewRelease,
   getBookWithHighestRating,
-  getBooksByCategory
+  getBooksByCategory,
+  getAllUnapproved
 }

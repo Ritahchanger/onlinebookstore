@@ -153,7 +153,7 @@ const getUserById = async (req, res) => {
     const { id } = req.params
 
     const singleUser = await User.findById(id).select(
-      '-password -email -roles -phoneNo'
+      '-password -email  -phoneNo'
     )
 
     if (!singleUser) {
