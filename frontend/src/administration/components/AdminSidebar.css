@@ -1,4 +1,4 @@
-.sidebar {
+.admin .sidebar {
     width: 250px;
     height: calc(100vh - 45px);
     background: var(--blue);
@@ -10,38 +10,35 @@
     border-right: 2px solid var(--blue);
     z-index: 9;
     top: 45px;
-  }
-  
 
-
-.sidebar.active{
-    left:0%;
 }
-.sidebar .sidebar-navigation li a {
+.admin .sidebar.active{
+    left:0%;
+}.admin .sidebar .sidebar-navigation li a {
   display: flex;
   align-items: center;
   padding: 1rem;
   color: var(--white);
   transition: all 0.5s;
 }
-.sidebar .sidebar-navigation li a.active{
+.admin .sidebar .sidebar-navigation li a.active{
   background:var(--white);
   color:var(--blue)
 }
-.sidebar .sidebar-navigation li a p {
+.admin .sidebar .sidebar-navigation li a p {
   font-size: 14px;
 }
-.sidebar .sidebar-navigation li a p:nth-child(2) {
+.admin .sidebar .sidebar-navigation li a p:nth-child(2) {
   margin-left: 1rem;
 }
-.sidebar .sidebar-navigation li a:hover {
+.admin .sidebar .sidebar-navigation li a:hover {
   background: var(--white);
 }
-.sidebar .sidebar-navigation li a:hover p {
+.admin .sidebar .sidebar-navigation li a:hover p {
   color: var(--blue);
 }
 
-.sidebar .amount{
+.admin .sidebar .amount{
     display:none;
 }
 .sidebar .link-text{

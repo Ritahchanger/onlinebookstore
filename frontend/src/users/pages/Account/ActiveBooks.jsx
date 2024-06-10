@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PdfViewer from "../../components/pdfViewer/pdfViewer";
 import { openReadBookModal } from "../../Redux/features/readBookModalSlice";
+import Config from "../../../Config";
 
 const ActiveBooks = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const ActiveBooks = () => {
     const getBooksRead = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/cart/purchase/${user.user._id}/get`
+          `${Config.apiUrl}/api/cart/purchase/${user.user._id}/get`
         );
         const backendData = response.data.data;
         const allItems = backendData.flatMap((purchase) => purchase.items);
@@ -63,7 +64,7 @@ const ActiveBooks = () => {
                   <tr key={book._id}>
                     <td>
                       <img
-                       src={`http://localhost:5000/upload/books/${book.productId.coverImage}`}
+                       src={`${Config.apiUrl}/upload/books/${book.productId.coverImage}`}
                         alt={book.productId.title}
                         style={{ width: "50px" }}
                       />

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../Redux/features/authSlice";
 import axios from "axios";
+import Config from "../../../../Config";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Logout = () => {
     const handleLogout = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/auth/logout"
+          `${Config.apiUrl}/api/auth/logout`
         );
 
         navigate("/login");

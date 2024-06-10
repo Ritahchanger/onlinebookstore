@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Account.css";
 import SideBar from "./SideBar";
 import AccountNavbar from "./AccountNavbar";
@@ -6,7 +6,7 @@ import TerminationModel from "../../components/TerminationModel/TerminationModel
 import axios from 'axios';
 import { useSelector } from "react-redux";
 import "./EditingAndPublishing.css";
-
+import Config from "../../../Config";
 const EditingAndPublishing = () => {
   const user = useSelector((state) => state.auth.user);
 
@@ -64,7 +64,7 @@ const EditingAndPublishing = () => {
       formData.append("category", category); // Add category to form data
 
       try {
-        const response = await axios.post('http://localhost:5000/api/books/add', formData, {
+        const response = await axios.post(`${Config.apiUrl}/api/books/add`, formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }

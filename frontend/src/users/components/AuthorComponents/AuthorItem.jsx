@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Config from "../../../Config";
 const AuthorItem = ({ author }) => {
   return (
     <div className="card">
       <div className="img-wrapper">
         {author.passport ? (
           <img
-            src={`http://localhost:5000/upload/authors/${author.passport}`}
+            src={`${Config.apiUrl}/upload/authors/${author.passport}`}
             alt={`${author.firstName} ${author.secondName}`}
           />
         ) : (

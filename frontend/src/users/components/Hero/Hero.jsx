@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
+import { Link } from "react-router-dom"; 
 import "./Hero.css";
 import Navbar from "../navigation/Navbar";
 import BannerImage from "../../../assets/images/book.jpg";
@@ -21,9 +22,9 @@ const Hero = () => {
               Thrillers to heartwarming romances, insightful non-fiction to
               enchanting children's tales.
             </p>
-            <a href="#" className="hero-btn">
-              READ MORE
-            </a>
+            <Link to="/shop" className="hero-btn">
+              Explore
+            </Link>
           </div>
           <div className="col">
             <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />

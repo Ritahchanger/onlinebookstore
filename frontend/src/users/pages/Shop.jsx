@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LowerNavbar from "../components/LowerNavbar/LowerNavbar";
 import NewRelease from "../components/HomePageComponents/NewReleases/NewRelease";
 import SectionTitle from "../components/shopComponents/SectionTitle";
@@ -7,6 +7,9 @@ import BooksGrid from "../components/Books/BooksGrid";
 import BookDescriptionModal from "../components/Books/BookDescriptionModal";
 import BestSellingAuthors from "../components/AuthorComponents/BestSellingAuthors";
 import axios from "axios";
+
+import Config from "../../Config";
+
 
 const Shop = () => {
   const [displayBook, setDisplayBook] = useState(false);
@@ -22,7 +25,7 @@ const Shop = () => {
 
   const getBooks = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/books/approved");
+      const response = await axios.get(`${Config.apiUrl}/api/books/approved`);
       if (response.status !== 200) {
         throw new Error("There was a problem fetching data from the server");
       }

@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
 
+import Config from "../../../../Config";
+
 const Login = () => {
   const dispatch = useDispatch();
 
@@ -36,7 +38,7 @@ const Login = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${Config.apiUrl}/api/auth/login`,
         {
           email: formData.email,
           password: formData.password,
@@ -72,7 +74,7 @@ const Login = () => {
           navigate("/account");
         } else {
           const getUser = await axios.get(
-            `http://localhost:5000/api/users/userId/${backendData.userId}`
+            `${Config.apiUrl}/api/users/userId/${backendData.userId}`
           );
 
           dispatch(login({ user: getUser.data.data }));

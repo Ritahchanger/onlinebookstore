@@ -40,7 +40,7 @@ const Navbar = () => {
             {isLoggedIn ? (
               <>
                 <p className="nav-li">
-                  <Link to="/cart">CART</Link>
+                  <Link to="/pending-payments">CART</Link>
                 </p>
 
                 <p className="nav-li">

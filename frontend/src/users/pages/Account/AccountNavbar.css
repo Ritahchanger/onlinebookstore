@@ -17,12 +17,37 @@
     display:flex;
     justify-content:center;
     align-items:center;
+    position: relative;
+    height:100%;
+}
+.account-navigation .profile-section .drop_down{
+    position:absolute;
+    top:100%;
+    background:var(--blue);
+    width:200px;
+    right:0.8rem;
+    padding:1rem;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    border-top:2px solid var(--white);
+    display:none;
+}
+.account-navigation .profile-section .drop_down.active{
+    display:block;
+}
+.account-navigation .profile-section .drop_down .linker.cart-buttons{
+    display:block;
+    margin:1rem 0rem;
+    text-align:center;
 }
 .account-navigation .profile-section img{
     border:none;
     width:30px;
     margin-right:9px;
     border-radius:50%;
+}
+.account-navigation .profile-section img:nth-child(1){
+    margin-right:1rem;
 }
 .account-navigation .menu-icon{
     width:40px;
@@ -75,6 +100,10 @@
 }
 .account-navigation .section p:nth-child(2){
     margin-left:1rem;
+}
+
+.account-navigation .arrow_dropdown.active{
+    transform:rotate(180deg);
 }
 
 

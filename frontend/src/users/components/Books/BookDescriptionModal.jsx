@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeBookModal } from "../../Redux/features/BookDescriptionSlice";
 import "./bookDescriptionModal.css";
 import axios from "axios";
+import Config from "../../../Config";
 
 const BookDescriptionModal = () => {
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ const BookDescriptionModal = () => {
     console.log("User is logged in. Proceeding to add item to cart.");
 
     try {
-      const response = await axios.post("http://localhost:5000/api/cart/post", {
+      const response = await axios.post(`${Config.apiUrl}/api/cart/post`, {
         userId: user.user._id,
         productId: selectedBook._id,
         quantity: 1
@@ -78,7 +79,7 @@ const BookDescriptionModal = () => {
           <div className="col">
             <div className="img-wrapper">
               <img
-                src={`http://localhost:5000/upload/books/${selectedBook.coverImage}`}
+                src={`${Config.apiUrl}/upload/books/${selectedBook.coverImage}`}
                 alt={selectedBook.title || "Book cover"}
               />
             </div>

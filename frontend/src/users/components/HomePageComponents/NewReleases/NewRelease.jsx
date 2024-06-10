@@ -10,6 +10,8 @@ import { useSelector,useDispatch} from "react-redux";
 
 import { openBookModal } from "../../../Redux/features/BookDescriptionSlice"; 
 
+import Config from "../../../../Config";
+
 const NewRelease = () => {
 
   const dispatch = useDispatch();
@@ -19,7 +21,7 @@ const NewRelease = () => {
 
   const fetchNewRelease = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/books/new/release");
+      const response = await axios.get(`${Config.apiUrl}/api/books/new/release`);
 
       if (!response.data.success) {
         throw new Error('Internal server error');
@@ -81,7 +83,7 @@ const NewRelease = () => {
               }}>
                 <div className="img-wrapper">
                   {book.coverImage ? (
-                    <img src={`http://localhost:5000/upload/books/${book.coverImage}`} alt={book.title} />
+                    <img src={`${Config.apiUrl}/upload/books/${book.coverImage}`} alt={book.title} />
                   ) : (
                     <img src={NewRelaseImage} alt={book.title} />
                   )}

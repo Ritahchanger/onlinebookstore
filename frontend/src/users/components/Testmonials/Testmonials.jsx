@@ -5,10 +5,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import TestmonialImage from "../../../assets/authors/profile-14.jpg";
 import axios from "axios";
+
+import Config from "../../../Config";
+
 import { useSelector } from "react-redux";
 
 const Testmonials = () => {
-  const user = useSelector((state) => state.auth.user);
   const [slidesToScroll, setSlidesToShow] = useState(3);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const Testmonials = () => {
 
   const fetchTestimonies = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/testmonials/get`);
+      const response = await axios.get(`${Config.apiUrl}/api/testmonials/get`);
       if (!response.data.success) {
         throw new Error(`There was an error fetching the data from the backend`);
       }
@@ -49,7 +51,7 @@ const Testmonials = () => {
 
   useEffect(() => {
     fetchTestimonies();
-  }, [user.user._id]);
+  }, []);
 
   // Function to truncate description to 20 words
   const truncateDescription = (description) => {

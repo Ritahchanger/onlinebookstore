@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Home from './users/pages/Home'
 import SignUp from './users/components/authentication/users/Signup'
@@ -29,23 +25,31 @@ import EditingAndPublishing from './users/pages/Account/EditingAndPublishing'
 import PaymentDetails from './users/pages/Account/PaymentDetails'
 import PendingApprovals from './users/pages/Account/PendingApprovals'
 import Logout from './users/components/authentication/users/Logout'
-
-import ShopCategories from './users/pages/ShopCategories';
-
+import ShopCategories from './users/pages/ShopCategories'
 import About from './users/pages/About'
-
 import Complete_payment from './users/pages/Complete_payment'
-
 import CancelOrder from './users/pages/CancelOrder'
+import { useSelector } from 'react-redux'
+import AutoLogoutHandler from './users/components/authentication/users/AutoLogoutHandler'
+
+// ADMIN ROUTES
+import UnapprovedBooks from './administration/pages/UnapprovedBooks'
+import AllBooksAdministration from './administration/pages/AllBooksAdministration'
+import BlogsAdministration from './administration/pages/BlogsAdministration'
+import TerminationAdministration from './administration/pages/TerminationAdministration'
+import UsersAdministration from './administration/pages/UsersAdministration'
+import AdminAuthors from './administration/pages/AdminAuthors'
+
+// 
 
 
 const App = () => {
-
- 
+  const user = useSelector(state => state.auth.user)
 
   return (
     <div className='app'>
       <BrowserRouter>
+        {user && <AutoLogoutHandler user={user} />}
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
@@ -58,7 +62,7 @@ const App = () => {
           <Route path='/categories' element={<CategoriesNavbar />} />
           <Route path='/check-out' element={<Checkout />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
-          <Route path='/about' element={<About/>} />
+          <Route path='/about' element={<About />} />
           <Route
             path='/change-password/:email'
             element={<PasswordChanging />}
@@ -114,22 +118,8 @@ const App = () => {
               </ProtectedRoutes>
             }
           />
-
-          {/* PAYPAL */}
-          <Route
-            path='/complete-order'
-            element={
-              <Complete_payment/>
-            }
-          />
-          <Route
-            path='/cancel-order'
-            element={
-              <CancelOrder/>
-            }
-          />
-
-          {/* PAYAP */}
+          <Route path='/complete-order' element={<Complete_payment />} />
+          <Route path='/cancel-order' element={<CancelOrder />} />
           <Route
             path='/editing-publishing'
             element={
@@ -154,6 +144,15 @@ const App = () => {
               </ProtectedRoutes>
             }
           />
+
+          {/* ADMINISTRATION */}
+
+          <Route path="/admin/unapproved" element={<UnapprovedBooks />} />
+          <Route path="/admin/blogs" element={<BlogsAdministration />} />
+          <Route path="/admin/termination-accounts" element={<TerminationAdministration />} />
+          <Route path="/admin/users" element={<UsersAdministration />} />
+          <Route path="/admin/all-books" element={<AllBooksAdministration />} />
+          <Route path="/admin/authors" element={<AdminAuthors />} />
         </Routes>
       </BrowserRouter>
     </div>

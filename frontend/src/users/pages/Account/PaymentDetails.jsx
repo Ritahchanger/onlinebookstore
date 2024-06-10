@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MpesaLogo from "../../../assets/images/mpesa.png";
 import { showLoading, hideLoading } from "../../Redux/features/alertSlice";
 import Preloaders from "../../components/Preloaders/Preloaders";
+import Config from "../../../Config";
 const PaymentDetails = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
@@ -33,13 +34,13 @@ const PaymentDetails = () => {
       alert("Please enter a phone number");
       return;
     }
-
+  
     const paymentMethod = "safaricom";
-
+  
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        `http://localhost:5000/api/payment`,
+        `${Config.apiUrl}/api/payment`,
         {
           phone: phoneNo,
           amount: totalPrice,
@@ -50,18 +51,21 @@ const PaymentDetails = () => {
           },
         }
       );
-
+  
       if (!response.data.success) {
-
-        const response = await axios.post(`http://localhost:5000/api/cart/purchase/${user.user._id}`);
-
-        if(response.data.success){
-          alert('Payment done successfully');
+        const response = await axios.post(
+          `${Config.apiUrl}/api/cart/purchase/${user.user._id}`
+        );
+  
+        if (response.data.success) {
+          alert("Payment done successfully");
+          // Fetch updated cart items after payment
+          await fetchCartItems();
           dispatch(hideLoading());
         }
         return;
       }
-
+  
       dispatch(hideLoading());
       setPaymentSuccess(true);
       setTimeout(() => {
@@ -72,33 +76,34 @@ const PaymentDetails = () => {
       dispatch(hideLoading());
     }
   };
+  
 
-  useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/api/cart/get/${user.user._id}`
-        );
-        if (!response.data.success) {
-          throw new Error("NO CART ITEMS");
-        }
-        setCartItems(response.data.items);
-        const totalPrice = response.data.items.reduce(
-          (acc, item) => acc + item.productId.price * item.quantity,
-          0
-        );
-        setTotalPrice(totalPrice);
-      } catch (error) {
-        console.error("Error fetching cart items:", error);
+  const fetchCartItems = async () => {
+    try {
+      const response = await axios.get(
+        `${Config.apiUrl}/api/cart/get/${user.user._id}`
+      );
+      if (!response.data.success) {
+        throw new Error("NO CART ITEMS");
       }
-    };
+      setCartItems(response.data.items);
+      const totalPrice = response.data.items.reduce(
+        (acc, item) => acc + item.productId.price * item.quantity,
+        0
+      );
+      setTotalPrice(totalPrice);
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
+  };
+  useEffect(() => {
     fetchCartItems();
   }, [user.user._id]);
 
   const deleteCartItem = async (cartItemId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/cart/delete/cartItem/${user.user._id}/${cartItemId}`
+        `${Config.apiUrl}/api/cart/delete/cartItem/${user.user._id}/${cartItemId}`
       );
 
       if (response.data.success) {
@@ -126,7 +131,7 @@ const PaymentDetails = () => {
       dispatch(showLoading());
 
       const response = await axios.post(
-        "http://localhost:5000/api/payment/paypal/orders",
+        `${Config.apiUrl}/api/payment/paypal/orders`,
         {
           cost: totalPrice,
           description: "cart_items",
@@ -196,7 +201,7 @@ const PaymentDetails = () => {
                         <tr key={item._id}>
                           <td>
                             <img
-                              src={`http://localhost:5000/upload/books/${item.productId?.coverImage}`}
+                              src={`${Config.apiUrl}/upload/books/${item.productId?.coverImage}`}
                               alt={item.productId?.title}
                             />
                           </td>

@@ -5,9 +5,17 @@ import "./AccountNavbar.css";
 import CloseIcon from "../../../assets/icons/close.png";
 import ProfileIcon from "../../../assets/icons/boy.png";
 
+import downArrow from "../../../assets/icons/drop.png";
+
 const AccountNavbar = ({ handleSidebar, sidebar }) => {
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
+
+  const [dropdown, setDropdown] = useState(false);
+
+  const handleDropDown = () => {
+    setDropdown(!dropdown);
+  };
 
   const handleNavigation = () => {
     navigate("/profile");
@@ -24,7 +32,6 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
           <img src={CloseIcon} alt="CloseIcon" onClick={handleSidebar} />
         </div>
       )}
-
       <div className="section date">
         <p>Joined on</p>
         <p>{`${user.user.createdOn}`}</p>
@@ -38,12 +45,30 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
         <p>{user.user.username}</p>
       </div>
 
+      <Link to="/admin/unapproved" className="linker cart-buttons">
+        ADMIN
+      </Link>
+
       <div className="profile-section" onClick={handleNavigation}>
         <div className="img-wrapper">
           <img
             src={`http://localhost:5000/upload/authors/${user.user.passport}`}
             alt="Profile"
           />
+        </div>
+        <img
+          src={downArrow}
+          alt=""
+          className={`arrow_dropdown ${dropdown ? "active" : null}`}
+          onClick={handleDropDown}
+        />
+        <div className={`drop_down ${dropdown ? "active" : ""} `}>
+          <Link to="/logout" className="linker cart-buttons">
+            LOGOUT
+          </Link>
+          <Link to="/" className="linker cart-buttons">
+            HOME
+          </Link>
         </div>
       </div>
     </div>

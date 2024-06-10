@@ -5,7 +5,7 @@ import SearchComponent from "../components/AuthorComponents/SearchComponent"; //
 import "./author.css";
 import AuthorItem from "../components/AuthorComponents/AuthorItem";
 import axios from "axios";
-
+import Config from "../../Config";
 const Authors = () => {
   const [authorData, setAuthorData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,7 +13,7 @@ const Authors = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/users/authors");
+      const response = await axios.get(`${Config.apiUrl}/api/users/authors`);
 
       if (response.status !== 200) {
         throw new Error("Internal server error");

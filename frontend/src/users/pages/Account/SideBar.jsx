@@ -12,7 +12,7 @@ import { authenticateTerminatingUser } from "../../Redux/features/AccountTermina
 
 import axios from "axios";
 
-const SideBar = ({ sidebar, handleTerminationModel }) => {
+const SideBar = ({ sidebar, han }) => {
   const dispatch = useDispatch();
 
   const accountTerminationRequest = useSelector(
@@ -79,14 +79,14 @@ const SideBar = ({ sidebar, handleTerminationModel }) => {
             <p>Previously read books</p>
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/payment-details" activeClassName="active">
             <p>
               <i className="fas fa-credit-card"></i>
             </p>
             <p>Payment Details</p>
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink to="/login" onClick={handleAccountTermination}>
             <p>

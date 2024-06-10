@@ -5,6 +5,8 @@ import axios from "axios";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 import { useSelector } from "react-redux";
 
+import Config from "../../../Config";
+
 const BooksRead = () => {
   const user = useSelector((state) => state.auth.user);
   const [sidebar, showSidebar] = useState(false);
@@ -31,7 +33,7 @@ const BooksRead = () => {
     const getBooksRead = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/cart/purchase/${user.user._id}/get`
+          `${Config.apiUrl}/api/cart/purchase/${user.user._id}/get`
         );
         const backendData = response.data.data;
         const allItems = backendData.flatMap((purchase) => purchase.items);
@@ -70,7 +72,7 @@ const BooksRead = () => {
                     <tr key={item._id}>
                       <td>
                         <img
-                          src={`http://localhost:5000/upload/books/${item.productId.coverImage}`}
+                          src={`${Config.apiUrl}/upload/books/${item.productId.coverImage}`}
                           alt={item.productId.title}
                           style={{ width: "50px" }}
                         />

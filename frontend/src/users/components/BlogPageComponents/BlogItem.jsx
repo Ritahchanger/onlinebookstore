@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom"; 
-
+import Config from "../../../Config";
 const BlogItem = ({blog}) => {
   const truncateText = (text, maxWords) => {
     const words = text.split(" ");
@@ -13,7 +13,7 @@ const BlogItem = ({blog}) => {
   return (
     <div className="blog-card">
       <div className="img-wrapper">
-        <img src={`http://localhost:5000/upload/blogs/${blog.filePath}`} alt={blog.title} />
+        <img src={`${Config.apiUrl}/upload/blogs/${blog.filePath}`} alt={blog.title} />
       </div>
       <div className="overlay">
         <p className="small-header">{blog.title}</p>

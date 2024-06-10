@@ -1,0 +1,115 @@
+.admin .medium-header{
+    text-align: center;
+    font-size:var(--mobile-font);
+    margin:0rem;
+    position:relative;
+}
+.admin .container{
+  max-width:1400px;
+  margin:0 auto;
+}
+.admin table{
+    width:100%;
+    border:1px solid var(--green);
+    min-width:400px;
+    border-collapse: collapse;
+  } 
+  .admin table thead{
+    background:var(--green);
+    color:var(--white);
+  }
+  .admin table thead tr td{
+    font-size:var(--mobile-font);
+  }
+  .admin table td{
+    padding:0.5rem 1rem;
+    border:1px solid var(--orange);
+  }
+  .admin table td img{
+    width:50px;
+    height:50px;
+  }
+
+  /* .admin table tbody tr:nth-child(even) {
+    background: var(--green);
+  } */
+  .admin table tbody tr td{
+   color:var(--black)
+  }
+  .admin table thead  td{
+   border:1px solid var(--green)
+  }
+  
+  .admin table tbody tr td:nth-child(5) i{
+    color:var(--blue);
+    cursor: pointer;
+  }
+  .admin table tbody tr td:nth-child(5) i:hover{
+    transform:scale(1.4);
+  }
+  .admin .table_wrapper {
+    overflow: scroll;
+    max-height: calc(100vh - 120px);
+    border-top:2px solid var(--green);
+  }
+  
+  .admin table tbody tr .remove{
+    background:var(--orange);
+    text-align:center;
+    cursor: pointer;
+    background:var(--green);
+    color:var(--white)
+  }
+  .admin table tbody tr .remove:hover i{
+    color:var(--pinkRed)
+  }
+  .admin table tbody tr .remove i{
+    color:var(--white);
+  }
+  .admin .cart-buttons{
+    background:var(--orange);
+    border:2px solid var(--orange);
+  }
+  .admin .input_group input{
+    border:none;
+    flex-basis:94%;
+    outline:none
+  }
+  .admin .input_group{
+    padding:8px 0px;
+    border-bottom:1px solid var(--gray);
+    margin-bottom:1rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  
+
+  .admin .custom-modal{
+    position:fixed;
+    top:0;
+    right:0;
+    left:0;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background:rgba(0,0,0,0.75);
+    color:var(--black);
+    z-index:99;
+  }
+ .admin  .custom-modal .modal-dialog{
+    background: var(--white);
+    width:100%;
+    max-width:600px;
+    padding:1rem;
+    position:relative;
+  }
+  .admin .custom-modal .modal-dialog .close_icon{
+    height:30px;
+    width:30px;
+    position: absolute;
+    cursor: pointer;
+    right:1rem;
+  }

@@ -123,7 +123,7 @@ img{
   padding:0.5rem 1rem;
   border-radius:5rem;
   margin-right:1rem;
-  color:var(--green)z
+  color:var(--green)
 }
 .cart-buttons:hover{
   background:var(--green);
@@ -273,4 +273,17 @@ width:100%;
 .paypal_terminations .cart-buttons:hover{
   background:transparent;
   color:var(--green)
+}
+.linker{
+  color:var(--white);
+  font-size:var(---mobile-font);
+  text-transform:uppercase;
+}
+.linker.cart-buttons{
+  background:var(--green);
+  border:2px solid var(--green);
+  font-weight:600;
+}
+.linker.cart-buttons:hover{
+  background:transparent;
 }
