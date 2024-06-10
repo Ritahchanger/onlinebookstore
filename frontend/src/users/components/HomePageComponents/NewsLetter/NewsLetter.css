@@ -1,3 +1,8 @@
+.newsletter .container{
+  box-shadow:0 0 5px rgba(0,0,0,0.25);
+  margin-top:2rem;
+  padding:2rem 0rem;
+}
 .newsletter .container .subscribe {
   color: var(--blue);
 }
@@ -16,6 +21,9 @@
   flex-direction: column;
   align-items: center;
 }
+.newsletter .container .row .col:nth-child(1) {
+  padding-left:10px;
+}
 .newsLetterForm input {
   flex-basis: 70%;
   border: none;
@@ -31,10 +39,17 @@
   border: none;
   background: var(--green);
   font-size:1rem;
-  color:var(--white)
+  color:var(--white);
+  cursor: pointer;
 }
 .newsLetterForm button i {
   margin-left: 1rem;
+}
+.newsletter .success-message{
+  color:var(--green);
+  font-weight:700;
+  text-align:start;
+  width:100%;
 }
 
 @media (max-width: 596px) {

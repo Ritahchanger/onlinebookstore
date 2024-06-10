@@ -31,6 +31,9 @@
 
 .account .mpesa_logo {
   border: 2px solid var(--green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .account .payment .cart-buttons {
@@ -55,7 +58,7 @@
   flex-direction: column;
 }
 .payment-row img{
-  width:200px;
+  width:130px;
 }
 
 .account .payment-options .input-group{
@@ -121,6 +124,22 @@ margin-top:1rem;
 .account .payment .container .row.cart_row{
   align-items:start;
   justify-content:space-between;
+}
+
+.paypal-btn {
+  background-color: #00457C;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width:100%;
+}
+
+.paypal-btn:hover {
+  background-color: #003366;
 }
 
 

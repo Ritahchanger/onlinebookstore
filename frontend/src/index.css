@@ -258,3 +258,19 @@ img{
   color:green;
   margin-top:1rem;
 }
+.paypal_terminations{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+width:100%;
+}
+.paypal_terminations .cart-buttons{
+  background:var(--green);
+  color:var(--white);
+  transition:all 0.5s;
+}
+.paypal_terminations .cart-buttons:hover{
+  background:transparent;
+  color:var(--green)
+}

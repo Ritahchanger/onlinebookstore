@@ -9,8 +9,6 @@ import { useSelector, useDispatch } from "react-redux";
 import MpesaLogo from "../../../assets/images/mpesa.png";
 import { showLoading, hideLoading } from "../../Redux/features/alertSlice";
 import Preloaders from "../../components/Preloaders/Preloaders";
-import { PayPalScriptProvider} from "@paypal/react-paypal-js";
-import PaypalPayment from "../../components/PaypalPayments/PaypalPayment";
 const PaymentDetails = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
@@ -54,7 +52,13 @@ const PaymentDetails = () => {
       );
 
       if (!response.data.success) {
-        dispatch(hideLoading());
+
+        const response = await axios.post(`http://localhost:5000/api/cart/purchase/${user.user._id}`);
+
+        if(response.data.success){
+          alert('Payment done successfully');
+          dispatch(hideLoading());
+        }
         return;
       }
 
@@ -117,114 +121,151 @@ const PaymentDetails = () => {
     }
   };
 
-  const initialOptions = {
-    clientId: "Ab-xtAN0jbGzeTr7RgoW8oDk1dOL78_nU275rwNgMhZo3C0jnJIGmz6N2SqbEEGg5p9H6_hNozjMmQxM",
-    currency: "USD",
-    intent: "capture",
-};
+  const payWithPaypal = async () => {
+    try {
+      dispatch(showLoading());
+
+      const response = await axios.post(
+        "http://localhost:5000/api/payment/paypal/orders",
+        {
+          cost: totalPrice,
+          description: "cart_items",
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+
+      dispatch(hideLoading());
+      if (response.status === 201) {
+        setPaymentSuccess(true);
+        const completion_page_url = response.data.links[1].href;
+
+        window.open(completion_page_url, "_blank");
+
+        setTimeout(() => {
+          setPaymentSuccess(false);
+        }, 10000);
+      } else {
+        // Payment failed
+        console.error("Payment failed:", response.data.error);
+        // Display error message to the user
+        alert("Payment failed. Please try again later.");
+      }
+    } catch (error) {
+      // Hide loading indicator
+      dispatch(hideLoading());
+      // Log and display error message
+      console.error("Error making PayPal payment:", error);
+      alert("Error making PayPal payment. Please try again later.");
+    }
+  };
 
   return (
-    <PayPalScriptProvider options={initialOptions}>
-      <div className="account">
-        <AccountNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
-        <SideBar
-          sidebar={sidebar}
-          handleTerminationModel={handleTerminationModel}
-        />
-        <div className="payment">
-          <div className="container">
-            <p className="medium-header">PENDING PAYMENTS</p>
-            {loading ? (
-              <Preloaders />
-            ) : cartItems.length === 0 ? (
-              <p>NO CART ITEMS</p>
-            ) : (
-              <>
-                <p className="small-header">Carted Items</p>
-                <div className="row cart_row">
-                  <div className="table_wrapper">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Book Cover</th>
-                          <th>Name</th>
-                          <th>Price</th>
-                          <th>Remove</th>
+    <div className="account">
+      <AccountNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
+      <SideBar
+        sidebar={sidebar}
+        handleTerminationModel={handleTerminationModel}
+      />
+      <div className="payment">
+        <div className="container">
+          <p className="medium-header">PENDING PAYMENTS</p>
+          {loading ? (
+            <Preloaders />
+          ) : cartItems.length === 0 ? (
+            <p>NO CART ITEMS</p>
+          ) : (
+            <>
+              <p className="small-header">Carted Items</p>
+              <div className="row cart_row">
+                <div className="table_wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Book Cover</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cartItems.map((item) => (
+                        <tr key={item._id}>
+                          <td>
+                            <img
+                              src={`http://localhost:5000/upload/books/${item.productId?.coverImage}`}
+                              alt={item.productId?.title}
+                            />
+                          </td>
+                          <td>{item.productId?.title}</td>
+                          <td>${item.productId?.price}</td>
+                          <td
+                            className="remove"
+                            onClick={() => deleteCartItem(item._id)}
+                          >
+                            <i className="fas fa-trash"></i>
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {cartItems.map((item) => (
-                          <tr key={item._id}>
-                            <td>
-                              <img
-                                src={`http://localhost:5000/upload/books/${item.productId?.coverImage}`}
-                                alt={item.productId?.title}
-                              />
-                            </td>
-                            <td>{item.productId?.title}</td>
-                            <td>${item.productId?.price}</td>
-                            <td
-                              className="remove"
-                              onClick={() => deleteCartItem(item._id)}
-                            >
-                              <i className="fas fa-trash"></i> 
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="payment_account">
-                    <p>Select payment method:</p>
-                    <Link to="/shop">
-                      <i className="fa fa-arrow-left"></i>Continue shopping?
-                    </Link>
-                    <p className="total-price">Total Price: ${totalPrice}</p>
-                    <div className="payment-row">
-                      <div className="safaricom">
-                        <p className="small-header">FOR THE LOCAL PAYMENT</p>
-                        <div className="mpesa_logo">
-                          <img src={MpesaLogo} alt="" />
-                        </div>
-                        <div className="payment-options">
-                          <input
-                            type="text"
-                            name="phoneNo"
-                            id="phoneNo"
-                            placeholder="Enter phone No (07--)"
-                            value={phoneNo}
-                            onChange={(e) => setPhoneNo(e.target.value)}
-                          />
-                        </div>
-                        <button
-                          onClick={handlePayment}
-                          className="cart-buttons"
-                          disabled={paymentSuccess}
-                        >
-                          {paymentSuccess ? "Payment Successful" : "PAY NOW"}
-                        </button>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="payment_account">
+                  <p>Select payment method:</p>
+                  <Link to="/shop">
+                    <i className="fa fa-arrow-left"></i>Continue shopping?
+                  </Link>
+                  <p className="total-price">Total Price: ${totalPrice}</p>
+                  <div className="payment-row">
+                    <div className="safaricom">
+                      <p className="small-header">FOR THE LOCAL PAYMENT</p>
+                      <div className="mpesa_logo">
+                        <img src={MpesaLogo} alt="" />
                       </div>
-                      <div className="paypal">
-                        <p className="small-header">
-                          FOR THE INTERNATIONAL PAYMENTS
-                        </p>  
-                        <div className="col">
-                         <PaypalPayment/>
-                        </div>
+                      <div className="payment-options">
+                        <input
+                          type="text"
+                          name="phoneNo"
+                          id="phoneNo"
+                          placeholder="Enter phone No (07--)"
+                          value={phoneNo}
+                          onChange={(e) => setPhoneNo(e.target.value)}
+                        />
+                      </div>
+                      <button
+                        onClick={handlePayment}
+                        className="cart-buttons"
+                        disabled={paymentSuccess}
+                      >
+                        {paymentSuccess ? "Payment Successful" : "PAY NOW"}
+                      </button>
+                    </div>
+                    <div className="paypal">
+                      <p className="small-header">
+                        FOR THE INTERNATIONAL PAYMENTS
+                      </p>
+                      <div className="col">
+                        <p>Pay with paypal</p>
+                        <button class="paypal-btn" onClick={payWithPaypal}>
+                          <i class="fa-brands fa-paypal"></i>
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
-              </>
-            )}
-          </div>
+              </div>
+            </>
+          )}
         </div>
-        <TerminationModel
-          handleTerminationModel={handleTerminationModel}
-          terminationModel={terminationModel}
-        />
       </div>
-    </PayPalScriptProvider>
+      <TerminationModel
+        handleTerminationModel={handleTerminationModel}
+        terminationModel={terminationModel}
+      />
+    </div>
   );
 };
 

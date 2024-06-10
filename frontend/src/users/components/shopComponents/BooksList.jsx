@@ -67,9 +67,6 @@ const BooksList = ({ book }) => {
           <p className="shop-items-icons">
             <i className="fa-solid fa-cart-shopping"></i>
           </p>
-          <p className="shop-items-icons">
-            <i className="fa-solid fa-heart"></i>
-          </p>
           <p className="shop-items-icons" onClick={handleBookModal}>
             <i className="fa fa-eye"></i>
           </p>
@@ -77,7 +74,6 @@ const BooksList = ({ book }) => {
       </div>
       <div className="card-body">
         <p className="book_title">{book.title}</p>
-        <Rating rating={bookRating} />
         <p className="book_price">{book.price}</p>
       </div>
     </div>

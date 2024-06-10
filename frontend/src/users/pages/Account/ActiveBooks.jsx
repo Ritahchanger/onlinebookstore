@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import PdfViewer from "../../components/pdfViewer/pdfViewer";
 import { openReadBookModal } from "../../Redux/features/readBookModalSlice";
 
@@ -10,30 +9,38 @@ const ActiveBooks = () => {
   const user = useSelector((state) => state.auth.user);
   const [books, setBooks] = useState(null);
 
-  const getBooksByAuthor = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/api/books/authors/${user.user._id}`
-      );
-
-      if (response.status !== 200) {
-        throw new Error(`Server returned status ${response.status}`);
-      }
-
-      setBooks(response.data.data);
-    } catch (error) {
-      console.log(
-        `There was a problem fetching the data from the backend->${error.message}`
-      );
+  const truncateDescription = (description) => {
+    const words = description.split(" ");
+    if (words.length <= 15) {
+      return description;
     }
+    return words.slice(0, 15).join(" ") + "...";
   };
 
   useEffect(() => {
-    getBooksByAuthor();
+    const getBooksRead = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/cart/purchase/${user.user._id}/get`
+        );
+        const backendData = response.data.data;
+        const allItems = backendData.flatMap((purchase) => purchase.items);
+        setBooks(allItems);
+        console.log(allItems);
+      } catch (error) {
+        console.error("Error fetching books read:", error);
+      }
+    };
+    getBooksRead();
   }, [user.user._id]);
 
   const openBookModal = (book) => {
-    dispatch(openReadBookModal(book));
+    dispatch(openReadBookModal(
+      {
+        title:book.productId.title,
+        book:book.productId.book
+      }
+    ));
   };
 
   return (
@@ -44,21 +51,25 @@ const ActiveBooks = () => {
           <table>
             <thead>
               <tr>
+                <td>COVER IMAGE</td>
                 <td>TITLE</td>
-                <td>AUTHOR</td>
-                <td>REVIEWS</td>
-                <td>RATINGS</td>
-                <td>VIEW</td>
+                <td>DESCRIPTION</td>
+                <td>READ</td>
               </tr>
             </thead>
             <tbody>
               {books &&
                 books.map((book) => (
                   <tr key={book._id}>
-                    <td>{book.title}</td>
-                    <td>{`${user.user.firstName} ${user.user.secondName}`}</td>
-                    <td>{book.reviews}</td>
-                    <td>{book.ratings}</td>
+                    <td>
+                      <img
+                       src={`http://localhost:5000/upload/books/${book.productId.coverImage}`}
+                        alt={book.productId.title}
+                        style={{ width: "50px" }}
+                      />
+                    </td>
+                    <td>{book.productId.title}</td>
+                    <td>{truncateDescription(book.productId.description)}</td>
                     <td onClick={() => openBookModal(book)}>
                       <i className="fa fa-eye"></i>
                     </td>
@@ -68,7 +79,7 @@ const ActiveBooks = () => {
           </table>
         </div>
       </div>
-      <PdfViewer/>
+      <PdfViewer />
     </div>
   );
 };

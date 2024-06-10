@@ -18,6 +18,8 @@ const Home = () => {
     window.scrollTo(0,0);
   },[])
 
+  console.log(process.env.REACT_APP_BASE_URL);
+
   return (
     <div className="home">
       <Hero />

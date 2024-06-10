@@ -43,9 +43,6 @@ const LowerNavbar = () => {
     };
   }, []);
 
-  const handleActiveNavItems = (index) => {
-    setActiveIndex(index);
-  };
 
   return (
     <div className={isFixed ? "lower_navbar fixed" : "lower_navbar"}>
@@ -67,11 +64,11 @@ const LowerNavbar = () => {
             &times;
           </a>
           <div className="nav-ul">
-            {sectioncNavigation.map((item, index) => (
+            {sectioncNavigation.map((item) => (
               <p
-                key={index}
+                key={item.path}
                 className="nav_li"
-                onClick={() => handleActiveNavItems(index)}
+                
               >
                 <NavLink to={item.path} activeClassName="active">
                   {item.menu_name}
@@ -79,7 +76,7 @@ const LowerNavbar = () => {
                 {item.navItems && (
                   <>
                     <Link to="#" className="angle">
-                      <i class="fa fa-angle-down"></i>
+                      <i className="fa fa-angle-down"></i>
                     </Link>
                     <Link to="#" className="arrow">
                       <i className="fa fa-arrow-right"></i>
@@ -91,7 +88,7 @@ const LowerNavbar = () => {
           </div>
           <div className="accounts">
             <p onClick={handleSideBar}>
-              <Link to="#">ACCOUNT</Link>
+              <Link to="/account">ACCOUNT</Link>
             </p>
             <p onClick={handleSideBar}>
               <Link to="/login">LOGIN</Link>
@@ -106,7 +103,7 @@ const LowerNavbar = () => {
               handleArrow();
             }}
           >
-            <i class="fa-sharp fa-solid fa-angle-down"></i>
+            <i className="fa-sharp fa-solid fa-angle-down"></i>
           </p>
           <div className={`cart-icons ${cartIcons ? "active" : ""}`}>
             <Link to="/cart">
@@ -114,11 +111,11 @@ const LowerNavbar = () => {
             </Link>
             <Link to="#">
               {" "}
-              <i class="fa-solid fa-heart"></i>
+              <i className="fa-solid fa-heart"></i>
             </Link>
           </div>
           <Link to="#" className="menu-icon" onClick={handleSideBar}>
-            <i class="fa-solid fa-bars-staggered"></i>
+            <i className="fa-solid fa-bars-staggered"></i>
           </Link>
         </div>
       </div>

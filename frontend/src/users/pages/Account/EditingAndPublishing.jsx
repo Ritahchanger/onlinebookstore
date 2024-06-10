@@ -1,7 +1,7 @@
+import React, { useState } from "react";
 import "./Account.css";
 import SideBar from "./SideBar";
 import AccountNavbar from "./AccountNavbar";
-import { useState } from "react";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 import axios from 'axios';
 import { useSelector } from "react-redux";
@@ -13,6 +13,7 @@ const EditingAndPublishing = () => {
   const [sidebar, showSidebar] = useState(false);
   const [terminationModel, showTerminationModel] = useState(false);
   const [uploadMessage, setUploadMessage] = useState("");
+  const [category, setCategory] = useState("spiritual"); // Initialize category state
 
   const handleSidebar = () => {
     showSidebar(!sidebar);
@@ -60,6 +61,7 @@ const EditingAndPublishing = () => {
       formData.append("description", description);
       formData.append("book", bookFile);
       formData.append("coverImage", coverImageFile);
+      formData.append("category", category); // Add category to form data
 
       try {
         const response = await axios.post('http://localhost:5000/api/books/add', formData, {
@@ -132,6 +134,11 @@ const EditingAndPublishing = () => {
           />
           {errors.price && <span className="error">{errors.price}</span>}
         </div>
+        <select name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="spiritual">SPIRITUAL</option>
+          <option value="academic">ACADEMIC</option>
+          <option value="business">BUSINESS</option>
+        </select>
         <div>
           <textarea
             placeholder="Description"

@@ -3,8 +3,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Navigate,
-  useNavigate
 } from 'react-router-dom'
 import './App.css'
 import Home from './users/pages/Home'
@@ -32,9 +30,19 @@ import PaymentDetails from './users/pages/Account/PaymentDetails'
 import PendingApprovals from './users/pages/Account/PendingApprovals'
 import Logout from './users/components/authentication/users/Logout'
 
-import ShopCategories from './users/pages/ShopCategories'
+import ShopCategories from './users/pages/ShopCategories';
+
+import About from './users/pages/About'
+
+import Complete_payment from './users/pages/Complete_payment'
+
+import CancelOrder from './users/pages/CancelOrder'
+
 
 const App = () => {
+
+ 
+
   return (
     <div className='app'>
       <BrowserRouter>
@@ -50,6 +58,7 @@ const App = () => {
           <Route path='/categories' element={<CategoriesNavbar />} />
           <Route path='/check-out' element={<Checkout />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/about' element={<About/>} />
           <Route
             path='/change-password/:email'
             element={<PasswordChanging />}
@@ -105,6 +114,22 @@ const App = () => {
               </ProtectedRoutes>
             }
           />
+
+          {/* PAYPAL */}
+          <Route
+            path='/complete-order'
+            element={
+              <Complete_payment/>
+            }
+          />
+          <Route
+            path='/cancel-order'
+            element={
+              <CancelOrder/>
+            }
+          />
+
+          {/* PAYAP */}
           <Route
             path='/editing-publishing'
             element={

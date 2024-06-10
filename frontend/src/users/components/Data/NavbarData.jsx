@@ -36,7 +36,7 @@ export const sectioncNavigation = [
 
  export const nav__categories=[
   {
-    booksTypes: "Fiction",
+    booksTypes: "SPIRITUAL",
     books: [
       "Literary Fiction",
       "Mystery/Thriller",
@@ -47,7 +47,7 @@ export const sectioncNavigation = [
     ],
   },
   {
-    booksTypes: "Non-fiction",
+    booksTypes: "BUSINESS",
     books: [
       "Biography/Autobiography",
       "Self-Help/Personal Development",
@@ -58,7 +58,7 @@ export const sectioncNavigation = [
     ],
   },
   {
-    booksTypes: "Children's Book",
+    booksTypes: "ACADEMIC",
     books: [
       "Picture Books",
       "Early Readers",
@@ -67,28 +67,5 @@ export const sectioncNavigation = [
 
       "Children's Non-Fiction",
     ],
-  },
-  {
-    booksTypes: "Educational",
-    books: ["Textbooks", "Study Guides", "Reference", "Test Preparations"],
-  },
-  {
-    booksTypes: "Specialty",
-    books: [
-      "Graphic Novels/Comics",
-      "Poetry",
-      "Art/Photography",
-      "Religion/Spirituality",
-      "Philosophy",
-    ],
-  },
-  {
-    booksTypes: "Miscellaneous",
-    books: [
-      "Best sellers",
-      "New Releases",
-      "Award winners",
-      "Local Authors",
-    ],
-  },
+  }
 ]

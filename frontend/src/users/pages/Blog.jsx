@@ -47,9 +47,6 @@ const Blog = () => {
                 value={searchTerm}
                 onChange={handleSearchChange}
               />
-              <button type="submit">
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </button>
             </div>
             <div className="filter-input">
               <p className="filter-title">Filter by</p>
