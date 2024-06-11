@@ -238,16 +238,17 @@ const addAccountToTerminate = async (req, res) => {
 
 const getAccountsToTerminate = async (req, res) => {
   try {
-    const accounts = await AccountTermination.find({})
+    const accounts = await AccountTermination.find({}).populate(
+      'user',
+      'firstName secondName'
+    )
 
     if (!accounts) {
-      return res
-        .status(200)
-        .json({
-          status: 404,
-          success: false,
-          message: 'There are no accounts for termination'
-        })
+      return res.status(200).json({
+        status: 404,
+        success: false,
+        message: 'There are no accounts for termination'
+      })
     }
 
     return res.status(200).json({ status: 200, success: true, data: accounts })
@@ -263,21 +264,17 @@ const terminateAccount = async (req, res) => {
     const terminateAccount = await AccountTermination.findByIdAndDelete(id)
 
     if (!terminateAccount) {
-      return res
-        .status(200)
-        .json({
-          status: 404,
-          success: false,
-          message: 'The account was not found'
-        })
-    }
-    return res
-      .status(200)
-      .json({
-        status: 200,
-        success: true,
-        message: 'The account terminated successfully'
+      return res.status(200).json({
+        status: 404,
+        success: false,
+        message: 'The account was not found'
       })
+    }
+    return res.status(200).json({
+      status: 200,
+      success: true,
+      message: 'The account terminated successfully'
+    })
   } catch (error) {
     return res.status(500).json({ success: false, error: error.message })
   }
@@ -300,13 +297,11 @@ const updateUserContact = async (req, res) => {
 
     // Basic validation for phone number format
     if (!phoneNo || !/^\d{10}$/.test(phoneNo)) {
-      return res
-        .status(200)
-        .json({
-          status: 400,
-          success: false,
-          error: 'Invalid phone number format'
-        })
+      return res.status(200).json({
+        status: 400,
+        success: false,
+        error: 'Invalid phone number format'
+      })
     }
 
     user.phoneNo = phoneNo
@@ -343,14 +338,12 @@ const updatePassword = async (req, res) => {
     // Verify the current password
     const passwordMatch = await bcrypt.compare(currentPassword, user.password)
     if (!passwordMatch) {
-      return res
-        .status(200)
-        .json({
-          status: 400,
-          success: false,
-          message: 'Incorrect current password',
-          passwordDontMatch: true
-        })
+      return res.status(200).json({
+        status: 400,
+        success: false,
+        message: 'Incorrect current password',
+        passwordDontMatch: true
+      })
     }
 
     // Generate a hash for the new password
@@ -491,7 +484,7 @@ const updateEmail = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'User email updated successfully',
+      message: 'User email updated successfully'
     })
   } catch (err) {
     return res.status(500).json({
@@ -500,7 +493,6 @@ const updateEmail = async (req, res) => {
     })
   }
 }
-
 
 module.exports = {
   getUsers,

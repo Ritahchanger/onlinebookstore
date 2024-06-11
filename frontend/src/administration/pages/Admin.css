@@ -1,3 +1,6 @@
+.admin{
+  position: relative;
+}
 .admin .medium-header{
     text-align: center;
     font-size:var(--mobile-font);
@@ -67,8 +70,12 @@
     color:var(--white);
   }
   .admin .cart-buttons{
-    background:var(--orange);
-    border:2px solid var(--orange);
+    background:var(--green);
+    color:var(--white);
+  }
+  .admin .cart-buttons:hover{
+    background:var(--blue);
+    border:2px solid var(--blue);
   }
   .admin .input_group input{
     border:none;
@@ -91,7 +98,7 @@
     right:0;
     left:0;
     height:100%;
-    display:flex;
+    display:none;
     align-items:center;
     justify-content:center;
     flex-direction:column;
@@ -99,17 +106,56 @@
     color:var(--black);
     z-index:99;
   }
+  .admin .custom-modal.active{
+    display:flex;
+  }
  .admin  .custom-modal .modal-dialog{
     background: var(--white);
-    width:100%;
+    width:90%;
     max-width:600px;
     padding:1rem;
     position:relative;
+    text-align:center;
+
   }
-  .admin .custom-modal .modal-dialog .close_icon{
-    height:30px;
-    width:30px;
-    position: absolute;
+  .admin .custom-modal .modal-dialog .medium-header{
+    margin:0.5rem 0rem;
+    text-align:center;
+  }
+  
+ 
+  .admin .modal-dialog .cart-buttons{
+    margin-top: 1REM;
+    border-radius:0;
+    width:100px;
+    color:var(--white);
+    align-items:start;
+  }
+
+  .admin .modal-dialog .cart-buttons.cancel{
+    background:var(--pinkRed);
+    border:var(--pinkRed);
+    font-weight:500;
+  }
+  .admin .modal-dialog .cart-buttons.ok{
+    background:var(--green);
+    border:none;
+  }
+  .admin .custom-modal .modal-dialog p{
+    text-align:center;
+    line-height:1.5rem;
+  }
+  .admin .modal-dialog .cart-buttons:hover{
+    background:var(--orange);
+  }
+  .admin .modal-dialog .img-wrapper img{
+    width:150px;
+  }
+  
+  .admin table tbody tr td:last-child{
     cursor: pointer;
-    right:1rem;
+  }
+  .admin table tbody tr td:last-child i{
+    text-align: center;
+    width:100%;
   }

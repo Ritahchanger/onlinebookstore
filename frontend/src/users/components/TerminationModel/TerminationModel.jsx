@@ -1,7 +1,7 @@
 import "./TerminationModel.css";
 import { useState } from "react";
 import axios from "axios";
-
+import Config from "../../../Config";
 import { useSelector } from "react-redux"; 
 
 const TerminationModel = ({ handleTerminationModel, terminationModel }) => {
@@ -14,7 +14,7 @@ const TerminationModel = ({ handleTerminationModel, terminationModel }) => {
   const deleteAccount = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users/add/termination/account",
+        `${Config.apiUrl}/api/users/add/termination/account`,
         {
           user:user.user._id,
           reason: reasonForTermination,

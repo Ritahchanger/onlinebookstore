@@ -4,14 +4,22 @@ import AdminSidebar from "../components/AdminSidebar";
 import AdminNavbar from "../components/AdminNavbar";
 import Config from "../../Config";
 import "./Admin.css";
-import CloseIcon from "../../assets/icons/close.png"
+import CloseIcon from "../../assets/icons/close.png";
+import AdminModal from "../components/AdminModal";
+
+import PdfViewer from "../../users/components/pdfViewer/pdfViewer";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { openReadBookModal } from "../../users/Redux/features/readBookModalSlice";
 
 const UnapprovedBooks = () => {
+  const dispatch = useDispatch();
   const [sidebar, showSidebar] = useState(false);
   const [unapprovedBooks, setUnapprovedBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [ approveBook,setApproveBook ] = useState(null)
+  const [approveBook, setApproveBook] = useState(null);
 
   const handleSidebar = () => {
     showSidebar(!sidebar);
@@ -45,10 +53,23 @@ const UnapprovedBooks = () => {
     );
   });
 
-  const handleBookApproving = () =>{
+  const [approveModal, setApproveModal] = useState(false);
+  const handleBookApproving = (book) => {
+    setApproveBook(book);
+  };
 
-    
-  }
+  const approveBookModal = () => {
+    setApproveModal(!approveModal);
+  };
+
+  const openBookModal = (book) => {
+    dispatch(
+      openReadBookModal({
+        title: book.title,
+        book: book.book,
+      })
+    );
+  };
 
   return (
     <div className="admin">
@@ -77,6 +98,7 @@ const UnapprovedBooks = () => {
                 <td>CATEGORY</td>
                 <td>UPLOADED ON</td>
                 <td>APPROVE</td>
+                <td>READ</td>
               </tr>
             </thead>
             <tbody>
@@ -94,7 +116,24 @@ const UnapprovedBooks = () => {
                   <td>{book.category}</td>
                   <td>{new Date(book.uploadedAt).toLocaleDateString()}</td>
                   <td>
-                    <button className="cart-buttons">Approve</button>
+                    <button
+                      className="cart-buttons"
+                      onClick={() => {
+                        handleBookApproving(book);
+                        approveBookModal();
+                      }}
+                    >
+                      Approve
+                    </button>
+                  </td>
+                  <td
+                    className="view"
+                    onClick={() => {
+                      openBookModal(book);
+                    }}
+                  >
+                    {" "}
+                    <i className="fa fa-eye"></i>
                   </td>
                 </tr>
               ))}
@@ -103,15 +142,14 @@ const UnapprovedBooks = () => {
         </div>
       </div>
 
-      <div className="custom-modal">
-        <div className="modal-dialog">
-          <p className="close_icon">
-            <img src={CloseIcon} alt="" />
-          </p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui laudantium at nisi molestias maiores enim, animi deleniti voluptate quidem velit et itaque accusantium laborum praesentium blanditiis voluptatem neque quaerat quis!</p>
-        </div>
+      <div className={`custom-modal ${approveModal ? "active" : ""}`}>
+        <AdminModal
+          approveBook={approveBook}
+          approveBookModal={approveBookModal}
+          onBookApproved={fetchData}
+        />
       </div>
-
+      <PdfViewer />
     </div>
   );
 };

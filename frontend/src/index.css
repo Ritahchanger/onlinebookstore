@@ -249,7 +249,8 @@ img{
   font-size:2rem;
   cursor: pointer;
   transition:All 0.5s;
-  color:var(--pinkRed)
+  color:var(--pinkRed);
+  z-index:99;
 }
 .book_view_modal .close-icon:hover{
   scale:1.4;
