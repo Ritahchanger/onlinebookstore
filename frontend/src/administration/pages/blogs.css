@@ -1,0 +1,33 @@
+.admin.blog .table_wrapper {
+    overflow: scroll;
+    max-height: calc(100vh - 80px);
+    border-top:2px solid var(--green);
+}
+.admin.blog .error{
+    color:var(--pinkRed);
+    position:absolute;
+    left:0;
+    bottom:0;
+}
+
+.admin .input-group{
+   position: relative; 
+   padding-bottom:1.5rem;
+}
+.admin .input-group input[type=text]{
+    border:none;
+    border-bottom:1px solid var(--gray);
+    padding-bottom:10px;
+    outline:none;
+}
+@media(max-width:904px){
+    .admin.blog .row{
+        flex-direction: column;
+    }
+    .admin.blog .row form{
+        width:100%;
+    }
+    .admin .row .books_list{
+        width:100%;
+    }
+}

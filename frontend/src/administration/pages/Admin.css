@@ -159,3 +159,25 @@
     text-align: center;
     width:100%;
   }
+  .admin textarea{
+    WIDTH:100%;
+    border:none;
+    border:1px solid var(--gray);
+    outline:none;
+    padding:10px;
+  }
+
+  .admin .row{
+    justify-content:space-between;
+    align-items:start;
+  }
+
+  .admin .row form{
+    flex-basis:44%;
+  }
+  .admin .row .books_list{
+    flex-basis:52%;
+  }
+  .admin .row .books_list .cart-buttons{
+    border:0rem;
+  }

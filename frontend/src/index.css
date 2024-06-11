@@ -110,6 +110,7 @@ img{
   color: var(--white);
   font-size: 1rem;
   cursor: pointer;
+  height:40px;
 }
 .submit-btn:hover {
   background: var(--green);

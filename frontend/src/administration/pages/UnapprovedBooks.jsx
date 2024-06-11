@@ -40,6 +40,7 @@ const UnapprovedBooks = () => {
     fetchData();
   }, []);
 
+
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -75,80 +76,85 @@ const UnapprovedBooks = () => {
     <div className="admin">
       <AdminNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
       <AdminSidebar sidebar={sidebar} />
-      <p className="medium-header">UNAPPROVED BOOKS</p>
-      <div className="container">
-        <div className="input_group">
-          <input
-            type="text"
-            name="search_book"
-            id=""
-            placeholder="Search book..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-          <i className="fa-solid fa-magnifying-glass"></i>
-        </div>
-        <div className="table_wrapper">
-          <table>
-            <thead>
-              <tr>
-                <td>COVER IMAGE</td>
-                <td>TITLE</td>
-                <td>AUTHOR</td>
-                <td>CATEGORY</td>
-                <td>UPLOADED ON</td>
-                <td>APPROVE</td>
-                <td>READ</td>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredBooks.map((book) => (
-                <tr key={book._id}>
-                  <td>
-                    <img
-                      src={`${Config.apiUrl}/upload/books/${book.coverImage}`}
-                      alt={book.title}
-                      width="50"
-                    />
-                  </td>
-                  <td>{book.title}</td>
-                  <td>{`${book.author.firstName} ${book.author.secondName}`}</td>
-                  <td>{book.category}</td>
-                  <td>{new Date(book.uploadedAt).toLocaleDateString()}</td>
-                  <td>
-                    <button
-                      className="cart-buttons"
-                      onClick={() => {
-                        handleBookApproving(book);
-                        approveBookModal();
-                      }}
-                    >
-                      Approve
-                    </button>
-                  </td>
-                  <td
-                    className="view"
-                    onClick={() => {
-                      openBookModal(book);
-                    }}
-                  >
-                    {" "}
-                    <i className="fa fa-eye"></i>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
 
-      <div className={`custom-modal ${approveModal ? "active" : ""}`}>
-        <AdminModal
-          approveBook={approveBook}
-          approveBookModal={approveBookModal}
-          onBookApproved={fetchData}
-        />
-      </div>
+      
+        
+          <p className="medium-header">UNAPPROVED BOOKS</p>
+          <div className="container">
+            <div className="input_group">
+              <input
+                type="text"
+                name="search_book"
+                id=""
+                placeholder="Search book..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div className="table_wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <td>COVER IMAGE</td>
+                    <td>TITLE</td>
+                    <td>AUTHOR</td>
+                    <td>CATEGORY</td>
+                    <td>UPLOADED ON</td>
+                    <td>APPROVE</td>
+                    <td>READ</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredBooks.map((book) => (
+                    <tr key={book._id}>
+                      <td>
+                        <img
+                          src={`${Config.apiUrl}/upload/books/${book.coverImage}`}
+                          alt={book.title}
+                          width="50"
+                        />
+                      </td>
+                      <td>{book.title}</td>
+                      <td>{`${book.author.firstName} ${book.author.secondName}`}</td>
+                      <td>{book.category}</td>
+                      <td>{new Date(book.uploadedAt).toLocaleDateString()}</td>
+                      <td>
+                        <button
+                          className="cart-buttons"
+                          onClick={() => {
+                            handleBookApproving(book);
+                            approveBookModal();
+                          }}
+                        >
+                          Approve
+                        </button>
+                      </td>
+                      <td
+                        className="view"
+                        onClick={() => {
+                          openBookModal(book);
+                        }}
+                      >
+                        {" "}
+                        <i className="fa fa-eye"></i>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className={`custom-modal ${approveModal ? "active" : ""}`}>
+            <AdminModal
+              approveBook={approveBook}
+              approveBookModal={approveBookModal}
+              onBookApproved={fetchData}
+            />
+          </div>
+
+
       <PdfViewer />
     </div>
   );

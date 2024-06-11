@@ -1,0 +1,5 @@
+.admin.authors .table_wrapper {
+  overflow: scroll;
+  max-height: calc(100vh - 115px);
+  border-top: 2px solid var(--green);
+}
