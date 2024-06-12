@@ -3,13 +3,22 @@
     max-height: calc(100vh - 80px);
     border-top:2px solid var(--green);
 }
+.admin.blog .table_wrapper td{
+    font-size:0.8rem;
+    font-weight:500;
+}
 .admin.blog .error{
     color:var(--pinkRed);
     position:absolute;
     left:0;
     bottom:0;
 }
-
+.admin.blog .custom-modal.delete{
+    display:flex;
+}
+.admin.blog .small-header{
+    color:var(--black);
+}
 .admin .input-group{
    position: relative; 
    padding-bottom:1.5rem;

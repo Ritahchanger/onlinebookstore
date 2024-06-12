@@ -153,8 +153,7 @@ const UnapprovedBooks = () => {
               onBookApproved={fetchData}
             />
           </div>
-
-
+          
       <PdfViewer />
     </div>
   );

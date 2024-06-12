@@ -1,5 +1,9 @@
 .admin{
   position: relative;
+  font-size:var(--mobile-font);
+}
+.admin p{
+  font-size:var(--mobile-font);
 }
 .admin .medium-header{
     text-align: center;

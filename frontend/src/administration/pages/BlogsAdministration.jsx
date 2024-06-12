@@ -5,7 +5,7 @@ import AdminSidebar from "../components/AdminSidebar";
 import Config from "../../Config";
 import "./Admin.css";
 import "./blogs.css";
-
+import DeleteBlogModal from "../components/deleteBlogModal";
 const BlogsAdministration = () => {
   const [sidebar, showSidebar] = useState(false);
   const [blogs, setBlogs] = useState([]);
@@ -13,6 +13,7 @@ const BlogsAdministration = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [errors, setErrors] = useState({});
+  const [displayModal, setDisplayModal] = useState(false);
 
   const handleSidebar = () => {
     showSidebar(!sidebar);
@@ -55,24 +56,35 @@ const BlogsAdministration = () => {
     formData.append("file", image);
 
     try {
-      const response=await axios.post(`${Config.apiUrl}/api/blog/post`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        `${Config.apiUrl}/api/blog/post`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       fetchData();
       setTitle("");
       setDescription("");
       setImage(null);
       setErrors({});
 
-      if(!response.data.success){
-        throw new Error('There was an error sending data to backend')
+      if (!response.data.success) {
+        throw new Error("There was an error sending data to backend");
       }
-      alert("BLOG ADDED SUCCESSFULLY")
+      alert("BLOG ADDED SUCCESSFULLY");
     } catch (error) {
       console.log(`There was an error creating the blog => ${error.message}`);
     }
+  };
+  const [selectedBlog, setSelectedBlog] = useState(false);
+  const handleBlogDelete = (blog) => {
+    setSelectedBlog(blog);
+  };
+  const handleDisplayModal = () => {
+    setDisplayModal(!displayModal);
   };
 
   return (
@@ -134,10 +146,18 @@ const BlogsAdministration = () => {
                 <tbody>
                   {blogs.map((blog) => (
                     <tr key={blog._id}>
-                      <td>{blog.title}</td>
+                      <td>{blog.title.toUpperCase()}</td>
                       <td>{new Date(blog.createdOn).toLocaleDateString()}</td>
                       <td>
-                        <button className="cart-buttons">DELETE</button>
+                        <button
+                          className="cart-buttons"
+                          onClick={() => {
+                            handleBlogDelete(blog);
+                            handleDisplayModal();
+                          }}
+                        >
+                          DELETE
+                        </button>
                       </td>
                       <td>
                         <button className="cart-buttons">EDIT</button>
@@ -149,6 +169,10 @@ const BlogsAdministration = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className={`custom-modal ${displayModal ? "delete" : null}`}>
+       <DeleteBlogModal handleDisplayModal={handleDisplayModal} 
+       selectedBlog={selectedBlog} fetchData={fetchData}/>
       </div>
     </div>
   );
