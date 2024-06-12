@@ -1,141 +1,148 @@
-.account-navigation{
-    width:100%;
-    box-shadow:0 0 5px rgba(0,0,0,0.25);
-    height:45px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0rem 1rem;
-    background:var(--blue);
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:9;
+.account-navigation {
+  width: 100%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 1rem;
+  background: var(--blue);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
 }
-.account-navigation .profile-section{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    position: relative;
-    height:100%;
+.account-navigation .profile-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100%;
 }
-.account-navigation .profile-section .drop_down{
+.account-navigation .profile-section img {
+  border: none;
+  width: 30px;
+  margin-right: 9px;
+  border-radius: 50%;
+}
+.account-navigation .profile-section img:nth-child(1) {
+  margin-right: 1rem;
+}
+.account-navigation .menu-icon {
+  width: 40px;
+}
+.account-navigation .menu-icon p {
+  font-size: 35px;
+  transition: all 0.5s;
+}
+.account-navigation .menu-icon p:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.account-navigation .close-icon {
+  width: 40px;
+}
+.account-navigation .close-icon img {
+  width: 25px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.account-navigation .close-icon img:hover {
+  transform: scale(1.1);
+}
+.account-navigation p {
+  font-size: 14px;
+  color: var(--white);
+}
+.account-navigation .profile-section img {
+  cursor: pointer;
+}
+.account-navigation .profile-section img {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.account-navigation .profile-section img:hover {
+  transform: scale(1.1);
+}
+.account-navigation .section p {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.account-navigation .profile-section p {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.account-navigation .section {
+  display: flex;
+}
+.account-navigation .section p:nth-child(2) {
+  margin-left: 1rem;
+}
+
+.account-navigation .arrow_dropdown.active {
+  transform: rotate(180deg);
+}
+.account-navigation .dropdown {
+  position: relative;
+}
+.account-navigation .dropdown .drop_down{
     position:absolute;
     top:100%;
     background:var(--blue);
-    width:200px;
-    right:0.8rem;
     padding:1rem;
     border-bottom-left-radius:5px;
     border-bottom-right-radius:5px;
     border-top:2px solid var(--white);
-    display:none;
+    right:-600%;
+    transition:all 0.5s;
 }
-.account-navigation .profile-section .drop_down.active{
-    display:block;
+.account-navigation .dropdown .drop_down.active{
+    right:1rem;
 }
-.account-navigation .profile-section .drop_down .linker.cart-buttons{
+.account-navigation .dropdown .drop_down a{
     display:block;
-    margin:1rem 0rem;
+    width:100%;
     text-align:center;
+    margin:1rem 0rem;
 }
-.account-navigation .profile-section img{
-    border:none;
-    width:30px;
-    margin-right:9px;
-    border-radius:50%;
-}
-.account-navigation .profile-section img:nth-child(1){
-    margin-right:1rem;
-}
-.account-navigation .menu-icon{
-    width:40px;
 
+.account-navigation .dropdown img {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
 }
-.account-navigation .menu-icon p{
-    font-size:35px;
-    transition:all 0.5s;
+
+@media (max-width: 614px) {
+  .account-navigation .section {
+    display: flex;
+    flex-direction: column;
+  }
+  .account-navigation .section p:nth-child(2) {
+    margin: 0;
+    align-items: center;
+    justify-content: end;
+  }
 }
-.account-navigation .menu-icon p:hover{
-    transform:scale(1.1);
-    cursor: pointer;
-}
-.account-navigation .close-icon{
-    width:40px;
-}
-.account-navigation .close-icon img{
-    width:25px;
-    cursor: pointer;
-    transition:all 0.5s;
-}
-.account-navigation .close-icon img:hover{
-    transform:scale(1.1);
-}
-.account-navigation p{
-    font-size:14px;
-    color:var(--white)
-}
-.account-navigation .profile-section img{
-    cursor:pointer;
-}
-.account-navigation .profile-section img{
-    cursor:pointer;
-    transition:all 0.5s;
-}
-.account-navigation .profile-section img:hover{
-    transform:scale(1.1);
-}
-.account-navigation .section p{
-    text-transform:uppercase;
-    font-weight:700;
-}
-.account-navigation .profile-section p{
-    font-size:12px;
+
+@media (max-width: 498px) {
+  .account-navigation .amount {
+    display: none;
+  }
+  .account-navigation .id {
+    display: none;
+  }
+  .account-navigation .date {
+    display: flex;
+    flex-direction: row;
+  }
+  .account-navigation .date p:nth-child(2) {
+    margin-left: 5px;
     text-transform: uppercase;
-    font-weight:700;
-}
-.account-navigation .section{
-    display:flex;
-}
-.account-navigation .section p:nth-child(2){
-    margin-left:1rem;
-}
-
-.account-navigation .arrow_dropdown.active{
-    transform:rotate(180deg);
-}
-
-
-@media(max-width:614px){
-    .account-navigation .section{
-        display:flex;
-        flex-direction: column;
-    }
-    .account-navigation .section p:nth-child(2){
-        margin:0;
-        align-items: center;
-        justify-content: end;
-    } 
-}
-
-@media(max-width:498px){
-    .account-navigation .amount{
-       display:none; 
-    }
-    .account-navigation .id{
-        display:none;
-    }
-    .account-navigation .date{
-        display:flex;
-        flex-direction:row;
-    }
-    .account-navigation .date p:nth-child(2){
-        margin-left:5px;
-        text-transform:uppercase;
-    } 
-    .account-navigation .date p{
-        font-size:12px;
-        font-weight:700;
-    }
+  }
+  .account-navigation .date p {
+    font-size: 12px;
+    font-weight: 700;
+  }
 }

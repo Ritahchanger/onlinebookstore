@@ -44,11 +44,6 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
         <p>Username</p>
         <p>{user.user.username}</p>
       </div>
-
-      <Link to="/admin/unapproved" className="linker cart-buttons">
-        ADMIN
-      </Link>
-
       <div className="profile-section" onClick={handleNavigation}>
         <div className="img-wrapper">
           <img
@@ -56,13 +51,18 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
             alt="Profile"
           />
         </div>
+      </div>
+      <div className="dropdown">
         <img
           src={downArrow}
           alt=""
           className={`arrow_dropdown ${dropdown ? "active" : null}`}
           onClick={handleDropDown}
         />
-        <div className={`drop_down ${dropdown ? "active" : ""} `}>
+        <div className={`drop_down ${dropdown ? "active" : null}`}>
+          <Link to="/admin/unapproved" className="linker cart-buttons">
+            ADMIN
+          </Link>
           <Link to="/logout" className="linker cart-buttons">
             LOGOUT
           </Link>

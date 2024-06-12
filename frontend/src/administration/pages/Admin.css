@@ -109,6 +109,7 @@
     background:rgba(0,0,0,0.75);
     color:var(--black);
     z-index:99;
+    overflow-y: scroll;
   }
   .admin .custom-modal.active{
     display:flex;

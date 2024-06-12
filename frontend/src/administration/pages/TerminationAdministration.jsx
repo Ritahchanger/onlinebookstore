@@ -66,6 +66,7 @@ const TerminationAdministration = () => {
             <thead>
               <tr>
                 <td>USER</td>
+                <td>EMAIL</td>
                 <td>REASON</td>
                 <td>REQUESTED ON</td>
                 <td>TERMINATE</td>
@@ -75,6 +76,7 @@ const TerminationAdministration = () => {
               {terminationAccounts.map((account) => (
                 <tr key={account._id}>
                   <td>{`${account.user.firstName} ${account.user.secondName}`}</td>
+                  <td>{account.user.email}</td>
                   <td>{account.reason}</td>
                   <td>{account.createdOn}</td>
                   <td>

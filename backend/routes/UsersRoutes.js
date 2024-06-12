@@ -39,7 +39,7 @@ router.get('/credentials',UsersController.getUserCookie)
 
 
 
-router.get('/delete/:id',UsersController.getUserCookie)
+router.delete('/account/:id',UsersController.deleteUser)
 
 
 // ACCOUNTS TERMINATION
@@ -49,7 +49,7 @@ router.post('/add/termination/account',UsersController.addAccountToTerminate)
 
 router.get('/get/termination/accounts',UsersController.getAccountsToTerminate)
 
-router.delete('delete/:id/termination/account',UsersController.terminateAccount)
+router.delete('/termination/:userId/:id/account',UsersController.terminateAccount)
 
 
 // USER PROFILE UPDATES

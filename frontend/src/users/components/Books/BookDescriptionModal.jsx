@@ -39,7 +39,7 @@ const BookDescriptionModal = () => {
   const addItemToCart = async () => {
     if (!isUserLogged) {
       setShowLoginMessage(true);
-      console.log("User is not logged in.");
+    
       return;
     }
 
@@ -63,7 +63,7 @@ const BookDescriptionModal = () => {
 
       setShowSuccessMessage(true);
       setShowLoginMessage(false);
-      console.log("Item added to cart:", response.data);
+      
     } catch (error) {
       console.error("Error adding item to cart:", error);
     }

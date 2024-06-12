@@ -11,6 +11,7 @@ const ActiveBooks = () => {
   const [books, setBooks] = useState(null);
 
   const truncateDescription = (description) => {
+    if (!description) return "No description available";
     const words = description.split(" ");
     if (words.length <= 15) {
       return description;
@@ -22,7 +23,7 @@ const ActiveBooks = () => {
     const getBooksRead = async () => {
       try {
         const response = await axios.get(
-          `${Config.apiUrl}/api/cart/purchase/${user.user._id}/get`
+          `${Config.apiUrl}/api/cart/purchase/${user?.user?._id}/get`
         );
         const backendData = response.data.data;
         const allItems = backendData.flatMap((purchase) => purchase.items);
@@ -32,16 +33,18 @@ const ActiveBooks = () => {
         console.error("Error fetching books read:", error);
       }
     };
-    getBooksRead();
-  }, [user.user._id]);
+    if (user?.user?._id) {
+      getBooksRead();
+    }
+  }, [user?.user?._id]);
 
   const openBookModal = (book) => {
-    dispatch(openReadBookModal(
-      {
-        title:book.productId.title,
-        book:book.productId.book
-      }
-    ));
+    dispatch(
+      openReadBookModal({
+        title: book?.productId?.title || "Unknown Title",
+        book: book?.productId?.book || "",
+      })
+    );
   };
 
   return (
@@ -61,16 +64,20 @@ const ActiveBooks = () => {
             <tbody>
               {books &&
                 books.map((book) => (
-                  <tr key={book._id}>
+                  <tr key={book?._id}>
                     <td>
-                      <img
-                       src={`${Config.apiUrl}/upload/books/${book.productId.coverImage}`}
-                        alt={book.productId.title}
-                        style={{ width: "50px" }}
-                      />
+                      {book?.productId?.coverImage ? (
+                        <img
+                          src={`${Config.apiUrl}/upload/books/${book.productId.coverImage}`}
+                          alt={book?.productId?.title || "No Title"}
+                          style={{ width: "50px" }}
+                        />
+                      ) : (
+                        "No Image"
+                      )}
                     </td>
-                    <td>{book.productId.title}</td>
-                    <td>{truncateDescription(book.productId.description)}</td>
+                    <td>{book?.productId?.title || "No Title"}</td>
+                    <td>{truncateDescription(book?.productId?.description)}</td>
                     <td onClick={() => openBookModal(book)}>
                       <i className="fa fa-eye"></i>
                     </td>

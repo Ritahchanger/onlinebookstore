@@ -3,9 +3,14 @@ import "./Navbar.css";
 import ProfileImage from "../../../assets/images/bemi.png";
 
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  const user = useSelector((state) => state.auth.user);
+
+  const isAdmin = user.user.roles.includes("admin");
 
   return (
     <nav className="nav">
@@ -39,15 +44,27 @@ const Navbar = () => {
           <div className="section-navigation">
             {isLoggedIn ? (
               <>
+                {isAdmin && (
+                  <p className="nav-li">
+                    <Link to="/admin/unapproved" className="cart-buttons">
+                      ADMIN
+                    </Link>
+                  </p>
+                )}
                 <p className="nav-li">
-                  <Link to="/pending-payments">CART</Link>
+                  <Link to="/pending-payments" className="cart-buttons">
+                    CART
+                  </Link>
                 </p>
-
                 <p className="nav-li">
-                  <Link to="/account">ACCOUNT</Link>
+                  <Link to="/account" className="cart-buttons">
+                    ACCOUNT
+                  </Link>
                 </p>
                 <p className="nav-li">
-                  <Link to="/login">LOGOUT</Link>
+                  <Link to="/login" className="cart-buttons">
+                    LOGOUT
+                  </Link>
                 </p>
               </>
             ) : (

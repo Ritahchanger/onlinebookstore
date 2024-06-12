@@ -186,7 +186,7 @@ const getUserCookie = (req, res) => {
 // Today
 
 const deleteUser = async (req, res) => {
-  const { id } = req.params.id
+  const { id } = req.params;
 
   try {
     const userToDelete = await User.findById(id)
@@ -240,7 +240,7 @@ const getAccountsToTerminate = async (req, res) => {
   try {
     const accounts = await AccountTermination.find({}).populate(
       'user',
-      'firstName secondName'
+      'firstName secondName email'
     )
 
     if (!accounts) {
@@ -259,26 +259,95 @@ const getAccountsToTerminate = async (req, res) => {
 
 const terminateAccount = async (req, res) => {
   try {
-    const { id } = req.params
+    const { userId, id } = req.params
 
-    const terminateAccount = await AccountTermination.findByIdAndDelete(id)
+    const terminatedAccount = await User.findById(userId);
 
-    if (!terminateAccount) {
-      return res.status(200).json({
-        status: 404,
-        success: false,
-        message: 'The account was not found'
-      })
+    console.log(terminateAccount);
+
+    if (!terminatedAccount || !terminatedAccount.email) {
+      return res.status(200).json({ status: 404, success: false, message: 'The user is not found or has no email address' });
     }
+
+    console.log(terminatedAccount)
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.COMPANY_EMAIL,
+        pass: process.env.COMPANY_EMAIL_PASSWORD
+      }
+    });
+
+    const info = await transporter.sendMail({
+      from: '"BEMI EDITORS LIMITED" <peterdennis573@gmail.com>',
+      to: terminatedAccount.email,
+      subject: 'ACCOUNT TERMINATION',
+      text: 'Request to change my password from the bookstore application',
+      html: `
+        <html>
+          <head>
+            <style>
+              /* CSS styles */
+              body {
+                font-family: Arial, sans-serif;
+                font-size: 16px;
+              }
+              .container {
+                margin: 20px;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              }
+              h1 {
+                color: #333;
+                margin-bottom: 20px;
+              }
+              p {
+                margin-bottom: 10px;
+              }
+              a {
+                display: inline-block;
+                background-color: #4CAF50;
+                color: #fff;
+                text-decoration: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+              }
+              a:hover {
+                background-color: #45a049;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>Password Reset Request</h1>
+              <p>The request to terminate your account has been received and account terminated successfully!</p>
+              <p>Thank you for using BEMI EDITORS LIMITED</p>
+              <p>You are still invited to use the system again!!</p>
+            </div>
+          </body>
+        </html>
+      `
+    });
+
+    await AccountTermination.findByIdAndDelete(id);
+    await User.findByIdAndDelete(userId);
+
+    console.log('Message sent: %s', info.messageId);
+
     return res.status(200).json({
       status: 200,
       success: true,
       message: 'The account terminated successfully'
-    })
+    });
   } catch (error) {
-    return res.status(500).json({ success: false, error: error.message })
+    return res.status(500).json({ success: false, error: error.message });
   }
-}
+};
+
 
 // USER UPDATES
 

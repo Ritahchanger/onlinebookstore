@@ -6,6 +6,7 @@ import Config from "../../Config";
 import "./Admin.css";
 import "./blogs.css";
 import DeleteBlogModal from "../components/deleteBlogModal";
+import EditBlogModal from "../components/EditBlogModal";
 const BlogsAdministration = () => {
   const [sidebar, showSidebar] = useState(false);
   const [blogs, setBlogs] = useState([]);
@@ -160,7 +161,15 @@ const BlogsAdministration = () => {
                         </button>
                       </td>
                       <td>
-                        <button className="cart-buttons">EDIT</button>
+                        <button
+                          className="cart-buttons"
+                          onClick={() => {
+                            handleBlogDelete(blog);
+                            handleDisplayModal();
+                          }}
+                        >
+                          EDIT
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -171,8 +180,18 @@ const BlogsAdministration = () => {
         </div>
       </div>
       <div className={`custom-modal ${displayModal ? "delete" : null}`}>
-       <DeleteBlogModal handleDisplayModal={handleDisplayModal} 
-       selectedBlog={selectedBlog} fetchData={fetchData}/>
+        <DeleteBlogModal
+          handleDisplayModal={handleDisplayModal}
+          selectedBlog={selectedBlog}
+          fetchData={fetchData}
+        />
+      </div>
+      <div className={`custom-modal ${displayModal ? "edit" : null}`}>
+        <EditBlogModal
+          selectedBlog={selectedBlog}
+          handleDisplayModal={handleDisplayModal}
+          fetchData={fetchData}
+        />
       </div>
     </div>
   );

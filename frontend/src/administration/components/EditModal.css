@@ -1,0 +1,10 @@
+.modal-dialog.edit{
+    max-height:calc(100vh - 120px);
+    overflow-y: scroll;
+}
+.modal-dialog.edit .img_wrapper{
+    margin-bottom:1rem;
+}
+.modal-dialog.edit .cart-buttons.cancel{
+    margin-top:-1rem;
+}
