@@ -74,7 +74,8 @@ const BooksList = ({ book }) => {
       </div>
       <div className="card-body">
         <p className="book_title">{book.title}</p>
-        <p className="book_price">{book.price}</p>
+        <p className="book_title">{`${book.price} sh`}</p>
+        <p className="book_title">{`${book.purchaseCount} Purchases`}</p>
       </div>
     </div>
   );

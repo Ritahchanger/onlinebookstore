@@ -10,6 +10,7 @@ import MpesaLogo from "../../../assets/images/mpesa.png";
 import { showLoading, hideLoading } from "../../Redux/features/alertSlice";
 import Preloaders from "../../components/Preloaders/Preloaders";
 import Config from "../../../Config";
+
 const PaymentDetails = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
@@ -20,6 +21,7 @@ const PaymentDetails = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [phoneNo, setPhoneNo] = useState("");
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [productIds, setProductIds] = useState([]);
 
   const handleSidebar = () => {
     showSidebar(!sidebar);
@@ -34,9 +36,9 @@ const PaymentDetails = () => {
       alert("Please enter a phone number");
       return;
     }
-  
+
     const paymentMethod = "safaricom";
-  
+
     try {
       dispatch(showLoading());
       const response = await axios.post(
@@ -51,21 +53,25 @@ const PaymentDetails = () => {
           },
         }
       );
-  
+
       if (!response.data.success) {
-        const response = await axios.post(
+        const purchaseResponse = await axios.post(
           `${Config.apiUrl}/api/cart/purchase/${user.user._id}`
         );
-  
-        if (response.data.success) {
+
+        if (purchaseResponse.data.success) {
           alert("Payment done successfully");
-          // Fetch updated cart items after payment
-          await fetchCartItems();
+
+          await axios.post(`http://localhost:5000/api/cart/success`, {
+            bookIds: productIds,
+          });
+
+          await fetchCartItems(); // Assuming fetchCartItems updates cartItems
           dispatch(hideLoading());
         }
         return;
       }
-  
+
       dispatch(hideLoading());
       setPaymentSuccess(true);
       setTimeout(() => {
@@ -76,7 +82,6 @@ const PaymentDetails = () => {
       dispatch(hideLoading());
     }
   };
-  
 
   const fetchCartItems = async () => {
     try {
@@ -84,7 +89,7 @@ const PaymentDetails = () => {
         `${Config.apiUrl}/api/cart/get/${user.user._id}`
       );
       if (!response.data.success) {
-        throw new Error("NO CART ITEMS");
+        throw new Error("No cart items found");
       }
       setCartItems(response.data.items);
       const totalPrice = response.data.items.reduce(
@@ -96,9 +101,20 @@ const PaymentDetails = () => {
       console.error("Error fetching cart items:", error);
     }
   };
+
   useEffect(() => {
     fetchCartItems();
   }, [user.user._id]);
+
+  useEffect(() => {
+    const extractProductIds = () => {
+      if (cartItems && cartItems.items) {
+        const ids = cartItems.items.map((item) => item.productId._id);
+        setProductIds(ids);
+      }
+    };
+    extractProductIds();
+  }, [cartItems]);
 
   const deleteCartItem = async (cartItemId) => {
     try {

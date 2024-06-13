@@ -45,3 +45,6 @@
 .book-card .overlay .overlay {
   cursor: pointer;
 }
+.book-card .book_title{
+  font-size:0.9rem;
+}

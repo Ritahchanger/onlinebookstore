@@ -52,6 +52,10 @@ const bookSchema = new mongoose.Schema({
   category:{
     type:String,
     default:null 
+  },
+  purchaseCount:{
+    type:Number,
+    default:0,
   }
 });
 
