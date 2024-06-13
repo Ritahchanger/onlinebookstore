@@ -5,6 +5,7 @@ const path = require('path')
 const uploadDirectory = path.join(__dirname, '../upload/blogs/')
 
 const fs = require("fs");
+const { findById } = require('../models/Counter.model');
 
 function formatCurrentDate () {
   const now = new Date()
@@ -92,52 +93,74 @@ const deleteBlog = async (req, res) => {
 
 
 const updateBlog = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
 
   try {
     // Fetch the blog post to check if it exists and to get the old image path
-    const blog = await Blog.findById(id)
+    const blog = await Blog.findById(id);
     if (!blog) {
-      return res
-        .status(404)
-        .json({ success: false, error: 'Blog post not found' })
+      return res.status(404).json({ success: false, error: 'Blog post not found' });
     }
 
+    // Log the fetched blog to verify it exists
+    console.log('Fetched Blog:', blog);
+
     // Check if a new file is uploaded
-    const newFilePath = req.file?.filename
+    const newFilePath = req.file?.filename;
     if (newFilePath) {
       // Delete the old image if it exists
-      const oldFilePath = blog.filePath
+      const oldFilePath = blog.filePath;
       if (oldFilePath) {
-        const oldFileFullPath = path.join(uploadDirectory, oldFilePath)
-        fs.unlink(oldFileFullPath, err => {
-          if (err) {
-            console.error('Error deleting old blog image:', err)
-          }
-        })
+        try {
+          await fs.promises.unlink(path.join(uploadDirectory, oldFilePath));
+          console.log('Deleted old blog image:', oldFilePath);
+        } catch (err) {
+          console.error('Error deleting old blog image:', err);
+          // Handle error deleting file (optional based on your requirements)
+        }
       }
 
       // Update the blog post with the new file path
-      req.body.filePath = newFilePath
+      blog.filePath = newFilePath;
+      console.log('Updated blog file path:', newFilePath);
     }
-    P
 
-    // Update the blog fields
-    blog.title = req.body.title || blog.title
-    blog.content = req.body.content || blog.content
-    if (newFilePath) {
-      blog.filePath = newFilePath
+    // Update the blog fields if provided in the request body
+    if (req.body.title) {
+      blog.title = req.body.title;
+      console.log('Updated blog title:', req.body.title);
+    }
+    if (req.body.content) {
+      blog.content = req.body.content;
+      console.log('Updated blog content:', req.body.content);
     }
 
     // Save the updated blog post
-    const updatedBlog = await blog.save()
+    const updatedBlog = await blog.save();
+    console.log('Updated Blog:', updatedBlog);
 
-    return res.status(200).json({ success: true, data: updatedBlog })
+    return res.status(200).json({ success: true, data: updatedBlog });
   } catch (error) {
-    console.error('Error updating blog post:', error)
-    return res.status(500).json({ success: false, error: error.message })
+    console.error('Error updating blog post:', error);
+    return res.status(500).json({ success: false, error: error.message });
   }
-}
+};
+
+
+// const updateBlog = async (req,res) =>{
+//   const { id } = req.params;
+//   try{
+
+//     const blog = await Blog.findById(id)
+
+//     console.log(blog)
+
+//   }catch(error){
+//     return res.status(500).json({ success: false, error: error.message })
+//   }
+  
+// }
+
 const getBlogById = async (req, res) => {
   try {
     const { id } = req.params

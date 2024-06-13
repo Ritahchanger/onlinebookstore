@@ -228,6 +228,18 @@ display:none;
   color:var(--green);
 }
 
+.account .profileDescription{
+  border:none;
+  border:1px solid var(--gray);
+  width:100%;
+  outline:none;
+  padding:10px;
+  margin-top:1rem;
+}
+.account .profileDescription:focus{
+  border:2px solid var(--blue);
+}
+
 
 @media(max-width:650px){
     .profile .container{

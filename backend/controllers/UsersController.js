@@ -169,6 +169,26 @@ const getUserById = async (req, res) => {
     return res.status(500).json({ success: false, error: error.message })
   }
 }
+const getUserInformation = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const singleUser = await User.findById(id)
+    if (!singleUser) {
+      return res
+        .status(404)
+        .json({ status: 404, success: false, message: 'User not found' })
+    }
+
+    return res
+      .status(200)
+      .json({ status: 200, success: true, data: singleUser })
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message })
+  }
+}
+
+
 
 const getUserCookie = (req, res) => {
   try {
@@ -560,6 +580,43 @@ const updateEmail = async (req, res) => {
   }
 }
 
+const updateUserDescription = async (req, res) => {
+  const { userId } = req.params;
+  const { description } = req.body;
+
+  try {
+    // Attempt to find the user by userId
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found. Unable to update description.'
+      });
+    }
+
+    // Update the user's description
+    user.description = description;
+
+    // Save the updated user document
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: 'User description updated successfully.',
+      data: user
+    });
+  } catch (error) {
+    console.error('Error updating user description:', error.message);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to update user description. Please try again later.'
+    });
+  }
+};
+
+
+
 module.exports = {
   getUsers,
   getAuthors,
@@ -576,5 +633,7 @@ module.exports = {
   updateUserContact,
   updatePassword,
   updateNames,
-  updateEmail
+  updateEmail,
+  getUserInformation,
+  updateUserDescription,
 }

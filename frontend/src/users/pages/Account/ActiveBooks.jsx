@@ -28,7 +28,6 @@ const ActiveBooks = () => {
         const backendData = response.data.data;
         const allItems = backendData.flatMap((purchase) => purchase.items);
         setBooks(allItems);
-        console.log(allItems);
       } catch (error) {
         console.error("Error fetching books read:", error);
       }
@@ -91,7 +90,9 @@ const ActiveBooks = () => {
             </div>
           </>
         ) : (
-          <p style={{ textAlign: "center"}} className="medium-header">No active books</p>
+          <p style={{ textAlign: "center" }} className="medium-header">
+            No active books
+          </p>
         )}
       </div>
       <PdfViewer />

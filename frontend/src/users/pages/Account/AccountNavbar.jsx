@@ -62,6 +62,7 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
             alt="Profile"
           />
         </div>
+        <Link to="/profile"><p className="small-header">{user.user.firstName}</p></Link>
       </div>
       <div className="dropdown">
         <img

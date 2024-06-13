@@ -7,16 +7,18 @@ import "./Admin.css";
 import "./blogs.css";
 import DeleteBlogModal from "../components/deleteBlogModal";
 import EditBlogModal from "../components/EditBlogModal";
+
 const BlogsAdministration = () => {
   const [sidebar, showSidebar] = useState(false);
   const [blogs, setBlogs] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null); // State for image preview
   const [errors, setErrors] = useState({});
   const [displayModal, setDisplayModal] = useState(false);
-
   const [editModal, setEditModal] = useState(false);
+  const [workingBlog, setWorkingBlog] = useState(null);
 
   const handleSidebar = () => {
     showSidebar(!sidebar);
@@ -72,20 +74,26 @@ const BlogsAdministration = () => {
       setTitle("");
       setDescription("");
       setImage(null);
+      setImagePreview(null); // Clear image preview after submission
       setErrors({});
 
       if (!response.data.success) {
         throw new Error("There was an error sending data to backend");
       }
       alert("BLOG ADDED SUCCESSFULLY");
+
+      // Reset image input field
+      document.getElementById("image-input").value = null;
     } catch (error) {
       console.log(`There was an error creating the blog => ${error.message}`);
     }
   };
-  const [workingBlog, setWorkingBlog] = useState(false);
+
   const handleBlogDelete = (blog) => {
     setWorkingBlog(blog);
+    setDisplayModal(true);
   };
+
   const handleDisplayModal = () => {
     setDisplayModal(!displayModal);
   };
@@ -96,6 +104,17 @@ const BlogsAdministration = () => {
 
   const editBlogModalHandler = (blog) => {
     setWorkingBlog(blog);
+    setEditModal(true);
+  };
+
+  // Function to handle image selection and preview
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    if (selectedImage) {
+      setImage(selectedImage);
+      const previewUrl = URL.createObjectURL(selectedImage);
+      setImagePreview(previewUrl);
+    }
   };
 
   return (
@@ -132,13 +151,19 @@ const BlogsAdministration = () => {
             </div>
             <div className="input-group">
               <input
+                id="image-input" // Add an id to target this input element
                 type="file"
                 name="image"
-                onChange={(e) => setImage(e.target.files[0])}
+                onChange={handleImageChange} // Update image input handler
               />
               {errors.image && <span className="error">{errors.image}</span>}
             </div>
-            <div className="input_type">
+            {imagePreview && ( // Conditionally render image preview
+              <div className="image-preview">
+                <img src={imagePreview} alt="Preview" />
+              </div>
+            )}
+            <div className="input_type" style={{marginBottom:"2rem"}}>
               <input type="submit" value="SUBMIT" className="submit-btn" />
             </div>
           </form>
@@ -164,7 +189,6 @@ const BlogsAdministration = () => {
                           className="cart-buttons"
                           onClick={() => {
                             handleBlogDelete(blog);
-                            handleDisplayModal();
                           }}
                         >
                           DELETE
@@ -174,7 +198,6 @@ const BlogsAdministration = () => {
                         <button
                           className="cart-buttons"
                           onClick={() => {
-                            handleEditModal();
                             editBlogModalHandler(blog);
                           }}
                         >
@@ -189,20 +212,24 @@ const BlogsAdministration = () => {
           </div>
         </div>
       </div>
-      <div className={`custom-modal ${displayModal ? "delete" : null}`}>
-        <DeleteBlogModal
-          handleDisplayModal={handleDisplayModal}
-          workingBlog={workingBlog}
-          fetchData={fetchData}
-        />
-      </div>
-      <div className={`custom-modal ${editModal ? "edit" : null} `}>
-        <EditBlogModal
-          workingBlog={workingBlog}
-          handleEditModal={handleEditModal}
-          fetchData={fetchData}
-        />
-      </div>
+      {displayModal && (
+        <div className="custom-modal delete">
+          <DeleteBlogModal
+            handleDisplayModal={handleDisplayModal}
+            workingBlog={workingBlog}
+            fetchData={fetchData}
+          />
+        </div>
+      )}
+      {editModal && (
+        <div className="custom-modal edit">
+          <EditBlogModal
+            workingBlog={workingBlog}
+            handleEditModal={handleEditModal}
+            fetchData={fetchData}
+          />
+        </div>
+      )}
     </div>
   );
 };

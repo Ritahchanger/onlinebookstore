@@ -28,7 +28,7 @@ const EditBlogModal = ({ workingBlog, handleEditModal, fetchData }) => {
         console.log(pair[0]+ ', ' + pair[1]); 
       }
 
-      const response = await axios.patch(`${Config.apiUrl}/api/blog/update/${workingBlog._id}`, formData, {
+      const response = await axios.patch(`${Config.apiUrl}/api/blog/update_blog/${workingBlog._id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -92,13 +92,14 @@ const EditBlogModal = ({ workingBlog, handleEditModal, fetchData }) => {
         </div>
         <div className="input-group">
           <input type="submit" value="SUBMIT" className="submit-btn" />
-        </div>
-      </form>
-      {successMessage && (
-        <div className="success-message">
+          {successMessage && (
+        <div className="success-message" style={{color:"green"}}>
           <p>{successMessage}</p>
         </div>
       )}
+        </div>
+      </form>
+     
       <button
         className="cart-buttons cancel"
         onClick={handleEditModal}

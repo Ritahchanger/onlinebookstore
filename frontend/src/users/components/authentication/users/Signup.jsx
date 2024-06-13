@@ -1,66 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../authentication.css";
-
-import { Navigate } from "react-router-dom";
-
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import Config from "../../../../Config";
+import { showLoading, hideLoading } from "../../../Redux/features/alertSlice";
+import Preloaders from "../../Preloaders/Preloaders";
 
 const SignUp = () => {
-  const[loading,setLoading] = useState(false)
+  const loading = useSelector((state) => state.alerts.loading);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [usernameFound, setusernameFound] = useState(false);
-  const [emailFound, setEmailFound] = useState(false);
-  const sentDataToDatabase = async () => {
-    try {
-      setLoading(true)
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/signup",
-        {
-          firstName: formData.firstName,
-          secondName: formData.secondName,
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
-        },
-        {
-          headers: {
-            "Content-Type": "Application/json",
-          },
-        }
-      );
-
-      if (response.status !== 200) {
-        throw new Error("There is problem with the server!");
-        setLoading(false);
-      }
-
-      const backendResult = response.data;
-
-      console.log(backendResult);
-
-      if (backendResult.usernameFound) {
-        setusernameFound(true);
-      } else {
-        setusernameFound(false);
-        setLoading(false)
-      }
-      if (backendResult.emailFound) {
-        setEmailFound(true);
-      } else {
-        setEmailFound(false);
-        setLoading(false)
-      }
-
-      if (!backendResult.usernameFound && !backendResult.emailFound) {
-        navigate("/login");
-      }
-    } catch (error) {
-      console.log(
-        `The following error arised while sending data to the database:-> ${error.message}`
-      );
-    }
-  };
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -70,6 +20,7 @@ const SignUp = () => {
     password: "",
     confirmPassword: "",
   });
+
   const [errors, setErrors] = useState({
     firstNameError: "",
     secondNameError: "",
@@ -79,21 +30,15 @@ const SignUp = () => {
     confirmPasswordError: "",
   });
 
-  const handleSubmit = (e) => {
+  const [usernameFound, setUsernameFound] = useState(false);
+  const [emailFound, setEmailFound] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let valid = true;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Username validation
-    if (!formData.secondName.trim()) {
-      setErrors((prevState) => ({
-        ...prevState,
-        secondNameError: "Secondname is required",
-      }));
-      valid = false;
-    } else {
-      setErrors((prevState) => ({ ...prevState, usernameError: "" }));
-    }
+    // Validation for each field
     if (!formData.firstName.trim()) {
       setErrors((prevState) => ({
         ...prevState,
@@ -101,8 +46,19 @@ const SignUp = () => {
       }));
       valid = false;
     } else {
-      setErrors((prevState) => ({ ...prevState, usernameError: "" }));
+      setErrors((prevState) => ({ ...prevState, firstNameError: "" }));
     }
+
+    if (!formData.secondName.trim()) {
+      setErrors((prevState) => ({
+        ...prevState,
+        secondNameError: "Secondname is required",
+      }));
+      valid = false;
+    } else {
+      setErrors((prevState) => ({ ...prevState, secondNameError: "" }));
+    }
+
     if (!formData.username.trim()) {
       setErrors((prevState) => ({
         ...prevState,
@@ -113,7 +69,6 @@ const SignUp = () => {
       setErrors((prevState) => ({ ...prevState, usernameError: "" }));
     }
 
-    // Email validation
     if (!formData.email.trim()) {
       setErrors((prevState) => ({
         ...prevState,
@@ -129,7 +84,7 @@ const SignUp = () => {
     } else {
       setErrors((prevState) => ({ ...prevState, emailError: "" }));
     }
-    // Password validation
+
     if (!formData.password.trim()) {
       setErrors((prevState) => ({
         ...prevState,
@@ -140,7 +95,6 @@ const SignUp = () => {
       setErrors((prevState) => ({ ...prevState, passwordError: "" }));
     }
 
-    // Confirm password validation
     if (formData.password !== formData.confirmPassword) {
       setErrors((prevState) => ({
         ...prevState,
@@ -153,8 +107,68 @@ const SignUp = () => {
 
     // If form is valid, submit the form data
     if (valid) {
-      console.log("Form submitted:", formData);
-      sentDataToDatabase();
+      try {
+        dispatch(showLoading());
+
+        // API call to register user
+        const response = await axios.post(
+          `${Config.apiUrl}/api/auth/signup`,
+          {
+            firstName: formData.firstName,
+            secondName: formData.secondName,
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.status !== 200) {
+          throw new Error("There is a problem with the server!");
+        }
+
+        // Validate email
+        await axios.post(
+          `${Config.apiUrl}/api/auth/validate_email`,
+          {
+            email: formData.email,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const backendResult = response.data;
+        console.log(backendResult);
+
+        dispatch(hideLoading());
+
+        if (backendResult.usernameFound) {
+          setUsernameFound(true);
+        } else {
+          setUsernameFound(false);
+        }
+
+        if (backendResult.emailFound) {
+          setEmailFound(true);
+        } else {
+          setEmailFound(false);
+        }
+
+        if (!backendResult.usernameFound && !backendResult.emailFound) {
+        }
+      } catch (error) {
+        console.log(
+          `Error occurred while sending data to the database: ${error.message}`
+        );
+        dispatch(hideLoading());
+      }
     }
   };
 
@@ -253,13 +267,18 @@ const SignUp = () => {
             )}
           </div>
           <div className="input-group">
-            <input type="submit" value={`${loading ? 'REGISTERING...' : 'SIGNUP'}`} />
+            <input
+              type="submit"
+              value={`${loading ? "REGISTERING..." : "SIGNUP"}`}
+              disabled={loading}
+            />
           </div>
           <p>
-            Have an account?<Link to="/login  ">Login</Link>
+            Have an account?<Link to="/login">Login</Link>
           </p>
         </form>
       </div>
+      {loading && <Preloaders />}
     </div>
   );
 };

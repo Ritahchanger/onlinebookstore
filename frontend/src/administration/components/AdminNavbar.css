@@ -24,3 +24,6 @@
 .adminNavbar .profile-section img{
     height:40px;
 }
+.adminNavbar .img-wrapper img{
+    cursor: pointer;
+}

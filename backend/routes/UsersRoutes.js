@@ -32,6 +32,7 @@ router.put('/:id/update-profile',upload.single('file'),UsersController.updatePas
 
 
 router.get('/userId/:id',UsersController.getUserById)
+router.get('/user-information/:id',UsersController.getUserInformation)
 
 
 
@@ -40,6 +41,8 @@ router.get('/credentials',UsersController.getUserCookie)
 
 
 router.delete('/account/:id',UsersController.deleteUser)
+
+router.put('/update/description/:userId',UsersController.updateUserDescription)
 
 
 // ACCOUNTS TERMINATION

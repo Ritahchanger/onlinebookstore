@@ -1,188 +1,185 @@
-.admin{
+.admin {
   position: relative;
-  font-size:var(--mobile-font);
+  font-size: var(--mobile-font);
 }
-.admin p{
-  font-size:var(--mobile-font);
+.admin p {
+  font-size: var(--mobile-font);
 }
-.admin .medium-header{
-    text-align: center;
-    font-size:var(--mobile-font);
-    margin:0rem;
-    position:relative;
+.admin .medium-header {
+  text-align: center;
+  font-size: var(--mobile-font);
+  margin: 0rem;
+  position: relative;
 }
-.admin .container{
-  max-width:1400px;
-  margin:0 auto;
+.admin .container {
+  max-width: 1400px;
+  margin: 0 auto;
 }
-.admin table{
-    width:100%;
-    border:1px solid var(--green);
-    min-width:400px;
-    border-collapse: collapse;
-  } 
-  .admin table thead{
-    background:var(--green);
-    color:var(--white);
-  }
-  .admin table thead tr td{
-    font-size:var(--mobile-font);
-  }
-  .admin table td{
-    padding:0.5rem 1rem;
-    border:1px solid var(--orange);
-  }
-  .admin table td img{
-    width:50px;
-    height:50px;
-  }
+.admin table {
+  width: 100%;
+  border: 1px solid var(--green);
+  min-width: 400px;
+  border-collapse: collapse;
+}
+.admin table thead {
+  background: var(--green);
+  color: var(--white);
+}
+.admin table thead tr td {
+  font-size: var(--mobile-font);
+}
+.admin table td {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--orange);
+}
+.admin table td img {
+  width: 50px;
+  height: 50px;
+}
 
-  /* .admin table tbody tr:nth-child(even) {
+/* .admin table tbody tr:nth-child(even) {
     background: var(--green);
   } */
-  .admin table tbody tr td{
-   color:var(--black)
-  }
-  .admin table thead  td{
-   border:1px solid var(--green)
-  }
-  
-  .admin table tbody tr td:nth-child(5) i{
-    color:var(--blue);
-    cursor: pointer;
-  }
-  .admin table tbody tr td:nth-child(5) i:hover{
-    transform:scale(1.4);
-  }
-  .admin .table_wrapper {
-    overflow: scroll;
-    max-height: calc(100vh - 120px);
-    border-top:2px solid var(--green);
-  }
-  
-  .admin table tbody tr .remove{
-    background:var(--orange);
-    text-align:center;
-    cursor: pointer;
-    background:var(--green);
-    color:var(--white)
-  }
-  .admin table tbody tr .remove:hover i{
-    color:var(--pinkRed)
-  }
-  .admin table tbody tr .remove i{
-    color:var(--white);
-  }
-  .admin .cart-buttons{
-    background:var(--green);
-    color:var(--white);
-  }
-  .admin .cart-buttons:hover{
-    background:var(--blue);
-    border:2px solid var(--blue);
-  }
-  .admin .input_group input{
-    border:none;
-    flex-basis:94%;
-    outline:none
-  }
-  .admin .input_group{
-    padding:8px 0px;
-    border-bottom:1px solid var(--gray);
-    margin-bottom:1rem;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-  }
-  
+.admin table tbody tr td {
+  color: var(--black);
+}
+.admin table thead td {
+  border: 1px solid var(--green);
+}
 
-  .admin .custom-modal{
-    position:fixed;
-    top:0;
-    right:0;
-    left:0;
-    height:100%;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    background:rgba(0,0,0,0.75);
-    color:var(--black);
-    z-index:99;
-    overflow-y: scroll;
-  }
-  .admin .custom-modal.active{
-    display:flex;
-  }
- .admin  .custom-modal .modal-dialog{
-    background: var(--white);
-    width:90%;
-    max-width:600px;
-    padding:1rem;
-    position:relative;
-    text-align:center;
+.admin table tbody tr td:nth-child(5) i {
+  color: var(--blue);
+  cursor: pointer;
+}
+.admin table tbody tr td:nth-child(5) i:hover {
+  transform: scale(1.4);
+}
+.admin .table_wrapper {
+  overflow: scroll;
+  max-height: calc(100vh - 120px);
+  border-top: 2px solid var(--green);
+}
 
-  }
-  .admin .custom-modal .modal-dialog .medium-header{
-    margin:0.5rem 0rem;
-    text-align:center;
-  }
-  
- 
-  .admin .modal-dialog .cart-buttons{
-    margin-top: 1REM;
-    border-radius:0;
-    width:100px;
-    color:var(--white);
-    align-items:start;
-  }
+.admin table tbody tr .remove {
+  background: var(--orange);
+  text-align: center;
+  cursor: pointer;
+  background: var(--green);
+  color: var(--white);
+}
+.admin table tbody tr .remove:hover i {
+  color: var(--pinkRed);
+}
+.admin table tbody tr .remove i {
+  color: var(--white);
+}
+.admin .cart-buttons {
+  background: var(--green);
+  color: var(--white);
+}
+.admin .cart-buttons:hover {
+  background: var(--blue);
+  border: 2px solid var(--blue);
+}
+.admin .input_group input {
+  border: none;
+  flex-basis: 94%;
+  outline: none;
+}
+.admin .input_group {
+  padding: 8px 0px;
+  border-bottom: 1px solid var(--gray);
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .admin .modal-dialog .cart-buttons.cancel{
-    background:var(--pinkRed);
-    border:var(--pinkRed);
-    font-weight:500;
-  }
-  .admin .modal-dialog .cart-buttons.ok{
-    background:var(--green);
-    border:none;
-  }
-  .admin .custom-modal .modal-dialog p{
-    text-align:center;
-    line-height:1.5rem;
-  }
-  .admin .modal-dialog .cart-buttons:hover{
-    background:var(--orange);
-  }
-  .admin .modal-dialog .img-wrapper img{
-    width:150px;
-  }
-  
-  .admin table tbody tr td:last-child{
-    cursor: pointer;
-  }
-  .admin table tbody tr td:last-child i{
-    text-align: center;
-    width:100%;
-  }
-  .admin textarea{
-    WIDTH:100%;
-    border:none;
-    border:1px solid var(--gray);
-    outline:none;
-    padding:10px;
-  }
+.admin .custom-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.75);
+  color: var(--black);
+  z-index: 99;
+  overflow-y: scroll;
+}
+.admin .custom-modal.active {
+  display: flex;
+}
+.admin .custom-modal .modal-dialog {
+  background: var(--white);
+  width: 90%;
+  max-width: 600px;
+  padding: 1rem;
+  position: relative;
+  text-align: center;
+}
+.admin .custom-modal .modal-dialog .medium-header {
+  margin: 0.5rem 0rem;
+  text-align: center;
+}
 
-  .admin .row{
-    justify-content:space-between;
-    align-items:start;
-  }
+.admin .modal-dialog .cart-buttons {
+  margin-top: 1rem;
+  border-radius: 0;
+  width: 100px;
+  color: var(--white);
+  align-items: start;
+}
 
-  .admin .row form{
-    flex-basis:44%;
-  }
-  .admin .row .books_list{
-    flex-basis:52%;
-  }
-  .admin .row .books_list .cart-buttons{
-    border:0rem;
-  }
+.admin .modal-dialog .cart-buttons.cancel {
+  background: var(--pinkRed);
+  border: var(--pinkRed);
+  font-weight: 500;
+}
+.admin .modal-dialog .cart-buttons.ok {
+  background: var(--green);
+  border: none;
+}
+.admin .custom-modal .modal-dialog p {
+  text-align: center;
+  line-height: 1.5rem;
+}
+.admin .modal-dialog .cart-buttons:hover {
+  background: var(--orange);
+}
+.admin .modal-dialog .img-wrapper img {
+  width: 150px;
+}
+
+.admin table tbody tr td:last-child {
+  cursor: pointer;
+}
+.admin table tbody tr td:last-child i {
+  text-align: center;
+  width: 100%;
+}
+.admin textarea {
+  width: 100%;
+  border: none;
+  border: 1px solid var(--gray);
+  outline: none;
+  padding: 10px;
+}
+
+.admin .row {
+  justify-content: space-between;
+  align-items: start;
+}
+
+.admin .row form {
+  flex-basis: 44%;
+}
+.admin .row .books_list {
+  flex-basis: 52%;
+}
+.admin .row .books_list .cart-buttons {
+  border: 0rem;
+}

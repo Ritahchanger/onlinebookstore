@@ -35,7 +35,7 @@ router.get('/get/:id',BlogController.getBlogById)
 router.delete('/delete/:id',BlogController.deleteBlog)
 
 
-router.patch('/update/:id',BlogController.updateBlog)
+router.patch('/update_blog/:id',upload.single('file'),BlogController.updateBlog)
 
 
 
