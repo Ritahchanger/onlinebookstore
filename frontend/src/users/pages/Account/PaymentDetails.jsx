@@ -161,10 +161,13 @@ const PaymentDetails = () => {
 
       dispatch(hideLoading());
       if (response.status === 201) {
+        const purchaseResponse = await axios.post(
+          `${Config.apiUrl}/api/cart/purchase/${user.user._id}`
+        );
         setPaymentSuccess(true);
         const completion_page_url = response.data.links[1].href;
 
-        window.open(completion_page_url, "_blank");
+      window.open(completion_page_url, "_blank");
 
         setTimeout(() => {
           setPaymentSuccess(false);

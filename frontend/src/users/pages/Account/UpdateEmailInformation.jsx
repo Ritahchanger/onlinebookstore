@@ -59,6 +59,8 @@ const UpdateEmailInformation = () => {
           }
         );
 
+        console.log(response.data.data);
+
         if (response.data.success) {
           setSubmitSuccess(true);
           setErrors({
@@ -109,7 +111,7 @@ const UpdateEmailInformation = () => {
       <button className="cart-buttons" type="submit">
         UPDATE
       </button>
-      {submitSuccess && <p className="success">Email information updated successfully!</p>}
+      {submitSuccess && <p className="success">Email verication link has been sent to your old email...! </p>}
     </form>
   );
 };

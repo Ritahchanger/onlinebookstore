@@ -42,8 +42,8 @@
   text-align: start;
 }
 .profile .profile-image {
-  max-width:270px;
-  width:100%;
+  max-width: 270px;
+  width: 100%;
 }
 .profile .main-section .wishlist-container {
   padding: 20px;
@@ -55,11 +55,11 @@
 .profile .main-section .wishlist-container h2 {
   text-align: center;
   margin-bottom: 20px;
-  color:var(--blue);
-  font-size:var(---mobile-font);
+  color: var(--blue);
+  font-size: var(---mobile-font);
 }
 
-.profile .main-section .wishlist-container ul{
+.profile .main-section .wishlist-container ul {
   list-style-type: none;
   padding: 0;
 }
@@ -111,158 +111,183 @@
   opacity: 0.8;
 }
 
-
 /* Profile.css */
 /* .profile .file-input {
   display: none;
 } */
 
-
-.profile form img{
-  width:50px;
+.profile form img {
+  width: 50px;
 }
-.profile .alter_profile{
-  width:100%;
-  display:flex;
-  align-items:center;
+.profile .alter_profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
   flex-direction: column;
-  text-align:center;
+  text-align: center;
 }
-.profile .alter_profile label{
-  width:100%;
-  display:flex;
-  justify-content:center;
+.profile .alter_profile label {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
-.profile .alter_profile input{
-display:none;
-
-}
-
-.profile .alter_profile .cart-buttons{
-  width:100%;
-  margin:0;
+.profile .alter_profile input {
+  display: none;
 }
 
-.profile .edit_profile button{
-  width:100%;
-  margin-bottom:1rem;
+.profile .alter_profile .cart-buttons {
+  width: 100%;
+  margin: 0;
 }
 
-
-.account .edit-form .cart-buttons{
-  background:var(--green);
-  border:2px solid var(--green);
-  color:var(--white);
+.profile .edit_profile button {
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
-.account .edit-form .cart-buttons:hover{
-  background:transparent;
-  color:var(--green);
-  font-weight:600;
-  border:2px solid var(--green)
+.account .edit-form .cart-buttons {
+  background: var(--green);
+  border: 2px solid var(--green);
+  color: var(--white);
 }
 
-
-
-
-
+.account .edit-form .cart-buttons:hover {
+  background: transparent;
+  color: var(--green);
+  font-weight: 600;
+  border: 2px solid var(--green);
+}
 
 /* Edit profile modal */
 
-.account .edit_profile_modal{
-  height:100vh;
-  width:100%;
-  position:fixed;
-  top:0;
-  right:0;
-  left:0;
-  background:rgba(0, 0, 0, 0.75);
-  z-index:99;
+.account .edit_profile_modal {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 99;
   /* display:none; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account .edit_profile_modal.active {
+  display: flex;
+}
+
+.account .form_container .medium-header {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.account .edit_profile_modal .cart-buttons {
+  width: 100%;
+  margin-top: 1rem;
+  color: var(--blue);
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.account .edit-form input {
+  border: none;
+  height: 40px;
+  border-bottom: 1px solid var(--gray);
+  outline: none;
+}
+.account .edit-form input:focus {
+  border-bottom: 1px solid var(--pinkRed);
+}
+.account .edit-form .input_group {
+  padding-bottom: 1rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.account .edit-form .errors {
+  color: var(--pinkRed);
+}
+
+.account .edit-form .error {
+  position: absolute;
+  color: var(--pinkRed);
+}
+.account .edit-form .success {
+  color: var(--green);
+}
+
+.account .profileDescription {
+  border: none;
+  border: 1px solid var(--gray);
+  width: 100%;
+  outline: none;
+  padding: 10px;
+  margin-top: 1rem;
+}
+.account .profileDescription:focus {
+  border: 2px solid var(--blue);
+}
+
+.account .email_modal {
+  position: fixed;
+  height: 100%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 99;
+  display:none;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.account .email_modal.show{
   display:flex;
-  justify-content:center;
+}
+.account .email_modal  .email_change {
+  background: var(--white);
+  max-width: 700px;
+  width: 95%;
+  padding: 2rem;
+  display: flex;
   align-items:center;
+  justify-content:space-between;
+  align-items: center;
+  justify-content: center;
+}
+.account .email_modal  .email_change .cart-buttons{
+  width:160px;
+}
+.account .email_modal form .medium-header {
+  margin: 0rem;
 }
 
-.account .edit_profile_modal.active{
-  display:flex;
+@media (max-width: 650px) {
+  .profile .container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .profile .user-information {
+    display: flex;
+  }
+  .profile .user-information .profile-card {
+    flex-basis: 48%;
+  }
+  .profile .user-information .profile-card:nth-child(1) {
+    padding-right: 1rem;
+  }
+  .profile .user-information .profile-card p {
+    text-align: start;
+  }
+  .profile .user-information .profile-card .small-header {
+    text-align: start;
+  }
 }
-
-.account .form_container  .medium-header{
-  margin:0;
-  text-transform:uppercase;
-}
-
-.account .edit_profile_modal .cart-buttons{
-  width:100%;
-  margin-top:1rem;
-  color:var(--blue);
-  font-weight:700;
-  margin-top:1rem;
-}
-
-.account .edit-form input{
-  border:none;
-  height:40px;
-  border-bottom:1px solid var(--gray);
-  outline:none;
-}
-.account .edit-form input:focus{
-  border-bottom:1px solid var(--pinkRed);
-}
-.account .edit-form .input_group{
-  padding-bottom:1rem;
-  cursor:pointer;
-  position:relative;
-}
-
-.account .edit-form .errors{
-  color:var(--pinkRed)
-}
-
-.account .edit-form .error{
-  position:absolute;
-  color:var(--pinkRed)
-}
-.account .edit-form .success{
-  color:var(--green);
-}
-
-.account .profileDescription{
-  border:none;
-  border:1px solid var(--gray);
-  width:100%;
-  outline:none;
-  padding:10px;
-  margin-top:1rem;
-}
-.account .profileDescription:focus{
-  border:2px solid var(--blue);
-}
-
-
-@media(max-width:650px){
-    .profile .container{
-        grid-template-columns:repeat(1,1fr);
-    } 
-    .profile .user-information{
-        display:flex;
-    }
-    .profile .user-information .profile-card{
-        flex-basis:48%;
-    }
-    .profile .user-information .profile-card:nth-child(1){
-        padding-right:1rem;
-    }
-    .profile .user-information .profile-card p{
-        text-align:start;
-    }
-    .profile .user-information .profile-card .small-header{
-        text-align:start;
-    } 
-} 
-@media(max-width:448px){
-    .profile .user-information{
-        flex-direction: column;
-    }
+@media (max-width: 448px) {
+  .profile .user-information {
+    flex-direction: column;
+  }
 }

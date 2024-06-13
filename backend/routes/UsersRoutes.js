@@ -65,6 +65,6 @@ router.patch('/:id/update/names',UsersController.updateNames)
 
 router.put('/:id/update/email',UsersController.updateEmail)
 
-
+router.put('/:userId/update-email',UsersController.changeEmail);
 
 module.exports = router;

@@ -518,7 +518,7 @@ const updateEmail = async (req, res) => {
       from: '"BEMI EDITORS LIMITED" <peterdennis573@gmail.com>',
       to: currentEmail,
       subject: 'EMAIL CHANGE',
-      text: 'Request to change my email from the bookstore application',
+      text: 'EMAIL CHANGE VERIFICATION',
       html: `
         <html>
           <head>
@@ -559,7 +559,7 @@ const updateEmail = async (req, res) => {
             <div class="container">
               <h1>Password Reset Request</h1>
               <p>Please click the button below to authenticate email change</p>
-              <p><a href='http://localhost:3000/change-password/${currentEmail}'>VERIFY</a></p>
+              <p><a href='http://localhost:3000/profile/${currentEmail}/user_id/:${findUser.userId}'>VERIFY</a></p>
             </div>
           </body>
         </html>
@@ -579,6 +579,30 @@ const updateEmail = async (req, res) => {
     })
   }
 }
+
+const changeEmail = async (req, res) => {
+  const { userId } = req.params;
+  const { newEmail } = req.body; // Assuming new email is sent in the request body
+
+  try {
+    // Find user by ID and update email
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { email: newEmail },
+      { new: true } // To return the updated user document
+    );
+
+    if (!updatedUser) {
+      return res.status(200).json({success:false, message: 'User not found' });
+    }
+
+    return res.status(200).json({success:true, message: 'User email updated successfully', user: updatedUser });
+  } catch (error) {
+    console.error(`Error updating user email: ${error.message}`);
+    res.status(500).json({success:false,message: 'Server error' });
+  }
+};
+
 
 const updateUserDescription = async (req, res) => {
   const { userId } = req.params;
@@ -636,4 +660,5 @@ module.exports = {
   updateEmail,
   getUserInformation,
   updateUserDescription,
+  changeEmail,
 }

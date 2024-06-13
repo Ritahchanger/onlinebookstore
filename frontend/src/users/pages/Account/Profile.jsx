@@ -1,7 +1,7 @@
 import "./Profile.css";
+import React, { useEffect, useState } from "react";
 import SideBar from "./SideBar";
 import AccountNavbar from "./AccountNavbar";
-import { useEffect, useState } from "react";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 import ProfileIcon from "../../../assets/icons/boy.png";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,17 +13,22 @@ import UpdateContactInformation from "./UpdateContactInformation";
 import UpdateEmailInformation from "./UpdateEmailInformation";
 import UpdatePasswordInformation from "./UpdatePasswordInformation";
 import Config from "../../../Config";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const { currentEmail, userId } = useParams();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
+
   const [sidebar, setSidebar] = useState(false);
   const [terminationModel, setTerminationModel] = useState(false);
   const [fileMessage, setFileMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [profileImage, setProfileImage] = useState(user.user?.passport);
-  const [userProfile, setUserProfile] = useState(null); // Initialize userProfile state
-  const [description, setDescription] = useState(""); // Add state for description
+  const [userProfile, setUserProfile] = useState(null);
+  const [description, setDescription] = useState("");
+  const [emailModal, setEmailModal] = useState(false);
 
   const handleSidebar = () => {
     setSidebar(!sidebar);
@@ -85,6 +90,7 @@ const Profile = () => {
 
   useEffect(() => {
     getUser(); // Fetch user data on component mount
+    displayEmailChangeModal(); // Check whether to show email modal on mount
   }, []);
 
   const getUser = async () => {
@@ -96,8 +102,6 @@ const Profile = () => {
       if (!response.data.success) {
         throw new Error("Failed to fetch user data");
       }
-
-      console.log(response.data.data);
 
       setUserProfile(response.data.data); // Update userProfile state with fetched data
     } catch (error) {
@@ -117,32 +121,59 @@ const Profile = () => {
       );
 
       if (response.data.success) {
-        // Optionally update the user profile state or display a success message
-        console.log("Description updated successfully.");
         // Update userProfile state with the new description
         setUserProfile((prevUserProfile) => ({
           ...prevUserProfile,
           description,
         }));
+      } else {
+        console.error("Failed to update description");
       }
     } catch (error) {
-      console.error(
-        `There was a problem updating the user description: ${error.message}`
-      );
+      console.error(`Error updating description: ${error.message}`);
     }
   };
+
+  const displayEmailChangeModal = () => {
+    // Conditionally show email modal based on userId and currentEmail
+    if (userId && currentEmail) {
+      setEmailModal(true);
+    } else {
+      setEmailModal(false);
+    }
+  };
+
+  const handleEmailChange = async () => {
+    try {
+      const response = await axios.put(
+        `${Config.apiUrl}/api/users/${user.user?._id}/update-email`,
+        { newEmail: currentEmail },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (response.data.success) {
+        setEmailModal(false)
+        getUser()
+        // Optionally navigate or refresh page after successful email change
+        navigate("/profile");
+      } else {
+        console.error("Failed to update email");
+      }
+    } catch (error) {
+      console.error(`Error updating email: ${error.message}`);
+    }
+  };
+
+  const handleEmailChangeCancel =()=>{
+    navigate("/profile");
+  }
 
   return (
     <div className="account">
       <AccountNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
-      <SideBar
-        sidebar={sidebar}
-        handleTerminationModel={handleTerminationModel}
-      />
-      <TerminationModel
-        handleTerminationModel={handleTerminationModel}
-        terminationModel={terminationModel}
-      />
+      <SideBar sidebar={sidebar} handleTerminationModel={handleTerminationModel} />
+      <TerminationModel handleTerminationModel={handleTerminationModel} terminationModel={terminationModel} />
 
       <div className="profile">
         <p className="medium-header">PROFILE SECTION</p>
@@ -151,21 +182,13 @@ const Profile = () => {
             <div className="profile-card">
               <div className="profile-image">
                 <img
-                  src={
-                    profileImage
-                      ? `${Config.apiUrl}/upload/authors/${profileImage}`
-                      : ProfileIcon
-                  }
+                  src={profileImage ? `${Config.apiUrl}/upload/authors/${profileImage}` : ProfileIcon}
                   alt={`${user.user?.firstName} ${user.user?.lastName}`}
                 />
               </div>
               <form className="alter_profile" onSubmit={uploadProfileImage}>
                 <label htmlFor="change-profile" className="upload-icon-wrapper">
-                  <img
-                    src={uploadIcon}
-                    alt="Upload Profile"
-                    className="upload-icon"
-                  />
+                  <img src={uploadIcon} alt="Upload Profile" className="upload-icon" />
                 </label>
                 <input
                   type="file"
@@ -176,22 +199,12 @@ const Profile = () => {
                   onChange={handleFileChange}
                 />
                 {fileMessage && <p className="file-message">{fileMessage}</p>}
-                <button type="submit" className="cart-buttons">
-                  SAVE
-                </button>
+                <button type="submit" className="cart-buttons">SAVE</button>
               </form>
             </div>
 
             <div className="profile-card">
-              <p
-                className="small-header"
-                style={{
-                  textAlign: "start",
-                  width: "100%",
-                  color: "var(--blue)",
-                }}
-              >{`${user.user?.firstName} ${user.user?.secondName}`}</p>
-
+              <p className="small-header" style={{ textAlign: "start", width: "100%", color: "var(--blue)" }}>{`${user.user?.firstName} ${user.user?.secondName}`}</p>
               <p className="description" style={{ textAlign: "start" }}>
                 {userProfile?.description
                   ? userProfile.description
@@ -200,69 +213,25 @@ const Profile = () => {
 
               {userProfile && (
                 <>
-                  <p
-                    className="small-header"
-                    style={{ textAlign: "start", width: "100%" }}
-                  >
-                    Email
-                  </p>
-                  <p
-                    className="small-header"
-                    style={{
-                      textAlign: "start",
-                      width: "100%",
-                      color: "var(--blue)",
-                    }}
-                  >
-                    {userProfile.email}
-                  </p>
+                  <p className="small-header" style={{ textAlign: "start", width: "100%" }}>Email</p>
+                  <p className="small-header" style={{ textAlign: "start", width: "100%", color: "var(--blue)" }}>{userProfile.email}</p>
 
-                  <p
-                    className="small-header"
-                    style={{ textAlign: "start", width: "100%" }}
-                  >
-                    Username
-                  </p>
-                  <p
-                    className="small-header"
-                    style={{
-                      textAlign: "start",
-                      width: "100%",
-                      color: "var(--blue)",
-                    }}
-                  >
-                    {userProfile.username}
-                  </p>
+                  <p className="small-header" style={{ textAlign: "start", width: "100%" }}>Username</p>
+                  <p className="small-header" style={{ textAlign: "start", width: "100%", color: "var(--blue)" }}>{userProfile.username}</p>
                 </>
               )}
             </div>
-            <form
-              onSubmit={updateUserDescription}
-              style={{ marginTop: "1rem" }}
-            >
-              <p
-                className="small-header"
-                style={{
-                  textAlign: "start",
-                  width: "100%",
-                  color: "var(--blue)",
-                }}
-              >
-                Update description
-              </p>
+
+            <form onSubmit={updateUserDescription} style={{ marginTop: "1rem" }}>
+              <p className="small-header" style={{ textAlign: "start", width: "100%", color: "var(--blue)" }}>Update description</p>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 cols="30"
                 rows="10"
                 className="profileDescription"
-              ></textarea>
-              <input
-                type="submit"
-                className="submit-btn"
-                style={{ marginTop: "1rem" }}
-                value="SUBMIT"
               />
+              <input type="submit" className="submit-btn" style={{ marginTop: "1rem" }} value="SUBMIT" />
             </form>
           </div>
 
@@ -272,6 +241,17 @@ const Profile = () => {
             <UpdateEmailInformation />
             <UpdatePasswordInformation />
           </div>
+        </div>
+      </div>
+
+      {/* Email Change Modal */}
+      <div className={`email_modal ${emailModal ? "show" : ""}`}>
+        <div className="email_change">
+          <button className="cart-buttons" onClick={handleEmailChange}>VERIFY</button>
+          <button className="cart-buttons" onClick={() =>{
+            setEmailModal(false)
+            handleEmailChangeCancel()
+          }}>CANCEL</button>
         </div>
       </div>
     </div>

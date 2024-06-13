@@ -86,6 +86,14 @@ const App = () => {
             }
           />
           <Route
+            path='/profile/:currentEmail/user_id/:userId'
+            element={
+              <ProtectedRoutes>
+                <Profile />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
             path='/mybooks'
             element={
               <ProtectedRoutes>
