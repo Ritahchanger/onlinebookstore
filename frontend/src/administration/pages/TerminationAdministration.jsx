@@ -35,16 +35,12 @@ const TerminationAdministration = () => {
     fetchData();
   }, []);
 
-  const handleTerminate = async (accountId) => {
+  const handleTerminate = async (account) => {
     try {
       const response = await axios.delete(
-        `${Config.apiUrl}/api/users/terminate/${accountId}`
+        `${Config.apiUrl}/api/users/termination/${account.user?._id}/account/${account._id}`
       );
-
-      if (!response.data.success) {
-        throw new Error("There was an error terminating the account");
-      }
-
+      console.log(response.data);
       // Refresh the data after successful termination
       fetchData();
     } catch (error) {
@@ -75,14 +71,19 @@ const TerminationAdministration = () => {
             <tbody>
               {terminationAccounts.map((account) => (
                 <tr key={account._id}>
-                  <td>{`${account.user.firstName} ${account.user.secondName}`}</td>
-                  <td>{account.user.email}</td>
-                  <td>{account.reason}</td>
-                  <td>{account.createdOn}</td>
+                  <td>{`${account.user?.firstName || "Unknown"} ${
+                    account.user?.secondName || "User"
+                  }`}</td>
+                  <td>{account.user?.email || "Unknown Email"}</td>
+                  <td>{account.reason || "No reason provided"}</td>
+                  <td>
+                    {new Date(account.createdOn).toLocaleDateString() ||
+                      "Unknown Date"}
+                  </td>
                   <td>
                     <button
                       className="cart-buttons"
-                      onClick={() => handleTerminate(account._id)}
+                      onClick={() => handleTerminate(account)}
                     >
                       DELETE
                     </button>

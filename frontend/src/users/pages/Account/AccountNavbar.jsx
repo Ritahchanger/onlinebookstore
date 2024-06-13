@@ -13,6 +13,10 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
 
   const [dropdown, setDropdown] = useState(false);
 
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  const isAdmin = user.user.roles.includes("admin");
+
   const handleDropDown = () => {
     setDropdown(!dropdown);
   };
@@ -34,15 +38,22 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
       )}
       <div className="section date">
         <p>Joined on</p>
-        <p>{`${user.user.createdOn}`}</p>
+        <p
+          className="subtitles"
+          style={{ color: "var(--orange)" }}
+        >{`${user.user.createdOn}`}</p>
       </div>
       <div className="section amount">
         <p>Amount</p>
-        <p>sh 78,000</p>
+        <p className="subtitles" style={{ color: "var(--orange)" }}>
+          sh 78,000
+        </p>
       </div>
       <div className="section id">
-        <p>Username</p>
-        <p>{user.user.username}</p>
+        <p>SYSTEM ID</p>
+        <p className="subtitles" style={{ color: "var(--orange)" }}>
+          {user.user.userId}
+        </p>
       </div>
       <div className="profile-section" onClick={handleNavigation}>
         <div className="img-wrapper">
@@ -60,9 +71,11 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
           onClick={handleDropDown}
         />
         <div className={`drop_down ${dropdown ? "active" : null}`}>
-          <Link to="/admin/unapproved" className="linker cart-buttons">
-            ADMIN
-          </Link>
+          {isAdmin && (
+            <Link to="/admin/unapproved" className="linker cart-buttons">
+              ADMIN
+            </Link>
+          )}
           <Link to="/logout" className="linker cart-buttons">
             LOGOUT
           </Link>

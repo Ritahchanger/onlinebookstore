@@ -23,6 +23,10 @@ export const sectioncNavigation = [
     path: "/shop",
   },
   {
+    menu_name: "CART",
+    path: "/pending-payments",
+  },
+  {
     menu_name: "BLOG",
     path: "/blog",
   },

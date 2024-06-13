@@ -259,17 +259,13 @@ const getAccountsToTerminate = async (req, res) => {
 
 const terminateAccount = async (req, res) => {
   try {
-    const { userId, id } = req.params
+    const { id,terminationAccountId } = req.params
 
-    const terminatedAccount = await User.findById(userId);
+    const user = await User.findById(id);
 
-    console.log(terminateAccount);
-
-    if (!terminatedAccount || !terminatedAccount.email) {
-      return res.status(200).json({ status: 404, success: false, message: 'The user is not found or has no email address' });
+    if(!user){
+      return res.status(200).json({status:404,success:false,message:'User not found!'})
     }
-
-    console.log(terminatedAccount)
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
@@ -282,7 +278,7 @@ const terminateAccount = async (req, res) => {
 
     const info = await transporter.sendMail({
       from: '"BEMI EDITORS LIMITED" <peterdennis573@gmail.com>',
-      to: terminatedAccount.email,
+      to:user.email,
       subject: 'ACCOUNT TERMINATION',
       text: 'Request to change my password from the bookstore application',
       html: `
@@ -333,8 +329,9 @@ const terminateAccount = async (req, res) => {
       `
     });
 
-    await AccountTermination.findByIdAndDelete(id);
-    await User.findByIdAndDelete(userId);
+    await User.findByIdAndDelete(id);
+
+    await AccountTermination.findByIdAndDelete(terminationAccountId)
 
     console.log('Message sent: %s', info.messageId);
 

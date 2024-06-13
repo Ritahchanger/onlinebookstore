@@ -7,10 +7,9 @@ import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
   const user = useSelector((state) => state.auth.user);
 
-  const isAdmin = user.user.roles.includes("admin");
+  const isAdmin = user?.user?.roles?.includes("admin");
 
   return (
     <nav className="nav">
@@ -70,17 +69,25 @@ const Navbar = () => {
             ) : (
               <>
                 <p className="nav-li">
-                  <Link to="/cart">CART</Link>
+                  <Link to="/cart" className="cart-buttons">
+                    CART
+                  </Link>
                 </p>
 
                 <p className="nav-li">
-                  <Link to="/account">ACCOUNT</Link>
+                  <Link to="/account" className="cart-buttons">
+                    ACCOUNT
+                  </Link>
                 </p>
                 <p className="nav-li">
-                  <Link to="/login">LOGIN</Link>
+                  <Link to="/login" className="cart-buttons">
+                    LOGIN
+                  </Link>
                 </p>
                 <p className="nav-li">
-                  <Link to="/signup">SIGNUP</Link>
+                  <Link to="/signup" className="cart-buttons">
+                    SIGNUP
+                  </Link>
                 </p>
               </>
             )}

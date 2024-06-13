@@ -15,6 +15,7 @@ const DeleteBlogModal = ({ handleDisplayModal, selectedBlog, fetchData }) => {
       const response = await axios.delete(
         `${Config.apiUrl}/api/blog/delete/${selectedBlog._id}`
       );
+      console.log(response.data);
       if (!response.data.success) {
         throw new Error("Internal server error occured!");
         dispatch(hideLoading());

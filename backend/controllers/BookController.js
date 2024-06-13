@@ -2,6 +2,12 @@ const express = require('express')
 
 const Book = require('../models/Book.model')
 
+const path = require('path')
+
+const uploadDirectory = path.join(__dirname, '../upload/blogs/')
+
+const fs = require("fs");
+
 function formatCurrentDate () {
   const now = new Date()
 

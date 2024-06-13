@@ -40,8 +40,7 @@ import TerminationAdministration from './administration/pages/TerminationAdminis
 import UsersAdministration from './administration/pages/UsersAdministration'
 import AdminAuthors from './administration/pages/AdminAuthors'
 
-// 
-
+//
 
 const App = () => {
   const user = useSelector(state => state.auth.user)
@@ -58,7 +57,7 @@ const App = () => {
           <Route path='/blog/:userId' element={<SingleBlog />} />
           <Route path='/authors' element={<Authors />} />
           <Route path='/authors/books/:id' element={<BookByAuthor />} />
-          <Route path='/cart' element={<Cart />} />
+
           <Route path='/categories' element={<CategoriesNavbar />} />
           <Route path='/check-out' element={<Checkout />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
@@ -147,12 +146,54 @@ const App = () => {
 
           {/* ADMINISTRATION */}
 
-          <Route path="/admin/unapproved" element={<UnapprovedBooks />} />
-          <Route path="/admin/blogs" element={<BlogsAdministration />} />
-          <Route path="/admin/termination-accounts" element={<TerminationAdministration />} />
-          <Route path="/admin/users" element={<UsersAdministration />} />
-          <Route path="/admin/all-books" element={<AllBooksAdministration />} />
-          <Route path="/admin/authors" element={<AdminAuthors />} />
+          <Route
+            path='/admin/unapproved'
+            element={
+              <ProtectedRoutes>
+                <UnapprovedBooks />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/admin/blogs'
+            element={
+              <ProtectedRoutes>
+                <BlogsAdministration />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/admin/termination-accounts'
+            element={
+              <ProtectedRoutes>
+                <TerminationAdministration />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/admin/users'
+            element={
+              <ProtectedRoutes>
+                <UsersAdministration />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/admin/all-books'
+            element={
+              <ProtectedRoutes>
+                <AllBooksAdministration />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/admin/authors'
+            element={
+              <ProtectedRoutes>
+                <AdminAuthors />
+              </ProtectedRoutes>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

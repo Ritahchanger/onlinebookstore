@@ -289,3 +289,6 @@ width:100%;
 .linker.cart-buttons:hover{
   background:transparent;
 }
+.subtitles{
+  color:var(--pinkRed);
+}

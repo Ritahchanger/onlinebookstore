@@ -94,6 +94,8 @@ const PayPalRoute = require('../routes/PayPalRoute');
 const TestimonialRoute = require('../routes/TestmonialRoute')
 
 
+
+
 app.use('/api/auth', AuthenticationRoute);
 app.use('/api/payment', PaymentsRoutes);
 app.use('/api/payment/paypal',PayPalRoute);

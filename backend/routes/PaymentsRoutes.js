@@ -39,8 +39,6 @@ const createToken = async (req, res, next) => {
     })
 }
 
-
-
 const stkPush = async (req, res) => {
     try {
       const shortCode = 174379;
@@ -61,16 +59,16 @@ const stkPush = async (req, res) => {
       );
   
       const data = {
-        BusinessShortCode: shortCode,
+        BusinessShortCode:shortCode,
         Password: password,
         Timestamp: timestamp,
         TransactionType: "CustomerPayBillOnline",
         Amount: amount,
         PartyA: `254${phone}`,
-        PartyB: shortCode,
+        PartyB:174379,
         PhoneNumber: `254${phone}`,
         CallBackURL: "https://mydomain.com/path",
-        AccountReference:"0712195228",
+        AccountReference:"Mpesa Test",
         TransactionDesc: "Testing stk push",
       };
   
@@ -79,7 +77,7 @@ const stkPush = async (req, res) => {
           Authorization: `Bearer ${token}`,
         },
       });
-  
+
       console.log(response.data);
       res.status(200).json(response.data);
     } catch (error) {

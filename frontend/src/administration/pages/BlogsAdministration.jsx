@@ -186,13 +186,13 @@ const BlogsAdministration = () => {
           fetchData={fetchData}
         />
       </div>
-      <div className={`custom-modal ${displayModal ? "edit" : null}`}>
+      {/* <div className={`custom-modal ${displayModal ? "edit" : null}`}>
         <EditBlogModal
           selectedBlog={selectedBlog}
           handleDisplayModal={handleDisplayModal}
           fetchData={fetchData}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
