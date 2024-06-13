@@ -16,6 +16,8 @@ const BlogsAdministration = () => {
   const [errors, setErrors] = useState({});
   const [displayModal, setDisplayModal] = useState(false);
 
+  const [editModal, setEditModal] = useState(false);
+
   const handleSidebar = () => {
     showSidebar(!sidebar);
   };
@@ -80,12 +82,20 @@ const BlogsAdministration = () => {
       console.log(`There was an error creating the blog => ${error.message}`);
     }
   };
-  const [selectedBlog, setSelectedBlog] = useState(false);
+  const [workingBlog, setWorkingBlog] = useState(false);
   const handleBlogDelete = (blog) => {
-    setSelectedBlog(blog);
+    setWorkingBlog(blog);
   };
   const handleDisplayModal = () => {
     setDisplayModal(!displayModal);
+  };
+
+  const handleEditModal = () => {
+    setEditModal(!editModal);
+  };
+
+  const editBlogModalHandler = (blog) => {
+    setWorkingBlog(blog);
   };
 
   return (
@@ -164,8 +174,8 @@ const BlogsAdministration = () => {
                         <button
                           className="cart-buttons"
                           onClick={() => {
-                            handleBlogDelete(blog);
-                            handleDisplayModal();
+                            handleEditModal();
+                            editBlogModalHandler(blog);
                           }}
                         >
                           EDIT
@@ -182,17 +192,17 @@ const BlogsAdministration = () => {
       <div className={`custom-modal ${displayModal ? "delete" : null}`}>
         <DeleteBlogModal
           handleDisplayModal={handleDisplayModal}
-          selectedBlog={selectedBlog}
+          workingBlog={workingBlog}
           fetchData={fetchData}
         />
       </div>
-      {/* <div className={`custom-modal ${displayModal ? "edit" : null}`}>
+      <div className={`custom-modal ${editModal ? "edit" : null} `}>
         <EditBlogModal
-          selectedBlog={selectedBlog}
-          handleDisplayModal={handleDisplayModal}
+          workingBlog={workingBlog}
+          handleEditModal={handleEditModal}
           fetchData={fetchData}
         />
-      </div> */}
+      </div>
     </div>
   );
 };

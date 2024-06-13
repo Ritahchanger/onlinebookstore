@@ -8,6 +8,9 @@ import AdminModal from "../components/AdminModal";
 import PdfViewer from "../../users/components/pdfViewer/pdfViewer";
 import { useDispatch, useSelector } from "react-redux";
 import { openReadBookModal } from "../../users/Redux/features/readBookModalSlice";
+import "./unapproved.css";
+
+import DisapproveModal from "../components/DisapproveModal";
 
 const UnapprovedBooks = () => {
   const dispatch = useDispatch();
@@ -41,7 +44,9 @@ const UnapprovedBooks = () => {
   };
 
   const filteredBooks = unapprovedBooks.filter((book) => {
-    const fullName = `${book.author?.firstName || ""} ${book.author?.secondName || ""}`;
+    const fullName = `${book.author?.firstName || ""} ${
+      book.author?.secondName || ""
+    }`;
     return (
       book.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       book.category?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -51,6 +56,7 @@ const UnapprovedBooks = () => {
 
   const handleBookApproving = (book) => {
     setApproveBook(book);
+    approveBookModal();
   };
 
   const approveBookModal = () => {
@@ -61,78 +67,107 @@ const UnapprovedBooks = () => {
     dispatch(
       openReadBookModal({
         title: book.title || "Unknown Title",
-        book: book.book || ""
+        book: book.book || "",
       })
     );
   };
 
+  const [workingBook, setWorkingBook] = useState();
+
+  const [disapproveModal, setDisapproveModal] = useState(false);
+
+  const handleDisapproveBook = (book) => {
+    setWorkingBook(book);
+    disapproveDisplayModal();
+  };
+
+  const disapproveDisplayModal = () => {
+    setDisapproveModal(!disapproveModal);
+  };
+
   return (
-    <div className="admin">
+    <div className="admin unapproved">
       <AdminNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
       <AdminSidebar sidebar={sidebar} />
-      <p className="medium-header">UNAPPROVED BOOKS</p>
       <div className="container">
-        <div className="input_group">
-          <input
-            type="text"
-            name="search_book"
-            placeholder="Search book..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-          <i className="fa-solid fa-magnifying-glass"></i>
-        </div>
-        <div className="table_wrapper">
-          <table>
-            <thead>
-              <tr>
-                <td>COVER IMAGE</td>
-                <td>TITLE</td>
-                <td>AUTHOR</td>
-                <td>CATEGORY</td>
-                <td>UPLOADED ON</td>
-                <td>APPROVE</td>
-                <td>READ</td>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredBooks.map((book) => (
-                <tr key={book._id}>
-                  <td>
-                    <img
-                      src={`${Config.apiUrl}/upload/books/${book.coverImage || "default.png"}`}
-                      alt={book.title || "No Title"}
-                      width="50"
-                    />
-                  </td>
-                  <td>{book.title || "No Title"}</td>
-                  <td>{`${book.author?.firstName || "Unknown"} ${book.author?.secondName || "Author"}`}</td>
-                  <td>{book.category || "No Category"}</td>
-                  <td>{new Date(book.uploadedAt).toLocaleDateString() || "No Date"}</td>
-                  <td>
-                    <button
-                      className="cart-buttons"
-                      onClick={() => {
-                        handleBookApproving(book);
-                        approveBookModal();
-                      }}
-                    >
-                      Approve
-                    </button>
-                  </td>
-                  <td
-                    className="view"
-                    onClick={() => {
-                      openBookModal(book);
-                    }}
-                  >
-                    <i className="fa fa-eye"></i>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        {filteredBooks.length > 0 ? (
+          <>
+            <p className="medium-header">UNAPPROVED BOOKS</p>
+            <div className="input_group">
+              <input
+                type="text"
+                name="search_book"
+                placeholder="Search book..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div className="table_wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <td>COVER IMAGE</td>
+                    <td>TITLE</td>
+                    <td>AUTHOR</td>
+                    <td>CATEGORY</td>
+                    <td>UPLOADED ON</td>
+                    <td>READ</td>
+                    <td>APPROVE</td>
+                    <td>REJECT</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredBooks.map((book) => (
+                    <tr key={book._id}>
+                      <td>
+                        <img
+                          src={`${Config.apiUrl}/upload/books/${
+                            book.coverImage || "default.png"
+                          }`}
+                          alt={book.title.toUpperCase() || "No Title"}
+                          width="50"
+                        />
+                      </td>
+                      <td>{book.title.toUpperCase() || "No Title"}</td>
+                      <td>{`${book.author?.firstName || "Unknown"} ${
+                        book.author?.secondName || "Author"
+                      }`}</td>
+                      <td>{book.category || "No Category"}</td>
+                      <td>
+                        {new Date(book.uploadedAt).toLocaleDateString() ||
+                          "No Date"}
+                      </td>
+                      <td className="view" onClick={() => openBookModal(book)}>
+                        <i className="fa fa-eye"></i>
+                      </td>
+                      <td>
+                        <button
+                          className="cart-buttons"
+                          onClick={() => handleBookApproving(book)}
+                        >
+                          Approve
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          className="cart-buttons"
+                          onClick={() => handleDisapproveBook(book)}
+                        >
+                          Reject
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        ) : (
+          <p className="medium-header" style={{ textAlign: "center" }}>
+            No unapproved books
+          </p>
+        )}
       </div>
 
       <div className={`custom-modal ${approveModal ? "active" : ""}`}>
@@ -144,6 +179,14 @@ const UnapprovedBooks = () => {
       </div>
 
       <PdfViewer />
+
+      <div className={`custom-modal ${disapproveModal ? "disapprove" : null}`}>
+        <DisapproveModal
+          workingBook={workingBook}
+          disapproveDisplayModal={disapproveDisplayModal}
+          fetchData={fetchData}
+        />
+      </div>
     </div>
   );
 };

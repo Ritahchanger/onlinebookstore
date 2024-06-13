@@ -6,14 +6,14 @@ import {
   hideLoading,
 } from "../../users/Redux/features/alertSlice";
 import Preloaders from "../../users/components/Preloaders/Preloaders";
-const DeleteBlogModal = ({ handleDisplayModal, selectedBlog, fetchData }) => {
+const DeleteBlogModal = ({ handleDisplayModal, workingBlog, fetchData }) => {
   const loading = useSelector((state) => state.alerts.loading);
   const dispatch = useDispatch();
   const deleteBlog = async () => {
     try {
       dispatch(showLoading());
       const response = await axios.delete(
-        `${Config.apiUrl}/api/blog/delete/${selectedBlog._id}`
+        `${Config.apiUrl}/api/blog/delete/${workingBlog._id}`
       );
       console.log(response.data);
       if (!response.data.success) {
@@ -31,7 +31,7 @@ const DeleteBlogModal = ({ handleDisplayModal, selectedBlog, fetchData }) => {
 
   return (
     <div className="modal-dialog">
-      <p className="small-header">{`Are you sure you want to delete ${selectedBlog.title}?`}</p>
+      <p className="small-header">{`Are you sure you want to delete ${workingBlog.title}?`}</p>
       <button className="cart-buttons ok" onClick={deleteBlog}>
         DELETE
       </button>

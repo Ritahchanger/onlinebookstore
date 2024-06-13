@@ -3,16 +3,16 @@ import './EditModal.css';
 import Config from '../../Config';
 import axios from 'axios';
 
-const EditBlogModal = ({ selectedBlog, handleDisplayModal, fetchData }) => {
-  const [title, setTitle] = useState(selectedBlog.title);
-  const [content, setContent] = useState(selectedBlog.content);
+const EditBlogModal = ({ workingBlog, handleEditModal, fetchData }) => {
+  const [title, setTitle] = useState(workingBlog.title);
+  const [content, setContent] = useState(workingBlog.content);
   const [blogImage, setBlogImage] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
-    setTitle(selectedBlog.title);
-    setContent(selectedBlog.content);
-  }, [selectedBlog]);
+    setTitle(workingBlog.title);
+    setContent(workingBlog.content);
+  }, [workingBlog]);
 
   const editBlog = async () => {
     try {
@@ -28,7 +28,7 @@ const EditBlogModal = ({ selectedBlog, handleDisplayModal, fetchData }) => {
         console.log(pair[0]+ ', ' + pair[1]); 
       }
 
-      const response = await axios.patch(`${Config.apiUrl}/api/blog/update/${selectedBlog._id}`, formData, {
+      const response = await axios.patch(`${Config.apiUrl}/api/blog/update/${workingBlog._id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -40,7 +40,7 @@ const EditBlogModal = ({ selectedBlog, handleDisplayModal, fetchData }) => {
         fetchData(); // Refresh the data after successful update
         setSuccessMessage('Blog updated successfully!');
         setTimeout(() => {
-          handleDisplayModal(); // Close the modal after showing the success message
+          handleEditModal(); // Close the modal after showing the success message
         }, 2000); // Close modal after 2 seconds
       } else {
         console.log(`Update failed: ${response.data.message}`);
@@ -57,7 +57,7 @@ const EditBlogModal = ({ selectedBlog, handleDisplayModal, fetchData }) => {
 
   return (
     <div className="modal-dialog edit">
-      <p className="small-header">{`EDIT ${selectedBlog.title}`}</p>
+      <p className="small-header">{`EDIT ${workingBlog.title}`}</p>
       <form onSubmit={handleSubmit}>
         <div className="input_group">
           <input
@@ -79,8 +79,8 @@ const EditBlogModal = ({ selectedBlog, handleDisplayModal, fetchData }) => {
         </div>
         <div className="img_wrapper">
           <img
-            src={`${Config.apiUrl}/upload/blogs/${selectedBlog.filePath}`}
-            alt={`${selectedBlog.title}`}
+            src={`${Config.apiUrl}/upload/blogs/${workingBlog.filePath}`}
+            alt={`${workingBlog.title}`}
           />
         </div>
         <div className="input-group">
@@ -101,7 +101,7 @@ const EditBlogModal = ({ selectedBlog, handleDisplayModal, fetchData }) => {
       )}
       <button
         className="cart-buttons cancel"
-        onClick={handleDisplayModal}
+        onClick={handleEditModal}
       >
         CANCEL
       </button>

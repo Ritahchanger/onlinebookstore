@@ -1,12 +1,14 @@
 const express = require('express')
-
+const User = require('../models/User.model')
 const Book = require('../models/Book.model')
 
 const path = require('path')
 
-const uploadDirectory = path.join(__dirname, '../upload/blogs/')
+const uploadDirectory = path.join(__dirname, '../upload/books/')
 
-const fs = require("fs");
+const nodemailer = require('nodemailer')
+
+const fs = require('fs')
 
 function formatCurrentDate () {
   const now = new Date()
@@ -22,7 +24,9 @@ function formatCurrentDate () {
 
 const getBooks = async (req, res) => {
   try {
-    const books = await Book.find({}).populate('author','firstName secondName').sort({ uploadedAt: -1 })
+    const books = await Book.find({})
+      .populate('author', 'firstName secondName')
+      .sort({ uploadedAt: -1 })
 
     if (!books.length)
       return res
@@ -261,31 +265,163 @@ const getBooksByCategory = async (req, res) => {
 
 const getAllUnapproved = async (req, res) => {
   try {
-    const unapprovedBooks = await Book.find({ upproved: false }).populate('author', 'firstName secondName');
+    const unapprovedBooks = await Book.find({ upproved: false }).populate(
+      'author',
+      'firstName secondName'
+    )
     if (!unapprovedBooks) {
       return res.status(404).json({
         status: 404,
         success: false,
-        message: "Books not fetched"
-      });
+        message: 'Books not fetched'
+      })
     }
     res.status(200).json({
       status: 200,
       success: true,
       data: unapprovedBooks
-    });
+    })
   } catch (error) {
     res.status(500).json({
       status: 500,
       success: false,
       message: 'Server Error',
       error: error.message
-    });
+    })
   }
-};
+}
 
-module.exports = getAllUnapproved;
+// DELETE BOOK
 
+const deleteBook = async (req, res) => {
+  try {
+    const { id, userId } = req.params
+
+    // Fetch the user by userId (assuming you have a User model)
+    const user = await User.findById(userId)
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'No such user with the provided userId'
+      })
+    }
+
+    // Find the book by ID
+    const bookToDelete = await Book.findById(id)
+
+    // Check if the book exists
+    if (!bookToDelete) {
+      return res.status(404).json({
+        success: false,
+        message: 'No such book with the provided Id'
+      })
+    }
+
+    // Delete the cover image if it exists
+    if (bookToDelete.coverImage) {
+      const coverImagePath = path.join(uploadDirectory, bookToDelete.coverImage)
+      try {
+        await fs.promises.unlink(coverImagePath)
+        console.log(`Deleted cover image: ${coverImagePath}`)
+      } catch (error) {
+        console.error(`Error deleting cover image ${coverImagePath}:`, error)
+        // Continue with deletion even if file deletion fails
+      }
+    }
+
+    // Delete the book file (PDF) if it exists
+    if (bookToDelete.book) {
+      const bookFilePath = path.join(uploadDirectory, bookToDelete.book)
+      try {
+        await fs.promises.unlink(bookFilePath)
+        console.log(`Deleted book file: ${bookFilePath}`)
+      } catch (error) {
+        console.error(`Error deleting book file ${bookFilePath}:`, error)
+        // Continue with deletion even if file deletion fails
+      }
+    }
+
+    // Setup nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.COMPANY_EMAIL,
+        pass: process.env.COMPANY_EMAIL_PASSWORD
+      }
+    })
+
+    // Send email to the user
+    const info = await transporter.sendMail({
+      from: '"BEMI EDITORS LIMITED" <peterdennis573@gmail.com>',
+      to: user.email,
+      subject: 'RESPONSE TO BOOK DELETION',
+      text: 'Book deletion alert!',
+      html: `
+        <html>
+          <head>
+            <style>
+              /* CSS styles */
+              body {
+                font-family: Arial, sans-serif;
+                font-size: 16px;
+              }
+              .container {
+                margin: 20px;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              }
+              h1 {
+                color: #333;
+                margin-bottom: 20px;
+              }
+              p {
+                margin-bottom: 10px;
+              }
+              a {
+                display: inline-block;
+                background-color: #4CAF50;
+                color: #fff;
+                text-decoration: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+              }
+              a:hover {
+                background-color: #45a049;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>BOOK DELETION NOTIFICATION</h1>
+              <p>The book "${bookToDelete.title}" has been deleted from our system.This is because the book does not coincide with our rules and laws that govern publishing and editing of books and also industial standards</p>
+              <p>Thank you.</p>
+            </div>
+          </body>
+        </html>
+      `
+    })
+
+    console.log('Message sent: %s', info.messageId)
+    console.log('The message was successfully sent')
+
+    // Delete the book from the database
+    await Book.findByIdAndDelete(id)
+
+    return res.status(200).json({
+      success: true,
+      message: 'Book and associated files deleted successfully'
+    })
+  } catch (error) {
+    console.error('Error deleting book:', error)
+    return res.status(500).json({ success: false, error: error.message })
+  }
+}
 
 module.exports = {
   getBooks,
@@ -298,5 +434,6 @@ module.exports = {
   getNewRelease,
   getBookWithHighestRating,
   getBooksByCategory,
-  getAllUnapproved
+  getAllUnapproved,
+  deleteBook
 }

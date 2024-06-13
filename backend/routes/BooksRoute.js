@@ -46,6 +46,8 @@ router.get('/highest/rating',BookController.getBookWithHighestRating)
 router.get('/category/:category',BookController.getBooksByCategory)
 router.get('/unapproved',BookController.getAllUnapproved)
 
+router.delete('/delete/:id/user/:userId',BookController.deleteBook)
+
 
 
 

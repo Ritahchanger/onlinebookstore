@@ -50,42 +50,49 @@ const ActiveBooks = () => {
   return (
     <div className="active-books">
       <div className="container">
-        <p className="medium-header">ACTIVE BOOKS</p>
-        <div className="table_wrapper">
-          <table>
-            <thead>
-              <tr>
-                <td>COVER IMAGE</td>
-                <td>TITLE</td>
-                <td>DESCRIPTION</td>
-                <td>READ</td>
-              </tr>
-            </thead>
-            <tbody>
-              {books &&
-                books.map((book) => (
-                  <tr key={book?._id}>
-                    <td>
-                      {book?.productId?.coverImage ? (
-                        <img
-                          src={`${Config.apiUrl}/upload/books/${book.productId.coverImage}`}
-                          alt={book?.productId?.title || "No Title"}
-                          style={{ width: "50px" }}
-                        />
-                      ) : (
-                        "No Image"
-                      )}
-                    </td>
-                    <td>{book?.productId?.title || "No Title"}</td>
-                    <td>{truncateDescription(book?.productId?.description)}</td>
-                    <td onClick={() => openBookModal(book)}>
-                      <i className="fa fa-eye"></i>
-                    </td>
+        {books && books.length > 0 ? (
+          <>
+            <p className="medium-header">ACTIVE BOOKS</p>
+            <div className="table_wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <td>COVER IMAGE</td>
+                    <td>TITLE</td>
+                    <td>DESCRIPTION</td>
+                    <td>READ</td>
                   </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
+                </thead>
+                <tbody>
+                  {books.map((book) => (
+                    <tr key={book?._id}>
+                      <td>
+                        {book?.productId?.coverImage ? (
+                          <img
+                            src={`${Config.apiUrl}/upload/books/${book.productId.coverImage}`}
+                            alt={book?.productId?.title || "No Title"}
+                            style={{ width: "50px" }}
+                          />
+                        ) : (
+                          "No Image"
+                        )}
+                      </td>
+                      <td>{book?.productId?.title || "No Title"}</td>
+                      <td>
+                        {truncateDescription(book?.productId?.description)}
+                      </td>
+                      <td onClick={() => openBookModal(book)}>
+                        <i className="fa fa-eye"></i>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        ) : (
+          <p style={{ textAlign: "center"}} className="medium-header">No active books</p>
+        )}
       </div>
       <PdfViewer />
     </div>
