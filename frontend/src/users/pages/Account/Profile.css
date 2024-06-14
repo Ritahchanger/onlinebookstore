@@ -44,6 +44,7 @@
 .profile .profile-image {
   max-width: 270px;
   width: 100%;
+  border:4px solid var(--blue);
 }
 .profile .main-section .wishlist-container {
   padding: 20px;

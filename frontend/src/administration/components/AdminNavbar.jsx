@@ -27,7 +27,7 @@ const AdminNavbar = ({ handleSidebar, sidebar }) => {
       <Link to="/account" className="linker cart-buttons">
         ACCOUNT
       </Link>
-      <Link to="/home" className="linker cart-buttons">
+      <Link to="/" className="linker cart-buttons">
         HOME
       </Link>
       <div className="profile-section">

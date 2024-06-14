@@ -140,7 +140,7 @@ const BlogsAdministration = () => {
               <textarea
                 name="description"
                 cols="30"
-                rows="10"
+                rows="20"
                 placeholder="Blog description..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}

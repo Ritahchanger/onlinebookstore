@@ -153,8 +153,8 @@ const Profile = () => {
         }
       );
       if (response.data.success) {
-        setEmailModal(false)
-        getUser()
+        setEmailModal(false);
+        getUser();
         // Optionally navigate or refresh page after successful email change
         navigate("/profile");
       } else {
@@ -165,15 +165,21 @@ const Profile = () => {
     }
   };
 
-  const handleEmailChangeCancel =()=>{
+  const handleEmailChangeCancel = () => {
     navigate("/profile");
-  }
+  };
 
   return (
     <div className="account">
       <AccountNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
-      <SideBar sidebar={sidebar} handleTerminationModel={handleTerminationModel} />
-      <TerminationModel handleTerminationModel={handleTerminationModel} terminationModel={terminationModel} />
+      <SideBar
+        sidebar={sidebar}
+        handleTerminationModel={handleTerminationModel}
+      />
+      <TerminationModel
+        handleTerminationModel={handleTerminationModel}
+        terminationModel={terminationModel}
+      />
 
       <div className="profile">
         <p className="medium-header">PROFILE SECTION</p>
@@ -182,13 +188,21 @@ const Profile = () => {
             <div className="profile-card">
               <div className="profile-image">
                 <img
-                  src={profileImage ? `${Config.apiUrl}/upload/authors/${profileImage}` : ProfileIcon}
+                  src={
+                    profileImage
+                      ? `${Config.apiUrl}/upload/authors/${profileImage}`
+                      : ProfileIcon
+                  }
                   alt={`${user.user?.firstName} ${user.user?.lastName}`}
                 />
               </div>
               <form className="alter_profile" onSubmit={uploadProfileImage}>
                 <label htmlFor="change-profile" className="upload-icon-wrapper">
-                  <img src={uploadIcon} alt="Upload Profile" className="upload-icon" />
+                  <img
+                    src={uploadIcon}
+                    alt="Upload Profile"
+                    className="upload-icon"
+                  />
                 </label>
                 <input
                   type="file"
@@ -199,12 +213,21 @@ const Profile = () => {
                   onChange={handleFileChange}
                 />
                 {fileMessage && <p className="file-message">{fileMessage}</p>}
-                <button type="submit" className="cart-buttons">SAVE</button>
+                <button type="submit" className="cart-buttons">
+                  SAVE
+                </button>
               </form>
             </div>
 
             <div className="profile-card">
-              <p className="small-header" style={{ textAlign: "start", width: "100%", color: "var(--blue)" }}>{`${user.user?.firstName} ${user.user?.secondName}`}</p>
+              <p
+                className="small-header"
+                style={{
+                  textAlign: "start",
+                  width: "100%",
+                  color: "var(--blue)",
+                }}
+              >{`${user.user?.firstName} ${user.user?.secondName}`}</p>
               <p className="description" style={{ textAlign: "start" }}>
                 {userProfile?.description
                   ? userProfile.description
@@ -213,17 +236,57 @@ const Profile = () => {
 
               {userProfile && (
                 <>
-                  <p className="small-header" style={{ textAlign: "start", width: "100%" }}>Email</p>
-                  <p className="small-header" style={{ textAlign: "start", width: "100%", color: "var(--blue)" }}>{userProfile.email}</p>
+                  <p
+                    className="small-header"
+                    style={{ textAlign: "start", width: "100%" }}
+                  >
+                    Email
+                  </p>
+                  <p
+                    className="small-header"
+                    style={{
+                      textAlign: "start",
+                      width: "100%",
+                      color: "var(--blue)",
+                    }}
+                  >
+                    {userProfile.email}
+                  </p>
 
-                  <p className="small-header" style={{ textAlign: "start", width: "100%" }}>Username</p>
-                  <p className="small-header" style={{ textAlign: "start", width: "100%", color: "var(--blue)" }}>{userProfile.username}</p>
+                  <p
+                    className="small-header"
+                    style={{ textAlign: "start", width: "100%" }}
+                  >
+                    Username
+                  </p>
+                  <p
+                    className="small-header"
+                    style={{
+                      textAlign: "start",
+                      width: "100%",
+                      color: "var(--blue)",
+                    }}
+                  >
+                    {userProfile.username}
+                  </p>
                 </>
               )}
             </div>
 
-            <form onSubmit={updateUserDescription} style={{ marginTop: "1rem" }}>
-              <p className="small-header" style={{ textAlign: "start", width: "100%", color: "var(--blue)" }}>Update description</p>
+            <form
+              onSubmit={updateUserDescription}
+              style={{ marginTop: "1rem" }}
+            >
+              <p
+                className="small-header"
+                style={{
+                  textAlign: "start",
+                  width: "100%",
+                  color: "var(--blue)",
+                }}
+              >
+                Update description
+              </p>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -231,7 +294,12 @@ const Profile = () => {
                 rows="10"
                 className="profileDescription"
               />
-              <input type="submit" className="submit-btn" style={{ marginTop: "1rem" }} value="SUBMIT" />
+              <input
+                type="submit"
+                className="submit-btn"
+                style={{ marginTop: "1rem" }}
+                value="SUBMIT"
+              />
             </form>
           </div>
 
@@ -247,11 +315,18 @@ const Profile = () => {
       {/* Email Change Modal */}
       <div className={`email_modal ${emailModal ? "show" : ""}`}>
         <div className="email_change">
-          <button className="cart-buttons" onClick={handleEmailChange}>VERIFY</button>
-          <button className="cart-buttons" onClick={() =>{
-            setEmailModal(false)
-            handleEmailChangeCancel()
-          }}>CANCEL</button>
+          <button className="cart-buttons" onClick={handleEmailChange}>
+            VERIFY
+          </button>
+          <button
+            className="cart-buttons"
+            onClick={() => {
+              setEmailModal(false);
+              handleEmailChangeCancel();
+            }}
+          >
+            CANCEL
+          </button>
         </div>
       </div>
     </div>
