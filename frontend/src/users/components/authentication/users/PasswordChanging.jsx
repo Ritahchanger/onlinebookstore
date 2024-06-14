@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../authentication.css";
+import Config from "../../../../Config";
 
 import { login } from "../../../Redux/features/authSlice";
 
@@ -75,7 +76,7 @@ const PasswordChanging = () => {
     } else {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/auth/change-password",
+          `${Config.apiUrl}/api/auth/change-password`,
           {
             email: email,
             newPassword: formData.password,
@@ -92,7 +93,7 @@ const PasswordChanging = () => {
 
           if (response.data.success) {
             const getUser = await axios.get(
-              `http://localhost:5000/api/users/userId/${response.data.userId}`
+              `${Config.apiUrl}/api/users/userId/${response.data.userId}`
             );
 
             dispatch(login({ user: getUser.data.data }));

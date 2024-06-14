@@ -176,7 +176,7 @@ const forgotPassword = async (req, res) => {
             <div class="container">
               <h1>Password Reset Request</h1>
               <p>Please follow the link to reset your password.</p>
-              <p><a href='http://localhost:3000/change-password/${email}'>Reset Password</a></p>
+              <p><a href='${process.env.FRONT_END_URL}/change-password/${email}'>Reset Password</a></p>
             </div>
           </body>
         </html>

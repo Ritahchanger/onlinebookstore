@@ -61,8 +61,8 @@ const createOrder = async (req, res) => {
       ],
 
       application_context: {
-        return_url: 'http://localhost:3000/account',
-        cancel_url: 'http://localhost:3000/cancel-order',
+        return_url: `{${process.env.FRONT_END_URL}/account}`,
+        cancel_url: `${process.env.FRONT_END_URL}/cancel-order`,
         shipping_preference: 'NO_SHIPPING',
         user_action: 'PAY_NOW',
         brand_name: 'BEMI EDITORS AND PUBLISHERS LIMITED'

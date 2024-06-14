@@ -559,7 +559,7 @@ const updateEmail = async (req, res) => {
             <div class="container">
               <h1>Password Reset Request</h1>
               <p>Please click the button below to authenticate email change</p>
-              <p><a href='http://localhost:3000/profile/${currentEmail}/user_id/:${findUser.userId}'>VERIFY</a></p>
+              <p><a href='${process.env.FRONT_END_URL}/profile/${currentEmail}/user_id/:${findUser.userId}'>VERIFY</a></p>
             </div>
           </body>
         </html>
