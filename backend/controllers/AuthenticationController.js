@@ -115,10 +115,11 @@ const forgotPassword = async (req, res) => {
     const user = await User.findOne({ email })
 
     if (!user) {
-      return res
-        .status(200)
-        .send({ success: false, status: 404, error: 'User not found' })
+      return res.status(404).send({ success: false, error: 'User not found' })
     }
+
+    // Encode the email address for URL
+    const encodedEmail = encodeURIComponent(email)
 
     // If user exists, proceed with sending the password reset email
     const transporter = nodemailer.createTransport({
@@ -176,23 +177,23 @@ const forgotPassword = async (req, res) => {
             <div class="container">
               <h1>Password Reset Request</h1>
               <p>Please follow the link to reset your password.</p>
-              <p><a href='${process.env.FRONT_END_URL}/change-password/${email}'>Reset Password</a></p>
+              <p><a href='${process.env.FRONT_END_URL}/change-password/${encodedEmail}'>Reset Password</a></p>
             </div>
           </body>
         </html>
       `
     })
 
-    console.log('Message sent: %s', info.messageId)
-    console.log('The message was successfully sent')
+    console.log('Password reset email sent:', info.response)
     res.status(200).send({
       success: true,
-      status: 200,
-      msg: 'The message was successfully sent'
+      message: 'Password reset email sent successfully'
     })
   } catch (error) {
-    console.log('There was a problem in sending the email:', error)
-    res.status(500).send('There was a problem in sending the email')
+    console.error('Error sending password reset email:', error.message)
+    res
+      .status(500)
+      .send({ success: false, error: 'Failed to send password reset email' })
   }
 }
 
@@ -220,14 +221,12 @@ const changePassword = async (req, res) => {
     await user.save()
 
     // Respond with success message
-    return res
-      .status(200)
-      .json({
-        success: true,
-        status: 200,
-        message: 'User password updated',
-        userId: user._id
-      })
+    return res.status(200).json({
+      success: true,
+      status: 200,
+      message: 'User password updated',
+      userId: user._id
+    })
   } catch (error) {
     console.error('Error updating password:', error)
     return res
@@ -236,10 +235,9 @@ const changePassword = async (req, res) => {
   }
 }
 
-
 const validateEmail = async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email } = req.body
 
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
@@ -249,7 +247,7 @@ const validateEmail = async (req, res) => {
         user: process.env.COMPANY_EMAIL,
         pass: process.env.COMPANY_EMAIL_PASSWORD
       }
-    });
+    })
 
     const info = await transporter.sendMail({
       from: '"BEMI EDITORS LIMITED" <peterdennis573@gmail.com>',
@@ -301,22 +299,27 @@ const validateEmail = async (req, res) => {
           </body>
         </html>
       `
-    });
-
-    console.log('Message sent: %s', info.messageId);
-    console.log('The message was successfully sent');
+    })
+    console.log('Message sent: %s', info.messageId)
+    console.log('The message was successfully sent')
     res.status(200).json({
       status: 200,
       message: 'Email verification message sent successfully'
-    });
+    })
   } catch (error) {
-    console.error('There was an error:', error.message);
+    console.error('There was an error:', error.message)
     res.status(500).json({
       status: 500,
       message: `There was an error: ${error.message}`
-    });
+    })
   }
 }
 
-
-module.exports = { Login, SignUp, logout, forgotPassword, changePassword,validateEmail }
+module.exports = {
+  Login,
+  SignUp,
+  logout,
+  forgotPassword,
+  changePassword,
+  validateEmail
+}

@@ -1,0 +1,36 @@
+.admin.users .custom-modal{
+    display:none;
+}
+.admin.users .custom-modal.update{
+    display:flex;
+}
+.admin.users .custom-modal .medium-header
+{
+    margin:0;
+}
+.admin.users .custom-modal form {
+    position: relative;
+    box-shadow:0 0 5px rgba(0,0,0,0.25);
+    padding:10px;
+    margin-bottom:1rem;
+}
+.admin.users .custom-modal form select{
+    width:100%;
+    padding:10px;
+    border:1px solid var(--gray);
+    cursor: pointer;
+    font-size:13px;
+    font-weight:600;
+}
+.admin.users .custom-modal input[type=submit]{
+    margin-top:1rem;
+    font-size:0.7rem;
+    font-weight:600;
+}
+.admin.users .custom-modal .cart-buttons{
+    background:var(--pinkRed);
+    border:none;
+}
+.admin.users .custom-modal .cart-buttons:hover{
+    background:var(--green);
+}

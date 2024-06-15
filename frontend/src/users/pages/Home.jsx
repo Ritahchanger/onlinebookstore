@@ -7,16 +7,19 @@ import FeaturedBook from "../components/HomePageComponents/FeaturedBook/Featured
 import NewsLetter from "../components/HomePageComponents/NewsLetter/NewsLetter";
 import Footer from "../components/Footer/Footer";
 
-import './Home.css'
+import "./Home.css";
 import Testmonials from "../components/Testmonials/Testmonials";
 
 import BookDescriptionModal from "../components/Books/BookDescriptionModal";
 
-const Home = () => {
+import { useSelector } from "react-redux";
 
-  useEffect(()=>{
-    window.scrollTo(0,0);
-  },[])
+const Home = () => {
+  const isUserLogged = useSelector((state) => state.auth.isLoggedIn);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   console.log(process.env.REACT_APP_BASE_URL);
 
@@ -24,13 +27,13 @@ const Home = () => {
     <div className="home">
       <Hero />
       <Categories />
-      <Ebook /> 
-       <NewRelease />
-      <FeaturedBook/>
-      <Testmonials/>
-      <NewsLetter/>
-      <BookDescriptionModal/>
-      <Footer/>
+      <Ebook />
+      <NewRelease />
+      <FeaturedBook />
+      <Testmonials />
+      {isUserLogged ? <NewsLetter /> : null}
+      <BookDescriptionModal />
+      <Footer />
     </div>
   );
 };

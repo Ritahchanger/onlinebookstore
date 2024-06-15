@@ -128,24 +128,18 @@ const getAuthorById = async (req, res) => {
 
 const getBooks = async (req, res) => {
   try {
-    // Aggregate books by author to find the total sales and the most selling book
+    // Aggregate books to find the most selling books by purchaseCount
     const result = await Book.aggregate([
       {
-        $group: {
-          _id: '$author',
-          totalSales: { $sum: '$sales' },
-          mostSellingBook: { $first: '$title' }, // Get the first title as most selling book
-          mostSellingBookDetails: { $first: '$$ROOT' } // Get the first book document for details
-        }
+        $sort: { purchaseCount: -1 } // Sort by purchaseCount in descending order
       },
-      { $sort: { totalSales: -1 } },
-      { $limit: 10 }
+      { $limit: 10 } // Limit to the top 10 most selling books
     ]);
 
-    // Fetch users with selected fields
+    // Fetch authors with selected fields
     const users = await User.find({}, 'firstName secondName username');
 
-    // Create a map to store user information
+    // Create a map to store author information
     const authorMap = {};
     users.forEach(user => {
       authorMap[user._id.toString()] = {
@@ -155,28 +149,23 @@ const getBooks = async (req, res) => {
       };
     });
 
-    // Populate result with user information and book details
-    result.forEach(author => {
-      const user = authorMap[author._id.toString()];
-      if (user) {
-        author.username = user.username;
-        author.firstName = user.firstName;
-        author.secondName = user.secondName;
-        author.mostSellingBookId=author.mostSellingBookDetails._id;
-        author.mostSellingBookTitle = author.mostSellingBookDetails.title;
-        author.mostSellingBookPrice = author.mostSellingBookDetails.price;
-        author.mostSellingBookCoverImage = author.mostSellingBookDetails.coverImage;
-        author.mostSellingBookDescription = author.mostSellingBookDetails.description;
+    // Populate result with author information
+    result.forEach(book => {
+      const author = authorMap[book.author.toString()];
+      if (author) {
+        book.authorUsername = author.username;
+        book.authorFirstName = author.firstName;
+        book.authorSecondName = author.secondName;
       }
-      delete author.mostSellingBookDetails;
     });
 
     res.status(200).json({ success: true, data: result });
   } catch (error) {
-    console.error('Error retrieving most selling authors:', error);
+    console.error('Error retrieving most selling books:', error);
     res.status(500).json({ success: false, error: 'An error occurred' });
   }
 };
+
 
 
 

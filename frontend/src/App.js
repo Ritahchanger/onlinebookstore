@@ -39,7 +39,7 @@ import BlogsAdministration from './administration/pages/BlogsAdministration'
 import TerminationAdministration from './administration/pages/TerminationAdministration'
 import UsersAdministration from './administration/pages/UsersAdministration'
 import AdminAuthors from './administration/pages/AdminAuthors'
-
+import AdminNewsLetter from './administration/pages/AdminNewsLetter'
 //
 
 const App = () => {
@@ -199,6 +199,14 @@ const App = () => {
             element={
               <ProtectedRoutes>
                 <AdminAuthors />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/admin/newsletter'
+            element={
+              <ProtectedRoutes>
+                <AdminNewsLetter />
               </ProtectedRoutes>
             }
           />

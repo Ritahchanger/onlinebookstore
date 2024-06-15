@@ -1,11 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+import Config from  "../../../Config"
+ 
+
 // Async thunk action creator for fetching all blogs
 export const fetchBlogs = createAsyncThunk(
   'blogs/fetchBlogs',
   async () => {
-    const response = await axios.get('http://localhost:5000/api/blog/get');
+    const response = await axios.get(`${Config.apiUrl}/api/blog/get`);
     const data = response.data.data;
     return data;
   }
@@ -15,7 +18,7 @@ export const fetchBlogs = createAsyncThunk(
 export const fetchBlogById = createAsyncThunk(
   'blogs/fetchBlogById',
   async (blogId) => {
-    const response = await axios.get(`http://localhost:5000/api/blog/get/${blogId}`);
+    const response = await axios.get(`${Config.apiUrl}/api/blog/get/${blogId}`);
     const data = response.data.data;
     return data;
   }

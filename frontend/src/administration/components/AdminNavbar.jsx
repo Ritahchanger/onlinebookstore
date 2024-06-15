@@ -7,7 +7,7 @@ import ProfileImage from "../../assets/icons/boy.png";
 
 import { useSelector } from "react-redux";
 
-import Config from "../../Config"
+import Config from "../../Config";
 
 const AdminNavbar = ({ handleSidebar, sidebar }) => {
   const user = useSelector((state) => state.auth.user);
@@ -23,7 +23,15 @@ const AdminNavbar = ({ handleSidebar, sidebar }) => {
           &#9776;
         </p>
       )}
-      <p className="small-header">ADMINISTRATION PANEL</p>
+      <div className="section id">
+        <p>SYSTEM ID</p>
+        <p className="subtitles" style={{ color: "var(--orange)" }}>
+          {user.user.userId}
+        </p>
+      </div>
+      <p className="small-header" style={{ color: "var(--orange)" }}>
+        ADMINISTRATION PANEL
+      </p>
       <Link to="/account" className="linker cart-buttons">
         ACCOUNT
       </Link>
@@ -32,9 +40,14 @@ const AdminNavbar = ({ handleSidebar, sidebar }) => {
       </Link>
       <div className="profile-section">
         {user.user.passport ? (
-          <div className="img-wrapper">
-            <img src={`${Config.apiUrl}/upload/authors/${user.user.passport}`} alt="" />
-          </div>
+          <Link to="/profile">
+            <div className="img-wrapper">
+              <img
+                src={`${Config.apiUrl}/upload/authors/${user.user.passport}`}
+                alt=""
+              />
+            </div>
+          </Link>
         ) : (
           <div className="img-wrapper">
             <img src={ProfileImage} alt="" />

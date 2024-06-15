@@ -86,7 +86,7 @@ const AdminAuthors = () => {
                   <td>{author.email}</td>
                   <td>{author._id}</td>
                   <td>{author.roles.join(", ")}</td>
-                  <td>{new Date(author.createdOn).toLocaleDateString()}</td>
+                  <td>{author.createdOn}</td>
                 </tr>
               ))}
             </tbody>

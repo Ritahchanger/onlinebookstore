@@ -26,8 +26,10 @@ router.get('/authors',UsersController.getAuthors)
 
 router.get('/admins',UsersController.getAdmins)
 
+// USER'S ROLE
 router.put('/:id/update-role',UsersController.updateUserRole)
-
+router.put('/:id/remove-role',UsersController.removeUserRole)
+// USER'S ROLE
 router.put('/:id/update-profile',upload.single('file'),UsersController.updatePassport)
 
 
@@ -37,6 +39,12 @@ router.get('/user-information/:id',UsersController.getUserInformation)
 
 
 router.get('/credentials',UsersController.getUserCookie)
+
+// news letter
+router.post('/subscribe/newsletter',UsersController.subscribe)
+router.get('/subscribe/newsletter',UsersController.getSubscribedUsers)
+
+// news letter
 
 
 

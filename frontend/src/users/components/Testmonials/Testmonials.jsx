@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import TestmonialImage from "../../../assets/authors/profile-14.jpg";
 import axios from "axios";
 
+
 import Config from "../../../Config";
 
 import { useSelector } from "react-redux";
@@ -77,7 +78,7 @@ const Testmonials = () => {
                   </p>
                   <div className="row">
                     <div className="profile-image">
-                      <img src={`http://localhost:5000/upload/authors/${item.passport}`} alt="" />
+                      <img src={`${Config.apiUrl}/upload/authors/${item.passport}`} alt="" />
                     </div>
                     <p className="small-header">{`${item.firstName} ${item.secondName}`}</p>
                   </div>
@@ -89,6 +90,7 @@ const Testmonials = () => {
       ) : (
         <p>Testmonies were not properly fetched</p>
       )}
+      
     </div>
   );
 };

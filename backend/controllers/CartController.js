@@ -139,21 +139,17 @@ const deleteCartItem = async (req, res) => {
 
 const purchaseCart = async (req, res) => {
   try {
-    const { userId } = req.params
+    const { userId } = req.params;
 
     if (!userId) {
-      return res
-        .status(400)
-        .json({ success: false, error: 'User ID is required' })
+      return res.status(400).json({ success: false, error: 'User ID is required' });
     }
 
     // Find the user's cart
-    const cart = await Cart.findOne({ userId }).populate('items.productId')
+    const cart = await Cart.findOne({ userId }).populate('items.productId');
 
     if (!cart || cart.items.length === 0) {
-      return res
-        .status(400)
-        .json({ success: false, error: 'Cart is empty or does not exist' })
+      return res.status(400).json({ success: false, error: 'Cart is empty or does not exist' });
     }
 
     // Move cart items to the PurchasedItems collection
@@ -164,24 +160,38 @@ const purchaseCart = async (req, res) => {
         quantity: item.quantity,
         addedAt: item.addedAt
       }))
-    })
+    });
 
-    await purchasedItems.save()
+    await purchasedItems.save();
+
+    // Increment purchaseCount for each book
+    for (const item of cart.items) {
+      // Find the book by productId (assuming productId is the _id of the Book)
+      const book = await Book.findById(item.productId);
+
+      if (book) {
+        // Increment purchaseCount
+        book.purchaseCount += item.quantity; // Increment by the quantity purchased
+        await book.save();
+      } else {
+        // Handle case where book is not found (optional)
+        console.log(`Book not found for productId: ${item.productId}`);
+      }
+    }
 
     // Delete the cart
-    await Cart.deleteOne({ userId })
+    await Cart.deleteOne({ userId });
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: 'Purchase successful and cart deleted',
-        purchasedItems
-      })
+    return res.status(200).json({
+      success: true,
+      message: 'Purchase successful and cart deleted',
+      purchasedItems
+    });
   } catch (error) {
-    return res.status(500).json({ success: false, error: error.message })
+    return res.status(500).json({ success: false, error: error.message });
   }
-}
+};
+
 
 const getPurchasedItemsByUserId = async (req, res) => {
   try {

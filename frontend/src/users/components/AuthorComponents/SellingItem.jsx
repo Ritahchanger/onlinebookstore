@@ -9,19 +9,19 @@ const SellingItem = ({ sellingAuthor }) => {
   const openModal = () => {
     dispatch(
       openBookModal({
-        title: sellingAuthor.mostSellingBookTitle,
-        coverImage: sellingAuthor.mostSellingBookCoverImage,
-        description: sellingAuthor.mostSellingBookDescription,
-        _id:sellingAuthor.mostSellingBookId
+        title: sellingAuthor.title,
+        coverImage: sellingAuthor.coverImage,
+        description: sellingAuthor.description,
+        _id:sellingAuthor._id
       })
     );
   };
 
   return (
     <tr>
-      <td>{`${sellingAuthor.firstName} ${sellingAuthor.secondName}`}</td>
-      <td>{`${sellingAuthor.mostSellingBookTitle}`}</td>
-      <td>{`${sellingAuthor.totalSales}`}</td>
+      <td>{`${sellingAuthor.authorFirstName} ${sellingAuthor.authorSecondName}`}</td>
+      <td>{`${sellingAuthor.title}`}</td>
+      <td>{`${sellingAuthor.purchaseCount}`}</td>
       <td onClick={openModal}>
         <p className="shop-items-icons">
           <i className="fa-solid fa-cart-shopping"></i>

@@ -4,7 +4,7 @@ const helmet = require('helmet')
 
 const morgan = require('morgan')
 
-const dotenv = require('dotenv')
+require('dotenv').config()
 
 const connectDatabase = require('../database/database')
 
@@ -13,7 +13,6 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 
 
-dotenv.config()
 
 const app = express()
 
@@ -31,14 +30,12 @@ app.use(morgan('combined'))
 app.use(
   '/upload/books',
   express.static('upload/books', {
-    setHeaders: (res) => {
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
-    },
+    setHeaders: res => {
+      res.setHeader('Access-Control-Allow-Origin', '*')
+      res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
+    }
   })
-);
-
-
+)
 
 app.use(
   '/upload/authors',
@@ -49,7 +46,6 @@ app.use(
   })
 )
 
-
 app.use(
   '/upload/blogs',
   express.static('upload/blogs', {
@@ -58,16 +54,14 @@ app.use(
     }
   })
 )
+app.use(cors({
+  credentials: true,
+  origin: [
+    process.env.FRONT_END_URL,
+    'http://localhost:5000'
+  ]
+}));
 
-
-
-
-app.use(
-  cors({
-    credentials: true,
-    origin: ['http://localhost:3000', 'http://localhost:5000']
-  })
-)
 
 const PORT = process.env.PORT || 5000
 
@@ -89,25 +83,23 @@ const AuthorRoutes = require('../routes/AuthorsRoutes')
 
 const CartRoute = require('../routes/CartRoute')
 
-const PayPalRoute = require('../routes/PayPalRoute');
+const PayPalRoute = require('../routes/PayPalRoute')
 
 const TestimonialRoute = require('../routes/TestmonialRoute')
 
+const NewsLetterRoutes = require("../routes/NewsLetterRoutes");
 
-
-
-app.use('/api/auth', AuthenticationRoute);
-app.use('/api/payment', PaymentsRoutes);
-app.use('/api/payment/paypal',PayPalRoute);
-app.use('/api/users', UsersRoutes);
-app.use('/api/books', BooksRoute);
-app.use('/api/categories', BooksCategoriesRoutes);
-app.use('/api/blog', BlogRoutes);
-app.use('/api/author', AuthorRoutes);
-app.use('/api/testmonials',TestimonialRoute);
-
+app.use('/api/auth', AuthenticationRoute)
+app.use('/api/payment', PaymentsRoutes)
+app.use('/api/payment/paypal', PayPalRoute)
+app.use('/api/users', UsersRoutes)
+app.use('/api/books', BooksRoute)
+app.use('/api/categories', BooksCategoriesRoutes)
+app.use('/api/blog', BlogRoutes)
+app.use('/api/author', AuthorRoutes)
+app.use('/api/testmonials', TestimonialRoute)
 app.use('/api/cart', CartRoute)
-
+app.use('/api/newsletter',NewsLetterRoutes)
 const connectServer = async () => {
   const BlogRoutes = require('../routes/BlogRoutes')
 

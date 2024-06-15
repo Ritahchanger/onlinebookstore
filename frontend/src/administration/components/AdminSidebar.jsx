@@ -3,10 +3,10 @@ import "./AdminSidebar.css";
 
 const AdminSidebar = ({ sidebar }) => {
   return (
-    <div className={`sidebar ${sidebar && "active"}`}>
+    <div className={`sidebar ${sidebar ? "active" : ""}`}>
       <ul className="sidebar-navigation">
         <li>
-          <NavLink to="/admin/unapproved" activeClassName="active">
+          <NavLink to="/admin/unapproved" className={({ isActive }) => isActive ? "active" : ""}>
             <p>
               <i className="fas fa-book"></i>
             </p>
@@ -14,7 +14,7 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/all-books" activeClassName="active">
+          <NavLink to="/admin/all-books" className={({ isActive }) => isActive ? "active" : ""}>
             <p>
               <i className="fas fa-book-open"></i>
             </p>
@@ -22,7 +22,7 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/termination-accounts" activeClassName="active">
+          <NavLink to="/admin/termination-accounts" className={({ isActive }) => isActive ? "active" : ""}>
             <p>
               <i className="fas fa-user-times"></i>
             </p>
@@ -30,7 +30,7 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/blogs" activeClassName="active">
+          <NavLink to="/admin/blogs" className={({ isActive }) => isActive ? "active" : ""}>
             <p>
               <i className="fas fa-blog"></i>
             </p>
@@ -38,7 +38,7 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/authors" activeClassName="active">
+          <NavLink to="/admin/authors" className={({ isActive }) => isActive ? "active" : ""}>
             <p>
               <i className="fas fa-user-edit"></i>
             </p>
@@ -46,7 +46,7 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/users" activeClassName="active">
+          <NavLink to="/admin/users" className={({ isActive }) => isActive ? "active" : ""}>
             <p>
               <i className="fas fa-users"></i>
             </p>
@@ -54,7 +54,15 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/" activeClassName="active">
+          <NavLink to="/admin/newsletter" className={({ isActive }) => isActive ? "active" : ""}>
+            <p>
+              <i className="fas fa-envelope"></i>
+            </p>
+            <p>NewsLetter</p>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
             <p>
               <i className="fas fa-home"></i>
             </p>

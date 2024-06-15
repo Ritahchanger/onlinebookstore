@@ -3,7 +3,7 @@ import SideBar from "./SideBar";
 import AccountNavbar from "./AccountNavbar";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./PaymentDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import MpesaLogo from "../../../assets/images/mpesa.png";
@@ -11,7 +11,9 @@ import { showLoading, hideLoading } from "../../Redux/features/alertSlice";
 import Preloaders from "../../components/Preloaders/Preloaders";
 import Config from "../../../Config";
 
+
 const PaymentDetails = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const loading = useSelector((state) => state.alerts.loading);
@@ -59,16 +61,21 @@ const PaymentDetails = () => {
           `${Config.apiUrl}/api/cart/purchase/${user.user._id}`
         );
 
+        
+
         if (purchaseResponse.data.success) {
           alert("Payment done successfully");
-
           await axios.post(`http://localhost:5000/api/cart/success`, {
             bookIds: productIds,
           });
-
-          await fetchCartItems(); // Assuming fetchCartItems updates cartItems
+           // Assuming fetchCartItems updates cartItems
           dispatch(hideLoading());
+
+          navigate("/account");
+
         }
+
+        
         return;
       }
 

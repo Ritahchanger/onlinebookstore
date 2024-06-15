@@ -112,6 +112,58 @@ const updateUserRole = async (req, res) => {
   }
 }
 
+const removeUserRole = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { role } = req.body
+
+    const user = await User.findById(id)
+
+    if (!user) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        message: 'User not found in the system'
+      })
+    }
+
+    const roles = ['admin', 'author', 'user']
+
+    if (!roles.includes(role)) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        message: 'The role is not found in the system'
+      })
+    }
+
+    if (!user.roles.includes(role)) {
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        message: `The user does not have the ${role} role`
+      })
+    }
+
+    user.roles = user.roles.filter(r => r !== role)
+
+    await user.save()
+
+    return res.status(200).json({
+      status: 200,
+      success: true,
+      message: `The ${role} role has been removed from the user`
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message
+    })
+  }
+}
+
+
+
 const updatePassport = async (req, res) => {
   const { id } = req.params
 
@@ -188,8 +240,6 @@ const getUserInformation = async (req, res) => {
   }
 }
 
-
-
 const getUserCookie = (req, res) => {
   try {
     // Retrieve the user data cookie from the request
@@ -203,10 +253,57 @@ const getUserCookie = (req, res) => {
   }
 }
 
+// newsletter
+
+const subscribe = async (req, res) => {
+  try {
+    const { email } = req.body
+
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required' })
+    }
+
+    const user = await User.findOneAndUpdate(
+      { email: email },
+      { $set: { newsLetter: true } },
+      { new: true }
+    )
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
+    }
+
+    res
+      .status(200)
+      .json({ message: 'Successfully subscribed to newsletter', user })
+  } catch (error) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+}
+
+
+const getSubscribedUsers = async (req, res) => {
+  try {
+    const subscribedUsers = await User.find({ newsLetter: true });
+
+    if (!subscribedUsers.length) {
+      return res.status(404).json({ message: 'No subscribed users found' });
+    }
+
+    res.status(200).json({ success: true, users: subscribedUsers });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+
+// newslleter
+
 // Today
 
 const deleteUser = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params
 
   try {
     const userToDelete = await User.findById(id)
@@ -279,12 +376,14 @@ const getAccountsToTerminate = async (req, res) => {
 
 const terminateAccount = async (req, res) => {
   try {
-    const { id,terminationAccountId } = req.params
+    const { id, terminationAccountId } = req.params
 
-    const user = await User.findById(id);
+    const user = await User.findById(id)
 
-    if(!user){
-      return res.status(200).json({status:404,success:false,message:'User not found!'})
+    if (!user) {
+      return res
+        .status(200)
+        .json({ status: 404, success: false, message: 'User not found!' })
     }
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
@@ -294,11 +393,11 @@ const terminateAccount = async (req, res) => {
         user: process.env.COMPANY_EMAIL,
         pass: process.env.COMPANY_EMAIL_PASSWORD
       }
-    });
+    })
 
     const info = await transporter.sendMail({
       from: '"BEMI EDITORS LIMITED" <peterdennis573@gmail.com>',
-      to:user.email,
+      to: user.email,
       subject: 'ACCOUNT TERMINATION',
       text: 'Request to change my password from the bookstore application',
       html: `
@@ -347,24 +446,23 @@ const terminateAccount = async (req, res) => {
           </body>
         </html>
       `
-    });
+    })
 
-    await User.findByIdAndDelete(id);
+    await User.findByIdAndDelete(id)
 
     await AccountTermination.findByIdAndDelete(terminationAccountId)
 
-    console.log('Message sent: %s', info.messageId);
+    console.log('Message sent: %s', info.messageId)
 
     return res.status(200).json({
       status: 200,
       success: true,
       message: 'The account terminated successfully'
-    });
+    })
   } catch (error) {
-    return res.status(500).json({ success: false, error: error.message });
+    return res.status(500).json({ success: false, error: error.message })
   }
-};
-
+}
 
 // USER UPDATES
 
@@ -581,8 +679,8 @@ const updateEmail = async (req, res) => {
 }
 
 const changeEmail = async (req, res) => {
-  const { userId } = req.params;
-  const { newEmail } = req.body; // Assuming new email is sent in the request body
+  const { userId } = req.params
+  const { newEmail } = req.body // Assuming new email is sent in the request body
 
   try {
     // Find user by ID and update email
@@ -590,56 +688,57 @@ const changeEmail = async (req, res) => {
       userId,
       { email: newEmail },
       { new: true } // To return the updated user document
-    );
+    )
 
     if (!updatedUser) {
-      return res.status(200).json({success:false, message: 'User not found' });
+      return res.status(200).json({ success: false, message: 'User not found' })
     }
 
-    return res.status(200).json({success:true, message: 'User email updated successfully', user: updatedUser });
+    return res.status(200).json({
+      success: true,
+      message: 'User email updated successfully',
+      user: updatedUser
+    })
   } catch (error) {
-    console.error(`Error updating user email: ${error.message}`);
-    res.status(500).json({success:false,message: 'Server error' });
+    console.error(`Error updating user email: ${error.message}`)
+    res.status(500).json({ success: false, message: 'Server error' })
   }
-};
-
+}
 
 const updateUserDescription = async (req, res) => {
-  const { userId } = req.params;
-  const { description } = req.body;
+  const { userId } = req.params
+  const { description } = req.body
 
   try {
     // Attempt to find the user by userId
-    const user = await User.findById(userId);
+    const user = await User.findById(userId)
 
     if (!user) {
       return res.status(404).json({
         success: false,
         message: 'User not found. Unable to update description.'
-      });
+      })
     }
 
     // Update the user's description
-    user.description = description;
+    user.description = description
 
     // Save the updated user document
-    await user.save();
+    await user.save()
 
     return res.status(200).json({
       success: true,
       message: 'User description updated successfully.',
       data: user
-    });
+    })
   } catch (error) {
-    console.error('Error updating user description:', error.message);
+    console.error('Error updating user description:', error.message)
     return res.status(500).json({
       success: false,
       message: 'Failed to update user description. Please try again later.'
-    });
+    })
   }
-};
-
-
+}
 
 module.exports = {
   getUsers,
@@ -661,4 +760,7 @@ module.exports = {
   getUserInformation,
   updateUserDescription,
   changeEmail,
+  subscribe,
+  getSubscribedUsers,
+  removeUserRole
 }

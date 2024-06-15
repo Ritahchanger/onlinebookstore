@@ -61,7 +61,7 @@ const Navbar = () => {
                   </Link>
                 </p>
                 <p className="nav-li">
-                  <Link to="/login" className="cart-buttons">
+                  <Link to="/logout" className="cart-buttons">
                     LOGOUT
                   </Link>
                 </p>

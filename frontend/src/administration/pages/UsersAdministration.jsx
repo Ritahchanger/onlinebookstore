@@ -3,11 +3,14 @@ import axios from "axios";
 import Config from "../../Config";
 import AdminSidebar from "../components/AdminSidebar";
 import AdminNavbar from "../components/AdminNavbar";
-
+import "./users.css";
+import UpdateRole from "../components/UpdateRole";
 const UsersAdministration = () => {
   const [sidebar, showSidebar] = useState(false);
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [updateModal, setUpdateModal] = useState(false);
+  const [userToUpdate, setUserToUpdate] = useState(null);
 
   const handleSidebar = () => {
     showSidebar(!sidebar);
@@ -36,8 +39,16 @@ const UsersAdministration = () => {
       .includes(searchTerm.toLowerCase())
   );
 
+  const handleUpdateModal = () => {
+    setUpdateModal(!updateModal);
+  };
+
+  const handleUserToUpdate = (user) => {
+    setUserToUpdate(user);
+  };
+
   return (
-    <div className="admin">
+    <div className="admin users">
       <AdminNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
       <AdminSidebar sidebar={sidebar} />
       <p className="medium-header">Users Administration</p>
@@ -46,7 +57,7 @@ const UsersAdministration = () => {
           <input
             type="text"
             name="search_author"
-            placeholder="Search author..."
+            placeholder="Search user..."
             value={searchTerm}
             onChange={handleSearchChange}
           />
@@ -62,28 +73,41 @@ const UsersAdministration = () => {
                 <td>ID</td>
                 <td>ROLES</td>
                 <td>CREATED ON</td>
+                <td>CHANGE ROLE</td>
               </tr>
             </thead>
             <tbody>
               {filteredUsers.map((user) => (
                 <tr key={user._id}>
                   <td>
-                    {user.passport && (
-                      <img
-                        src={`${Config.apiUrl}/upload/authors/${user.passport}`}
-                        alt={`${user.firstName}'s profile`}
-                      />
-                    )}
+                    <img
+                      src={`${Config.apiUrl}/upload/authors/${user.passport}`}
+                      alt={`${user.firstName}'s profile`}
+                    />
                   </td>
                   <td>{`${user.firstName} ${user.secondName}`}</td>
                   <td>{user.email}</td>
-                  <td>{user._id}</td>
+                  <td>{user.userId}</td>
                   <td>{user.roles.join(", ")}</td>
-                  <td>{new Date(user.createdOn).toLocaleDateString()}</td>
+                  <td>{user.createdOn}</td>
+                  <td>
+                    <button
+                      className="cart-buttons"
+                      onClick={() => {
+                        handleUpdateModal();
+                        handleUserToUpdate(user);
+                      }}
+                    >
+                      UPDATE ROLE
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+        <div className={`custom-modal ${updateModal ? "update" : null}`}>
+          <UpdateRole handleUpdateModal={handleUpdateModal} userToUpdate={userToUpdate} fetchData={fetchData} />
         </div>
       </div>
     </div>
