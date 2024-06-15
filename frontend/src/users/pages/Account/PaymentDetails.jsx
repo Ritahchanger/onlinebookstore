@@ -61,7 +61,7 @@ const PaymentDetails = () => {
           `${Config.apiUrl}/api/cart/purchase/${user.user._id}`
         );
 
-        
+        console.log(purchaseResponse.data.data)
 
         if (purchaseResponse.data.success) {
           alert("Payment done successfully");

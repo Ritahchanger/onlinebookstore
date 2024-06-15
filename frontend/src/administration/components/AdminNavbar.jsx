@@ -49,9 +49,11 @@ const AdminNavbar = ({ handleSidebar, sidebar }) => {
             </div>
           </Link>
         ) : (
-          <div className="img-wrapper">
-            <img src={ProfileImage} alt="" />
-          </div>
+          <Link to="/profile">
+            <div className="img-wrapper">
+              <img src={ProfileImage} alt="" />
+            </div>
+          </Link>
         )}
       </div>
     </div>

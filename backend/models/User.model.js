@@ -48,7 +48,8 @@ const UserSchema = new mongoose.Schema({
     type: String
   },
   amount: {
-    type: Number
+    type: Number,
+    default:0
   },
   passport: {
     type: String

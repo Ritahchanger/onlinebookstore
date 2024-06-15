@@ -46,7 +46,7 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
       <div className="section amount">
         <p>Amount</p>
         <p className="subtitles" style={{ color: "var(--orange)" }}>
-          sh 78,000
+          {`${user.user.amount}`}
         </p>
       </div>
       <div className="section id">

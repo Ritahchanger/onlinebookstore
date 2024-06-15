@@ -5,6 +5,7 @@ import AdminSidebar from "../components/AdminSidebar";
 import AdminNavbar from "../components/AdminNavbar";
 import "./users.css";
 import UpdateRole from "../components/UpdateRole";
+
 const UsersAdministration = () => {
   const [sidebar, showSidebar] = useState(false);
   const [users, setUsers] = useState([]);
@@ -19,7 +20,7 @@ const UsersAdministration = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(`${Config.apiUrl}/api/users/all`);
-      setUsers(response.data.data); // Adjust based on the actual structure of your response
+      setUsers(response.data.data || []); // Adjust based on the actual structure of your response
     } catch (error) {
       console.error("Error fetching users data:", error);
     }
@@ -34,7 +35,7 @@ const UsersAdministration = () => {
   };
 
   const filteredUsers = users.filter((user) =>
-    `${user.firstName} ${user.secondName}`
+    `${user.firstName || ""} ${user.secondName || ""}`
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
   );
@@ -82,14 +83,14 @@ const UsersAdministration = () => {
                   <td>
                     <img
                       src={`${Config.apiUrl}/upload/authors/${user.passport}`}
-                      alt={`${user.firstName}'s profile`}
+                      alt={`${user.firstName || "User"}'s profile`}
                     />
                   </td>
-                  <td>{`${user.firstName} ${user.secondName}`}</td>
-                  <td>{user.email}</td>
-                  <td>{user.userId}</td>
-                  <td>{user.roles.join(", ")}</td>
-                  <td>{user.createdOn}</td>
+                  <td>{`${user.firstName || ""} ${user.secondName || ""}`}</td>
+                  <td>{user.email || ""}</td>
+                  <td>{user.userId || ""}</td>
+                  <td>{(user.roles || []).join(", ")}</td>
+                  <td>{user.createdOn || ""}</td>
                   <td>
                     <button
                       className="cart-buttons"
@@ -106,9 +107,15 @@ const UsersAdministration = () => {
             </tbody>
           </table>
         </div>
-        <div className={`custom-modal ${updateModal ? "update" : null}`}>
-          <UpdateRole handleUpdateModal={handleUpdateModal} userToUpdate={userToUpdate} fetchData={fetchData} />
-        </div>
+        {updateModal && (
+          <div className="custom-modal update">
+            <UpdateRole
+              handleUpdateModal={handleUpdateModal}
+              userToUpdate={userToUpdate}
+              fetchData={fetchData}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
