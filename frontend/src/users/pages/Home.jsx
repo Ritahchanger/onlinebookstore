@@ -17,6 +17,8 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const isUserLogged = useSelector((state) => state.auth.isLoggedIn);
 
+  const user = useSelector((state) => state.auth.user);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -31,7 +33,7 @@ const Home = () => {
       <NewRelease />
       <FeaturedBook />
       <Testmonials />
-      {isUserLogged ? <NewsLetter /> : null}
+      {isUserLogged && !user.user.newsLetter ? <NewsLetter /> : null}
       <BookDescriptionModal />
       <Footer />
     </div>

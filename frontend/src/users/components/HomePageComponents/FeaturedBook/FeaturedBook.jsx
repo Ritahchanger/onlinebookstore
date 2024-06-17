@@ -15,7 +15,9 @@ const FeaturedBook = () => {
 
   const fetchBook = async () => {
     try {
-      const response = await axios.get(`${Config.apiUrl}/api/books/highest/rating`);
+      const response = await axios.get(
+        `${Config.apiUrl}/api/books/highest/rating`
+      );
 
       if (response.data.success) {
         setFeaturedBook(response.data.data);
@@ -41,7 +43,10 @@ const FeaturedBook = () => {
         quantity: 1,
       };
 
-      const response = await axios.post(`${Config.apiUrl}/api/cart/post`, payload);
+      const response = await axios.post(
+        `${Config.apiUrl}/api/cart/post`,
+        payload
+      );
       console.log("Item added to cart:", response.data);
     } catch (error) {
       console.error("Error adding item to cart:", error);
@@ -64,7 +69,11 @@ const FeaturedBook = () => {
             <p className="medium-header">Featured Book</p>
             <div className="img-wrapper">
               <img
-                src={featuredBook ? `${Config.apiUrl}/upload/books/${featuredBook.coverImage}` : FeaturedImage}
+                src={
+                  featuredBook
+                    ? `${Config.apiUrl}/upload/books/${featuredBook.coverImage}`
+                    : FeaturedImage
+                }
                 alt={featuredBook ? featuredBook.title : "Featured Book"}
               />
             </div>
@@ -74,15 +83,17 @@ const FeaturedBook = () => {
               <>
                 <p className="small-header book-title">{featuredBook.title}</p>
                 <p className="description">{featuredBook.description}</p>
-                <p className="description featured-description">{featuredBook.purchaseCount} Purchases</p>
+                <p className="description featured-description">
+                  {featuredBook.purchaseCount} Purchases
+                </p>
                 <p className="description featured-description">{`$${featuredBook.price}`}</p>
 
                 <div className="row">
                   <button className="cart-buttons" onClick={displayBook}>
                     VIEW MORE
                   </button>
-                  <button className="cart-buttons" onClick={addToCart}>
-                    {cartItem ? "Added to Cart" : "ADD TO CART"}
+                  <button className="cart-buttons" onClick={displayBook}>
+                    ADD TO CART
                   </button>
                 </div>
               </>

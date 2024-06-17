@@ -85,6 +85,8 @@ const CartRoute = require('../routes/CartRoute')
 
 const PayPalRoute = require('../routes/PayPalRoute')
 
+const WithdrawalsRoutes = require('../routes/WithdrawalsRoutes');
+
 const TestimonialRoute = require('../routes/TestmonialRoute')
 
 const NewsLetterRoutes = require("../routes/NewsLetterRoutes");
@@ -100,6 +102,7 @@ app.use('/api/author', AuthorRoutes)
 app.use('/api/testmonials', TestimonialRoute)
 app.use('/api/cart', CartRoute)
 app.use('/api/newsletter',NewsLetterRoutes)
+app.use('/api/withdrawals',WithdrawalsRoutes)
 const connectServer = async () => {
   const BlogRoutes = require('../routes/BlogRoutes')
 

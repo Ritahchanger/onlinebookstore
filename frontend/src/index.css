@@ -18,7 +18,8 @@
   --pinkRed:#ff004f;
   --poppins:'Poppins',sans-serif;
   --darkGreen:rgb(0,255,0);
-  ---mobile-font:14px;
+  --mobile-font:14px;
+  --marroon:#940049;
 }
 html{
   scroll-behavior:smooth;
@@ -291,4 +292,7 @@ width:100%;
 }
 .subtitles{
   color:var(--pinkRed);
+}
+input[type="checkbox"]{
+  cursor: pointer;
 }

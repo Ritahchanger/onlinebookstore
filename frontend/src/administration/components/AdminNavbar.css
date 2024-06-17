@@ -1,7 +1,7 @@
 .adminNavbar{
     height:45px;
     width:100%;
-    background:var(--blue);
+    background: var(--marroon);
     color:var(--white);
     display:flex;
     justify-content:space-between;
@@ -13,6 +13,9 @@
 }
 .adminNavbar .section.id .subtitles{
     margin-left:1rem;
+}
+.adminNavbar .close-icon{
+    width:50px;
 }
 .adminNavbar .close-icon img{
     height:25px;
@@ -32,4 +35,12 @@
 }
 .adminNavbar .img-wrapper img{
     cursor: pointer;
+}
+
+.adminNavbar .cart-buttons.home{
+    background:transparent;
+}
+.adminNavbar .cart-buttons.home:hover{
+    background:var(--green);
+    border:2px solid var(--green)
 }

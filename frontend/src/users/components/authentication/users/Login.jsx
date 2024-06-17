@@ -79,6 +79,8 @@ const Login = () => {
 
           dispatch(login({ user: getUser.data.data }));
 
+          ///email
+
           navigate("/account");
         }
       }

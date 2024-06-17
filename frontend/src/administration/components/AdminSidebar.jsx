@@ -6,7 +6,10 @@ const AdminSidebar = ({ sidebar }) => {
     <div className={`sidebar ${sidebar ? "active" : ""}`}>
       <ul className="sidebar-navigation">
         <li>
-          <NavLink to="/admin/unapproved" className={({ isActive }) => isActive ? "active" : ""}>
+          <NavLink
+            to="/admin/unapproved"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             <p>
               <i className="fas fa-book"></i>
             </p>
@@ -14,7 +17,10 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/all-books" className={({ isActive }) => isActive ? "active" : ""}>
+          <NavLink
+            to="/admin/all-books"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             <p>
               <i className="fas fa-book-open"></i>
             </p>
@@ -22,7 +28,10 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/termination-accounts" className={({ isActive }) => isActive ? "active" : ""}>
+          <NavLink
+            to="/admin/termination-accounts"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             <p>
               <i className="fas fa-user-times"></i>
             </p>
@@ -30,7 +39,10 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/blogs" className={({ isActive }) => isActive ? "active" : ""}>
+          <NavLink
+            to="/admin/blogs"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             <p>
               <i className="fas fa-blog"></i>
             </p>
@@ -38,7 +50,10 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/authors" className={({ isActive }) => isActive ? "active" : ""}>
+          <NavLink
+            to="/admin/authors"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             <p>
               <i className="fas fa-user-edit"></i>
             </p>
@@ -46,7 +61,10 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/users" className={({ isActive }) => isActive ? "active" : ""}>
+          <NavLink
+            to="/admin/users"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             <p>
               <i className="fas fa-users"></i>
             </p>
@@ -54,7 +72,10 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/newsletter" className={({ isActive }) => isActive ? "active" : ""}>
+          <NavLink
+            to="/admin/newsletter"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             <p>
               <i className="fas fa-envelope"></i>
             </p>
@@ -62,20 +83,15 @@ const AdminSidebar = ({ sidebar }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
+          <NavLink
+            to="/admin/withdrawals"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             <p>
-              <i className="fas fa-home"></i>
+              <i class="fas fa-dollar-sign"></i>
             </p>
-            <p>Home</p>
+            <p>Withdrawals requests!</p>
           </NavLink>
-        </li>
-        <li>
-          <Link to="/logout">
-            <p>
-              <i className="fas fa-sign-out-alt"></i>
-            </p>
-            <p>Logout</p>
-          </Link>
         </li>
       </ul>
       <p className="link-text">

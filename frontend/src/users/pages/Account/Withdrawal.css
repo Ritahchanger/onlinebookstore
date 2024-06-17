@@ -1,0 +1,91 @@
+.account.withdrawal .container .small-header,
+.account.withdrawal .container p {
+  text-align: center;
+}
+.account.withdrawal .container .medium-header:nth-child(2) {
+  margin: 0;
+}
+.account.withdrawal .container .small-header.larger-font {
+  color: var(--blue);
+  font-size: 2rem;
+}
+.account.withdrawal .container .small-header {
+  margin: 1rem 0rem;
+}
+.account.withdrawal .grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 2rem;
+}
+.account.withdrawal .grid .card {
+  padding: 1rem;
+  box-shadow: 0 0 5px rgb(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+.account.withdrawal .grid .card .medium-header {
+  margin: 0;
+  text-align: start;
+  margin-bottom: 0.5rem;
+}
+.account.withdrawal .detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.account.withdrawal .detail {
+  font-weight: 600;
+}
+.account.withdrawal .input-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0rem;
+}
+.account.withdrawal .input-group input[type="text"],
+.account.withdrawal .input-group input[type="email"] {
+  flex-basis: 75%;
+  height: 40px;
+  border: 1px solid var(--gray);
+  padding: 10px;
+  cursor: pointer;
+  outline: none;
+}
+.account.withdrawal .input-group input[type="text"]:focus,
+.account.withdrawal .input-group input[type="email"]:focus {
+  border: 1px solid var(--pinkRed);
+}
+.account.withdrawal .input-group input[type="submit"] {
+  flex-basis: 25%;
+  height: 40px;
+  border: none;
+  background: var(--blue);
+  cursor: pointer;
+  color: var(--white);
+  transition: all 0.5s;
+}
+.account.withdrawal .input-group input[type="submit"]:hover {
+  background: var(--green);
+}
+.account.withdrawal .grid .card:nth-child(2) .input-group{
+  flex-direction: column;
+  align-items:start;
+}
+.account.withdrawal .grid .card:nth-child(2) .input-group .withdrawal{
+  height:40px;
+  padding:0.7rem;
+  margin-top:0rem;
+}
+
+
+@media (max-width: 642px) {
+  .account.withdrawal .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .account.withdrawal .container .small-header.larger-font {
+    font-size: 1rem;
+  }
+  .account.withdrawal .detail p {
+    font-size: var(--mobile-font);
+  }
+}

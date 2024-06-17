@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Initial state
 const initialState = {
-  isLoggedIn: localStorage.getItem('user') ? true : false,
-  user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
+  isLoggedIn: sessionStorage.getItem('user') ? true : false,
+  user: sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null,
 };
 
 // Create the slice
@@ -15,12 +15,12 @@ const authSlice = createSlice({
       const { payload } = action;
       state.isLoggedIn = true;
       state.user = payload;
-      localStorage.setItem('user', JSON.stringify(payload));
+      sessionStorage.setItem('user', JSON.stringify(payload));
     },
     logout(state) {
       state.isLoggedIn = false;
       state.user = null;
-      localStorage.removeItem('user');
+      sessionStorage.removeItem('user');
     },
   },
 });

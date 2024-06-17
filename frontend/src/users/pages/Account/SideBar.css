@@ -6,9 +6,8 @@
     left:-100%;
     display: block;
     transition: all 0.5s;
-    border-top: 2px solid var(--white);
-    border-right: 2px solid var(--blue);
     z-index: 9;
+    padding-right:3px;
     top: 45px;
   }
   
@@ -26,7 +25,8 @@
 }
 .sidebar .sidebar-navigation li a.active{
   background:var(--white);
-  color:var(--blue)
+  color:var(--blue);
+  border-top-right-radius:10px;
 }
 .sidebar .sidebar-navigation li a p {
   font-size: 14px;
@@ -36,6 +36,7 @@
 }
 .sidebar .sidebar-navigation li a:hover {
   background: var(--white);
+  border-top-right-radius:10px;
 }
 .sidebar .sidebar-navigation li a:hover p {
   color: var(--blue);

@@ -4,27 +4,19 @@ import { useSelector } from "react-redux";
 import "./AccountNavbar.css";
 import CloseIcon from "../../../assets/icons/close.png";
 import ProfileIcon from "../../../assets/icons/boy.png";
-
 import downArrow from "../../../assets/icons/drop.png";
-
 const AccountNavbar = ({ handleSidebar, sidebar }) => {
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
-
   const [dropdown, setDropdown] = useState(false);
-
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
   const isAdmin = user.user.roles.includes("admin");
-
   const handleDropDown = () => {
     setDropdown(!dropdown);
   };
-
   const handleNavigation = () => {
     navigate("/profile");
   };
-
   return (
     <div className="account-navigation">
       {!sidebar ? (
@@ -36,13 +28,21 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
           <img src={CloseIcon} alt="CloseIcon" onClick={handleSidebar} />
         </div>
       )}
-      <div className="section date">
+      {/* <div className="section date">
         <p>Joined on</p>
         <p
           className="subtitles"
           style={{ color: "var(--orange)" }}
         >{`${user.user.createdOn}`}</p>
-      </div>
+      </div> */}
+
+      <Link to="/" activeClassName="active" className="cart-buttons home">
+        <p>
+          <i className="fas fa-home"></i>
+        </p>
+        <p>Home</p>
+      </Link>
+
       <div className="section amount">
         <p>Amount</p>
         <p className="subtitles" style={{ color: "var(--orange)" }}>
@@ -55,6 +55,12 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
           {user.user.userId}
         </p>
       </div>
+      <Link to="/admin/unapproved" className="cart-buttons home">
+        <p>
+          <i class="fas fa-cogs"></i>
+        </p>
+        <p>Admin</p>
+      </Link>
       <div className="profile-section" onClick={handleNavigation}>
         <div className="img-wrapper">
           <img
@@ -62,7 +68,9 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
             alt="Profile"
           />
         </div>
-        <Link to="/profile"><p className="small-header">{user.user.firstName}</p></Link>
+        <Link to="/profile">
+          <p className="small-header">{user.user.firstName}</p>
+        </Link>
       </div>
       <div className="dropdown">
         <img
@@ -73,15 +81,24 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
         />
         <div className={`drop_down ${dropdown ? "active" : null}`}>
           {isAdmin && (
-            <Link to="/admin/unapproved" className="linker cart-buttons">
-              ADMIN
+            <Link to="/admin/unapproved" className="cart-buttons home">
+              <p>
+                <i class="fas fa-cogs"></i>
+              </p>
+              <p>Admin</p>
             </Link>
           )}
-          <Link to="/logout" className="linker cart-buttons">
-            LOGOUT
+          <Link to="/" className="cart-buttons home">
+            <p>
+              <i className="fas fa-home"></i>
+            </p>
+            <p>Home</p>
           </Link>
-          <Link to="/" className="linker cart-buttons">
-            HOME
+          <Link to="/logout" className="cart-buttons home">
+            <p>
+              <i className="fas fa-sign-out-alt"></i>
+            </p>
+            <p>Logout</p>
           </Link>
         </div>
       </div>

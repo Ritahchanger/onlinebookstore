@@ -96,6 +96,14 @@ const SideBar = ({ sidebar, han }) => {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/payment-details" activeClassName="active">
+            <p>
+              <i className="fas fa-credit-card"></i>
+            </p>
+            <p>Payment Details</p>
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/" activeClassName="active">
             <p>
               <i className="fas fa-home"></i>

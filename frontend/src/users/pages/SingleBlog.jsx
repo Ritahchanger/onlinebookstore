@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const SingleBlog = () => {
-  const { userId } = useParams(); // Destructure userId from useParams
+  const { userId } = useParams(); 
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blogs.blogs);
   const [singleBlog, setSingleBlog] = useState(null);

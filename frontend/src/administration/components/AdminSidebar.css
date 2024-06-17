@@ -1,29 +1,29 @@
 .admin .sidebar {
-    width: 250px;
-    height: calc(100vh - 45px);
-    background: var(--blue);
-    position: fixed;
-    left:-100%;
-    display: block;
-    transition: all 0.5s;
-    border-top: 2px solid var(--white);
-    border-right: 2px solid var(--blue);
-    z-index: 9;
-    top: 45px;
-
+  width: 250px;
+  height: calc(100vh - 45px);
+  background: var(--marroon);
+  position: fixed;
+  left: -100%;
+  display: block;
+  transition: all 0.5s;
+  z-index: 9;
+  top: 45px;
+  padding-right:3px;
 }
-.admin .sidebar.active{
-    left:0%;
-}.admin .sidebar .sidebar-navigation li a {
+.admin .sidebar.active {
+  left: 0%;
+}
+.admin .sidebar .sidebar-navigation li a {
   display: flex;
   align-items: center;
   padding: 1rem;
   color: var(--white);
   transition: all 0.5s;
 }
-.admin .sidebar .sidebar-navigation li a.active{
-  background:var(--white);
-  color:var(--blue)
+.admin .sidebar .sidebar-navigation li a.active {
+  background: var(--white);
+  color: var(--blue);
+  border-top-right-radius:10px;
 }
 .admin .sidebar .sidebar-navigation li a p {
   font-size: 14px;
@@ -33,40 +33,40 @@
 }
 .admin .sidebar .sidebar-navigation li a:hover {
   background: var(--white);
+  border-top-right-radius:10px;
 }
 .admin .sidebar .sidebar-navigation li a:hover p {
-  color: var(--blue);
+  color: var(--marroon);
 }
 
-.admin .sidebar .amount{
-    display:none;
+.admin .sidebar .amount {
+  display: none;
 }
-.sidebar .link-text{
-  padding:20px;
+.sidebar .link-text {
+  padding: 20px;
 }
-.sidebar .link-text a{
-  color:var(--white);
+.sidebar .link-text a {
+  color: var(--white);
 }
-.sidebar .link-text a:hover{
-  text-decoration:underline;
-}
-
-
-@media(max-width:524px){
-    .sidebar{
-        width:200px;
-    }
+.sidebar .link-text a:hover {
+  text-decoration: underline;
 }
 
-@media(max-width:498px){
-    .sidebar .amount{
-        display:flex;
-        padding:1rem;
-        background:var(--black);
-        color:var(--white)
-    }
-    .sidebar .section.amount p:nth-child(2){
-        margin-left:10px;
-        text-transform:uppercase;
-    }
+@media (max-width: 524px) {
+  .sidebar {
+    width: 200px;
+  }
+}
+
+@media (max-width: 498px) {
+  .sidebar .amount {
+    display: flex;
+    padding: 1rem;
+    background: var(--black);
+    color: var(--white);
+  }
+  .sidebar .section.amount p:nth-child(2) {
+    margin-left: 10px;
+    text-transform: uppercase;
+  }
 }

@@ -1,37 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../authentication.css";
 import Config from "../../../../Config";
-
 import { login } from "../../../Redux/features/authSlice";
-
 import { useDispatch } from "react-redux";
 
 const PasswordChanging = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { email } = useParams();
+  const { token } = useParams();
+  const [ message,setMessage ] = useState(null);
 
-  const [isValidEmailFormat, setIsValidEmailFormat] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
   const [submitSuccess, setSubmitSuccess] = useState(false);
-
-  useEffect(() => {
-    // Email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setIsValidEmailFormat(emailRegex.test(email));
-
-    if(!emailRegex.test(email) || email.length <=0) {
-      navigate('/login')
-    }
-
-  }, [email]);
+  const [serverError, setServerError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,6 +31,7 @@ const PasswordChanging = () => {
       ...errors,
       [name]: "",
     });
+    setServerError("");
   };
 
   const validateForm = () => {
@@ -78,7 +67,7 @@ const PasswordChanging = () => {
         const response = await axios.post(
           `${Config.apiUrl}/api/auth/change-password`,
           {
-            email: email,
+            token, // Corrected payload to use token
             newPassword: formData.password,
           },
           {
@@ -98,20 +87,20 @@ const PasswordChanging = () => {
 
             dispatch(login({ user: getUser.data.data }));
 
-            navigate("/account");
+            setTimeout(() => {
+              navigate("/account");
+            }, 2000);
           }
-
-          console.log(response.data);
         } else {
           throw new Error("There was a problem with the request");
         }
       } catch (error) {
-        console.error(
-          `There was a problem accessing the server: ${error.message}`
-        );
+        setServerError(error.response?.data?.message || "There was a problem accessing the server");
+        console.error(`There was a problem accessing the server: ${error.message}`);
       }
     }
   };
+
   return (
     <div className="authentication">
       <div className="form-wrapper">
@@ -144,9 +133,10 @@ const PasswordChanging = () => {
           <div className="input-group">
             <input type="submit" value="SEND" />
           </div>
+          {serverError && <p className="error-message">{serverError}</p>}
           {submitSuccess && (
             <p className="success">
-              Password reset successful! Redirecting to login...
+              Password reset successful! Redirecting to account...
             </p>
           )}
           <p>

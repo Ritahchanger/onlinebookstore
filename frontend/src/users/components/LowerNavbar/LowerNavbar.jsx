@@ -12,13 +12,9 @@ const LowerNavbar = () => {
 
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const [cartIcons, displayCartIcons] = useState(false);
 
   const [dropdownArrow, showDropDownArrow] = useState(false);
 
-  const handleCartIcons = () => {
-    displayCartIcons(!cartIcons);
-  };
 
   const handleArrow = () => {
     showDropDownArrow(!dropdownArrow);
@@ -96,24 +92,8 @@ const LowerNavbar = () => {
           </div>
         </div>
         <div className="left-icon">
-          <p
-            className={`angle ${dropdownArrow ? "active" : ""}`}
-            onClick={() => {
-              handleCartIcons();
-              handleArrow();
-            }}
-          >
-            <i className="fa-sharp fa-solid fa-angle-down"></i>
-          </p>
-          <div className={`cart-icons ${cartIcons ? "active" : ""}`}>
-            <Link to="/cart">
-              <sup>4</sup> <i class="fa-solid fa-cart-shopping"></i>
-            </Link>
-            <Link to="#">
-              {" "}
-              <i className="fa-solid fa-heart"></i>
-            </Link>
-          </div>
+         
+          
           <Link to="#" className="menu-icon" onClick={handleSideBar}>
             <i className="fa-solid fa-bars-staggered"></i>
           </Link>

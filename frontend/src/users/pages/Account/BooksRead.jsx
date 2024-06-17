@@ -22,6 +22,8 @@ const BooksRead = () => {
   };
 
   const truncateDescription = (description) => {
+    if (!description) return ""; // Handle undefined or null description
+
     const words = description.split(" ");
     if (words.length <= 15) {
       return description;
@@ -33,18 +35,20 @@ const BooksRead = () => {
     const getBooksRead = async () => {
       try {
         const response = await axios.get(
-          `${Config.apiUrl}/api/cart/purchase/${user.user._id}/get`
+          `${Config.apiUrl}/api/cart/purchase/${user?.user?._id}/get`
         );
-        const backendData = response.data.data;
-        const allItems = backendData.flatMap((purchase) => purchase.items);
+        const backendData = response.data.data || []; // Handle undefined or null backendData
+        const allItems = backendData.flatMap((purchase) => purchase.items || []); // Handle undefined or null items array
         setBooksRead(allItems);
         console.log(allItems);
       } catch (error) {
         console.error("Error fetching books read:", error);
       }
     };
-    getBooksRead();
-  }, [user.user._id]);
+    if (user?.user?._id) {
+      getBooksRead();
+    }
+  }, [user?.user?._id]);
 
   return (
     <div className="account">
@@ -72,13 +76,13 @@ const BooksRead = () => {
                     <tr key={item._id}>
                       <td>
                         <img
-                          src={`${Config.apiUrl}/upload/books/${item.productId.coverImage}`}
-                          alt={item.productId.title}
+                          src={`${Config.apiUrl}/upload/books/${item?.productId?.coverImage}`}
+                          alt={item?.productId?.title || ""}
                           style={{ width: "50px" }}
                         />
                       </td>
-                      <td>{item.productId.title}</td>
-                      <td>{truncateDescription(item.productId.description)}</td>
+                      <td>{item?.productId?.title || ""}</td>
+                      <td>{truncateDescription(item?.productId?.description)}</td>
                     </tr>
                   ))}
                 </tbody>

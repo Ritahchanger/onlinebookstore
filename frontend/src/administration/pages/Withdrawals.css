@@ -1,0 +1,7 @@
+.admin.withdrawals .table_wrapper table {
+  font-size: 12px;
+}
+.admin.withdrawals .table_wrapper table thead tr td {
+  font-size: 12px;
+  text-transform: uppercase;
+}

@@ -8,13 +8,13 @@ import Blog from './users/pages/Blog'
 import SingleBlog from './users/pages/SingleBlog'
 import Authors from './users/pages/Authors'
 import BookByAuthor from './users/components/Books/BookByAuthor'
-import Cart from './users/components/cart/Cart'
+
 import ForgotPassword from './users/components/authentication/users/ForgotPassword'
 import PasswordChanging from './users/components/authentication/users/PasswordChanging'
 import Shop from './users/pages/Shop'
 import ProtectedRoutes from './users/components/authentication/users/ProtectedRoutes'
 import CategoriesNavbar from './users/components/navigation/CategoriesNavbar'
-import Checkout from './users/components/cart/Checkout'
+
 import WishList from './users/pages/WishList'
 import Account from './users/pages/Account/Account'
 import Profile from './users/pages/Account/Profile'
@@ -22,7 +22,7 @@ import MyBooks from './users/pages/Account/MyBooks'
 import BooksRead from './users/pages/Account/BooksRead'
 import Publishing from './users/pages/Account/Publishing'
 import EditingAndPublishing from './users/pages/Account/EditingAndPublishing'
-import PaymentDetails from './users/pages/Account/PaymentDetails'
+import PaymentCart from './users/pages/Account/PaymentCart'
 import PendingApprovals from './users/pages/Account/PendingApprovals'
 import Logout from './users/components/authentication/users/Logout'
 import ShopCategories from './users/pages/ShopCategories'
@@ -41,6 +41,8 @@ import UsersAdministration from './administration/pages/UsersAdministration'
 import AdminAuthors from './administration/pages/AdminAuthors'
 import AdminNewsLetter from './administration/pages/AdminNewsLetter'
 //
+import Withdrawals from './administration/pages/Withdrawals'
+import PaymentDetails from './users/pages/Account/PaymentDetails'
 
 const App = () => {
   const user = useSelector(state => state.auth.user)
@@ -59,11 +61,11 @@ const App = () => {
           <Route path='/authors/books/:id' element={<BookByAuthor />} />
 
           <Route path='/categories' element={<CategoriesNavbar />} />
-          <Route path='/check-out' element={<Checkout />} />
+         
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/about' element={<About />} />
           <Route
-            path='/change-password/:email'
+            path='/change-password/:token'
             element={<PasswordChanging />}
           />
           <Route path='/shop' element={<Shop />} />
@@ -139,7 +141,7 @@ const App = () => {
             path='/pending-payments'
             element={
               <ProtectedRoutes>
-                <PaymentDetails />
+                <PaymentCart />
               </ProtectedRoutes>
             }
           />
@@ -148,6 +150,14 @@ const App = () => {
             element={
               <ProtectedRoutes>
                 <Logout />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/payment-details'
+            element={
+              <ProtectedRoutes>
+                <PaymentDetails/>
               </ProtectedRoutes>
             }
           />
@@ -207,6 +217,14 @@ const App = () => {
             element={
               <ProtectedRoutes>
                 <AdminNewsLetter />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/admin/withdrawals'
+            element={
+              <ProtectedRoutes>
+                <Withdrawals/>
               </ProtectedRoutes>
             }
           />

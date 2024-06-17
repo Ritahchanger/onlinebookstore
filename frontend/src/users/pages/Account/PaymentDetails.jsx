@@ -1,30 +1,17 @@
 import React, { useState, useEffect } from "react";
 import SideBar from "./SideBar";
 import AccountNavbar from "./AccountNavbar";
-import TerminationModel from "../../components/TerminationModel/TerminationModel";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import "./PaymentDetails.css";
-import { useSelector, useDispatch } from "react-redux";
-import MpesaLogo from "../../../assets/images/mpesa.png";
-import { showLoading, hideLoading } from "../../Redux/features/alertSlice";
-import Preloaders from "../../components/Preloaders/Preloaders";
+import TerminationModel from "../../components/TerminationModel/TerminationModel";
+import { useSelector } from "react-redux";
+import "./Withdrawal.css";
 import Config from "../../../Config";
 
-
 const PaymentDetails = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const loading = useSelector((state) => state.alerts.loading);
   const [sidebar, showSidebar] = useState(false);
   const [terminationModel, showTerminationModel] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [phoneNo, setPhoneNo] = useState("");
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [productIds, setProductIds] = useState([]);
-
+  const [withdrawalAmount, setWithDrawalAmount] = useState("");
   const handleSidebar = () => {
     showSidebar(!sidebar);
   };
@@ -33,21 +20,12 @@ const PaymentDetails = () => {
     showTerminationModel(!terminationModel);
   };
 
-  const handlePayment = async () => {
-    if (!phoneNo) {
-      alert("Please enter a phone number");
-      return;
-    }
-
-    const paymentMethod = "safaricom";
-
+  const setWithdrawalAccount = async () => {
     try {
-      dispatch(showLoading());
       const response = await axios.post(
-        `${Config.apiUrl}/api/payment`,
+        `${Config.apiUrl}/api/withdrawals/post`,
         {
-          phone: phoneNo,
-          amount: totalPrice,
+          userId: user.user._id,
         },
         {
           headers: {
@@ -55,243 +33,119 @@ const PaymentDetails = () => {
           },
         }
       );
-
-      if (!response.data.success) {
-        const purchaseResponse = await axios.post(
-          `${Config.apiUrl}/api/cart/purchase/${user.user._id}`
-        );
-
-        console.log(purchaseResponse.data.data)
-
-        if (purchaseResponse.data.success) {
-          alert("Payment done successfully");
-          await axios.post(`http://localhost:5000/api/cart/success`, {
-            bookIds: productIds,
-          });
-           // Assuming fetchCartItems updates cartItems
-          dispatch(hideLoading());
-
-          navigate("/account");
-
-        }
-
-        
-        return;
+      if (response.status !== 200 && response.status !== 201) {
+        throw new Error(`There was a problem accessing the server!`);
       }
-
-      dispatch(hideLoading());
-      setPaymentSuccess(true);
-      setTimeout(() => {
-        setPaymentSuccess(false);
-      }, 10000);
+      console.log("Withdrawal account created successfully");
     } catch (error) {
-      console.error("Error making payment:", error);
-      dispatch(hideLoading());
+      console.log("There was a problem accessing the server!");
     }
   };
-
-  const fetchCartItems = async () => {
-    try {
-      const response = await axios.get(
-        `${Config.apiUrl}/api/cart/get/${user.user._id}`
-      );
-      if (!response.data.success) {
-        throw new Error("No cart items found");
-      }
-      setCartItems(response.data.items);
-      const totalPrice = response.data.items.reduce(
-        (acc, item) => acc + item.productId.price * item.quantity,
-        0
-      );
-      setTotalPrice(totalPrice);
-    } catch (error) {
-      console.error("Error fetching cart items:", error);
-    }
-  };
-
   useEffect(() => {
-    fetchCartItems();
+    setWithdrawalAccount();
   }, [user.user._id]);
 
-  useEffect(() => {
-    const extractProductIds = () => {
-      if (cartItems && cartItems.items) {
-        const ids = cartItems.items.map((item) => item.productId._id);
-        setProductIds(ids);
-      }
-    };
-    extractProductIds();
-  }, [cartItems]);
-
-  const deleteCartItem = async (cartItemId) => {
-    try {
-      const response = await axios.delete(
-        `${Config.apiUrl}/api/cart/delete/cartItem/${user.user._id}/${cartItemId}`
-      );
-
-      if (response.data.success) {
-        // Update the cart items in the state
-        setCartItems(cartItems.filter((item) => item._id !== cartItemId));
-        // Recalculate the total price
-        const updatedTotalPrice = cartItems.reduce(
-          (acc, item) =>
-            item._id !== cartItemId
-              ? acc + item.productId.price * item.quantity
-              : acc,
-          0
-        );
-        setTotalPrice(updatedTotalPrice);
-      } else {
-        console.error("Error deleting cart item:", response.data.error);
-      }
-    } catch (error) {
-      console.error("Error deleting cart item:", error);
-    }
-  };
-
-  const payWithPaypal = async () => {
-    try {
-      dispatch(showLoading());
-
-      const response = await axios.post(
-        `${Config.apiUrl}/api/payment/paypal/orders`,
-        {
-          cost: totalPrice,
-          description: "cart_items",
-        },
-        {
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
-
-      dispatch(hideLoading());
-      if (response.status === 201) {
-        const purchaseResponse = await axios.post(
-          `${Config.apiUrl}/api/cart/purchase/${user.user._id}`
-        );
-        setPaymentSuccess(true);
-        const completion_page_url = response.data.links[1].href;
-
-      window.open(completion_page_url, "_blank");
-
-        setTimeout(() => {
-          setPaymentSuccess(false);
-        }, 10000);
-      } else {
-        // Payment failed
-        console.error("Payment failed:", response.data.error);
-        // Display error message to the user
-        alert("Payment failed. Please try again later.");
-      }
-    } catch (error) {
-      // Hide loading indicator
-      dispatch(hideLoading());
-      // Log and display error message
-      console.error("Error making PayPal payment:", error);
-      alert("Error making PayPal payment. Please try again later.");
-    }
-  };
+  console.log(withdrawalAmount);
 
   return (
-    <div className="account">
+    <div className="account withdrawal">
       <AccountNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
       <SideBar
         sidebar={sidebar}
         handleTerminationModel={handleTerminationModel}
       />
-      <div className="payment">
+
+      <div className="my-books">
         <div className="container">
-          <p className="medium-header">PENDING PAYMENTS</p>
-          {loading ? (
-            <Preloaders />
-          ) : cartItems.length === 0 ? (
-            <p>NO CART ITEMS</p>
-          ) : (
-            <>
-              <p className="small-header">Carted Items</p>
-              <div className="row cart_row">
-                <div className="table_wrapper">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Book Cover</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Remove</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {cartItems.map((item) => (
-                        <tr key={item._id}>
-                          <td>
-                            <img
-                              src={`${Config.apiUrl}/upload/books/${item.productId?.coverImage}`}
-                              alt={item.productId?.title}
-                            />
-                          </td>
-                          <td>{item.productId?.title}</td>
-                          <td>${item.productId?.price}</td>
-                          <td
-                            className="remove"
-                            onClick={() => deleteCartItem(item._id)}
-                          >
-                            <i className="fas fa-trash"></i>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="payment_account">
-                  <p>Select payment method:</p>
-                  <Link to="/shop">
-                    <i className="fa fa-arrow-left"></i>Continue shopping?
-                  </Link>
-                  <p className="total-price">Total Price: ${totalPrice}</p>
-                  <div className="payment-row">
-                    <div className="safaricom">
-                      <p className="small-header">FOR THE LOCAL PAYMENT</p>
-                      <div className="mpesa_logo">
-                        <img src={MpesaLogo} alt="" />
-                      </div>
-                      <div className="payment-options">
-                        <input
-                          type="text"
-                          name="phoneNo"
-                          id="phoneNo"
-                          placeholder="Enter phone No (07--)"
-                          value={phoneNo}
-                          onChange={(e) => setPhoneNo(e.target.value)}
-                        />
-                      </div>
-                      <button
-                        onClick={handlePayment}
-                        className="cart-buttons"
-                        disabled={paymentSuccess}
-                      >
-                        {paymentSuccess ? "Payment Successful" : "PAY NOW"}
-                      </button>
-                    </div>
-                    <div className="paypal">
-                      <p className="small-header">
-                        FOR THE INTERNATIONAL PAYMENTS
-                      </p>
-                      <div className="col">
-                        <p>Pay with paypal</p>
-                        <button class="paypal-btn" onClick={payWithPaypal}>
-                          <i class="fa-brands fa-paypal"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          <p className="medium-header">PAYMENT DETAILS</p>
+          <p className="small-header">
+            {`Hello, ${user.user.firstName} ${user.user.secondName}! You can manage your withdrawal options and update your payment information here.`}
+          </p>
+          <p>
+            Please ensure that the payment details provided to Bemi Editors are
+            accurate, as they will be used to process your payments.
+          </p>
+          <p className="small-header larger-font">
+            Note: 20% of your earnings will be retained by Bemi Editors Limited
+            to cover marketing and advertisement costs for your products.
+          </p>
+          <p className="small-header larger-font">
+            Minimum amount withdrawable:
+            <br />
+            sh 3000 equivalent to $ 23.18
+          </p>
+          <div className="grid">
+            <div className="card">
+              <div className="medium-header">DETAILS</div>
+              <div className="detail">
+                <p>Phone No</p>
+                <p>07-121-95-228</p>
               </div>
-            </>
-          )}
+              <div className="detail">
+                <p>Paypal Email</p>
+                <p>payment@paypal.com</p>
+              </div>
+              <div className="medium-header">UPDATE PAYMENT DETAILS</div>
+              <div className="input-group">
+                <input
+                  type="text"
+                  name="Phone"
+                  placeholder="Enter phone no.."
+                />
+                <input type="submit" value="UPDATE" />
+              </div>
+              <div className="input-group">
+                <input
+                  type="email"
+                  name="Phone"
+                  placeholder="Enter paypal email.."
+                />
+                <input type="submit" value="UPDATE" />
+              </div>
+            </div>
+            <div className="card">
+              <div className="medium-header">WITHDRAW</div>
+              <div className="input-group">
+                <input
+                  type="text"
+                  name="amount"
+                  value={withdrawalAmount}
+                  placeholder="Amount to withdrawal in(SH)..(NO LETTER,COMMA OR CHARACTER"
+                  onChange={(e) => {
+                    setWithDrawalAmount(e.target.value);
+                  }}
+                />
+                {withdrawalAmount.length > 1 && (
+                  <>
+                    <p
+                      className="medium-header"
+                      style={{ textAlign: "center" }}
+                    >{`Sh  ${withdrawalAmount} equivalent to $ ${(
+                      withdrawalAmount / 129.48
+                    ).toFixed(2)}`}</p>
+
+                    <p className="medium-header">
+                      {`Substracting 20% you'll get sh ${
+                        0.8 * withdrawalAmount
+                      } equivalent to $ ${(
+                        (0.8 * withdrawalAmount) /
+                        120.48
+                      ).toFixed(2)}`}
+                    </p>
+                  </>
+                )}
+
+                <input
+                  type="submit"
+                  value="REQUEST WITHDRAW"
+                  className="withdrawal"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
       <TerminationModel
         handleTerminationModel={handleTerminationModel}
         terminationModel={terminationModel}

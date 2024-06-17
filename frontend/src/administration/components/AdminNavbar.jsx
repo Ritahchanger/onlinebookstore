@@ -29,15 +29,29 @@ const AdminNavbar = ({ handleSidebar, sidebar }) => {
           {user.user.userId}
         </p>
       </div>
+      <Link to="/" activeClassName="active" className="cart-buttons home">
+        <p>
+          <i className="fas fa-home"></i>
+        </p>
+        <p>Home</p>
+      </Link>
       <p className="small-header" style={{ color: "var(--orange)" }}>
         ADMINISTRATION PANEL
       </p>
-      <Link to="/account" className="linker cart-buttons">
-        ACCOUNT
+      <Link to="/account" activeClassName="active" className="cart-buttons home">
+        <p>
+          <i class="fas fa-user"></i>
+        </p>
+        <p>Account</p>
       </Link>
-      <Link to="/" className="linker cart-buttons">
-        HOME
+
+      <Link to="/logout" className="cart-buttons home">
+        <p>
+          <i className="fas fa-sign-out-alt" ></i>
+        </p>
+        <p>Logout</p>
       </Link>
+
       <div className="profile-section">
         {user.user.passport ? (
           <Link to="/profile">

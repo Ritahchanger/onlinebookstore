@@ -124,13 +124,14 @@ const AdminNewsLetter = () => {
           </div>
         </form>
 
-        {successMessage && <p className="success-message">{successMessage}</p>}
+        {successMessage && <p className="success-message" style={{color:"green"}}>{successMessage}</p>}
 
         <div className="table_wrapper">
           <table>
             <thead>
               <tr>
                 <th>Name</th>
+                <th>Email</th>
                 <th>Roles</th>
                 <th>Date</th>
               </tr>
@@ -140,6 +141,7 @@ const AdminNewsLetter = () => {
                 subscribers.map((user) => (
                   <tr key={user._id}>
                     <td>{`${user.firstName} ${user.secondName}`}</td>
+                    <td>{user.email}</td>
                     <td>{user.roles.join(", ")}</td>
                     <td>{user.createdOn}</td>
                   </tr>

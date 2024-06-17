@@ -121,6 +121,10 @@ const forgotPassword = async (req, res) => {
     // Encode the email address for URL
     const encodedEmail = encodeURIComponent(email)
 
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '5m'
+    })
+
     // If user exists, proceed with sending the password reset email
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
@@ -177,7 +181,8 @@ const forgotPassword = async (req, res) => {
             <div class="container">
               <h1>Password Reset Request</h1>
               <p>Please follow the link to reset your password.</p>
-              <p><a href='${process.env.FRONT_END_URL}/change-password/${encodedEmail}'>Reset Password</a></p>
+              <p>And you have 5 minutes to reset it</p>
+              <p><a href='${process.env.FRONT_END_URL}/change-password/${token}'>Reset Password</a></p>
             </div>
           </body>
         </html>
@@ -198,40 +203,54 @@ const forgotPassword = async (req, res) => {
 }
 
 const changePassword = async (req, res) => {
-  const { email, newPassword } = req.body
+  const { token, newPassword } = req.body
 
+  if (!token || !newPassword) {
+    return res.status(400).json({
+      success: false,
+      message: 'Token and new password are required'
+    })
+  }
   try {
-    // Find the user by email
-    const user = await User.findOne({ email })
-
-    // If user not found, return an error
-    if (!user) {
-      return res
-        .status(200)
-        .json({ success: false, status: 404, message: 'User not found' })
-    }
+    // Verify the token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    // Extract user ID from the token
+    const userId = decoded.id
 
     // Hash the new password before saving it
     const hashedPassword = await bcrypt.hash(newPassword, 10)
 
     // Update user's password
-    user.password = hashedPassword
-
-    // Save the updated user
-    await user.save()
+    await User.findByIdAndUpdate(userId, { password: hashedPassword })
 
     // Respond with success message
     return res.status(200).json({
       success: true,
       status: 200,
       message: 'User password updated',
-      userId: user._id
+      userId: userId
     })
   } catch (error) {
     console.error('Error updating password:', error)
-    return res
-      .status(500)
-      .json({ success: false, message: 'Internal server error' })
+
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid token'
+      })
+    }
+
+    if (error.name === 'TokenExpiredError') {
+      return res.status(401).json({
+        success: false,
+        message: 'Token has expired'
+      })
+    }
+
+    return res.status(500).json({
+      success: false,
+      message: 'Internal server error'
+    })
   }
 }
 

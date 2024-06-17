@@ -87,31 +87,44 @@
 .account-navigation .dropdown {
   position: relative;
 }
-.account-navigation .dropdown .drop_down{
-    position:absolute;
-    top:100%;
-    background:var(--blue);
-    padding:1rem;
-    border-bottom-left-radius:5px;
-    border-bottom-right-radius:5px;
-    border-top:2px solid var(--white);
-    right:-600%;
-    transition:all 0.5s;
+.account-navigation .dropdown .drop_down {
+  position: absolute;
+  top: 100%;
+  background: var(--blue);
+  padding: 1rem;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top: 2px solid var(--white);
+  right: -600%;
+  transition: all 0.5s;
 }
-.account-navigation .dropdown .drop_down.active{
-    right:1rem;
+.account-navigation .dropdown .drop_down.active {
+  right: 1rem;
 }
 .account-navigation .dropdown .drop_down a{
-    display:block;
-    width:100%;
-    text-align:center;
-    margin:1rem 0rem;
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 1rem 0rem;
+  display:flex;
 }
 
 .account-navigation .dropdown img {
   height: 30px;
   width: 30px;
   cursor: pointer;
+}
+
+.cart-buttons.home {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+.cart-buttons.home i {
+  margin-right: 10px;
+}
+.cart-buttons.home p {
+  text-transform: uppercase;
 }
 
 @media (max-width: 614px) {
