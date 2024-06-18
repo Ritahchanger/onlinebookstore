@@ -5,7 +5,7 @@ const WithdrawalSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
-  },
+  }, 
   requestTime: {
     type: Date,
     default: Date.now

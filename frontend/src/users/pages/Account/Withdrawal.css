@@ -79,6 +79,12 @@
   margin-top:0rem;
 }
 
+.account.withdrawal .success-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 
 @media (max-width: 642px) {
   .account.withdrawal .grid {

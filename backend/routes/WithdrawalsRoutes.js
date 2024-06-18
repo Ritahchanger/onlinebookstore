@@ -1,10 +1,17 @@
 const router = require('express').Router()
 
-const WithdrawalsController = require("../controllers/WithdrawalsController")
+const WithdrawalsController = require('../controllers/WithdrawalsController')
 
+router.put(
+  '/update-paypal-email/:userId',
+  WithdrawalsController.updatePaypalEmail
+)
 
-router.put('/update-paypal-email/:id',WithdrawalsController.updatePaypalEmail)
+router.post('/post', WithdrawalsController.postUserId)
 
-router.post('/post',WithdrawalsController.postUserId)
+router.put(
+  '/update-mpesa-phone-no/:userId',
+  WithdrawalsController.updateMpesaNumber
+)
 
 module.exports = router
