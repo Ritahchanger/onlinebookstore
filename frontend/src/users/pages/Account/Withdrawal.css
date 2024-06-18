@@ -43,6 +43,7 @@
   margin: 1rem 0rem;
 }
 .account.withdrawal .input-group input[type="text"],
+.account.withdrawal .input-group input[type="number"],
 .account.withdrawal .input-group input[type="email"] {
   flex-basis: 75%;
   height: 40px;
@@ -52,6 +53,7 @@
   outline: none;
 }
 .account.withdrawal .input-group input[type="text"]:focus,
+.account.withdrawal .input-group input[type="number"]:focus,
 .account.withdrawal .input-group input[type="email"]:focus {
   border: 1px solid var(--pinkRed);
 }

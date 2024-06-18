@@ -5,3 +5,12 @@
   font-size: 12px;
   text-transform: uppercase;
 }
+.admin.withdrawals .custom-modal{
+  display:none;
+}
+.admin.withdrawals .custom-modal.active{
+  display:flex;
+}
+.admin.withdrawals .custom-modal .medium-header{
+  margin:0;
+}

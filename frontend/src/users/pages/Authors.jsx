@@ -6,6 +6,8 @@ import "./author.css";
 import AuthorItem from "../components/AuthorComponents/AuthorItem";
 import axios from "axios";
 import Config from "../../Config";
+
+
 const Authors = () => {
   const [authorData, setAuthorData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");

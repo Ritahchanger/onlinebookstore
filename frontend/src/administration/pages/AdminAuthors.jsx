@@ -6,6 +6,8 @@ import Config from "../../Config";
 import "./Admin.css";
 import "./Authors.css";
 
+import User from "../../assets/icons/user.png"
+
 const AdminAuthors = () => {
   const [sidebar, showSidebar] = useState(false);
   const [authors, setAuthors] = useState([]);
@@ -73,13 +75,20 @@ const AdminAuthors = () => {
             <tbody>
               {filteredAuthors.map((author) => (
                 <tr key={author._id}>
-                  <td>
-                    <img
-                      src={`${Config.apiUrl}/upload/authors/${author.passport}`}
-                      alt="profile"
-                      className="profile-img"
-                    />
-                  </td>
+                   {author.passport ? (
+                    <td>
+                      <img
+                        src={`${Config.apiUrl}/upload/authors/${author.passport}`}
+                      />
+                    </td>
+                  ) : (
+                    <td>
+                      <img
+                        src={User}
+                        alt="Profile"
+                      />
+                    </td>
+                  )}
                   <td>
                     {author.firstName} {author.secondName}
                   </td>

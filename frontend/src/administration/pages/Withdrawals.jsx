@@ -4,18 +4,21 @@ import AdminSidebar from "../components/AdminSidebar";
 import AdminNavbar from "../components/AdminNavbar";
 import Config from "../../Config";
 import "./Admin.css";
+import User from "../../assets/icons/user.png";
+import "./Withdrawals.css";
+import CloseIcon from "../../assets/icons/close.png";
 
-import "./Withdrawals.css"
+import ClearPaymentModal from "../components/ClearPaymentModal";
+
 const Withdrawals = () => {
   const [sidebar, showSidebar] = useState(false);
   const [authors, setAuthors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredAuthors, setFilteredAuthors] = useState([]);
-
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const handleSidebar = () => {
     showSidebar(!sidebar);
   };
-
   const fetchData = async () => {
     try {
       const response = await axios.get(`${Config.apiUrl}/api/users/authors`);
@@ -27,7 +30,6 @@ const Withdrawals = () => {
       );
     }
   };
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -45,6 +47,9 @@ const Withdrawals = () => {
     setFilteredAuthors(filtered);
   };
 
+  const handlePaymentModal = () => {
+    setShowPaymentModal(!showPaymentModal);
+  };
   return (
     <div className="admin withdrawals">
       <AdminNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
@@ -79,13 +84,18 @@ const Withdrawals = () => {
             <tbody>
               {filteredAuthors.map((author) => (
                 <tr key={author._id}>
-                  <td>
-                    <img
-                      src={`${Config.apiUrl}/upload/authors/${author.passport}`}
-                      alt="profile"
-                      className="profile-img"
-                    />
-                  </td>
+                  {author.passport ? (
+                    <td>
+                      <img
+                        src={`${Config.apiUrl}/upload/authors/${author.passport}`}
+                        className="profile-img"
+                      />
+                    </td>
+                  ) : (
+                    <td>
+                      <img src={User} className="profile-img" />
+                    </td>
+                  )}
                   <td>
                     {author.firstName} {author.secondName}
                   </td>
@@ -100,7 +110,7 @@ const Withdrawals = () => {
                     <label for="checkbox1"></label>
                   </td>
                   <td>
-                    <button className="cart-buttons">clear</button>
+                    <button className="cart-buttons" onClick={handlePaymentModal}>clear</button>
                   </td>
                 </tr>
               ))}
@@ -108,8 +118,11 @@ const Withdrawals = () => {
           </table>
         </div>
       </div>
+      <div className={`custom-modal ${showPaymentModal ? "active" : ""}`}>
+        <ClearPaymentModal handlePaymentModal={handlePaymentModal} />
+      </div>
     </div>
   );
 };
-
+ 
 export default Withdrawals;

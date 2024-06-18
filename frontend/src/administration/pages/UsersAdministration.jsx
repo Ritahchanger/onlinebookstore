@@ -5,6 +5,7 @@ import AdminSidebar from "../components/AdminSidebar";
 import AdminNavbar from "../components/AdminNavbar";
 import "./users.css";
 import UpdateRole from "../components/UpdateRole";
+import User from "../../assets/icons/user.png";
 
 const UsersAdministration = () => {
   const [sidebar, showSidebar] = useState(false);
@@ -80,12 +81,21 @@ const UsersAdministration = () => {
             <tbody>
               {filteredUsers.map((user) => (
                 <tr key={user._id}>
-                  <td>
-                    <img
-                      src={`${Config.apiUrl}/upload/authors/${user.passport}`}
-                      alt={`${user.firstName || "User"}'s profile`}
-                    />
-                  </td>
+                  {user.passport ? (
+                    <td>
+                      <img
+                        src={`${Config.apiUrl}/upload/authors/${user.passport}`}
+                      />
+                    </td>
+                  ) : (
+                    <td>
+                      <img
+                        src={User}
+                        alt="Profile"
+                      />
+                    </td>
+                  )}
+
                   <td>{`${user.firstName || ""} ${user.secondName || ""}`}</td>
                   <td>{user.email || ""}</td>
                   <td>{user.userId || ""}</td>

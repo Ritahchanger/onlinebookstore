@@ -4,6 +4,7 @@ import AccountNavbar from "./AccountNavbar";
 import axios from "axios";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 import { useSelector } from "react-redux";
+
 import "./Withdrawal.css";
 import Config from "../../../Config";
 
@@ -34,7 +35,7 @@ const PaymentDetails = () => {
         }
       );
       if (response.status !== 200 && response.status !== 201) {
-        throw new Error(`There was a problem accessing the server!`);
+        throw new Error(`There was a network technicalities encountered!`);
       }
       console.log("Withdrawal account created successfully");
     } catch (error) {
@@ -44,8 +45,6 @@ const PaymentDetails = () => {
   useEffect(() => {
     setWithdrawalAccount();
   }, [user.user._id]);
-
-  console.log(withdrawalAmount);
 
   return (
     <div className="account withdrawal">
@@ -107,10 +106,10 @@ const PaymentDetails = () => {
               <div className="medium-header">WITHDRAW</div>
               <div className="input-group">
                 <input
-                  type="text"
+                  type="number"
                   name="amount"
                   value={withdrawalAmount}
-                  placeholder="Amount to withdrawal in(SH)..(NO LETTER,COMMA OR CHARACTER"
+                  placeholder="Amount to withdrawal.."
                   onChange={(e) => {
                     setWithDrawalAmount(e.target.value);
                   }}
@@ -139,6 +138,9 @@ const PaymentDetails = () => {
                   type="submit"
                   value="REQUEST WITHDRAW"
                   className="withdrawal"
+                  style={
+                    withdrawalAmount.length ===0 ? { marginTop: "10px" } : null
+                  }
                 />
               </div>
             </div>
