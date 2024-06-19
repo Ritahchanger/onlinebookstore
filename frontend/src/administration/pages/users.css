@@ -7,6 +7,15 @@
 .admin.users .custom-modal .medium-header {
   margin: 0;
 }
+.admin.users .table_wrapper table {
+  font-size: 12px;
+  font-weight:600;
+}
+.admin.users .table_wrapper table thead tr td {
+  font-size: 12px;
+  font-weight:600;
+  text-transform: uppercase;
+}
 .admin.users .custom-modal form {
   position: relative;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);

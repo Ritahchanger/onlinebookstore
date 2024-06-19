@@ -133,81 +133,23 @@ const deleteCartItem = async (req, res) => {
     return res.status(500).json({ success: false, error: error.message })
   }
 }
-
-// const purchaseCart = async (req, res) => {
-//   try {
-//     const { userId } = req.params
-
-//     if (!userId) {
-//       return res
-//         .status(400)
-//         .json({ success: false, error: 'User ID is required' })
-//     }
-
-//     // Find the user's cart
-//     const cart = await Cart.findOne({ userId }).populate('items.productId')
-
-//     if (!cart || cart.items.length === 0) {
-//       return res
-//         .status(400)
-//         .json({ success: false, error: 'Cart is empty or does not exist' })
-//     }
-
-//     // Move cart items to the PurchasedItems collection
-//     const purchasedItems = new PurchasedItem({
-//       userId,
-//       items: cart.items.map(item => ({
-//         productId: item.productId,
-//         quantity: item.quantity,
-//         addedAt: item.addedAt
-//       }))
-//     })
-
-//     await purchasedItems.save()
-
-//     // Increment purchaseCount for each book
-//     for (const item of cart.items) {
-//       // Find the book by productId (assuming productId is the _id of the Book)
-//       const book = await Book.findById(item.productId)
-
-//       if (book) {
-//         // Increment purchaseCount
-//         book.purchaseCount += item.quantity // Increment by the quantity purchased
-
-//         await book.save()
-//       } else {
-//         // Handle case where book is not found (optional)
-//         console.log(`Book not found for productId: ${item.productId}`)
-//       }
-//     }
-
-//     // Delete the cart
-//     await Cart.deleteOne({ userId })
-
-//     return res.status(200).json({
-//       success: true,
-//       message: 'Purchase successful and cart deleted',
-//       purchasedItems
-//     })
-//   } catch (error) {
-//     return res.status(500).json({ success: false, error: error.message })
-//   }
-// }
-
-
 const purchaseCart = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { userId } = req.params
 
     if (!userId) {
-      return res.status(400).json({ success: false, error: 'User ID is required' });
+      return res
+        .status(400)
+        .json({ success: false, error: 'User ID is required' })
     }
 
     // Find the user's cart
-    const cart = await Cart.findOne({ userId }).populate('items.productId');
+    const cart = await Cart.findOne({ userId }).populate('items.productId')
 
     if (!cart || cart.items.length === 0) {
-      return res.status(400).json({ success: false, error: 'Cart is empty or does not exist' });
+      return res
+        .status(400)
+        .json({ success: false, error: 'Cart is empty or does not exist' })
     }
 
     // Move cart items to the PurchasedItems collection
@@ -218,56 +160,57 @@ const purchaseCart = async (req, res) => {
         quantity: item.quantity,
         addedAt: item.addedAt
       }))
-    });
+    })
 
-    await purchasedItems.save();
+    await purchasedItems.save()
 
     // Increment purchaseCount for each book
     for (const item of cart.items) {
       try {
         // Find the book by productId (assuming productId is the _id of the Book)
-        const book = await Book.findById(item.productId);
+        const book = await Book.findById(item.productId)
 
         if (book) {
           // Increment purchaseCount
-          book.purchaseCount += item.quantity; // Increment by the quantity purchased
-          await book.save();
+          book.purchaseCount += item.quantity // Increment by the quantity purchased
+          await book.save()
 
           // Find and update the author's total amount
-          const author = await User.findById(book.author);
+          const author = await User.findById(book.author)
           if (author) {
-            
-              author.amount += Number(Number(item.quantity) * Number(book.price));
-              await author.save();
-           
+            author.amount += Number(Number(item.quantity) * Number(book.price))
+            await author.save()
           } else {
-            console.log(`Author not found for book with productId: ${item.productId}`);
+            console.log(
+              `Author not found for book with productId: ${item.productId}`
+            )
           }
         } else {
-          console.log(`Book not found for productId: ${item.productId}`);
+          console.log(`Book not found for productId: ${item.productId}`)
         }
       } catch (error) {
-        console.error(`Error processing book with productId ${item.productId}:`, error);
+        console.error(
+          `Error processing book with productId ${item.productId}:`,
+          error
+        )
         // Handle specific book processing errors if needed
         // This ensures that errors do not stop the entire process
       }
     }
 
     // Delete the cart
-    await Cart.deleteOne({ userId });
+    await Cart.deleteOne({ userId })
 
     return res.status(200).json({
       success: true,
       message: 'Purchase successful and cart deleted',
       purchasedItems
-    });
+    })
   } catch (error) {
-    console.error('Error in purchaseCart:', error);
-    return res.status(500).json({ success: false, error: error.message });
+    console.error('Error in purchaseCart:', error)
+    return res.status(500).json({ success: false, error: error.message })
   }
-};
-
-
+}
 
 const getPurchasedItemsByUserId = async (req, res) => {
   try {
@@ -312,6 +255,79 @@ const updatePurchaseCount = async bookIds => {
   }
 }
 
+const getAllPurchasedItemsByUsers = async (req, res) => {
+  try {
+    const purchasedItems = await PurchasedItem.aggregate([
+      {
+        $unwind: '$items'
+      },
+      {
+        $lookup: {
+          from: 'books',
+          localField: 'items.productId',
+          foreignField: '_id',
+          as: 'bookDetails'
+        }
+      },
+      {
+        $unwind: '$bookDetails'
+      },
+      {
+        $sort: { 'items.purchaseDate': -1 }
+      },
+      {
+        $group: {
+          _id: '$_id',
+          userId: { $first: '$userId' },
+          items: {
+            $push: {
+              productId: '$items.productId',
+              quantity: '$items.quantity',
+              purchaseDate: '$items.purchaseDate',
+              title: '$bookDetails.title',
+              price: '$bookDetails.price'
+            }
+          }
+        }
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'userId',
+          foreignField: '_id',
+          as: 'userDetails'
+        }
+      },
+      {
+        $unwind: '$userDetails'
+      },
+      {
+        $project: {
+          _id: 1,
+          userId: 1,
+          items: 1,
+          firstName: '$userDetails.firstName',
+          secondName: '$userDetails.secondName',
+          user:'$userDetails.userId'
+        }
+      }
+    ]);
+
+    if (!purchasedItems || purchasedItems.length === 0) {
+      return res.status(404).json({
+        status: 404,
+        success: false,
+        message: 'Purchase history not found'
+      });
+    }
+
+    res.status(200).json({ status: 200, success: true, data: purchasedItems });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 module.exports = {
   addCartItem,
   getCartItems,
@@ -319,5 +335,6 @@ module.exports = {
   deleteCartItem,
   purchaseCart,
   getPurchasedItemsByUserId,
-  updatePurchaseCount
+  updatePurchaseCount,
+  getAllPurchasedItemsByUsers
 }

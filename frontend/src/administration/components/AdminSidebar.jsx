@@ -84,6 +84,18 @@ const AdminSidebar = ({ sidebar }) => {
         </li>
         <li>
           <NavLink
+            to="/admin/purchase-history"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            <p>
+              <i className="fas fa-history"></i>
+            </p>
+            <p>Purchase history!</p>
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
             to="/admin/withdrawals"
             className={({ isActive }) => (isActive ? "active" : "")}
           >

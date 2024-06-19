@@ -17,6 +17,9 @@ router.post('/purchase/:userId', CartController.purchaseCart)
 
 router.get('/purchase/:userId/get', CartController.getPurchasedItemsByUserId)
 
+
+router.get('/get/all/purchases',CartController.getAllPurchasedItemsByUsers);
+
 router.post('/success', async (req, res) => {
   const { bookIds } = req.body
 

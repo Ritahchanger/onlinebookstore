@@ -142,7 +142,7 @@ const Login = () => {
   return (
     <div className="authentication">
       <div className="form-wrapper">
-        <form action="#" className="login-form" onSubmit={handleSubmit}>
+        <form action="#" className="login-form" onSubmit={handleSubmit} noValidate>
           <p className="form-title">USER LOGIN</p>
           <div className="input-group">
             <input

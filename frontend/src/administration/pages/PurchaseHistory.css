@@ -1,0 +1,52 @@
+.admin.purchase-history .table_wrapper {
+  overflow: scroll;
+  max-height: calc(100vh - 80px);
+  border-top: 2px solid var(--green);
+}
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.admin.purchase-history .table_wrapper table thead tr td {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.admin.purchase-history .table_wrapper table {
+  font-size: 12px;
+  font-weight: 600;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+p .table th,
+.table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+}
+
+.product-list,
+.quantity-list,
+.date-list,
+.price-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-list li,
+.quantity-list li,
+.date-list li,
+.price-list li {
+  margin-bottom: 5px;
+}

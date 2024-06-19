@@ -76,7 +76,7 @@ const ActiveBooks = () => {
                           "No Image"
                         )}
                       </td>
-                      <td>{book?.productId?.title || "No Title"}</td>
+                      <td>{book?.productId?.title.toUpperCase() || "No Title"}</td>
                       <td>
                         {truncateDescription(book?.productId?.description)}
                       </td>

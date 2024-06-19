@@ -5,60 +5,44 @@ import SideBar from "./SideBar";
 import AccountNavbar from "./AccountNavbar";
 import TerminationModel from "../../components/TerminationModel/TerminationModel";
 import Config from "../../../Config";
-
 import "./Withdrawal.css";
-
+import CardPaymentCard from "./CardPaymentCard";
+import WithdrawalCard from "./WithdrawalCard";
 const PaymentDetails = () => {
   const user = useSelector((state) => state.auth.user);
   const [sidebar, showSidebar] = useState(false);
   const [terminationModel, showTerminationModel] = useState(false);
-  const [withdrawalAmount, setWithDrawalAmount] = useState("");
+
+  const [userDetails, setUserDetails] = useState(null);
+
+  const [userInformation, setUserInformation] = useState(null);
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhoneNumber = (phoneNumber) => {
+    const phoneNumberRegex = /^\d{10}$/;
+    return phoneNumberRegex.test(phoneNumber);
+  };
+  const [loading, setLoading] = useState(false);
   const [paypalEmail, setPaypalEmail] = useState("");
   const [mpesaNumber, setMpesaNumber] = useState("");
   const [emailSuccessMessage, setEmailSuccessMessage] = useState("");
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [phoneNoSuccessMessage, setPhoneNoSuccessMessage] = useState("");
   const [phoneNoErrorMessage, setPhoneNoErrorMessage] = useState("");
-
-  const handleSidebar = () => {
-    showSidebar(!sidebar);
-  };
-
-  const handleTerminationModel = () => {
-    showTerminationModel(!terminationModel);
-  };
-
-  const setWithdrawalAccount = async () => {
-    try {
-      const response = await axios.post(
-        `${Config.apiUrl}/api/withdrawals/post`,
-        {
-          userId: user?.user?._id,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.status !== 200 && response.status !== 201) {
-        throw new Error(`There was a network technicalities encountered!`);
-      }
-      console.log("Withdrawal account created successfully");
-    } catch (error) {
-      console.log("There was a problem accessing the server!");
-    }
-  };
-
-  useEffect(() => {
-    setWithdrawalAccount();
-  }, [user?._id]);
-
   const updateEmail = async (e) => {
     e.preventDefault();
+    if (!validateEmail(paypalEmail)) {
+      setEmailErrorMessage("Invalid email format");
+      setEmailSuccessMessage("");
+      return;
+    }
     try {
+      setLoading(true);
       const response = await axios.put(
-        `${Config.apiUrl}/api/withdrawals/update-paypal-email/${user?.user?._id}`,
+        `${Config.apiUrl}/api/payment-detail/update-paypal-email/${user?.user?._id}`,
         {
           paypalEmail: paypalEmail,
         },
@@ -70,23 +54,35 @@ const PaymentDetails = () => {
       );
 
       if (response.status === 200) {
+        getPaymentDetails();
         setEmailSuccessMessage("Email updated successfully");
         setEmailErrorMessage("");
+        setPaypalEmail(""); // Clear input field
+      } else if (response.status === 409) {
+        setEmailErrorMessage(response.data.error);
+        setEmailSuccessMessage("");
       } else {
         throw new Error("There was an error accessing the server!");
       }
     } catch (error) {
-      setEmailErrorMessage("Failed to update email. Please try again.");
+      setEmailErrorMessage("We already have this email");
       setEmailSuccessMessage("");
       console.log("Error updating email:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
-
   const updatePhoneNo = async (e) => {
     e.preventDefault();
+    if (!validatePhoneNumber(mpesaNumber)) {
+      setPhoneNoErrorMessage("Phone number must be exactly 10 digits");
+      setPhoneNoSuccessMessage("");
+      return;
+    }
     try {
+      setLoading(true);
       const response = await axios.put(
-        `${Config.apiUrl}/api/withdrawals/update-mpesa-phone-no/${user?.user?._id}`,
+        `${Config.apiUrl}/api/payment-detail/update-mpesa-phone-no/${user?.user?._id}`,
         { mpesaNumber: mpesaNumber },
         {
           headers: {
@@ -96,19 +92,102 @@ const PaymentDetails = () => {
       );
 
       if (response.status === 200) {
+        getPaymentDetails();
         setPhoneNoSuccessMessage("M-Pesa phone number updated successfully");
         setPhoneNoErrorMessage("");
+        setMpesaNumber(""); // Clear input field
+      } else if (response.status === 409) {
+        getPaymentDetails();
+        setPhoneNoErrorMessage("This phone number is already used");
+        setPhoneNoSuccessMessage("");
       } else {
         throw new Error("There was an error accessing the server!");
       }
     } catch (error) {
-      setPhoneNoErrorMessage(
-        "Failed to update M-Pesa phone number. Please try again."
-      );
+      setPhoneNoErrorMessage("We already have this phone no");
       setPhoneNoSuccessMessage("");
       console.log("Error updating M-Pesa phone number:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
+
+  const handleSidebar = () => {
+    showSidebar(!sidebar);
+  };
+
+  const handleTerminationModel = () => {
+    showTerminationModel(!terminationModel);
+  };
+
+  const getUserInformation = async () => {
+    try {
+      const response = await axios.get(
+        `${Config.apiUrl}/api/users/user-information/${user.user?._id}`
+      );
+      setUserInformation(response.data.data);
+    } catch (error) {
+      console.log("There was an error accessing the server");
+    }
+  };
+
+  const setWithdrawalAccount = async () => {
+    try {
+      const response = await axios.post(
+        `${Config.apiUrl}/api/payment-detail/post`,
+        {
+          userId: user?.user?._id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status !== 200 && response.status !== 201) {
+        throw new Error("There was a network technicality encountered!");
+      }
+      console.log("Withdrawal account created successfully");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const getPaymentDetails = async () => {
+    try {
+      const response = await axios.get(
+        `${Config.apiUrl}/api/payment-detail/payment-details/${user?.user?._id}`
+      );
+
+      if (response.status === 200) {
+        setUserDetails(response.data);
+      } else {
+        throw new Error(
+          "There was an error fetching user details from the backend"
+        );
+      }
+    } catch (error) {
+      console.log(
+        `There was a problem getting the user payment details ${error.message}`
+      );
+    }
+  };
+
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        await setWithdrawalAccount();
+        await getPaymentDetails();
+      } catch (error) {
+        console.error("Error fetching payment details:", error);
+      }
+    };
+
+    if (user?.user?._id) {
+      fetchDetails();
+      getUserInformation();
+    }
+  }, [user?.user?._id]);
 
   return (
     <div className="account withdrawal">
@@ -122,7 +201,7 @@ const PaymentDetails = () => {
         <div className="container">
           <p className="medium-header">PAYMENT DETAILS</p>
           <p className="small-header">
-            {`Hello, ${user?.firstName} ${user?.secondName}! You can manage your withdrawal options and update your payment information here.`}
+            {`Hello, ${user?.user?.firstName} ${user?.user?.secondName}! You can manage your withdrawal options and update your payment information here.`}
           </p>
           <p>
             Please ensure that the payment details provided to Bemi Editors are
@@ -135,95 +214,37 @@ const PaymentDetails = () => {
           <p className="small-header larger-font">
             Minimum amount withdrawable:
             <br />
-            sh 3000 equivalent to $ 23.18
+            sh 2000 equivalent to $ {(2000 / 129.48).toFixed(2)}
           </p>
           <div className="grid">
-            <div className="card">
-              <div className="medium-header">DETAILS</div>
-              <div className="detail">
-                <p>Phone No</p>
-                <p>07-121-95-228</p>
-              </div>
-              <div className="detail">
-                <p>Paypal Email</p>
-                <p>{paypalEmail}</p>
-              </div>
-              <p className="medium-header">UPDATE PAYMENT DETAILS</p>
-              <form onSubmit={updatePhoneNo} className="input-group">
-                <input
-                  type="text"
-                  name="mpesanumber"
-                  placeholder="Enter M-Pesa number.."
-                  value={mpesaNumber}
-                  onChange={(e) => setMpesaNumber(e.target.value)}
-                  required
-                />
-                <input type="submit" value="UPDATE M-PESA" />
-              </form>
-              {phoneNoSuccessMessage && (
-                <p className="success-message">{phoneNoSuccessMessage}</p>
-              )}
-              {phoneNoErrorMessage && (
-                <p className="error-message">{phoneNoErrorMessage}</p>
-              )}
-              <form onSubmit={updateEmail} className="input-group">
-                <input
-                  type="email"
-                  name="paypalEmail"
-                  placeholder="Enter PayPal email.."
-                  value={paypalEmail}
-                  onChange={(e) => setPaypalEmail(e.target.value)}
-                  required
-                />
-                <input type="submit" value="UPDATE PAYPAL" />
-              </form>
-              {emailSuccessMessage && (
-                <p className="success-message">{emailSuccessMessage}</p>
-              )}
-              {emailErrorMessage && (
-                <p className="error-message">{emailErrorMessage}</p>
-              )}
-            </div>
+            <CardPaymentCard
+              getPaymentDetails={getPaymentDetails}
+              user={user}
+              userDetails={userDetails}
+              setWithdrawalAccount={setWithdrawalAccount}
+              userInformation={userInformation}
+              updateEmail={updateEmail}
+              mpesaNumber={mpesaNumber}
+              paypalEmail={paypalEmail}
+              updatePhoneNo={updatePhoneNo}
+              emailErrorMessage={emailErrorMessage}
+              emailSuccessMessage={emailSuccessMessage}
+              phoneNoErrorMessage={phoneNoErrorMessage}
+              phoneNoSuccessMessage={phoneNoSuccessMessage}
+              setMpesaNumber={setMpesaNumber}
+              setPhoneNoErrorMessage={setPhoneNoErrorMessage}
+              setPhoneNoSuccessMessage={setPhoneNoSuccessMessage}
+              setPaypalEmail={setPaypalEmail}
+              setEmailErrorMessage={setEmailErrorMessage}
+              setEmailSuccessMessage={setEmailSuccessMessage}
+              loading={loading}
+            />
             <div className="card">
               <div className="medium-header">WITHDRAW</div>
-              <div className="input-group">
-                <input
-                  type="number"
-                  name="amount"
-                  value={withdrawalAmount}
-                  placeholder="Amount to withdrawal.."
-                  onChange={(e) => {
-                    setWithDrawalAmount(e.target.value);
-                  }}
-                />
-                {withdrawalAmount.length > 1 && (
-                  <>
-                    <p
-                      className="medium-header"
-                      style={{ textAlign: "center" }}
-                    >{`Sh ${withdrawalAmount} equivalent to $ ${(
-                      withdrawalAmount / 129.48
-                    ).toFixed(2)}`}</p>
-                    <p className="medium-header">
-                      {`Subtracting 20% you'll get sh ${
-                        0.8 * withdrawalAmount
-                      } equivalent to $ ${(
-                        (0.8 * withdrawalAmount) /
-                        129.48
-                      ).toFixed(2)}`}
-                    </p>
-                  </>
-                )}
-
-                <input
-                  type="submit"
-                  value="REQUEST WITHDRAW"
-                  className="withdrawal"
-                  style={
-                    withdrawalAmount.length === 0 ? { marginTop: "10px" } : null
-                  }
-                />
-              </div>
+              <WithdrawalCard
+                paypalEmail={paypalEmail}
+                mpesaNumber={mpesaNumber}
+              />
             </div>
           </div>
         </div>

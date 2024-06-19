@@ -1,8 +1,10 @@
 .admin.withdrawals .table_wrapper table {
   font-size: 12px;
+  font-weight:600;
 }
 .admin.withdrawals .table_wrapper table thead tr td {
   font-size: 12px;
+  font-weight:600;
   text-transform: uppercase;
 }
 .admin.withdrawals .custom-modal{

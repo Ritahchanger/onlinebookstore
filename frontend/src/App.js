@@ -44,6 +44,8 @@ import AdminNewsLetter from './administration/pages/AdminNewsLetter'
 import Withdrawals from './administration/pages/Withdrawals'
 import PaymentDetails from './users/pages/Account/PaymentDetails'
 
+import PurchaseHistory from './administration/pages/PurchaseHistory'
+
 const App = () => {
   const user = useSelector(state => state.auth.user)
 
@@ -225,6 +227,14 @@ const App = () => {
             element={
               <ProtectedRoutes>
                 <Withdrawals/>
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path='/admin/purchase-history'
+            element={
+              <ProtectedRoutes>
+                <PurchaseHistory/>
               </ProtectedRoutes>
             }
           />

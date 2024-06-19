@@ -13,6 +13,8 @@ const UsersAdministration = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [updateModal, setUpdateModal] = useState(false);
   const [userToUpdate, setUserToUpdate] = useState(null);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   const handleSidebar = () => {
     showSidebar(!sidebar);
@@ -31,15 +33,49 @@ const UsersAdministration = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    // Calculate total amount when users state changes
+    const calculateTotalAmount = () => {
+      let total = 0;
+      users.forEach((user) => {
+        if (user.amount) {
+          total += parseFloat(user.amount);
+        }
+      });
+      setTotalAmount(total);
+    };
+
+    calculateTotalAmount();
+  }, [users]);
+
+  useEffect(() => {
+    // Update filteredUsers when searchTerm or users change
+    const filtered = users.filter((user) =>
+      `${user.firstName || ""} ${user.secondName || ""}`
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
+    );
+    setFilteredUsers(filtered);
+  }, [searchTerm, users]);
+
+  useEffect(() => {
+    // Calculate total amount based on filteredUsers
+    const calculateFilteredTotalAmount = () => {
+      let total = 0;
+      filteredUsers.forEach((user) => {
+        if (user.amount) {
+          total += parseFloat(user.amount);
+        }
+      });
+      setTotalAmount(total);
+    };
+
+    calculateFilteredTotalAmount();
+  }, [filteredUsers]);
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-
-  const filteredUsers = users.filter((user) =>
-    `${user.firstName || ""} ${user.secondName || ""}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
-  );
 
   const handleUpdateModal = () => {
     setUpdateModal(!updateModal);
@@ -65,6 +101,7 @@ const UsersAdministration = () => {
           />
           <i className="fa-solid fa-magnifying-glass"></i>
         </div>
+        <p>Total amount = {totalAmount.toFixed(2)} shillings</p>
         <div className="table_wrapper">
           <table>
             <thead>
@@ -76,6 +113,7 @@ const UsersAdministration = () => {
                 <td>ROLES</td>
                 <td>CREATED ON</td>
                 <td>CHANGE ROLE</td>
+                <td>AMOUNT</td>
               </tr>
             </thead>
             <tbody>
@@ -85,14 +123,12 @@ const UsersAdministration = () => {
                     <td>
                       <img
                         src={`${Config.apiUrl}/upload/authors/${user.passport}`}
+                        alt="Profile"
                       />
                     </td>
                   ) : (
                     <td>
-                      <img
-                        src={User}
-                        alt="Profile"
-                      />
+                      <img src={User} alt="Profile" />
                     </td>
                   )}
 
@@ -112,6 +148,7 @@ const UsersAdministration = () => {
                       UPDATE ROLE
                     </button>
                   </td>
+                  <td>{user.amount ? <p>{user.amount}</p> : <p>0.0</p>}</td>
                 </tr>
               ))}
             </tbody>

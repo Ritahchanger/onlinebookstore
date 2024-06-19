@@ -1,32 +1,26 @@
 const mongoose = require('mongoose');
 
-const WithdrawalSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  }, 
-  requestTime: {
-    type: Date,
-    default: Date.now
-  },
-  amount: {
-    type: Number,
-  },
-  mpesaNumber: {
-    type: String,
-    unique: true,
-  },
-  paypalEmail: {
-    type: String,
-    unique: true,
-  },
-  isPaymentConfirmed: {
-    type: Boolean,
-    default: false
-  }
-});
+const WithdrawalsSchema = new mongoose.Schema({
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User',
+    },
+    amount:{
+        type:Number,
+        default:0,
+    },
+    requestedTime:{
+        type:Date,
+        default:Date.now
+    },
+    paypalEmail:{
+        type:String,
+    },
+    mpesaNumber:{
+        type:String,
+    }
+})
 
-const Withdrawal = mongoose.model('Withdrawal', WithdrawalSchema);
+const Withdrawal = mongoose.model('Withdrawal',WithdrawalsSchema);
 
 module.exports = Withdrawal;
