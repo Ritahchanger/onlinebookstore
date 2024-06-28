@@ -14,7 +14,7 @@
   margin: 0 auto;
   padding: 1rem;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns:1fr 3fr;
   gap: 1rem;
 }
 .profile .container .user-information {

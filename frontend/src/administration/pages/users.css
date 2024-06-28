@@ -7,6 +7,9 @@
 .admin.users .custom-modal .medium-header {
   margin: 0;
 }
+.admin.users .table_wrapper{
+  max-height: calc(100vh - 154px);
+}
 .admin.users .table_wrapper table {
   font-size: 12px;
   font-weight:600;

@@ -12,6 +12,7 @@ import Config from "../../Config";
 const AdminNavbar = ({ handleSidebar, sidebar }) => {
   const user = useSelector((state) => state.auth.user);
 
+
   return (
     <div className="adminNavbar">
       {sidebar ? (

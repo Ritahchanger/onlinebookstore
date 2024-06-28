@@ -72,29 +72,37 @@ const updatePaypalEmail = async (req, res) => {
 
 const postUserId = async (req, res) => {
   try {
-    const { userId } = req.body
+    const { userId, mpesaNumber, paypalEmail } = req.body;
 
     if (!userId) {
       return res.status(400).json({
         success: false,
         status: 400,
         message: 'User ID is required'
-      })
+      });
     }
 
-    const detail = await PaymentDetail.findOne({ user: userId })
+    const detail = await PaymentDetail.findOne({ user: userId });
 
     if (!detail) {
-      const newWithdrawalAccount = new PaymentDetail({
-        user: userId
-      })
-      await newWithdrawalAccount.save()
+      const newWithdrawalAccountData = { user: userId };
+
+      // Only include mpesaNumber and paypalEmail if they are provided and not null
+      if (mpesaNumber) {
+        newWithdrawalAccountData.mpesaNumber = mpesaNumber;
+      }
+      if (paypalEmail) {
+        newWithdrawalAccountData.paypalEmail = paypalEmail;
+      }
+
+      const newWithdrawalAccount = new PaymentDetail(newWithdrawalAccountData);
+      await newWithdrawalAccount.save();
       return res.status(201).json({
         success: true,
         status: 201,
         message: 'PaymentDetail account successfully created',
         detail: newWithdrawalAccount
-      })
+      });
     }
 
     return res.status(200).json({
@@ -102,16 +110,26 @@ const postUserId = async (req, res) => {
       status: 200,
       message: 'PaymentDetail account already exists',
       detail: detail
-    })
+    });
   } catch (error) {
+    if (error.code === 11000) {
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        message: 'Duplicate key error',
+        error: error.message
+      });
+    }
+
     return res.status(500).json({
       success: false,
       status: 500,
       message: 'Server error',
       error: error.message
-    })
+    });
   }
-}
+};
+
 
 
 const getPaymentDetails = async (req, res) => {

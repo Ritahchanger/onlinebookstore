@@ -9,7 +9,6 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
   const [dropdown, setDropdown] = useState(false);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isAdmin = user.user.roles.includes("admin");
   const handleDropDown = () => {
     setDropdown(!dropdown);
@@ -55,12 +54,16 @@ const AccountNavbar = ({ handleSidebar, sidebar }) => {
           {user.user.userId}
         </p>
       </div>
-      <Link to="/admin/unapproved" className="cart-buttons home">
-        <p>
-          <i class="fas fa-cogs"></i>
-        </p>
-        <p>Admin</p>
-      </Link>
+
+      {isAdmin && (
+        <Link to="/admin/unapproved" className="cart-buttons home">
+          <p>
+            <i class="fas fa-cogs"></i>
+          </p>
+          <p>Admin</p>
+        </Link>
+      )}
+
       <div className="profile-section" onClick={handleNavigation}>
         <div className="img-wrapper">
           <img

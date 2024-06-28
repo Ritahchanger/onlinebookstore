@@ -242,8 +242,8 @@ const PaymentDetails = () => {
             <div className="card">
               <div className="medium-header">WITHDRAW</div>
               <WithdrawalCard
-                paypalEmail={paypalEmail}
-                mpesaNumber={mpesaNumber}
+                userInformation={userInformation}
+                userDetails={userDetails}
               />
             </div>
           </div>

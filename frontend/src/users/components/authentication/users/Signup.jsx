@@ -162,6 +162,7 @@ const SignUp = () => {
         }
 
         if (!backendResult.usernameFound && !backendResult.emailFound) {
+          navigate('/login')
         }
       } catch (error) {
         console.log(

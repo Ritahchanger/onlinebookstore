@@ -122,7 +122,7 @@ const forgotPassword = async (req, res) => {
     const encodedEmail = encodeURIComponent(email)
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '5m'
+      expiresIn: '3m'
     })
 
     // If user exists, proceed with sending the password reset email
@@ -234,16 +234,16 @@ const changePassword = async (req, res) => {
     console.error('Error updating password:', error)
 
     if (error.name === 'JsonWebTokenError') {
-      return res.status(401).json({
+      return res.status(200).json({
         success: false,
         message: 'Invalid token'
       })
     }
 
     if (error.name === 'TokenExpiredError') {
-      return res.status(401).json({
+      return res.status(200).json({
         success: false,
-        message: 'Token has expired'
+        message: 'Change password time expired!'
       })
     }
 

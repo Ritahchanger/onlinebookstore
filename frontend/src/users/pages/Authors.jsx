@@ -7,7 +7,6 @@ import AuthorItem from "../components/AuthorComponents/AuthorItem";
 import axios from "axios";
 import Config from "../../Config";
 
-
 const Authors = () => {
   const [authorData, setAuthorData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -61,7 +60,10 @@ const Authors = () => {
           {filteredAuthors.length === 0 ? (
             <p className="medium-header">No authors found</p>
           ) : (
-            <div className="grid">
+            <div
+              className="grid"
+             
+            >
               {filteredAuthors.map((author) => (
                 <AuthorItem key={author._id} author={author} />
               ))}

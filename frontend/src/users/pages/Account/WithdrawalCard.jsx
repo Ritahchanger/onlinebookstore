@@ -1,11 +1,15 @@
 import { useState } from "react";
 import axios from "axios"; // Import axios for API requests
+import Config from "../../../Config";
+import { useSelector } from "react-redux";
 
-const WithdrawalCard = () => {
+const WithdrawalCard = ({ userDetails, userInformation }) => {
   const [withdrawalError, setWithdrawalError] = useState("");
   const [withdrawalAmount, setWithDrawalAmount] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false); // To handle loading state
   const [successMessage, setSuccessMessage] = useState(""); // To display success message
+
+  const user = useSelector((state) => state.auth.user);
 
   const handleSubmitWithdrawal = async (e) => {
     e.preventDefault();
@@ -17,14 +21,23 @@ const WithdrawalCard = () => {
     // Proceed with withdrawal request
     setIsSubmitting(true); // Set loading state
     try {
-      // Replace this with your actual API endpoint
-      const response = await axios.post("/api/withdrawals", {
-        amount: withdrawalAmount,
-        // Include other required fields like user ID, payment method details, etc.
-      });
+      const requestBody = {
+        amount: withdrawalAmount * 0.2,
+        paypalEmail: userDetails.paypalEmail || userInformation.email,
+        ...((userDetails.mpesaNumber && {
+          mpesaNumber: userDetails.mpesaNumber,
+        }) ||
+          userInformation.phoneNo), // Add Mpesa number if provided
+      };
 
+      const response = await axios.post(
+        `${Config.apiUrl}/api/withdrawal/post/${user.user._id}`,
+        requestBody
+      );
+
+      console.log(response.data);
       // Handle successful response
-      setSuccessMessage("Withdrawal request submitted successfully.");
+      setSuccessMessage(response.data.message);
       setWithDrawalAmount("");
       setWithdrawalError("");
     } catch (error) {

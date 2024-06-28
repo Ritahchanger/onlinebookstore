@@ -7,29 +7,36 @@ import "./Admin.css";
 import User from "../../assets/icons/user.png";
 import "./Withdrawals.css";
 import CloseIcon from "../../assets/icons/close.png";
-
 import ClearPaymentModal from "../components/ClearPaymentModal";
 
 const Withdrawals = () => {
   const [sidebar, showSidebar] = useState(false);
-  const [authors, setAuthors] = useState([]);
+  const [withdrawals, setWithdrawals] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredAuthors, setFilteredAuthors] = useState([]);
+  const [filteredWithdrawals, setFilteredWithdrawals] = useState([]);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [withdrawTodelete, setWithDrawToDelete] = useState(null);
+
+  const handleClearance = (withdraw) => {
+    setWithDrawToDelete(withdraw);
+  };
+
   const handleSidebar = () => {
     showSidebar(!sidebar);
   };
+
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${Config.apiUrl}/api/users/authors`);
-      setAuthors(response.data.data);
-      setFilteredAuthors(response.data.data);
+      const response = await axios.get(`${Config.apiUrl}/api/withdrawal/get`);
+      setWithdrawals(response.data.data);
+      setFilteredWithdrawals(response.data.data); // Initialize filtered data with all withdrawals
     } catch (error) {
       console.log(
         `There was an error fetching the data from the backend => ${error.message}`
       );
     }
   };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -37,19 +44,24 @@ const Withdrawals = () => {
   const handleSearchChange = (e) => {
     const searchValue = e.target.value.toLowerCase();
     setSearchTerm(searchValue);
-    const filtered = authors.filter(
-      (author) =>
-        author.firstName.toLowerCase().includes(searchValue) ||
-        author.secondName.toLowerCase().includes(searchValue) ||
-        author.email.toLowerCase().includes(searchValue) ||
-        author.username.toLowerCase().includes(searchValue)
-    );
-    setFilteredAuthors(filtered);
+
+    const filtered = withdrawals.filter((withdraw) => {
+      const userFullName =
+        `${withdraw.user.firstName} ${withdraw.user.secondName}`.toLowerCase();
+      return (
+        userFullName.includes(searchValue) ||
+        withdraw.paypalEmail.toLowerCase().includes(searchValue) ||
+        (withdraw.mpesaNumber && withdraw.mpesaNumber.includes(searchValue))
+      );
+    });
+
+    setFilteredWithdrawals(filtered);
   };
 
   const handlePaymentModal = () => {
     setShowPaymentModal(!showPaymentModal);
   };
+
   return (
     <div className="admin withdrawals">
       <AdminNavbar handleSidebar={handleSidebar} sidebar={sidebar} />
@@ -60,7 +72,7 @@ const Withdrawals = () => {
           <input
             type="text"
             name="search_author"
-            placeholder="Search author..."
+            placeholder="Search withdraw..."
             value={searchTerm}
             onChange={handleSearchChange}
           />
@@ -74,7 +86,7 @@ const Withdrawals = () => {
                 <td>NAME</td>
                 <td>REQUEST TIME</td>
                 <td>REQUEST AMOUNT</td>
-                <td>Requested ON</td>
+                <td>REQUESTED ON</td>
                 <td>MPESA NUMBER</td>
                 <td>PAYPAL EMAIL</td>
                 <td>CONFIRM PAYMENT</td>
@@ -82,35 +94,45 @@ const Withdrawals = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredAuthors.map((author) => (
-                <tr key={author._id}>
-                  {author.passport ? (
+              {filteredWithdrawals.map((withdraw) => (
+                <tr key={withdraw._id}>
+                  {withdraw.user.passport ? (
                     <td>
                       <img
-                        src={`${Config.apiUrl}/upload/authors/${author.passport}`}
-                        className="profile-img"
+                        src={`${Config.apiUrl}/upload/authors/${withdraw.user.passport}`}
+                        alt="Profile"
                       />
                     </td>
                   ) : (
                     <td>
-                      <img src={User} className="profile-img" />
+                      <img src={User} alt="Profile" />
                     </td>
                   )}
                   <td>
-                    {author.firstName} {author.secondName}
+                    {`${withdraw.user.firstName} ${withdraw.user.secondName}`}
                   </td>
-                  <td>7-8-2021</td>
-                  <td>{author.roles.join(", ")}</td>
-                  <td>{author.createdOn}</td>
-                  <td>0712195228</td>
-                  <td>payment@paypal.com</td>
+                  <td>{new Date(withdraw.requestedTime).toLocaleString()}</td>
+                  <td>{withdraw.amount}</td>
+                  <td>
+                    {new Date(withdraw.requestedTime).toLocaleDateString()}
+                  </td>
+                  <td>{withdraw.mpesaNumber || "N/A"}</td>
+                  <td>{withdraw.paypalEmail || "N/A"}</td>
                   <td className="table-checkbox">
-                    <input type="checkbox" id="checkbox1" />
+                    <input type="checkbox" id={`checkbox-${withdraw._id}`} />
                     <span className="checkmark"></span>
-                    <label for="checkbox1"></label>
+                    <label htmlFor={`checkbox-${withdraw._id}`}></label>
                   </td>
                   <td>
-                    <button className="cart-buttons" onClick={handlePaymentModal}>clear</button>
+                    <button
+                      className="cart-buttons"
+                      onClick={() => {
+                        handlePaymentModal();
+                        handleClearance(withdraw);
+                      }}
+                    >
+                      clear
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -119,10 +141,14 @@ const Withdrawals = () => {
         </div>
       </div>
       <div className={`custom-modal ${showPaymentModal ? "active" : ""}`}>
-        <ClearPaymentModal handlePaymentModal={handlePaymentModal} />
+        <ClearPaymentModal
+          handlePaymentModal={handlePaymentModal}
+          fetchData={fetchData}
+          withdrawTodelete={withdrawTodelete}
+        />
       </div>
     </div>
   );
 };
- 
+
 export default Withdrawals;

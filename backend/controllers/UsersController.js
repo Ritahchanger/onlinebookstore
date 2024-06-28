@@ -17,7 +17,7 @@ const nodemailer = require('nodemailer')
 
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find({}).select('-password') // Exclude the password field
+    const users = await User.find({}).select('-password').sort({createdOn: -1});
 
     if (users.length === 0) {
       return res
@@ -33,7 +33,7 @@ const getUsers = async (req, res) => {
 
 const getAuthors = async (req, res) => {
   try {
-    const authors = await User.find({ roles: 'author' }).select('-password')
+    const authors = await User.find({ roles: 'author' }).select('-password').sort({createdOn:-1})
 
     if (authors.length === 0) {
       return res

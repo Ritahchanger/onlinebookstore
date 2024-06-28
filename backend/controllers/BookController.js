@@ -42,7 +42,7 @@ const getBooks = async (req, res) => {
 const getBooksByAuthors = async (req, res) => {
   try {
     const authorId = req.params.id
-    const books = await Book.find({ author: authorId })
+    const books = await Book.find({ author: authorId }).sort({uploadedAt:-1})
 
     if (!books.length) {
       return res.status(404).json({

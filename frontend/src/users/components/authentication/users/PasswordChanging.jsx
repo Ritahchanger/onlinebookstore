@@ -11,7 +11,7 @@ const PasswordChanging = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token } = useParams();
-  const [ message,setMessage ] = useState(null);
+  const [message, setMessage] = useState(null);
 
   const [formData, setFormData] = useState({
     password: "",
@@ -77,7 +77,7 @@ const PasswordChanging = () => {
           }
         );
 
-        if (response.status === 200) {
+        if (response.data.success) {
           setSubmitSuccess(true);
 
           if (response.data.success) {
@@ -92,11 +92,17 @@ const PasswordChanging = () => {
             }, 2000);
           }
         } else {
-          throw new Error("There was a problem with the request");
+          console.log(response.data);
+          setServerError(response.data.message);
         }
       } catch (error) {
-        setServerError(error.response?.data?.message || "There was a problem accessing the server");
-        console.error(`There was a problem accessing the server: ${error.message}`);
+        setServerError(
+          error.response?.data?.message ||
+            "There was a problem accessing the server"
+        );
+        console.error(
+          `There was a problem accessing the server: ${error.message}`
+        );
       }
     }
   };
@@ -133,7 +139,7 @@ const PasswordChanging = () => {
           <div className="input-group">
             <input type="submit" value="SEND" />
           </div>
-          {serverError && <p className="error-message">{serverError}</p>}
+          {serverError && <p className="success" style={{color:"var(--pinkRed)"}}>{serverError}</p>}
           {submitSuccess && (
             <p className="success">
               Password reset successful! Redirecting to account...
