@@ -1,27 +1,32 @@
 .preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Ensure it's above other elements */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it's above other elements */
+}
+
+.loader {
+  border: 8px solid transparent; /* Transparent border */
+  border-top: 8px solid var(--blue); /* Blue border on top */
+  border-right: 8px solid var(--blue); /* Blue border on right */
+  border-radius: 50%; /* Rounded edges */
+  width: 80px;
+  height: 80px;
+  animation: spin 0.35s linear infinite; /* Rotate animation */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle box shadow */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  .loader {
-    border: 8px solid var(--white); /* Light gray border */
-    border-top: 8px solid var(--blue); /* Blue border on top */
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    animation: spin 0.5s linear infinite; /* Rotate animation */
+  100% {
+    transform: rotate(360deg);
   }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
+}

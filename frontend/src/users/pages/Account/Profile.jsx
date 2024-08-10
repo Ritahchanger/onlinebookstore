@@ -7,14 +7,14 @@ import ProfileIcon from "../../../assets/icons/boy.png";
 import { useSelector, useDispatch } from "react-redux";
 import uploadIcon from "../../../assets/icons/upload.png";
 import axios from "axios";
-import { updateUserData } from "../../Redux/features/userSlice";
+
 import UpdateBasicInformation from "./UpdateBasicInformation";
 import UpdateContactInformation from "./UpdateContactInformation";
 import UpdateEmailInformation from "./UpdateEmailInformation";
 import UpdatePasswordInformation from "./UpdatePasswordInformation";
 import Config from "../../../Config";
+import { updateUserData } from "../../Redux/features/userSlice";
 import { useParams, useNavigate } from "react-router-dom";
-
 const Profile = () => {
   const { currentEmail, userId } = useParams();
   const dispatch = useDispatch();
@@ -69,14 +69,8 @@ const Profile = () => {
         }
       );
 
-      // Update user data in Redux state
-      const updatedUserData = await axios.get(
-        `${Config.apiUrl}/api/users/userId/${user.user?._id}`
-      );
-
-      dispatch(updateUserData({ user: updatedUserData.data.data }));
-
-      // Update profileImage state and display message
+      await getUser()
+      
       setProfileImage(result.data.data);
       setFileMessage("File uploaded successfully");
     } catch (error) {
@@ -103,7 +97,10 @@ const Profile = () => {
         throw new Error("Failed to fetch user data");
       }
 
-      setUserProfile(response.data.data); // Update userProfile state with fetched data
+      dispatch(updateUserData({user:response.data.data}))
+
+      setUserProfile(response.data.data); 
+
     } catch (error) {
       console.error(`Error fetching user data: ${error.message}`);
     }
@@ -165,6 +162,8 @@ const Profile = () => {
     }
   };
 
+
+
   const handleEmailChangeCancel = () => {
     navigate("/profile");
   };
@@ -187,13 +186,23 @@ const Profile = () => {
           <div className="user-information">
             <div className="profile-card">
               <div className="profile-image">
-                <img
+                {/* <img
                   src={
                     profileImage
                       ? `${Config.apiUrl}/upload/authors/${profileImage}`
                       : ProfileIcon
                   }
                   alt={`${user.user?.firstName} ${user.user?.lastName}`}
+                /> */}
+
+                <img
+                  src={
+                    selectedFile
+                      ? URL.createObjectURL(selectedFile)
+                      : `${Config.apiUrl}/upload/authors/${profileImage}` ||
+                        ProfileIcon
+                  }
+                  alt={`${user.user?.firstName} ${user.user?.secondName}`}
                 />
               </div>
               <form className="alter_profile" onSubmit={uploadProfileImage}>

@@ -8,17 +8,14 @@ const Ebook = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-6">
-            <p className="small-header">ebook</p>
+            <p className="small-header">eBook</p>
             <p className="medium-header">
-              Access, Read, Practise & Engage
+              Access, Read, Practice & Engage
               <br />
               with Digital Content (eBook)
             </p>
             <p className="description">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione
-              soluta facere tempora quia quaerat distinctio suscipit tenetur rem
-              temporibus officia veniam facilis, alias eveniet aut, porro sunt
-              obcaecati provident corporis laudantium quam,
+              Dive into a world of knowledge with our extensive collection of eBooks. Whether you’re looking to learn something new, enhance your skills, or simply enjoy a good read, our digital library offers a variety of content to suit your needs. Easy to access, interactive, and available at your fingertips, our eBooks are designed to provide a seamless reading experience. Join us and start your journey towards lifelong learning today!
             </p>
           </div>
           <div className="col-md-6">

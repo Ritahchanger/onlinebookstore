@@ -10,6 +10,8 @@ import axios from "axios";
 
 import Config from "../../../../Config";
 
+import leftIcon from "../../../../assets/icons/left-arrow.png"
+
 const Login = () => {
   const dispatch = useDispatch();
 
@@ -79,7 +81,7 @@ const Login = () => {
 
           dispatch(login({ user: getUser.data.data }));
 
-          ///email
+        
 
           navigate("/account");
         }
@@ -141,6 +143,9 @@ const Login = () => {
 
   return (
     <div className="authentication">
+      <Link to="/" className="left-arrow">
+        <img src={leftIcon} alt="" />
+      </Link>
       <div className="form-wrapper">
         <form action="#" className="login-form" onSubmit={handleSubmit} noValidate>
           <p className="form-title">USER LOGIN</p>

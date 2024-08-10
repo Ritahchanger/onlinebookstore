@@ -16,7 +16,7 @@ const Logout = () => {
           `${Config.apiUrl}/api/auth/logout`
         );
 
-        navigate("/login");
+        navigate("/");
 
         dispatch(logout());
       } catch (error) {

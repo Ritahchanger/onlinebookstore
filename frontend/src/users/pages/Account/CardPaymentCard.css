@@ -1,0 +1,14 @@
+.card.card-payment input[type="submit"]{
+    border:none;
+    height:40px;
+    background:var(--blue);
+    cursor: pointer;
+}
+.card.card-payment input[type="submit"]{
+    border:none;
+    height:40px;
+    color:var(--white);
+}
+.card.card-payment input[type="submit"]:hover{
+    
+}

@@ -4,12 +4,34 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  position: relative;
+}
+.authentication .left-arrow img {
+  width: 30px;
+  height: 30px;
+}
+.authentication .left-arrow {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  transition:all 0.5s;
+}
+.authentication .left-arrow:hover {
+  box-shadow: 0 0 5px var(--darkGreen), 0 0 10px var(--darkGreen),
+    0 0 20px var(--darkGreen);
 }
 .authentication .form-wrapper {
   max-width: 600px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
   width: 100%;
-  border-radius: 10px;
+  border-radius:4px;
   margin: 0 10px;
 }
 .form-title {
@@ -53,10 +75,10 @@
   position: absolute;
   top: 100%;
   z-index: 9;
-  font-size:0.9rem;
+  font-size: 0.9rem;
 }
 .authentication .forget-password {
-  margin-top:1.2rem;
+  margin-top: 1.2rem;
 }
 
 @media (max-width: 498px) {
@@ -78,11 +100,11 @@
   .authentication .form-title {
     font-size: 1.4rem;
   }
-  .error-message{
-    font-size:0.85rem;
+  .error-message {
+    font-size: 0.85rem;
   }
   .authentication .form-wrapper form {
-    padding:0.5rem;
+    padding: 0.5rem;
     width: 100%;
     border-radius: 10px;
   }

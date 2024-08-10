@@ -7,6 +7,8 @@ import "./Admin.css";
 import "./blogs.css";
 import DeleteBlogModal from "../components/deleteBlogModal";
 import EditBlogModal from "../components/EditBlogModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BlogsAdministration = () => {
   const [sidebar, showSidebar] = useState(false);
@@ -74,18 +76,17 @@ const BlogsAdministration = () => {
       setTitle("");
       setDescription("");
       setImage(null);
-      setImagePreview(null); // Clear image preview after submission
+      setImagePreview(null); 
       setErrors({});
 
       if (!response.data.success) {
-        throw new Error("There was an error sending data to backend");
+        toast.error("There was an error sending data to backend");
       }
       alert("BLOG ADDED SUCCESSFULLY");
 
-      // Reset image input field
       document.getElementById("image-input").value = null;
     } catch (error) {
-      console.log(`There was an error creating the blog => ${error.message}`);
+    toast.error(`There was an error creating the blog => ${error.message}`);
     }
   };
 

@@ -14,6 +14,11 @@
   display: flex;
   justify-content: space-between;
 }
+.authors .grid .card .card-body{
+  display:flex;
+  justify-content:space-between;
+  flex-direction: column;
+}
 .authors .container .grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);

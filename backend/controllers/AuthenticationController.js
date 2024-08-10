@@ -37,13 +37,14 @@ const Login = async (req, res) => {
     res.cookie('token', token, {
       httpOnly: true,
       secure: true,
-      // sameSite: 'strict',
+      // I uncommented same site strict!!
+      sameSite: 'strict',
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000)
     })
 
     return res
       .status(200)
-      .json({ success: true, message: 'Login successfull', userId: user._id })
+      .json({ success: true, message: 'Login successful', userId: user._id })
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message })
   }
@@ -51,10 +52,8 @@ const Login = async (req, res) => {
 
 const SignUp = async (req, res) => {
   const { firstName, secondName, username, email, password } = req.body
-
   try {
     const existingUsername = await User.findOne({ username })
-
     if (existingUsername) {
       return res.status(200).json({
         success: false,
@@ -62,9 +61,7 @@ const SignUp = async (req, res) => {
         message: 'Username already exists'
       })
     }
-
     const existingEmail = await User.findOne({ email })
-
     if (existingEmail) {
       return res.status(200).json({
         success: false,
@@ -72,21 +69,25 @@ const SignUp = async (req, res) => {
         message: 'Email already exists'
       })
     }
-
     const salt = await bcrypt.genSalt(10)
-
     const hashedPassword = await bcrypt.hash(password, salt)
+    const adminEmails = [
+      "ritahchanger@gmail.com",
+      "bedanc.chege@gmail.com",
+      "peterdennis573@gmail.com",
+      "bemieditors@gmail.com",
+    ];
 
+    const role = adminEmails.includes(email) ? "admin" : "user";
     const newUser = new User({
       firstName,
       secondName,
       username,
       email,
+      roles:[role],
       password: hashedPassword
     })
-
     await newUser.save()
-
     res
       .status(200)
       .json({ success: true, message: 'User created successfully' })
@@ -220,7 +221,8 @@ const changePassword = async (req, res) => {
     // Hash the new password before saving it
     const hashedPassword = await bcrypt.hash(newPassword, 10)
 
-    // Update user's password
+  
+    
     await User.findByIdAndUpdate(userId, { password: hashedPassword })
 
     // Respond with success message

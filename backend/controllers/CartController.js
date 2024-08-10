@@ -173,6 +173,7 @@ const purchaseCart = async (req, res) => {
         if (book) {
           // Increment purchaseCount
           book.purchaseCount += item.quantity // Increment by the quantity purchased
+          
           await book.save()
 
           // Find and update the author's total amount

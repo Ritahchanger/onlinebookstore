@@ -91,6 +91,14 @@ const SignUp = () => {
         passwordError: "Password is required",
       }));
       valid = false;
+    } else if (
+      !/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/.test(formData.password)
+    ) {
+      setErrors((prevState) => ({
+        ...prevState,
+        passwordError: "Use strong password",
+      }));
+      valid = false;
     } else {
       setErrors((prevState) => ({ ...prevState, passwordError: "" }));
     }
@@ -132,17 +140,17 @@ const SignUp = () => {
         }
 
         // Validate email
-        await axios.post(
-          `${Config.apiUrl}/api/auth/validate_email`,
-          {
-            email: formData.email,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        // await axios.post(
+        //   `${Config.apiUrl}/api/auth/validate_email`,
+        //   {
+        //     email: formData.email,
+        //   },
+        //   {
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //   }
+        // );
 
         const backendResult = response.data;
         console.log(backendResult);
@@ -162,7 +170,7 @@ const SignUp = () => {
         }
 
         if (!backendResult.usernameFound && !backendResult.emailFound) {
-          navigate('/login')
+          navigate("/login");
         }
       } catch (error) {
         console.log(
