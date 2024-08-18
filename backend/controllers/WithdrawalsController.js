@@ -2,15 +2,21 @@ const Withdrawal = require('../models/Withdrawals.model')
 const User = require('../models/User.model')
 
 const requestWithDrawal = async (req, res) => {
-  try {
-    const { userId } = req.params
-    const { amount, mpesaNumber, paypalEmail } = req.body
 
+  try {
+
+    const { userId } = req.params
+
+    const { amount, mpesaNumber, paypalEmail } = req.body
     // Validate input
     if (!mpesaNumber && !paypalEmail) {
+
       return res.status(200).json({
+
         success: false,
+
         message: 'Please provide either mpesaNumber or paypalEmail'
+        
       })
     }
 
@@ -66,12 +72,16 @@ const getWithDrawRequests = async (req, res) => {
     }
 
     res.status(200).json({status:200,success: true, data: withdrawals });
+
   } catch (error) {
+
     res.status(500).json({ success: false, message: "Server error. Unable to fetch withdrawal requests." });
+
   }
 };
 
 const deleteWithdrawalById = async (req, res) => {
+
   const withdrawalId = req.params.id; // Assuming the withdrawal ID is passed as a parameter
   
   try {

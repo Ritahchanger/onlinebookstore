@@ -1,31 +1,35 @@
 const nodemailer = require("nodemailer");
 const sendBulkEmail = async (req, res) => {
-    const { emails, subject, message } = req.body; // Assuming emails, subject, and message are in the request body
-  
-    // Validate request body
-    if (!emails || !subject || !message) {
-      return res.status(400).json({ error: 'Emails, subject, and message are required in the request body' });
-    }
-  
-    try {
-      // Create Nodemailer transporter
-      const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: {
-          user: process.env.COMPANY_EMAIL,
-          pass: process.env.COMPANY_EMAIL_PASSWORD
-        }
+  const { emails, subject, message } = req.body; // Assuming emails, subject, and message are in the request body
+
+  // Validate request body
+  if (!emails || !subject || !message) {
+    return res
+      .status(400)
+      .json({
+        error: "Emails, subject, and message are required in the request body",
       });
-  
-      // Send email to multiple recipients
-      const info = await transporter.sendMail({
-        from: `"BEMI EDITORS LIMITED" <${process.env.COMPANY_EMAIL}>`,
-        to: emails, // Array of recipient email addresses
-        subject: subject,
-        text: message,
-        html: `
+  }
+
+  try {
+    // Create Nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.COMPANY_EMAIL,
+        pass: process.env.COMPANY_EMAIL_PASSWORD,
+      },
+    });
+
+    // Send email to multiple recipients
+    const info = await transporter.sendMail({
+      from: `"BEMI EDITORS LIMITED" <${process.env.COMPANY_EMAIL}>`,
+      to: emails, // Array of recipient email addresses
+      subject: subject,
+      text: message,
+      html: `
           <html>
             <head>
               <style>
@@ -68,16 +72,19 @@ const sendBulkEmail = async (req, res) => {
               </div>
             </body>
           </html>
-        `
-      });
-  
-      console.log('Bulk email sent:', info.response);
-      res.status(200).json({ success: true, message: 'Bulk email sent successfully' });
-    } catch (error) {
-      console.error('Error sending bulk email:', error.message);
-      res.status(500).json({ success: false, error: 'Failed to send bulk email' });
-    }
-  };
+        `,
+    });
 
+    console.log("Bulk email sent:", info.response);
+    res
+      .status(200)
+      .json({ success: true, message: "Bulk email sent successfully" });
+  } catch (error) {
+    console.error("Error sending bulk email:", error.message);
+    res
+      .status(500)
+      .json({ success: false, error: "Failed to send bulk email" });
+  }
+};
 
-  module.exports = { sendBulkEmail }
+module.exports = { sendBulkEmail };

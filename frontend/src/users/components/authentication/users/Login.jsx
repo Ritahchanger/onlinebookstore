@@ -10,7 +10,7 @@ import axios from "axios";
 
 import Config from "../../../../Config";
 
-import leftIcon from "../../../../assets/icons/left-arrow.png"
+import leftIcon from "../../../../assets/icons/left-arrow.png";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -52,6 +52,9 @@ const Login = () => {
           },
         }
       );
+
+      console.log(response.data);
+
       if (response.status !== 200) {
         setLoading(false);
         throw new Error("There was a problem with the server!");
@@ -80,8 +83,6 @@ const Login = () => {
           );
 
           dispatch(login({ user: getUser.data.data }));
-
-        
 
           navigate("/account");
         }
@@ -147,7 +148,12 @@ const Login = () => {
         <img src={leftIcon} alt="" />
       </Link>
       <div className="form-wrapper">
-        <form action="#" className="login-form" onSubmit={handleSubmit} noValidate>
+        <form
+          action="#"
+          className="login-form"
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <p className="form-title">USER LOGIN</p>
           <div className="input-group">
             <input

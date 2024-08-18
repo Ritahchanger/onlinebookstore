@@ -1,19 +1,26 @@
 const PaymentDetail = require('../models/PaymentDetails.model')
 
 const User = require('../models/User.model')
+
 const updatePaypalEmail = async (req, res) => {
+
   const { userId } = req.params;
+
   const { paypalEmail } = req.body;
 
   try {
     // Check if paypalEmail is provided
     if (!paypalEmail) {
+
       return res.status(400).json({ error: 'PayPal email is required' });
+
     }
 
     // Validate email format using regex
     if (!/\S+@\S+\.\S+/.test(paypalEmail)) {
+
       return res.status(400).json({ error: 'Invalid PayPal email format' });
+
     }
 
     // Find the PaymentDetail record for the given user
@@ -26,10 +33,12 @@ const updatePaypalEmail = async (req, res) => {
 
     // Check if the provided paypalEmail is already used by another user
     const existingDetail = await PaymentDetail.findOne({ paypalEmail });
+
     const userWithEmail = await User.findOne({ email: paypalEmail });
 
     // If the email is associated with the same user, update the PayPal email
     if (userWithEmail && userWithEmail._id.toString() === userId) {
+      
       detail.paypalEmail = paypalEmail;
 
       // Save the updated detail

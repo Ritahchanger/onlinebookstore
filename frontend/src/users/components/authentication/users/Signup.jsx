@@ -135,6 +135,7 @@ const SignUp = () => {
           }
         );
 
+        console.log(response.data);
         if (response.status !== 200) {
           throw new Error("There is a problem with the server!");
         }

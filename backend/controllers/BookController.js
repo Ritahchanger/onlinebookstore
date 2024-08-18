@@ -132,12 +132,7 @@ const updateBookSales = async (req, res) => {
 // Define the controller function
 const approveBook = async (req, res) => {
   try {
-    const { authorId, bookId } = req.body // Assuming you pass the authorId and bookId in the request body
-
-    // Check if the user has the necessary permissions to approve the book
-    // This could involve checking if the user is an admin or has specific roles/permissions
-    // For simplicity, let's assume the user is authorized to approve the book
-
+    const { authorId, bookId } = req.body
     // Find the book by ID
     const book = await Book.findById(bookId)
 
@@ -145,7 +140,6 @@ const approveBook = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Book not found' })
     }
 
-    // Check if the author ID matches the author of the book
     if (book.author.toString() !== authorId) {
       return res
         .status(403)
@@ -408,9 +402,9 @@ const deleteBook = async (req, res) => {
     })
 
     console.log('Message sent: %s', info.messageId)
-    console.log('The message was successfully sent')
 
-    // Delete the book from the database
+    console.log('The message was successfully sent')
+    
     await Book.findByIdAndDelete(id)
 
     return res.status(200).json({
