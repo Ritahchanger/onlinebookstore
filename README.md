@@ -2,6 +2,13 @@
 
 This is a full-featured online bookstore application built with modern web technologies including React, CSS3, Node.js, MongoDB, and JWT for secure authentication. The application provides a seamless experience for administrators, authors, and customers, offering a wide range of functionalities to manage and purchase books, as well as read and manage blogs about books.
 
+![BirdAI Overview](./frontend/src/assets/screenshots/bookstore1.png) 
+![BirdAI Overview](./frontend/src/assets/screenshots/screen2.png) 
+![BirdAI Overview](./frontend/src/assets/screenshots/screen3.png) 
+![BirdAI Overview](./frontend/src/assets/screenshots/screen4.png) 
+![BirdAI Overview](./frontend/src/assets/screenshots/screen5.png) 
+
+
 ## Features
 
 ### 1. User Authentication
