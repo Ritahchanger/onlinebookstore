@@ -93,10 +93,8 @@ npm run install
 
 ```
 npm install
-
 ```
 create  a file and name it `.env `  and  add the following
-
 ```
 
 PORT=5000
