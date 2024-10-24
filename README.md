@@ -79,3 +79,59 @@ The application is deployed on a reliable hosting service, ensuring high availab
 ## Getting Started
 
 To set up the project locally, follow these steps:
+
+## Bash
+```
+git clone https://github.com/Ritahchanger/onlinebookstore.git`
+```
+
+## On frontend folder
+```
+npm run install
+```
+## On backend folder
+
+```
+npm install
+
+```
+create  a file and name it `.env `  and  add the following
+
+```
+
+PORT=5000
+
+DATABASE_CONNECTION=mongodbURI
+
+JWT_SECRET=
+
+COMPANY_EMAIL=
+
+COMPANY_EMAIL_PASSWORD=
+
+SAFARICOM_CONSUMER_KEY=
+
+SAFARICOM_CONSUMER_SECRET=
+
+SAFARICOM_STK_PUSH_PASS_KEY=
+
+LIPA_NA_MPESA_URL=
+
+NODE_ENV=production
+
+PAYPAL_CLIENT_ID=
+
+PAYPAL_CLIENT_SECRET=
+
+FRONT_END_URL=http://localhost:3000
+ ```
+
+Still in the backend folder
+
+```
+npm run dev
+```
+On the frontend folder
+```
+npm run start
+```
