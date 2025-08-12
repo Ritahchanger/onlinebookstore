@@ -58,6 +58,64 @@ This is a full-featured online bookstore application built with modern web techn
 - **Data Encryption**: Sensitive information, such as passwords and payment details, are securely encrypted.
 - **No Copying**: Books purchased through the system can be read online without the ability to copy or download the content.
 
+```mermaid
+flowchart TD
+    %% Entry
+    A[Landing Page] --> B[User Authentication]
+    B -->|Login/Register| C[JWT Auth System]
+    C -->|Role: Admin| D[Admin Dashboard]
+    C -->|Role: Author| E[Author Dashboard]
+    C -->|Role: Customer| F[Customer Dashboard]
+
+    %% Admin Flow
+    D --> D1[Book Approval]
+    D --> D2[Inventory Management]
+    D --> D3[Order Management]
+    D --> D4[User Management]
+    D --> D5[Blog Management]
+    D --> D6[Payment Records Management]
+    D1 -->|Approve/Reject| D7[Book Available in Store]
+    D5 --> D51[Create Blog]
+    D5 --> D52[Edit Blog]
+    D5 --> D53[Delete Blog]
+
+    %% Author Flow
+    E --> E1[Profile Management]
+    E --> E2[Book Uploads]
+    E --> E3[View Published Books]
+    E --> E4[Blog Contributions]
+    E --> E5[Earnings Management]
+    E2 -->|Submit for Approval| D1
+    E4 -->|Submit Blog| D5
+
+    %% Customer Flow
+    F --> F1[Browse Books]
+    F --> F2[Purchase Books]
+    F --> F3[Read Books Online]
+    F --> F4[Order History]
+    F --> F5[Profile Management]
+    F --> F6[Read Blogs]
+    F2 -->|PayPal/Mpesa| P[Payment Gateway]
+    P -->|Success| E5
+    P -->|Success| PC[Platform Commission]
+    F3 -->|No Copy/No Download| SEC[Content Protection]
+
+    %% Payments
+    P -->|Record Payment| D6
+    E5 -->|Author Percentage| AuthorBalance[Author Wallet]
+    PC -->|Platform Percentage| PlatformBalance[Platform Revenue]
+
+    %% Security
+    B --> SEC2[Data Encryption]
+    SEC2 --> SEC3[Secure Storage of Passwords & Payments]
+
+    %% Future Enhancements
+    FUT[Future Enhancements] --> R1[Recommendation Engine]
+    FUT --> R2[Mobile App]
+    FUT --> R3[Advanced Analytics]
+
+```
+
 ## Technologies Used
 
 - **Frontend**: React, CSS3
